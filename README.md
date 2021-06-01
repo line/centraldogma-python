@@ -9,7 +9,7 @@ $ pip install --user .
 
 ## Usage
 ### Getting started
-Please see [`examples` folder](https://github.com/hexoul/centraldogma-python/tree/main/examples) for more detail.
+Please see [`examples` folder](https://github.com/line/centraldogma-python/tree/main/examples) for more detail.
 ```python
 client = ApiClient(base_url, token, timeout=30)
 client.list_projects()
