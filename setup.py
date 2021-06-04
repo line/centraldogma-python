@@ -7,12 +7,12 @@ with open("README.md", "r") as fh:
 
 setup(
     name="centraldogma",
-    version="0.0.1",
+    version="0.1.0",
     packages=["centraldogma", "centraldogma.data"],
     description="Central Dogma client in Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/line/centraldogma-python",
     author="",
     license="MIT",
     author_email="",

@@ -6,7 +6,7 @@ from centraldogma.repository_service import RepositoryService
 from typing import List, Optional
 
 
-class ApiClient:
+class Dogma:
     def __init__(self, base_url: str, token: str, **configs):
         """A Central Dogma API client using requests.
 

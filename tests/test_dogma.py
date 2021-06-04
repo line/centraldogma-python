@@ -1,12 +1,12 @@
-from centraldogma.api_client import ApiClient
 from centraldogma.data import DATE_FORMAT_ISO8601, Content, Creator, Project, Repository
+from centraldogma.dogma import Dogma
 from datetime import datetime
 from http import HTTPStatus
 import json
 import requests_mock
 
 
-client = ApiClient("http://baseurl", "token")
+client = Dogma("http://baseurl", "token")
 
 mock_project = {
     "name": "project1",
