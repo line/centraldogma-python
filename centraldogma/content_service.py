@@ -59,5 +59,6 @@ class ContentService:
         path = f"/projects/{project_name}/repos/{repo_name}/contents{file_path}"
         resp = self.client.request("get", path, params=params)
         if resp.status_code != HTTPStatus.OK:
+            # TODO(@hexoul): Instead of returning None, raise a proper exception like Java client.
             return None
         return Content.from_json(json.dumps(resp.json()))
