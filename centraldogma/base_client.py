@@ -18,10 +18,10 @@ import requests
 
 
 class BaseClient:
-    PATH_PREFIX = "api/v1"
+    PATH_PREFIX = "/api/v1"
 
     def __init__(self, base_url: str, token: str, **configs):
-        self.base_url = base_url
+        self.base_url = base_url[:-1] if base_url[-1] == "/" else base_url
         self.token = token
         self.headers = self._get_headers(token)
         self.patch_headers = self._get_patch_headers(token)
@@ -32,7 +32,7 @@ class BaseClient:
         return self._request(method, self._create_url(path), **kwargs)
 
     def _create_url(self, path) -> str:
-        return self.base_url + "/" + self.PATH_PREFIX + path
+        return self.base_url + self.PATH_PREFIX + path
 
     def _get_kwargs(self, method: str, **kwargs) -> Dict:
         kwargs["headers"] = self.patch_headers if method == "patch" else self.headers
