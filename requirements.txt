@@ -1,0 +1,3 @@
+dataclasses-json
+marshmallow
+requests
