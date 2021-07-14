@@ -18,26 +18,19 @@ from typing import Dict, Union
 
 
 class BaseClient:
-    PATH_PREFIX = "/api/v1"
-
     def __init__(self, base_url: str, token: str, http2: bool = True, **configs):
-        self.base_url = base_url[:-1] if base_url[-1] == "/" else base_url
-        self.client = Client(http2=http2)
+        base_url = base_url[:-1] if base_url[-1] == "/" else base_url
+        self.client = Client(base_url=f"{base_url}/api/v1", http2=http2, **configs)
         self.token = token
         self.headers = self._get_headers(token)
         self.patch_headers = self._get_patch_headers(token)
-        self.configs = configs
 
     def request(self, method: str, path: str, **kwargs) -> Union[Response]:
         kwargs = self._get_kwargs(method, **kwargs)
-        return self._httpx_request(method, self._create_url(path), **kwargs)
-
-    def _create_url(self, path) -> str:
-        return f"{self.base_url}{self.PATH_PREFIX}{path}"
+        return self._httpx_request(method, path, **kwargs)
 
     def _get_kwargs(self, method: str, **kwargs) -> Dict:
         kwargs["headers"] = self.patch_headers if method == "patch" else self.headers
-        kwargs.update(self.configs)
         return kwargs
 
     def _httpx_request(self, method: str, url: str, **kwargs) -> Response:

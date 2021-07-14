@@ -13,24 +13,35 @@
 # under the License.
 from centraldogma.exceptions import AuthorizationException, NotFoundException
 from centraldogma.base_client import BaseClient
-from httpx import Response
+from httpx import Limits, Response
 import pytest
 
 
 client = BaseClient("http://baseurl", "token")
 
 configs = {
-    "timeout": 5,
-    "cookies": None,
     "auth": None,
-    "allow_redirects": False,
+    "cookies": None,
+    "verify": None,
+    "cert": None,
+    "proxies": None,
+    "mounts": None,
+    "timeout": 5,
+    "limits": Limits(max_connections=100, max_keepalive_connections=20),
+    "max_redirects": 1,
+    "event_hooks": None,
+    "transport": None,
+    "app": None,
+    "trust_env": True,
 }
 client_with_configs = BaseClient("http://baseurl", "token", **configs)
 
 
 def test_get_kwargs():
     for method in ["get", "post", "delete", "patch"]:
-        kwargs = client_with_configs._get_kwargs(method, a="b")
+        kwargs = client_with_configs._get_kwargs(
+            method, params={"a": "b"}, allow_redirects=True
+        )
         content_type = (
             "application/json-patch+json" if method == "patch" else "application/json"
         )
@@ -38,10 +49,8 @@ def test_get_kwargs():
             "Authorization": "bearer token",
             "Content-Type": content_type,
         }
-        assert kwargs["timeout"] == 5
-        assert kwargs["cookies"] == None
-        assert kwargs["auth"] == None
-        assert kwargs["allow_redirects"] == False
+        assert kwargs["params"] == {"a": "b"}
+        assert kwargs["allow_redirects"]
 
 
 def test_request_with_configs(respx_mock):
