@@ -13,8 +13,8 @@
 # under the License.
 from centraldogma.exceptions import AuthorizationException, NotFoundException
 from centraldogma.base_client import BaseClient
+from httpx import Response
 import pytest
-import requests_mock
 
 
 client = BaseClient("http://baseurl", "token")
@@ -24,10 +24,6 @@ configs = {
     "cookies": None,
     "auth": None,
     "allow_redirects": False,
-    "proxies": None,
-    "hooks": None,
-    "stream": None,
-    "cert": None,
 }
 client_with_configs = BaseClient("http://baseurl", "token", **configs)
 
@@ -46,111 +42,100 @@ def test_get_kwargs():
         assert kwargs["cookies"] == None
         assert kwargs["auth"] == None
         assert kwargs["allow_redirects"] == False
-        assert kwargs["proxies"] == None
-        assert kwargs["hooks"] == None
-        assert kwargs["stream"] == None
-        assert kwargs["cert"] == None
 
 
-def test_request_with_configs():
-    with requests_mock.mock() as m:
-        m.get("http://baseurl/api/v1/path", text="success")
-        for method in ["get", "post", "delete", "patch"]:
-            getattr(m, method)("http://baseurl/api/v1/path", text="success")
-            client.request(
-                method,
-                "/path",
-                timeout=5,
-                cookies=None,
-                auth=None,
-                allow_redirects=False,
-                proxies=None,
-                hooks=None,
-                stream=None,
-                cert=None,
-            )
-            client.request(method, "/path", timeout=(3.05, 27))
-            client_with_configs.request(method, "/path")
+def test_request_with_configs(respx_mock):
+    methods = ["get", "post", "put", "delete", "patch", "options"]
+    for method in methods:
+        getattr(respx_mock, method)("http://baseurl/api/v1/path").mock(
+            return_value=Response(200, text="success")
+        )
+        client.request(
+            method,
+            "/path",
+            timeout=5,
+            cookies=None,
+            auth=None,
+            allow_redirects=False,
+        )
+        client.request(method, "/path", timeout=(3.05, 27))
+        client_with_configs.request(method, "/path")
+    assert respx_mock.calls.call_count == len(methods) * 3
 
 
-def test_delete():
-    with requests_mock.mock() as m:
-        matcher = m.delete("http://baseurl/api/v1/path", text="success")
-        client.request("delete", "/path", params={"a": "b"})
+def test_delete(respx_mock):
+    route = respx_mock.delete("http://baseurl/api/v1/path").mock(
+        return_value=Response(200, text="success")
+    )
+    resp = client.request("delete", "/path", params={"a": "b"})
 
-        request = matcher.last_request
-        assert request.headers["Authorization"] == "bearer token"
-        assert request.headers["Content-Type"] == "application/json"
-        assert request.url.endswith("?a=b")
+    assert route.called
+    assert resp.request.headers["Authorization"] == "bearer token"
+    assert resp.request.headers["Content-Type"] == "application/json"
+    assert resp.request.url.params.multi_items() == [("a", "b")]
 
 
-def test_delete_exception_authorization():
+def test_delete_exception_authorization(respx_mock):
     with pytest.raises(AuthorizationException):
-        with requests_mock.mock() as m:
-            m.delete("http://baseurl/api/v1/path", status_code=401)
-            client.request("delete", "/path")
+        respx_mock.delete("http://baseurl/api/v1/path").mock(return_value=Response(401))
+        client.request("delete", "/path")
 
 
-def test_get():
-    with requests_mock.mock() as m:
-        matcher = m.get("http://baseurl/api/v1/path", text="success")
-        client.request("get", "/path", params={"a": "b"})
+def test_get(respx_mock):
+    route = respx_mock.get("http://baseurl/api/v1/path").mock(
+        return_value=Response(200, text="success")
+    )
+    resp = client.request("get", "/path", params={"a": "b"})
 
-        request = matcher.last_request
-        assert request.headers["Authorization"] == "bearer token"
-        assert request.headers["Content-Type"] == "application/json"
-        assert request.url.endswith("?a=b")
+    assert route.called
+    assert resp.request.headers["Authorization"] == "bearer token"
+    assert resp.request.headers["Content-Type"] == "application/json"
+    assert resp.request.url.params.multi_items() == [("a", "b")]
 
 
-def test_get_exception_authorization():
+def test_get_exception_authorization(respx_mock):
     with pytest.raises(AuthorizationException):
-        with requests_mock.mock() as m:
-            m.get("http://baseurl/api/v1/path", status_code=401, json={"message": ""})
-            client.request("get", "/path")
+        respx_mock.get("http://baseurl/api/v1/path").mock(return_value=Response(401))
+        client.request("get", "/path")
 
 
-def test_get_exception_not_found():
+def test_get_exception_not_found(respx_mock):
     with pytest.raises(NotFoundException):
-        with requests_mock.mock() as m:
-            m.get("http://baseurl/api/v1/path", status_code=404, json={"message": ""})
-            client.request("get", "/path")
+        respx_mock.get("http://baseurl/api/v1/path").mock(return_value=Response(404))
+        client.request("get", "/path")
 
 
-def test_patch():
-    with requests_mock.mock() as m:
-        url = "http://baseurl/api/v1/path"
-        matcher = m.patch(url, text="success")
+def test_patch(respx_mock):
+    route = respx_mock.patch("http://baseurl/api/v1/path").mock(
+        return_value=Response(200, text="success")
+    )
+    resp = client.request("patch", "/path", json={"a": "b"})
+
+    assert route.called
+    assert resp.request.headers["Authorization"] == "bearer token"
+    assert resp.request.headers["Content-Type"] == "application/json-patch+json"
+    assert resp.request._content == b'{"a": "b"}'
+
+
+def test_patch_exception_authorization(respx_mock):
+    with pytest.raises(AuthorizationException):
+        respx_mock.patch("http://baseurl/api/v1/path").mock(return_value=Response(401))
         client.request("patch", "/path", json={"a": "b"})
 
-        request = matcher.last_request
-        assert request.headers["Authorization"] == "bearer token"
-        assert request.headers["Content-Type"] == "application/json-patch+json"
-        assert request.url == url
-        assert request.body == b'{"a": "b"}'
+
+def test_post(respx_mock):
+    route = respx_mock.post("http://baseurl/api/v1/path").mock(
+        return_value=Response(200, text="success")
+    )
+    resp = client.request("post", "/path", json={"a": "b"})
+
+    assert route.called
+    assert resp.request.headers["Authorization"] == "bearer token"
+    assert resp.request.headers["Content-Type"] == "application/json"
+    assert resp.request._content == b'{"a": "b"}'
 
 
-def test_patch_exception_authorization():
+def test_post_exception_authorization(respx_mock):
     with pytest.raises(AuthorizationException):
-        with requests_mock.mock() as m:
-            m.patch("http://baseurl/api/v1/path", status_code=401)
-            client.request("patch", "/path", json={"a": "b"})
-
-
-def test_post():
-    with requests_mock.mock() as m:
-        url = "http://baseurl/api/v1/path"
-        matcher = m.post(url, text="success")
-        client.request("post", "/path", json={"a": "b"})
-
-        request = matcher.last_request
-        assert request.headers["Authorization"] == "bearer token"
-        assert request.headers["Content-Type"] == "application/json"
-        assert request.url == url
-        assert request.body == b'{"a": "b"}'
-
-
-def test_post_exception_authorization():
-    with pytest.raises(AuthorizationException):
-        with requests_mock.mock() as m:
-            m.post("http://baseurl/api/v1/path", status_code=401)
-            client.request("post", "/path")
+        respx_mock.post("http://baseurl/api/v1/path").mock(return_value=Response(401))
+        client.request("post", "/path")

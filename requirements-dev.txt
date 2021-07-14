@@ -1,4 +1,4 @@
 black
 pytest
 setuptools
-requests_mock
+respx
