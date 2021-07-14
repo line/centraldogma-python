@@ -26,10 +26,10 @@ class BaseClient:
         self.patch_headers = self._get_patch_headers(token)
 
     def request(self, method: str, path: str, **kwargs) -> Union[Response]:
-        kwargs = self._get_kwargs(method, **kwargs)
+        kwargs = self._get_request_configs(method, **kwargs)
         return self._httpx_request(method, path, **kwargs)
 
-    def _get_kwargs(self, method: str, **kwargs) -> Dict:
+    def _get_request_configs(self, method: str, **kwargs) -> Dict:
         kwargs["headers"] = self.patch_headers if method == "patch" else self.headers
         return kwargs
 

@@ -37,9 +37,9 @@ configs = {
 client_with_configs = BaseClient("http://baseurl", "token", **configs)
 
 
-def test_get_kwargs():
+def test_get_request_configs():
     for method in ["get", "post", "delete", "patch"]:
-        kwargs = client_with_configs._get_kwargs(
+        kwargs = client_with_configs._get_request_configs(
             method, params={"a": "b"}, allow_redirects=True
         )
         content_type = (
@@ -51,6 +51,11 @@ def test_get_kwargs():
         }
         assert kwargs["params"] == {"a": "b"}
         assert kwargs["allow_redirects"]
+        assert "limits" not in kwargs
+        assert "event_hooks" not in kwargs
+        assert "transport" not in kwargs
+        assert "app" not in kwargs
+        assert "trust_env" not in kwargs
 
 
 def test_request_with_configs(respx_mock):
