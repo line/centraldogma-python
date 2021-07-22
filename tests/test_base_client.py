@@ -37,9 +37,9 @@ configs = {
 client_with_configs = BaseClient("http://baseurl", "token", **configs)
 
 
-def test_get_request_configs():
+def test_set_request_headers():
     for method in ["get", "post", "delete", "patch"]:
-        kwargs = client_with_configs._get_request_configs(
+        kwargs = client_with_configs._set_request_headers(
             method, params={"a": "b"}, allow_redirects=True
         )
         content_type = (
