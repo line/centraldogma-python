@@ -52,8 +52,10 @@ class ContentService:
         json_path: Optional[str],
     ) -> Content:
         params = {}
-        params["revision"] = revision if revision else None
-        params["jsonpath"] = json_path if json_path else None
+        if revision:
+            params["revision"] = revision
+        if json_path:
+            params["jsonpath"] = json_path
         if not file_path.startswith("/"):
             file_path = "/" + file_path
         path = f"/projects/{project_name}/repos/{repo_name}/contents{file_path}"

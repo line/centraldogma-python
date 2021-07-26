@@ -25,8 +25,8 @@ class Dogma:
 
         : param base_url: a base URL indicating Central Dogma server such as domain.
         : param token: a token for authorization.
-        : param configs: (optional) configurations for requests. For example, timeout can be
-            applied by using it.
+        : param configs: (optional) configurations for an HTTP client.
+            For example, cert and timeout can be applied by using it.
         """
         self.base_client = BaseClient(base_url, token, **configs)
         self.project_service = ProjectService(self.base_client)
