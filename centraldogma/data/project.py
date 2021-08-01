@@ -11,11 +11,12 @@ from typing import Optional
 @dataclass
 class Project:
     name: str
-    creator: Creator
-    created_at: datetime = field(
+    creator: Optional[Creator] = None
+    created_at: Optional[datetime] = field(
+        default=None,
         metadata=config(
-            decoder=lambda x: datetime.strptime(x, DATE_FORMAT_ISO8601),
+            decoder=lambda x: datetime.strptime(x, DATE_FORMAT_ISO8601) if x else None,
             mm_field=fields.DateTime(format=DATE_FORMAT_ISO8601),
-        )
+        ),
     )
     url: Optional[str] = None

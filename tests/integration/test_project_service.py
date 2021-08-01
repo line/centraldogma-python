@@ -26,8 +26,18 @@ def test_project():
     with pytest.raises(BadRequestException):
         dogma.create_project("Test project")
 
-    newProject = dogma.create_project("TestProject")
-    assert newProject.name == "TestProject"
+    project_name = "TestProject"
+    new_project = dogma.create_project(project_name)
+    assert new_project.name == project_name
 
     projects = dogma.list_projects()
     assert len(projects) == 1
+
+    removed = dogma.remove_project("TestProject")
+    assert removed == True
+
+    projects = dogma.list_projects(removed=True)
+    assert len(projects) == 1
+
+    projects = dogma.list_projects()
+    assert len(projects) == 0
