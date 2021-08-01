@@ -31,13 +31,13 @@ class AuthorizationException(BaseException):
     pass
 
 
-class BadRequestException(Exception):
+class BadRequestException(BaseException):
     pass
 
 
-class NotFoundException(Exception):
+class NotFoundException(BaseException):
     pass
 
 
-class UnknownException(Exception):
+class UnknownException(BaseException):
     pass
