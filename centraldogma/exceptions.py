@@ -23,7 +23,20 @@ class AuthorizationException(Exception):
             print("The response format is not expected")
 
     def __str__(self):
-        return self.response
+        return str(self.response)
+
+
+class BadRequestException(Exception):
+    def __init__(self, response: Response):
+        try:
+            self.response = response.json()
+            self.exception = self.response["exception"]
+            self.message = self.response["message"]
+        except:
+            print("The response format is not expected")
+
+    def __str__(self):
+        return str(self.response)
 
 
 class NotFoundException(Exception):
@@ -36,4 +49,17 @@ class NotFoundException(Exception):
             print("The response format is not expected")
 
     def __str__(self):
-        return self.response
+        return str(self.response)
+
+
+class UnknownException(Exception):
+    def __init__(self, response: Response):
+        try:
+            self.response = response.json()
+            self.exception = self.response["exception"]
+            self.message = self.response["message"]
+        except:
+            print("The response format is not expected")
+
+    def __str__(self):
+        return str(self.response)

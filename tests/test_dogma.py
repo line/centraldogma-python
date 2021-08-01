@@ -13,10 +13,12 @@
 # under the License.
 from centraldogma.data import DATE_FORMAT_ISO8601, Content, Creator, Project, Repository
 from centraldogma.dogma import Dogma
+from centraldogma.exceptions import BadRequestException, UnknownException
 from datetime import datetime
 from http import HTTPStatus
 from httpx import Response
 import json
+import pytest
 
 
 client = Dogma("http://baseurl", "token")
@@ -95,13 +97,13 @@ def test_create_project(respx_mock):
 def test_create_project_failed(respx_mock):
     url = "http://baseurl/api/v1/projects"
     route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    project = client.create_project("newProject")
+    with pytest.raises(BadRequestException):
+        client.create_project("newProject")
 
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
     assert request._content == b'{"name": "newProject"}'
-    assert project == None
 
 
 def test_remove_project(respx_mock):
@@ -117,11 +119,11 @@ def test_remove_project(respx_mock):
 def test_remove_project_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/project1"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    removed = client.remove_project("project1")
+    with pytest.raises(BadRequestException):
+        client.remove_project("project1")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert removed == False
 
 
 def test_unremove_project(respx_mock):
@@ -145,7 +147,8 @@ def test_unremove_project_failed(respx_mock):
     route = respx_mock.patch(url).mock(
         return_value=Response(HTTPStatus.SERVICE_UNAVAILABLE)
     )
-    project = client.unremove_project("project1")
+    with pytest.raises(UnknownException):
+        client.unremove_project("project1")
 
     assert route.called
     request = respx_mock.calls.last.request
@@ -153,7 +156,6 @@ def test_unremove_project_failed(respx_mock):
     assert (
         request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     )
-    assert project == None
 
 
 def test_purge_project(respx_mock):
@@ -169,11 +171,11 @@ def test_purge_project(respx_mock):
 def test_purge_project_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/project1/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.FORBIDDEN))
-    purged = client.purge_project("project1")
+    with pytest.raises(UnknownException):
+        client.purge_project("project1")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert purged == False
 
 
 def test_list_repositories(respx_mock):
@@ -223,13 +225,13 @@ def test_create_repository(respx_mock):
 def test_create_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos"
     route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    repo = client.create_repository("myproject", "newRepo")
+    with pytest.raises(BadRequestException):
+        client.create_repository("myproject", "newRepo")
 
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
     assert request._content == b'{"name": "newRepo"}'
-    assert repo == None
 
 
 def test_remove_repository(respx_mock):
@@ -245,11 +247,11 @@ def test_remove_repository(respx_mock):
 def test_remove_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.FORBIDDEN))
-    removed = client.remove_repository("myproject", "myrepo")
+    with pytest.raises(UnknownException):
+        client.remove_repository("myproject", "myrepo")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert removed == False
 
 
 def test_unremove_repository(respx_mock):
@@ -271,7 +273,8 @@ def test_unremove_repository(respx_mock):
 def test_unremove_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.patch(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    repo = client.unremove_repository("myproject", "myrepo")
+    with pytest.raises(BadRequestException):
+        client.unremove_repository("myproject", "myrepo")
 
     assert route.called
     request = respx_mock.calls.last.request
@@ -279,7 +282,6 @@ def test_unremove_repository_failed(respx_mock):
     assert (
         request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     )
-    assert repo == None
 
 
 def test_purge_repository(respx_mock):
@@ -295,11 +297,11 @@ def test_purge_repository(respx_mock):
 def test_purge_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.FORBIDDEN))
-    perged = client.purge_repository("myproject", "myrepo")
+    with pytest.raises(UnknownException):
+        client.purge_repository("myproject", "myrepo")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert perged == False
 
 
 def test_normalize_repository_revision(respx_mock):
@@ -317,11 +319,11 @@ def test_normalize_repository_revision(respx_mock):
 def test_normalize_repository_revision_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/revision/3"
     route = respx_mock.get(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    revision = client.normalize_repository_revision("myproject", "myrepo", 3)
+    with pytest.raises(BadRequestException):
+        client.normalize_repository_revision("myproject", "myrepo", 3)
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert revision == None
 
 
 def test_list_files(respx_mock):
