@@ -14,52 +14,30 @@
 from requests import Response
 
 
-class AuthorizationException(Exception):
+class BaseException(Exception):
     def __init__(self, response: Response):
         try:
             self.response = response.json()
+            self.exception = self.response["exception"]
             self.message = self.response["message"]
         except:
             print("The response format is not expected")
 
     def __str__(self):
         return str(self.response)
+
+
+class AuthorizationException(BaseException):
+    pass
 
 
 class BadRequestException(Exception):
-    def __init__(self, response: Response):
-        try:
-            self.response = response.json()
-            self.exception = self.response["exception"]
-            self.message = self.response["message"]
-        except:
-            print("The response format is not expected")
-
-    def __str__(self):
-        return str(self.response)
+    pass
 
 
 class NotFoundException(Exception):
-    def __init__(self, response: Response):
-        try:
-            self.response = response.json()
-            self.exception = self.response["exception"]
-            self.message = self.response["message"]
-        except:
-            print("The response format is not expected")
-
-    def __str__(self):
-        return str(self.response)
+    pass
 
 
 class UnknownException(Exception):
-    def __init__(self, response: Response):
-        try:
-            self.response = response.json()
-            self.exception = self.response["exception"]
-            self.message = self.response["message"]
-        except:
-            print("The response format is not expected")
-
-    def __str__(self):
-        return str(self.response)
+    pass
