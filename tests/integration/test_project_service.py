@@ -15,7 +15,7 @@ from centraldogma.dogma import Dogma
 from centraldogma.exceptions import BadRequestError
 import pytest
 
-dogma = Dogma("http://localhost:36462", "anonymous")
+dogma = Dogma()
 
 
 @pytest.mark.integtest
