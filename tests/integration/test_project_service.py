@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestException
+from centraldogma.exceptions import BadRequestError
 import pytest
 
 dogma = Dogma("http://localhost:36462", "anonymous")
@@ -23,7 +23,7 @@ def test_project():
     projects = dogma.list_projects()
     assert len(projects) == 0
 
-    with pytest.raises(BadRequestException):
+    with pytest.raises(BadRequestError):
         dogma.create_project("Test project")
 
     project_name = "TestProject"

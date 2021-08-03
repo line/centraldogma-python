@@ -14,7 +14,7 @@
 from requests import Response
 
 
-class BaseException(Exception):
+class Error(Exception):
     def __init__(self, response: Response):
         try:
             self.response = response.json()
@@ -27,17 +27,17 @@ class BaseException(Exception):
         return str(self.response)
 
 
-class AuthorizationException(BaseException):
+class AuthorizationError(Error):
     pass
 
 
-class BadRequestException(BaseException):
+class BadRequestError(Error):
     pass
 
 
-class NotFoundException(BaseException):
+class NotFoundError(Error):
     pass
 
 
-class UnknownException(BaseException):
+class UnknownError(Error):
     pass
