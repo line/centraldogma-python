@@ -14,13 +14,8 @@
 from centraldogma.dogma import Dogma
 from centraldogma.exceptions import BadRequestException
 import pytest
-import os
 
-host = os.getenv("CENTRAL_DOGMA_HOST")
-token = os.getenv("CENTRAL_DOGMA_TOKEN")
-dogma = Dogma(
-    host if host else Dogma.DEFAULT_BASE_URL, token if token else Dogma.DEFAULT_TOKEN
-)
+dogma = Dogma()
 
 
 @pytest.mark.integtest
