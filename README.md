@@ -25,7 +25,7 @@ $ pip install -r requirements-dev.txt
 ### Tests
 #### Unit test
 ```
-$ pytest -m "not integtest"
+$ pytest -m "not integration"
 ```
 
 #### Integration test
@@ -36,7 +36,7 @@ $ docker-compose up -d
 
 2. Run integration tests
 ```
-$ pytest -m integtest
+$ pytest -m integration
 ```
 - If you want to run not only integration tests but also **all tests**,
 ```

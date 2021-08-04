@@ -18,7 +18,7 @@ import pytest
 dogma = Dogma()
 
 
-@pytest.mark.integtest
+@pytest.mark.integration
 def test_project():
     projects = dogma.list_projects()
     assert len(projects) == 0
