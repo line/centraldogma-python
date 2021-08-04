@@ -13,7 +13,7 @@
 # under the License.
 from centraldogma.data import DATE_FORMAT_ISO8601, Content, Creator, Project, Repository
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestError, UnknownError
+from centraldogma.exceptions import BadRequestException, UnknownException
 from datetime import datetime
 from http import HTTPStatus
 from httpx import Response
@@ -97,7 +97,7 @@ def test_create_project(respx_mock):
 def test_create_project_failed(respx_mock):
     url = "http://baseurl/api/v1/projects"
     route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    with pytest.raises(BadRequestError):
+    with pytest.raises(BadRequestException):
         client.create_project("newProject")
 
     assert route.called
@@ -119,7 +119,7 @@ def test_remove_project(respx_mock):
 def test_remove_project_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/project1"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    with pytest.raises(BadRequestError):
+    with pytest.raises(BadRequestException):
         client.remove_project("project1")
 
     assert route.called
@@ -147,7 +147,7 @@ def test_unremove_project_failed(respx_mock):
     route = respx_mock.patch(url).mock(
         return_value=Response(HTTPStatus.SERVICE_UNAVAILABLE)
     )
-    with pytest.raises(UnknownError):
+    with pytest.raises(UnknownException):
         client.unremove_project("project1")
 
     assert route.called
@@ -171,7 +171,7 @@ def test_purge_project(respx_mock):
 def test_purge_project_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/project1/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.FORBIDDEN))
-    with pytest.raises(UnknownError):
+    with pytest.raises(UnknownException):
         client.purge_project("project1")
 
     assert route.called
@@ -225,7 +225,7 @@ def test_create_repository(respx_mock):
 def test_create_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos"
     route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    with pytest.raises(BadRequestError):
+    with pytest.raises(BadRequestException):
         client.create_repository("myproject", "newRepo")
 
     assert route.called
@@ -247,7 +247,7 @@ def test_remove_repository(respx_mock):
 def test_remove_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.FORBIDDEN))
-    with pytest.raises(UnknownError):
+    with pytest.raises(UnknownException):
         client.remove_repository("myproject", "myrepo")
 
     assert route.called
@@ -273,7 +273,7 @@ def test_unremove_repository(respx_mock):
 def test_unremove_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.patch(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    with pytest.raises(BadRequestError):
+    with pytest.raises(BadRequestException):
         client.unremove_repository("myproject", "myrepo")
 
     assert route.called
@@ -297,7 +297,7 @@ def test_purge_repository(respx_mock):
 def test_purge_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.FORBIDDEN))
-    with pytest.raises(UnknownError):
+    with pytest.raises(UnknownException):
         client.purge_repository("myproject", "myrepo")
 
     assert route.called
@@ -319,7 +319,7 @@ def test_normalize_repository_revision(respx_mock):
 def test_normalize_repository_revision_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/revision/3"
     route = respx_mock.get(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    with pytest.raises(BadRequestError):
+    with pytest.raises(BadRequestException):
         client.normalize_repository_revision("myproject", "myrepo", 3)
 
     assert route.called

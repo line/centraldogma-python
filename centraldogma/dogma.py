@@ -20,11 +20,11 @@ from typing import List, Optional
 
 
 class Dogma:
+    DEFAULT_BASE_URL = "http://localhost:36462"
+    DEFAULT_TOKEN = "anonymous"
+
     def __init__(
-        self,
-        base_url: str = "http://localhost:36462",
-        token: str = "anonymous",
-        **configs
+        self, base_url: str = DEFAULT_BASE_URL, token: str = DEFAULT_TOKEN, **configs
     ):
         """A Central Dogma API client using requests.
 

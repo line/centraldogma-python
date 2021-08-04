@@ -12,10 +12,15 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestError
+from centraldogma.exceptions import BadRequestException
 import pytest
+import os
 
-dogma = Dogma()
+host = os.getenv("CENTRAL_DOGMA_HOST")
+token = os.getenv("CENTRAL_DOGMA_TOKEN")
+dogma = Dogma(
+    host if host else Dogma.DEFAULT_BASE_URL, token if token else Dogma.DEFAULT_TOKEN
+)
 
 
 @pytest.mark.integtest
@@ -23,7 +28,7 @@ def test_project():
     projects = dogma.list_projects()
     assert len(projects) == 0
 
-    with pytest.raises(BadRequestError):
+    with pytest.raises(BadRequestException):
         dogma.create_project("Test project")
 
     project_name = "TestProject"

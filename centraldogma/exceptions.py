@@ -14,7 +14,7 @@
 from requests import Response
 
 
-class Error(Exception):
+class CentralDogmaException(Exception):
     def __init__(self, response: Response):
         try:
             self.response = response.json()
@@ -27,17 +27,17 @@ class Error(Exception):
         return str(self.response)
 
 
-class AuthorizationError(Error):
+class UnauthorizedException(CentralDogmaException):
     pass
 
 
-class BadRequestError(Error):
+class BadRequestException(CentralDogmaException):
     pass
 
 
-class NotFoundError(Error):
+class NotFoundException(CentralDogmaException):
     pass
 
 
-class UnknownError(Error):
+class UnknownException(CentralDogmaException):
     pass
