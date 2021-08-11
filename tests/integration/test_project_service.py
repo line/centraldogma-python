@@ -14,10 +14,14 @@
 from centraldogma.dogma import Dogma
 from centraldogma.exceptions import BadRequestException
 import pytest
+import os
 
 dogma = Dogma()
 
 
+@pytest.mark.skipif(
+    os.getenv("INTEGRATION_TEST") is None, reason="Integration tests are optional"
+)
 @pytest.mark.integration
 def test_project():
     projects = dogma.list_projects()
