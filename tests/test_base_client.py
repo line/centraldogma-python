@@ -11,7 +11,7 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.exceptions import AuthorizationException, NotFoundException
+from centraldogma.exceptions import UnauthorizedException, NotFoundException
 from centraldogma.base_client import BaseClient
 from httpx import Limits, Response
 import pytest
@@ -90,7 +90,7 @@ def test_delete(respx_mock):
 
 
 def test_delete_exception_authorization(respx_mock):
-    with pytest.raises(AuthorizationException):
+    with pytest.raises(UnauthorizedException):
         respx_mock.delete("http://baseurl/api/v1/path").mock(return_value=Response(401))
         client.request("delete", "/path")
 
@@ -108,7 +108,7 @@ def test_get(respx_mock):
 
 
 def test_get_exception_authorization(respx_mock):
-    with pytest.raises(AuthorizationException):
+    with pytest.raises(UnauthorizedException):
         respx_mock.get("http://baseurl/api/v1/path").mock(return_value=Response(401))
         client.request("get", "/path")
 
@@ -132,7 +132,7 @@ def test_patch(respx_mock):
 
 
 def test_patch_exception_authorization(respx_mock):
-    with pytest.raises(AuthorizationException):
+    with pytest.raises(UnauthorizedException):
         respx_mock.patch("http://baseurl/api/v1/path").mock(return_value=Response(401))
         client.request("patch", "/path", json={"a": "b"})
 
@@ -150,6 +150,6 @@ def test_post(respx_mock):
 
 
 def test_post_exception_authorization(respx_mock):
-    with pytest.raises(AuthorizationException):
+    with pytest.raises(UnauthorizedException):
         respx_mock.post("http://baseurl/api/v1/path").mock(return_value=Response(401))
         client.request("post", "/path")

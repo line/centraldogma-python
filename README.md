@@ -22,9 +22,26 @@ client.list_projects()
 $ pip install -r requirements-dev.txt
 ```
 
-### Test
+### Tests
+#### Unit test
 ```
 $ pytest
+```
+
+#### Integration test
+1. Run local Central Dogma server with docker-compose
+```
+$ docker-compose up -d
+```
+
+2. Run integration tests
+```
+$ INTEGRATION_TEST=true pytest
+```
+
+3. Stop the server
+```
+$ docker-compose down
 ```
 
 ### Lint

@@ -30,7 +30,7 @@ setup(
     author="",
     author_email="",
     license="Apache 2.0",
-    install_requires=["requests", "marshmallow", "dataclasses-json"],
+    install_requires=["httpx", "marshmallow", "dataclasses-json"],
     python_requires=">=3.7",
     keywords="centraldogma",
     classifiers=[

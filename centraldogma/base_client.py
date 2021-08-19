@@ -11,7 +11,12 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.exceptions import AuthorizationException, NotFoundException
+from centraldogma.exceptions import (
+    BadRequestException,
+    NotFoundException,
+    UnauthorizedException,
+    UnknownException,
+)
 from http import HTTPStatus
 from httpx import Client, Response
 from typing import Dict, Union
@@ -63,6 +68,10 @@ class BaseClient:
     @staticmethod
     def _handle_exception(response: Response):
         if response.status_code == HTTPStatus.UNAUTHORIZED:
-            raise AuthorizationException(response)
-        if response.status_code == HTTPStatus.NOT_FOUND:
+            raise UnauthorizedException(response)
+        elif response.status_code == HTTPStatus.BAD_REQUEST:
+            raise BadRequestException(response)
+        elif response.status_code == HTTPStatus.NOT_FOUND:
             raise NotFoundException(response)
+        else:
+            raise UnknownException(response)

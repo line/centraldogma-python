@@ -17,10 +17,14 @@ from centraldogma.data import Content, Project, Repository
 from centraldogma.project_service import ProjectService
 from centraldogma.repository_service import RepositoryService
 from typing import List, Optional
+import os
 
 
 class Dogma:
-    def __init__(self, base_url: str, token: str, **configs):
+    DEFAULT_BASE_URL = "http://localhost:36462"
+    DEFAULT_TOKEN = "anonymous"
+
+    def __init__(self, base_url: str = None, token: str = None, **configs):
         """A Central Dogma API client using requests.
 
         : param base_url: a base URL indicating Central Dogma server such as domain.
@@ -28,6 +32,12 @@ class Dogma:
         : param configs: (optional) configurations for an HTTP client.
             For example, cert and timeout can be applied by using it.
         """
+        if base_url is None:
+            env_host = os.getenv("CENTRAL_DOGMA_HOST")
+            base_url = env_host if env_host else self.DEFAULT_BASE_URL
+        if token is None:
+            env_token = os.getenv("CENTRAL_DOGMA_TOKEN")
+            token = env_token if env_token else self.DEFAULT_TOKEN
         self.base_client = BaseClient(base_url, token, **configs)
         self.project_service = ProjectService(self.base_client)
         self.repository_service = RepositoryService(self.base_client)
