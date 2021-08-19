@@ -36,7 +36,7 @@ $ docker-compose up -d
 
 2. Run integration tests
 ```
-$ INTEGRATION_TEST=1 pytest
+$ INTEGRATION_TEST=true pytest
 ```
 
 3. Stop the server

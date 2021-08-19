@@ -20,7 +20,8 @@ dogma = Dogma()
 
 
 @pytest.mark.skipif(
-    os.getenv("INTEGRATION_TEST") is None, reason="Integration tests are optional"
+    os.getenv("INTEGRATION_TEST", "false").lower() != "true",
+    reason="Integration tests are disabled. Use `INTEGRATION_TEST=true pytest` to enable them.",
 )
 @pytest.mark.integration
 def test_project():
