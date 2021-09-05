@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestException
+from centraldogma.exceptions import BadRequestException, NotFoundException
 import pytest
 import os
 
@@ -35,6 +35,9 @@ def run_around_test():
 )
 @pytest.mark.integration
 def test_repository(run_around_test):
+    with pytest.raises(BadRequestException):
+        dogma.create_repository(project_name, "Test repo")
+
     len_repo = len(dogma.list_repositories(project_name))
     len_removed_repo = len(dogma.list_repositories(project_name, removed=True))
 
@@ -42,9 +45,15 @@ def test_repository(run_around_test):
     assert repo.name == repo_name
     validate_len(len_repo + 1, len_removed_repo)
 
+    with pytest.raises(NotFoundException):
+        dogma.remove_repository(project_name, "Non-existent")
+
     removed = dogma.remove_repository(project_name, repo_name)
     assert removed == True
     validate_len(len_repo, len_removed_repo + 1)
+
+    with pytest.raises(NotFoundException):
+        dogma.unremove_repository(project_name, "Non-existent")
 
     unremoved = dogma.unremove_repository(project_name, repo_name)
     assert unremoved.name == repo_name

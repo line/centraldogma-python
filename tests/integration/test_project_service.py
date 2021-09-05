@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestException
+from centraldogma.exceptions import BadRequestException, NotFoundException
 import pytest
 import os
 
@@ -36,9 +36,15 @@ def test_project():
     assert new_project.name == project_name
     validate_len(len_project + 1, len_removed_project)
 
+    with pytest.raises(NotFoundException):
+        dogma.remove_project("Non-existent")
+
     removed = dogma.remove_project(project_name)
     assert removed == True
     validate_len(len_project, len_removed_project + 1)
+
+    with pytest.raises(NotFoundException):
+        dogma.unremove_project("Non-existent")
 
     unremoved = dogma.unremove_project(project_name)
     assert unremoved.name == project_name
