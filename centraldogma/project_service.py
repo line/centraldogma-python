@@ -27,13 +27,13 @@ class ProjectService:
         resp = self.client.request("get", "/projects", params=params)
         if resp.status_code == HTTPStatus.NO_CONTENT:
             return []
-        return [Project.from_json(json.dumps(project)) for project in resp.json()]
+        return [Project.from_dict(project) for project in resp.json()]
 
     def create(self, name: str) -> Project:
         resp = self.client.request("post", "/projects", json={"name": name})
         if resp.status_code != HTTPStatus.CREATED:
             return None
-        return Project.from_json(json.dumps(resp.json()))
+        return Project.from_dict(resp.json())
 
     def remove(self, name: str) -> bool:
         resp = self.client.request("delete", f"/projects/{name}")
@@ -44,7 +44,7 @@ class ProjectService:
         resp = self.client.request("patch", f"/projects/{name}", json=body)
         if resp.status_code != HTTPStatus.OK:
             return None
-        return Project.from_json(json.dumps(resp.json()))
+        return Project.from_dict(resp.json())
 
     def purge(self, name: str) -> bool:
         resp = self.client.request("delete", f"/projects/{name}/removed")
