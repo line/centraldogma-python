@@ -15,7 +15,6 @@ from centraldogma.base_client import BaseClient
 from centraldogma.data import Content
 from http import HTTPStatus
 from typing import List, Optional
-import json
 
 
 class ContentService:
@@ -41,7 +40,7 @@ class ContentService:
         resp = self.client.request("get", path, params=params)
         if resp.status_code == HTTPStatus.NO_CONTENT:
             return []
-        return [Content.from_json(json.dumps(content)) for content in resp.json()]
+        return [Content.from_dict(content) for content in resp.json()]
 
     def get_file(
         self,
@@ -63,4 +62,4 @@ class ContentService:
         if resp.status_code != HTTPStatus.OK:
             # TODO(@hexoul): Instead of returning None, raise a proper exception like Java client.
             return None
-        return Content.from_json(json.dumps(resp.json()))
+        return Content.from_dict(resp.json())

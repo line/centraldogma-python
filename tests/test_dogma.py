@@ -17,7 +17,6 @@ from centraldogma.exceptions import BadRequestException, UnknownException
 from datetime import datetime
 from http import HTTPStatus
 from httpx import Response
-import json
 import pytest
 
 
@@ -63,7 +62,7 @@ def test_list_projects(respx_mock):
     assert len(projects) == 2
     for project in projects:
         assert project.name == mock_project["name"]
-        assert project.creator == Creator.from_json(json.dumps(mock_project["creator"]))
+        assert project.creator == Creator.from_dict(mock_project["creator"])
         assert project.url == mock_project["url"]
         assert project.created_at == datetime.strptime(
             mock_project["createdAt"], DATE_FORMAT_ISO8601
@@ -91,7 +90,7 @@ def test_create_project(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert request._content == b'{"name": "newProject"}'
-    assert project == Project.from_json(json.dumps(mock_project))
+    assert project == Project.from_dict(mock_project)
 
 
 def test_create_project_failed(respx_mock):
@@ -139,7 +138,7 @@ def test_unremove_project(respx_mock):
     assert (
         request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     )
-    assert project == Project.from_json(json.dumps(mock_project))
+    assert project == Project.from_dict(mock_project)
 
 
 def test_unremove_project_failed(respx_mock):
@@ -190,7 +189,7 @@ def test_list_repositories(respx_mock):
     assert len(repos) == 2
     for repo in repos:
         assert repo.name == mock_repository["name"]
-        assert repo.creator == Creator.from_json(json.dumps(mock_repository["creator"]))
+        assert repo.creator == Creator.from_dict(mock_repository["creator"])
         assert repo.head_revision == mock_repository["headRevision"]
         assert repo.url == mock_repository["url"]
         assert repo.created_at == datetime.strptime(
@@ -219,7 +218,7 @@ def test_create_repository(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert request._content == b'{"name": "newRepo"}'
-    assert repo == Repository.from_json(json.dumps(mock_repository))
+    assert repo == Repository.from_dict(mock_repository)
 
 
 def test_create_repository_failed(respx_mock):
@@ -267,7 +266,7 @@ def test_unremove_repository(respx_mock):
     assert (
         request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     )
-    assert repo == Repository.from_json(json.dumps(mock_repository))
+    assert repo == Repository.from_dict(mock_repository)
 
 
 def test_unremove_repository_failed(respx_mock):
@@ -377,7 +376,7 @@ def test_get_files(respx_mock):
     assert respx_mock.calls.last.request.url == url
     assert len(files) == 2
     for file in files:
-        assert file == Content.from_json(json.dumps(mock_content_text))
+        assert file == Content.from_dict(mock_content_text)
 
 
 def test_get_files_pattern(respx_mock):

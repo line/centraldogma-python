@@ -15,7 +15,6 @@ from centraldogma.base_client import BaseClient
 from centraldogma.data import Repository
 from http import HTTPStatus
 from typing import List
-import json
 
 
 class RepositoryService:
@@ -29,7 +28,7 @@ class RepositoryService:
         )
         if resp.status_code == HTTPStatus.NO_CONTENT:
             return []
-        return [Repository.from_json(json.dumps(repo)) for repo in resp.json()]
+        return [Repository.from_dict(repo) for repo in resp.json()]
 
     def create(self, project_name: str, name: str) -> Repository:
         resp = self.client.request(
@@ -37,7 +36,7 @@ class RepositoryService:
         )
         if resp.status_code != HTTPStatus.CREATED:
             return None
-        return Repository.from_json(json.dumps(resp.json()))
+        return Repository.from_dict(resp.json())
 
     def remove(self, project_name: str, name: str) -> bool:
         resp = self.client.request("delete", f"/projects/{project_name}/repos/{name}")
@@ -50,7 +49,7 @@ class RepositoryService:
         )
         if resp.status_code != HTTPStatus.OK:
             return None
-        return Repository.from_json(json.dumps(resp.json()))
+        return Repository.from_dict(resp.json())
 
     def purge(self, project_name: str, name: str) -> bool:
         resp = self.client.request(
