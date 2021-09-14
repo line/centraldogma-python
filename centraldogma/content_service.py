@@ -15,7 +15,6 @@ from centraldogma.base_client import BaseClient
 from centraldogma.data import Content
 from http import HTTPStatus
 from typing import List, Optional
-import json
 
 
 class ContentService:

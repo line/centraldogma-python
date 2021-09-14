@@ -15,7 +15,6 @@ from centraldogma.base_client import BaseClient
 from centraldogma.data import Project
 from http import HTTPStatus
 from typing import List
-import json
 
 
 class ProjectService:

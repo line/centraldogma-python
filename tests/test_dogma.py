@@ -17,7 +17,6 @@ from centraldogma.exceptions import BadRequestException, UnknownException
 from datetime import datetime
 from http import HTTPStatus
 from httpx import Response
-import json
 import pytest
 
 
