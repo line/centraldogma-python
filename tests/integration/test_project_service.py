@@ -12,11 +12,12 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestException
+from centraldogma.exceptions import BadRequestException, NotFoundException
 import pytest
 import os
 
 dogma = Dogma()
+project_name = "TestProject"
 
 
 @pytest.mark.skipif(
@@ -25,24 +26,38 @@ dogma = Dogma()
 )
 @pytest.mark.integration
 def test_project():
-    projects = dogma.list_projects()
-    assert len(projects) == 0
-
     with pytest.raises(BadRequestException):
         dogma.create_project("Test project")
 
-    project_name = "TestProject"
+    len_project = len(dogma.list_projects())
+    len_removed_project = len(dogma.list_projects(removed=True))
+
     new_project = dogma.create_project(project_name)
     assert new_project.name == project_name
+    validate_len(len_project + 1, len_removed_project)
 
-    projects = dogma.list_projects()
-    assert len(projects) == 1
+    with pytest.raises(NotFoundException):
+        dogma.remove_project("Non-existent")
 
-    removed = dogma.remove_project("TestProject")
+    removed = dogma.remove_project(project_name)
     assert removed == True
+    validate_len(len_project, len_removed_project + 1)
 
-    projects = dogma.list_projects(removed=True)
-    assert len(projects) == 1
+    with pytest.raises(NotFoundException):
+        dogma.unremove_project("Non-existent")
 
+    unremoved = dogma.unremove_project(project_name)
+    assert unremoved.name == project_name
+    validate_len(len_project + 1, len_removed_project)
+
+    dogma.remove_project(project_name)
+    purged = dogma.purge_project(project_name)
+    assert purged == True
+    validate_len(len_project, len_removed_project)
+
+
+def validate_len(expected_len, expected_removed_len):
     projects = dogma.list_projects()
-    assert len(projects) == 0
+    removed_projects = dogma.list_projects(removed=True)
+    assert len(projects) == expected_len
+    assert len(removed_projects) == expected_removed_len

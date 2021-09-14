@@ -4,18 +4,20 @@ from dataclasses import dataclass, field
 from dataclasses_json import LetterCase, config, dataclass_json
 from datetime import datetime
 from marshmallow import fields
+from typing import Optional
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class Repository:
     name: str
-    creator: Creator
-    head_revision: int
-    url: str
-    created_at: datetime = field(
+    creator: Optional[Creator] = None
+    created_at: Optional[datetime] = field(
+        default=None,
         metadata=config(
-            decoder=lambda x: datetime.strptime(x, DATE_FORMAT_ISO8601),
+            decoder=lambda x: datetime.strptime(x, DATE_FORMAT_ISO8601) if x else None,
             mm_field=fields.DateTime(format=DATE_FORMAT_ISO8601),
-        )
+        ),
     )
+    head_revision: Optional[int] = -1
+    url: Optional[str] = None
