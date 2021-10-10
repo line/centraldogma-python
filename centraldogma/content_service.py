@@ -11,6 +11,8 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+from centraldogma.data.change import Change
+from centraldogma.data.commit import Commit
 from centraldogma.base_client import BaseClient
 from centraldogma.data import Content
 from http import HTTPStatus
@@ -63,3 +65,10 @@ class ContentService:
             # TODO(@hexoul): Instead of returning None, raise a proper exception like Java client.
             return None
         return Content.from_dict(resp.json())
+
+    def push_changes(
+        self,
+        commit: Commit,
+        changes: List[Change],
+    ):
+        pass
