@@ -165,8 +165,10 @@ class Dogma:
     ):
         """Creates, replaces, renames or deletes files. The user should have write permission.
 
-        :param commit:
-        :param changes:
+        :param commit: A commit message for changes.
+        :param changes: Detailed changes including path, type and content.
+            If the type is REMOVE, the content should be empty. If the type is RENAME,
+            the content is supposed to be the new name.
         """
         return self.content_service.push_changes(
             project_name, repo_name, commit, changes

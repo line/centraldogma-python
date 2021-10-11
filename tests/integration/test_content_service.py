@@ -12,6 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from centraldogma.dogma import Change, ChangeType, Commit, Dogma
+from centraldogma.exceptions import ConflictException
 import pytest
 import os
 
@@ -40,6 +41,9 @@ def test_content(run_around_test):
     commit = Commit("Upsert test.json")
     jsonChange = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
     dogma.push_changes(project_name, repo_name, commit, [jsonChange])
+
+    with pytest.raises(ConflictException):
+        dogma.push_changes(project_name, repo_name, commit, [jsonChange])
 
     commit = Commit("Upsert test.txt")
     textChange = Change("/path/test.txt", ChangeType.UPSERT_TEXT, "foo")
