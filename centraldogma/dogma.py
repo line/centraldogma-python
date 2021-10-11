@@ -13,7 +13,7 @@
 # under the License.
 from centraldogma.base_client import BaseClient
 from centraldogma.content_service import ContentService
-from centraldogma.data import Change, Commit, Content, Project, Repository
+from centraldogma.data import Change, ChangeType, Commit, Content, Project, Repository
 from centraldogma.project_service import ProjectService
 from centraldogma.repository_service import RepositoryService
 from typing import List, Optional
@@ -158,6 +158,8 @@ class Dogma:
 
     def push_changes(
         self,
+        project_name: str,
+        repo_name: str,
         commit: Commit,
         changes: List[Change],
     ):
@@ -166,5 +168,6 @@ class Dogma:
         :param commit:
         :param changes:
         """
-        print(commit, changes)
-        return self.content_service.push_changes(commit, changes)
+        return self.content_service.push_changes(
+            project_name, repo_name, commit, changes
+        )

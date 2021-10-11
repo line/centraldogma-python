@@ -11,8 +11,7 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.dogma import Change, Commit, Dogma
-from centraldogma.exceptions import BadRequestException, NotFoundException
+from centraldogma.dogma import Change, ChangeType, Commit, Dogma
 import pytest
 import os
 
@@ -38,9 +37,15 @@ def run_around_test():
 )
 @pytest.mark.integration
 def test_content(run_around_test):
-    with pytest.raises(BadRequestException):
-        dogma.create_repository(project_name, "Test repo")
+    commit = Commit("Upsert test.json")
+    jsonChange = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
+    dogma.push_changes(project_name, repo_name, commit, [jsonChange])
 
-    commit = Commit("summary")
-    change = Change("/path/1", "json", '{"foo":"bar"}')
-    dogma.push_changes(commit, [change])
+    commit = Commit("Upsert test.txt")
+    textChange = Change("/path/test.txt", ChangeType.UPSERT_TEXT, "foo")
+    dogma.push_changes(project_name, repo_name, commit, [textChange])
+
+    commit = Commit("Upsert both json and txt")
+    jsonChange = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar2"})
+    textChange = Change("/path/test.txt", ChangeType.UPSERT_TEXT, "foo2")
+    dogma.push_changes(project_name, repo_name, commit, [jsonChange, textChange])

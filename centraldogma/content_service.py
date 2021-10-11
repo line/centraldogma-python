@@ -15,6 +15,8 @@ from centraldogma.data.change import Change
 from centraldogma.data.commit import Commit
 from centraldogma.base_client import BaseClient
 from centraldogma.data import Content
+from dataclasses import asdict
+from enum import Enum
 from http import HTTPStatus
 from typing import List, Optional
 
@@ -61,14 +63,26 @@ class ContentService:
             file_path = "/" + file_path
         path = f"/projects/{project_name}/repos/{repo_name}/contents{file_path}"
         resp = self.client.request("get", path, params=params)
-        if resp.status_code != HTTPStatus.OK:
-            # TODO(@hexoul): Instead of returning None, raise a proper exception like Java client.
-            return None
         return Content.from_dict(resp.json())
 
     def push_changes(
         self,
+        project_name: str,
+        repo_name: str,
         commit: Commit,
         changes: List[Change],
     ):
-        pass
+        params = {
+            "commitMessage": asdict(commit),
+            "changes": [
+                asdict(change, dict_factory=self._change_dict) for change in changes
+            ],
+        }
+        path = f"/projects/{project_name}/repos/{repo_name}/contents"
+        self.client.request("post", path, json=params)
+
+    def _change_dict(self, data):
+        return {
+            field: value.value if isinstance(value, Enum) else value
+            for field, value in data
+        }

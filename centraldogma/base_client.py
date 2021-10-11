@@ -13,6 +13,7 @@
 # under the License.
 from centraldogma.exceptions import (
     BadRequestException,
+    ConflictException,
     NotFoundException,
     UnauthorizedException,
     UnknownException,
@@ -73,5 +74,7 @@ class BaseClient:
             raise BadRequestException(response)
         elif response.status_code == HTTPStatus.NOT_FOUND:
             raise NotFoundException(response)
+        elif response.status_code == HTTPStatus.CONFLICT:
+            raise ConflictException(response)
         else:
             raise UnknownException(response)
