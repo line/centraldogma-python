@@ -11,7 +11,7 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.dogma import Change, ChangeType, Commit, Dogma, PushResult
+from centraldogma.dogma import Change, ChangeType, Commit, Dogma
 from centraldogma.exceptions import BadRequestException, ConflictException
 import pytest
 import os
@@ -42,33 +42,38 @@ def test_content(run_around_test):
     assert len(files) == 0
 
     commit = Commit("Upsert test.json")
-    upsertJson = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
-    ret = dogma.push_changes(project_name, repo_name, commit, [upsertJson])
+    upsert_json = Change("/test .json", ChangeType.UPSERT_JSON, {"foo": "bar"})
+    with pytest.raises(BadRequestException):
+        dogma.push_changes(project_name, repo_name, commit, [upsert_json])
+    upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
+    ret = dogma.push_changes(project_name, repo_name, commit, [upsert_json])
     assert ret.revision == 2
 
     with pytest.raises(ConflictException):
-        dogma.push_changes(project_name, repo_name, commit, [upsertJson])
+        dogma.push_changes(project_name, repo_name, commit, [upsert_json])
 
     commit = Commit("Upsert test.txt")
-    upsertText = Change("/path/test.txt", ChangeType.UPSERT_TEXT, "foo")
-    ret = dogma.push_changes(project_name, repo_name, commit, [upsertText])
+    upsert_text = Change("/path/test.txt", ChangeType.UPSERT_TEXT, "foo")
+    ret = dogma.push_changes(project_name, repo_name, commit, [upsert_text])
     assert ret.revision == 3
 
     commit = Commit("Upsert both json and txt")
-    upsertJson = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar2"})
-    upsertText = Change("/path/test.txt", ChangeType.UPSERT_TEXT, "foo2")
-    ret = dogma.push_changes(project_name, repo_name, commit, [upsertJson, upsertText])
+    upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar2"})
+    upsert_text = Change("/path/test.txt", ChangeType.UPSERT_TEXT, "foo2")
+    ret = dogma.push_changes(
+        project_name, repo_name, commit, [upsert_json, upsert_text]
+    )
     assert ret.revision == 4
 
     commit = Commit("Rename the json")
-    renameJson = Change("/test2.json", ChangeType.RENAME, "/test3.json")
+    rename_json = Change("/test2.json", ChangeType.RENAME, "/test3.json")
     with pytest.raises(ConflictException):
-        dogma.push_changes(project_name, repo_name, commit, [renameJson])
-    renameJson = Change("/test.json", ChangeType.RENAME, "")
+        dogma.push_changes(project_name, repo_name, commit, [rename_json])
+    rename_json = Change("/test.json", ChangeType.RENAME, "")
     with pytest.raises(BadRequestException):
-        dogma.push_changes(project_name, repo_name, commit, [renameJson])
-    renameJson = Change("/test.json", ChangeType.RENAME, "/test2.json")
-    ret = dogma.push_changes(project_name, repo_name, commit, [renameJson])
+        dogma.push_changes(project_name, repo_name, commit, [rename_json])
+    rename_json = Change("/test.json", ChangeType.RENAME, "/test2.json")
+    ret = dogma.push_changes(project_name, repo_name, commit, [rename_json])
     assert ret.revision == 5
 
     files = dogma.list_files(project_name, repo_name)
@@ -77,22 +82,22 @@ def test_content(run_around_test):
     assert set(map(lambda x: x.type, files)) == {"DIRECTORY", "JSON"}
 
     commit = Commit("Remove the json")
-    removeJson = Change("/test.json", ChangeType.REMOVE)
+    remove_json = Change("/test.json", ChangeType.REMOVE)
     with pytest.raises(ConflictException):
-        dogma.push_changes(project_name, repo_name, commit, [removeJson])
-    removeJson = Change("/test2.json", ChangeType.REMOVE)
-    ret = dogma.push_changes(project_name, repo_name, commit, [removeJson])
+        dogma.push_changes(project_name, repo_name, commit, [remove_json])
+    remove_json = Change("/test2.json", ChangeType.REMOVE)
+    ret = dogma.push_changes(project_name, repo_name, commit, [remove_json])
     assert ret.revision == 6
 
     with pytest.raises(ConflictException):
-        dogma.push_changes(project_name, repo_name, commit, [removeJson])
+        dogma.push_changes(project_name, repo_name, commit, [remove_json])
 
     files = dogma.list_files(project_name, repo_name)
     assert len(files) == 1
 
     commit = Commit("Remove the folder")
-    removeFolder = Change("/path", ChangeType.REMOVE)
-    ret = dogma.push_changes(project_name, repo_name, commit, [removeFolder])
+    remove_folder = Change("/path", ChangeType.REMOVE)
+    ret = dogma.push_changes(project_name, repo_name, commit, [remove_folder])
     assert ret.revision == 7
 
     files = dogma.list_files(project_name, repo_name)
