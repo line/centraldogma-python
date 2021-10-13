@@ -11,5 +11,20 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-DATE_FORMAT_ISO8601 = "%Y-%m-%dT%H:%M:%S%z"
-DATE_FORMAT_ISO8601_MS = "%Y-%m-%dT%H:%M:%S.%f%z"
+from centraldogma.data.constants import DATE_FORMAT_ISO8601_MS
+from dataclasses import dataclass, field
+from dataclasses_json import LetterCase, config, dataclass_json
+from datetime import datetime
+from marshmallow import fields
+
+
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass
+class PushResult:
+    revision: int
+    pushed_at: datetime = field(
+        metadata=config(
+            decoder=lambda x: datetime.strptime(x, DATE_FORMAT_ISO8601_MS),
+            mm_field=fields.DateTime(format=DATE_FORMAT_ISO8601_MS),
+        ),
+    )

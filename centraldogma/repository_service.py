@@ -34,8 +34,6 @@ class RepositoryService:
         resp = self.client.request(
             "post", f"/projects/{project_name}/repos", json={"name": name}
         )
-        if resp.status_code != HTTPStatus.CREATED:
-            return None
         return Repository.from_dict(resp.json())
 
     def remove(self, project_name: str, name: str) -> bool:
@@ -47,8 +45,6 @@ class RepositoryService:
         resp = self.client.request(
             "patch", f"/projects/{project_name}/repos/{name}", json=body
         )
-        if resp.status_code != HTTPStatus.OK:
-            return None
         return Repository.from_dict(resp.json())
 
     def purge(self, project_name: str, name: str) -> bool:

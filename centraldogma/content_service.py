@@ -13,6 +13,7 @@
 # under the License.
 from centraldogma.data.change import Change
 from centraldogma.data.commit import Commit
+from centraldogma.data.push_result import PushResult
 from centraldogma.base_client import BaseClient
 from centraldogma.data import Content
 from dataclasses import asdict
@@ -71,7 +72,7 @@ class ContentService:
         repo_name: str,
         commit: Commit,
         changes: List[Change],
-    ):
+    ) -> PushResult:
         params = {
             "commitMessage": asdict(commit),
             "changes": [
@@ -79,7 +80,8 @@ class ContentService:
             ],
         }
         path = f"/projects/{project_name}/repos/{repo_name}/contents"
-        self.client.request("post", path, json=params)
+        resp = self.client.request("post", path, json=params)
+        return PushResult.from_dict(resp.json())
 
     def _change_dict(self, data):
         return {

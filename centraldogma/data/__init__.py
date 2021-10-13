@@ -11,10 +11,11 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from .constants import DATE_FORMAT_ISO8601 as DATE_FORMAT_ISO8601
-from .change import Change as Change, ChangeType
-from .commit import Commit as Commit
-from .content import Content as Content
-from .creator import Creator as Creator
-from .project import Project as Project
-from .repository import Repository as Repository
+from .constants import DATE_FORMAT_ISO8601
+from .change import Change, ChangeType
+from .commit import Commit
+from .content import Content
+from .creator import Creator
+from .project import Project
+from .push_result import PushResult
+from .repository import Repository

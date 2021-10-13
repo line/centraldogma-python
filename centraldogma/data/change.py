@@ -31,4 +31,4 @@ class ChangeType(Enum):
 class Change:
     path: str
     type: ChangeType
-    content: Optional[Union[map, str]]
+    content: Optional[Union[map, str]] = None
