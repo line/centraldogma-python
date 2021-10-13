@@ -11,7 +11,7 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from .constants import DATE_FORMAT_ISO8601
+from .constants import DATE_FORMAT_ISO8601, DATE_FORMAT_ISO8601_MS
 from .change import Change, ChangeType
 from .commit import Commit
 from .content import Content
