@@ -11,20 +11,18 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+import json
+from dataclasses import dataclass
+from http import HTTPStatus
+from json import JSONDecodeError
+from typing import Dict, Any, Callable
+
+from dataclasses_json import dataclass_json
 from requests import Response
 
 
 class CentralDogmaException(Exception):
-    def __init__(self, response: Response):
-        try:
-            self.response = response.json()
-            self.exception = self.response["exception"]
-            self.message = self.response["message"]
-        except:
-            print("The response format is not expected")
-
-    def __str__(self):
-        return str(self.response)
+    pass
 
 
 class UnauthorizedException(CentralDogmaException):
@@ -41,3 +39,77 @@ class NotFoundException(CentralDogmaException):
 
 class UnknownException(CentralDogmaException):
     pass
+
+
+class ProjectExistsException(CentralDogmaException):
+    pass
+
+
+class ProjectNotFoundException(CentralDogmaException):
+    pass
+
+
+class QueryExecutionException(CentralDogmaException):
+    pass
+
+
+class RedundantChangeException(CentralDogmaException):
+    pass
+
+
+class RevisionNotFoundException(CentralDogmaException):
+    pass
+
+
+class EntryNotFoundException(CentralDogmaException):
+    pass
+
+
+class ChangeConflictException(CentralDogmaException):
+    pass
+
+
+class RepositoryNotFoundException(CentralDogmaException):
+    pass
+
+
+class AuthorizationException(CentralDogmaException):
+    pass
+
+
+class ShuttingDownException(CentralDogmaException):
+    pass
+
+
+class RepositoryExistsException(CentralDogmaException):
+    pass
+
+
+_EXCEPTION_FACTORIES: dict[str, Callable[[str], CentralDogmaException]] = {
+    "com.linecorp.centraldogma.common." + exception.__name__: exception for exception in
+    [ProjectExistsException, ProjectNotFoundException, QueryExecutionException, RedundantChangeException,
+     RevisionNotFoundException, EntryNotFoundException, ChangeConflictException, RepositoryNotFoundException,
+     AuthorizationException, ShuttingDownException, RepositoryExistsException]
+}
+
+
+def to_exception(response: Response) -> CentralDogmaException:
+    try:
+        body = response.json()
+    except JSONDecodeError:
+        return UnknownException(response.text)
+
+    exception = body["exception"]
+    if exception is not None:
+        exception_type = _EXCEPTION_FACTORIES.get(exception)
+        if exception_type is not None:
+            return exception_type(body["message"])
+
+    if response.status_code == HTTPStatus.UNAUTHORIZED:
+        raise UnauthorizedException(response)
+    elif response.status_code == HTTPStatus.BAD_REQUEST:
+        raise BadRequestException(response)
+    elif response.status_code == HTTPStatus.NOT_FOUND:
+        raise NotFoundException(response)
+    else:
+        raise UnknownException(response.text)

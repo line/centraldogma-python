@@ -11,10 +11,12 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.base_client import BaseClient
-from centraldogma.data import Content
 from http import HTTPStatus
 from typing import List, Optional
+
+from centraldogma.base_client import BaseClient
+from centraldogma.data import Content
+from centraldogma.exceptions import to_exception
 
 
 class ContentService:
@@ -38,9 +40,12 @@ class ContentService:
             else:
                 path += "/" + path_pattern
         resp = self.client.request("get", path, params=params)
-        if resp.status_code == HTTPStatus.NO_CONTENT:
+        if resp.status_code == HTTPStatus.OK:
+            return [Content.from_dict(content) for content in resp.json()]
+        elif resp.status_code == HTTPStatus.NO_CONTENT:
             return []
-        return [Content.from_dict(content) for content in resp.json()]
+        else:
+            raise to_exception(resp)
 
     def get_file(
         self,
@@ -59,7 +64,7 @@ class ContentService:
             file_path = "/" + file_path
         path = f"/projects/{project_name}/repos/{repo_name}/contents{file_path}"
         resp = self.client.request("get", path, params=params)
-        if resp.status_code != HTTPStatus.OK:
-            # TODO(@hexoul): Instead of returning None, raise a proper exception like Java client.
-            return None
-        return Content.from_dict(resp.json())
+
+        if resp.status_code == HTTPStatus.OK:
+            return Content.from_dict(resp.json())
+        raise to_exception(resp)

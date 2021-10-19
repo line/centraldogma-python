@@ -11,15 +11,9 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.exceptions import (
-    BadRequestException,
-    NotFoundException,
-    UnauthorizedException,
-    UnknownException,
-)
-from http import HTTPStatus
-from httpx import Client, Response
 from typing import Dict, Union
+
+from httpx import Client, Response
 
 
 class BaseClient:
@@ -43,7 +37,7 @@ class BaseClient:
         return kwargs
 
     def _httpx_request(self, method: str, url: str, **kwargs) -> Response:
-        return self._handle_response(self.client.request(method, url, **kwargs))
+        return self.client.request(method, url, **kwargs)
 
     @staticmethod
     def _get_headers(token: str) -> Dict:
@@ -59,19 +53,3 @@ class BaseClient:
             "Content-Type": "application/json-patch+json",
         }
 
-    @staticmethod
-    def _handle_response(response: Response):
-        if response.is_error:
-            BaseClient._handle_exception(response)
-        return response
-
-    @staticmethod
-    def _handle_exception(response: Response):
-        if response.status_code == HTTPStatus.UNAUTHORIZED:
-            raise UnauthorizedException(response)
-        elif response.status_code == HTTPStatus.BAD_REQUEST:
-            raise BadRequestException(response)
-        elif response.status_code == HTTPStatus.NOT_FOUND:
-            raise NotFoundException(response)
-        else:
-            raise UnknownException(response)

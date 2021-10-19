@@ -11,10 +11,12 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.base_client import BaseClient
-from centraldogma.data import Project
 from http import HTTPStatus
 from typing import List
+
+from centraldogma.base_client import BaseClient
+from centraldogma.data import Project
+from centraldogma.exceptions import to_exception
 
 
 class ProjectService:
@@ -24,27 +26,33 @@ class ProjectService:
     def list(self, removed: bool) -> List[Project]:
         params = {"status": "removed"} if removed else None
         resp = self.client.request("get", "/projects", params=params)
-        if resp.status_code == HTTPStatus.NO_CONTENT:
+        if resp.status_code == HTTPStatus.OK:
+            return [Project.from_dict(project) for project in resp.json()]
+        elif resp.status_code == HTTPStatus.NO_CONTENT:
             return []
-        return [Project.from_dict(project) for project in resp.json()]
+        raise to_exception(resp)
 
     def create(self, name: str) -> Project:
         resp = self.client.request("post", "/projects", json={"name": name})
-        if resp.status_code != HTTPStatus.CREATED:
-            return None
-        return Project.from_dict(resp.json())
+        if resp.status_code == HTTPStatus.CREATED:
+            return Project.from_dict(resp.json())
+        raise to_exception(resp)
 
-    def remove(self, name: str) -> bool:
+    def remove(self, name: str) -> None:
         resp = self.client.request("delete", f"/projects/{name}")
-        return True if resp.status_code == HTTPStatus.NO_CONTENT else False
+        if resp.status_code == HTTPStatus.NO_CONTENT:
+            return None
+        raise to_exception(resp)
 
     def unremove(self, name: str) -> Project:
         body = [{"op": "replace", "path": "/status", "value": "active"}]
         resp = self.client.request("patch", f"/projects/{name}", json=body)
-        if resp.status_code != HTTPStatus.OK:
-            return None
-        return Project.from_dict(resp.json())
+        if resp.status_code == HTTPStatus.OK:
+            return Project.from_dict(resp.json())
+        raise to_exception(resp)
 
-    def purge(self, name: str) -> bool:
+    def purge(self, name: str) -> None:
         resp = self.client.request("delete", f"/projects/{name}/removed")
-        return True if resp.status_code == HTTPStatus.NO_CONTENT else False
+        if resp.status_code == HTTPStatus.NO_CONTENT:
+            return None
+        raise to_exception(resp)

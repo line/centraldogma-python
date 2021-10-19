@@ -16,6 +16,8 @@ from centraldogma.data import Repository
 from http import HTTPStatus
 from typing import List
 
+from centraldogma.exceptions import to_exception
+
 
 class RepositoryService:
     def __init__(self, client: BaseClient):
@@ -26,39 +28,49 @@ class RepositoryService:
         resp = self.client.request(
             "get", f"/projects/{project_name}/repos", params=params
         )
-        if resp.status_code == HTTPStatus.NO_CONTENT:
+        if resp.status_code == HTTPStatus.OK:
+            return [Repository.from_dict(repo) for repo in resp.json()]
+        elif resp.status_code == HTTPStatus.NO_CONTENT:
             return []
-        return [Repository.from_dict(repo) for repo in resp.json()]
+        else:
+            raise to_exception(resp)
 
     def create(self, project_name: str, name: str) -> Repository:
         resp = self.client.request(
             "post", f"/projects/{project_name}/repos", json={"name": name}
         )
-        if resp.status_code != HTTPStatus.CREATED:
-            return None
-        return Repository.from_dict(resp.json())
+        if resp.status_code == HTTPStatus.CREATED:
+            return Repository.from_dict(resp.json())
+        raise to_exception(resp)
 
-    def remove(self, project_name: str, name: str) -> bool:
+    def remove(self, project_name: str, name: str) -> None:
         resp = self.client.request("delete", f"/projects/{project_name}/repos/{name}")
-        return True if resp.status_code == HTTPStatus.NO_CONTENT else False
+
+        if resp.status_code == HTTPStatus.NO_CONTENT:
+            return None
+        raise to_exception(resp)
 
     def unremove(self, project_name: str, name: str) -> Repository:
         body = [{"op": "replace", "path": "/status", "value": "active"}]
         resp = self.client.request(
             "patch", f"/projects/{project_name}/repos/{name}", json=body
         )
-        if resp.status_code != HTTPStatus.OK:
-            return None
-        return Repository.from_dict(resp.json())
+        if resp.status_code == HTTPStatus.OK:
+            return Repository.from_dict(resp.json())
+        raise to_exception(resp)
 
-    def purge(self, project_name: str, name: str) -> bool:
+    def purge(self, project_name: str, name: str) -> None:
         resp = self.client.request(
             "delete", f"/projects/{project_name}/repos/{name}/removed"
         )
-        return True if resp.status_code == HTTPStatus.NO_CONTENT else False
+        if resp.status_code == HTTPStatus.NO_CONTENT:
+            return None
+        raise to_exception(resp)
 
     def normalize_revision(self, project_name: str, name: str, revision: int) -> int:
         resp = self.client.request(
             "get", f"/projects/{project_name}/repos/{name}/revision/{revision}"
         )
-        return resp.json()["revision"] if resp.status_code == HTTPStatus.OK else None
+        if resp.status_code == HTTPStatus.OK:
+            return resp.json()["revision"]
+        raise to_exception(resp)

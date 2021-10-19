@@ -13,12 +13,12 @@
 # under the License.
 from centraldogma.data import DATE_FORMAT_ISO8601, Content, Creator, Project, Repository
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestException, UnknownException
+from centraldogma.exceptions import BadRequestException, UnknownException, ProjectExistsException, \
+    RepositoryExistsException
 from datetime import datetime
 from http import HTTPStatus
 from httpx import Response
 import pytest
-
 
 client = Dogma("http://baseurl", "token")
 
@@ -95,9 +95,13 @@ def test_create_project(respx_mock):
 
 def test_create_project_failed(respx_mock):
     url = "http://baseurl/api/v1/projects"
-    route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    with pytest.raises(BadRequestException):
+    response_body = {
+        "exception": "com.linecorp.centraldogma.common.ProjectExistsException",
+        "message": "Project 'newProject' exists already."}
+    route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.CONFLICT, json=response_body))
+    with pytest.raises(ProjectExistsException) as cause:
         client.create_project("newProject")
+    assert response_body["message"] == str(cause.value)
 
     assert route.called
     request = respx_mock.calls.last.request
@@ -112,7 +116,7 @@ def test_remove_project(respx_mock):
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert removed == True
+    assert removed == None
 
 
 def test_remove_project_failed(respx_mock):
@@ -136,7 +140,7 @@ def test_unremove_project(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+            request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     )
     assert project == Project.from_dict(mock_project)
 
@@ -153,7 +157,7 @@ def test_unremove_project_failed(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+            request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     )
 
 
@@ -164,7 +168,7 @@ def test_purge_project(respx_mock):
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert purged == True
+    assert purged is None
 
 
 def test_purge_project_failed(respx_mock):
@@ -223,8 +227,11 @@ def test_create_repository(respx_mock):
 
 def test_create_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos"
-    route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    with pytest.raises(BadRequestException):
+    response_body = {
+        "exception": "com.linecorp.centraldogma.common.RepositoryExistsException",
+        "message": "Respository 'myproject/newRepo' exists already."}
+    route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.CONFLICT, json=response_body))
+    with pytest.raises(RepositoryExistsException):
         client.create_repository("myproject", "newRepo")
 
     assert route.called
@@ -240,7 +247,7 @@ def test_remove_repository(respx_mock):
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert removed == True
+    assert removed is None
 
 
 def test_remove_repository_failed(respx_mock):
@@ -264,7 +271,7 @@ def test_unremove_repository(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+            request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     )
     assert repo == Repository.from_dict(mock_repository)
 
@@ -279,7 +286,7 @@ def test_unremove_repository_failed(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+            request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     )
 
 
@@ -290,7 +297,7 @@ def test_purge_repository(respx_mock):
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert perged == True
+    assert perged is None
 
 
 def test_purge_repository_failed(respx_mock):
