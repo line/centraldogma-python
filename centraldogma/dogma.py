@@ -164,7 +164,7 @@ class Dogma:
             project_name, repo_name, file_path, revision, json_path
         )
 
-    def push_changes(
+    def push(
         self,
         project_name: str,
         repo_name: str,
@@ -178,6 +178,4 @@ class Dogma:
             If the type is REMOVE, the content should be empty. If the type is RENAME,
             the content is supposed to be the new name.
         """
-        return self.content_service.push_changes(
-            project_name, repo_name, commit, changes
-        )
+        return self.content_service.push(project_name, repo_name, commit, changes)

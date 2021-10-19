@@ -464,14 +464,14 @@ def test_get_file_json_path(respx_mock):
     assert file.url == mock_content_json["url"]
 
 
-def test_push_changes(respx_mock):
+def test_push(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents"
     route = respx_mock.post(url).mock(
         return_value=Response(HTTPStatus.CREATED, json=mock_push_result)
     )
     commit = Commit("Upsert test.json")
     upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
-    ret = client.push_changes("myproject", "myrepo", commit, [upsert_json])
+    ret = client.push("myproject", "myrepo", commit, [upsert_json])
 
     assert route.called
     request = respx_mock.calls.last.request

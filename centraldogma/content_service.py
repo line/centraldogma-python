@@ -66,7 +66,7 @@ class ContentService:
         resp = self.client.request("get", path, params=params)
         return Content.from_dict(resp.json())
 
-    def push_changes(
+    def push(
         self,
         project_name: str,
         repo_name: str,
