@@ -21,12 +21,10 @@ def test_repository_exists_exception():
         def json(self) -> dict:
             return {
                 "exception": "com.linecorp.centraldogma.common.ProjectExistsException",
-                "message": "foobar"
+                "message": "foobar",
             }
 
     # noinspection PyTypeChecker
     exception: ProjectExistsException = to_exception(MockResponse())
     assert isinstance(exception, ProjectExistsException)
     assert str(exception) == "foobar"
-
-

@@ -12,7 +12,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestException, NotFoundException, ProjectNotFoundException
+from centraldogma.exceptions import (
+    BadRequestException,
+    NotFoundException,
+    ProjectNotFoundException,
+)
 import pytest
 import os
 

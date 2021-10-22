@@ -11,14 +11,11 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-import json
-from dataclasses import dataclass
 from http import HTTPStatus
 from json import JSONDecodeError
-from typing import Dict, Any, Callable
+from typing import Callable
 
-from dataclasses_json import dataclass_json
-from requests import Response
+from httpx import Response
 
 
 class CentralDogmaException(Exception):
@@ -85,11 +82,25 @@ class RepositoryExistsException(CentralDogmaException):
     pass
 
 
+class InvalidResponseException(CentralDogmaException):
+    pass
+
+
 _EXCEPTION_FACTORIES: dict[str, Callable[[str], CentralDogmaException]] = {
-    "com.linecorp.centraldogma.common." + exception.__name__: exception for exception in
-    [ProjectExistsException, ProjectNotFoundException, QueryExecutionException, RedundantChangeException,
-     RevisionNotFoundException, EntryNotFoundException, ChangeConflictException, RepositoryNotFoundException,
-     AuthorizationException, ShuttingDownException, RepositoryExistsException]
+    "com.linecorp.centraldogma.common." + exception.__name__: exception
+    for exception in [
+        ProjectExistsException,
+        ProjectNotFoundException,
+        QueryExecutionException,
+        RedundantChangeException,
+        RevisionNotFoundException,
+        EntryNotFoundException,
+        ChangeConflictException,
+        RepositoryNotFoundException,
+        AuthorizationException,
+        ShuttingDownException,
+        RepositoryExistsException,
+    ]
 }
 
 
@@ -97,19 +108,23 @@ def to_exception(response: Response) -> CentralDogmaException:
     try:
         body = response.json()
     except JSONDecodeError:
-        return UnknownException(response.text)
+        return InvalidResponseException(response.text)
 
     exception = body["exception"]
+    message = body["message"]
     if exception is not None:
         exception_type = _EXCEPTION_FACTORIES.get(exception)
         if exception_type is not None:
-            return exception_type(body["message"])
+            return exception_type(message)
+
+    if message is None:
+        message = response.text
 
     if response.status_code == HTTPStatus.UNAUTHORIZED:
-        raise UnauthorizedException(response)
+        return UnauthorizedException(message)
     elif response.status_code == HTTPStatus.BAD_REQUEST:
-        raise BadRequestException(response)
+        return BadRequestException(message)
     elif response.status_code == HTTPStatus.NOT_FOUND:
-        raise NotFoundException(response)
+        return NotFoundException(message)
     else:
-        raise UnknownException(response.text)
+        return UnknownException(message)

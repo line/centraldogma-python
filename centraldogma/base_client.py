@@ -52,4 +52,3 @@ class BaseClient:
             "Authorization": f"bearer {token}",
             "Content-Type": "application/json-patch+json",
         }
-
