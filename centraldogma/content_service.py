@@ -11,11 +11,11 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+from centraldogma.base_client import BaseClient
 from centraldogma.data.change import Change
 from centraldogma.data.commit import Commit
+from centraldogma.data.content import Content
 from centraldogma.data.push_result import PushResult
-from centraldogma.base_client import BaseClient
-from centraldogma.data import Content
 from dataclasses import asdict
 from enum import Enum
 from http import HTTPStatus
