@@ -30,8 +30,6 @@ class ProjectService:
 
     def create(self, name: str) -> Project:
         resp = self.client.request("post", "/projects", json={"name": name})
-        if resp.status_code != HTTPStatus.CREATED:
-            return None
         return Project.from_dict(resp.json())
 
     def remove(self, name: str) -> bool:
@@ -41,8 +39,6 @@ class ProjectService:
     def unremove(self, name: str) -> Project:
         body = [{"op": "replace", "path": "/status", "value": "active"}]
         resp = self.client.request("patch", f"/projects/{name}", json=body)
-        if resp.status_code != HTTPStatus.OK:
-            return None
         return Project.from_dict(resp.json())
 
     def purge(self, name: str) -> bool:

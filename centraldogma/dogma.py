@@ -13,7 +13,15 @@
 # under the License.
 from centraldogma.base_client import BaseClient
 from centraldogma.content_service import ContentService
-from centraldogma.data import Content, Project, Repository
+from centraldogma.data import (
+    Change,
+    ChangeType,
+    Commit,
+    Content,
+    Project,
+    PushResult,
+    Repository,
+)
 from centraldogma.project_service import ProjectService
 from centraldogma.repository_service import RepositoryService
 from typing import List, Optional
@@ -155,3 +163,19 @@ class Dogma:
         return self.content_service.get_file(
             project_name, repo_name, file_path, revision, json_path
         )
+
+    def push(
+        self,
+        project_name: str,
+        repo_name: str,
+        commit: Commit,
+        changes: List[Change],
+    ) -> PushResult:
+        """Creates, replaces, renames or deletes files. The user should have write permission.
+
+        :param commit: A commit message for changes.
+        :param changes: Detailed changes including path, type and content.
+            If the type is REMOVE, the content should be empty. If the type is RENAME,
+            the content is supposed to be the new name.
+        """
+        return self.content_service.push(project_name, repo_name, commit, changes)

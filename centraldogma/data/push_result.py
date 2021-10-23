@@ -11,12 +11,20 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from dataclasses import dataclass
-from dataclasses_json import dataclass_json
+from centraldogma.data.constants import DATE_FORMAT_ISO8601_MS
+from dataclasses import dataclass, field
+from dataclasses_json import LetterCase, config, dataclass_json
+from datetime import datetime
+from marshmallow import fields
 
 
-@dataclass_json
+@dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class Creator:
-    name: str
-    email: str
+class PushResult:
+    revision: int
+    pushed_at: datetime = field(
+        metadata=config(
+            decoder=lambda x: datetime.strptime(x, DATE_FORMAT_ISO8601_MS),
+            mm_field=fields.DateTime(format=DATE_FORMAT_ISO8601_MS),
+        ),
+    )
