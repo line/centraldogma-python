@@ -111,14 +111,11 @@ def to_exception(response: Response) -> CentralDogmaException:
         return InvalidResponseException(response.text)
 
     exception = body["exception"]
-    message = body["message"]
-    if exception is not None:
+    message = body["message"] if body["message"] else response.text
+    if exception:
         exception_type = _EXCEPTION_FACTORIES.get(exception)
-        if exception_type is not None:
+        if exception_type:
             return exception_type(message)
-
-    if message is None:
-        message = response.text
 
     if response.status_code == HTTPStatus.UNAUTHORIZED:
         return UnauthorizedException(message)
