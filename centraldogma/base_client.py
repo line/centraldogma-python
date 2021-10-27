@@ -40,7 +40,9 @@ class BaseClient:
         return self._httpx_request(method, path, **kwargs)
 
     def _set_request_headers(self, method: str, **kwargs) -> Dict:
-        kwargs["headers"] = self.patch_headers if method == "patch" else self.headers
+        default_headers = self.patch_headers if method == "patch" else self.headers
+        headers = kwargs.get("headers")
+        kwargs["headers"] = dict(list(default_headers.items()) + list(headers.items())) if headers else default_headers
         return kwargs
 
     def _httpx_request(self, method: str, url: str, **kwargs) -> Response:

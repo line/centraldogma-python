@@ -45,3 +45,8 @@ class UnauthorizedException(CentralDogmaException):
 
 class UnknownException(CentralDogmaException):
     pass
+
+
+class EntryNoContentException(CentralDogmaException):
+    """A CentralDogmaException that is raised when attempted to retrieve the content from a directory entry."""
+    pass

@@ -11,6 +11,9 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+import os
+from typing import List, Optional, TypeVar, Generic
+
 from centraldogma.base_client import BaseClient
 from centraldogma.content_service import ContentService
 from centraldogma.data import (
@@ -22,13 +25,16 @@ from centraldogma.data import (
     PushResult,
     Repository,
 )
+from centraldogma.data.entry import Entry
+from centraldogma.data.revision import Revision
 from centraldogma.project_service import ProjectService
+from centraldogma.query import Query
 from centraldogma.repository_service import RepositoryService
-from typing import List, Optional
-import os
+
+T = TypeVar('T')
 
 
-class Dogma:
+class Dogma(Generic[T]):
     DEFAULT_BASE_URL = "http://localhost:36462"
     DEFAULT_TOKEN = "anonymous"
 
@@ -179,3 +185,29 @@ class Dogma:
             the content is supposed to be the new name.
         """
         return self.content_service.push(project_name, repo_name, commit, changes)
+
+    def watch_repository(
+            self,
+            project_name: str,
+            repo_name: str,
+            last_known_revision: Revision,
+            path_pattern: str,
+            timeout_millis: int) -> Optional[Revision]:
+        """
+        TODO(ikhoon): TBU
+        """
+        return self.content_service.watch_repository(project_name, repo_name, last_known_revision,
+                                                     path_pattern, timeout_millis)
+
+    def watch_file(
+            self,
+            project_name: str,
+            repo_name: str,
+            last_known_revision: Revision,
+            query: Query[T],
+            timeout_millis: int) -> Optional[Entry[T]]:
+        """
+        TODO(ikhoon): TBU
+        :rtype: object
+        """
+        return self.content_service.watch_file(project_name, repo_name, last_known_revision, query, timeout_millis)

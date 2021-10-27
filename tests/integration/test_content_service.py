@@ -11,12 +11,22 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+import os
+import time
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
+from typing import Optional, Any
+
+import pytest
+
+from centraldogma.data.entry import Entry
+from centraldogma.data.revision import Revision
 from centraldogma.dogma import Change, ChangeType, Commit, Dogma
 from centraldogma.exceptions import BadRequestException, ConflictException
-import pytest
-import os
+from centraldogma.query import Query
 
-dogma = Dogma()
+dogma = Dogma(base_url="http://127.0.0.1:18080")
+# dogma = Dogma()
 project_name = "TestProject"
 repo_name = "TestRepository"
 
@@ -100,3 +110,54 @@ def test_content(run_around_test):
 
     files = dogma.list_files(project_name, repo_name)
     assert len(files) == 0
+
+
+@pytest.mark.integration
+def test_watch_repository(run_around_test):
+    commit = Commit("Upsert test.json")
+    upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
+    ret = dogma.push(project_name, repo_name, commit, [upsert_json])
+
+    start = datetime.now()
+    revision = dogma.watch_repository(project_name, repo_name, Revision(ret.revision), "/**", 2000)
+    end = datetime.now()
+    assert not revision  # Not modified
+    assert (end - start).seconds >= 1
+
+    with ThreadPoolExecutor(max_workers=1) as e:
+        e.submit(push_later)
+    start = datetime.now()
+    revision = dogma.watch_repository(project_name, repo_name, Revision(ret.revision), "/**", 4000)
+    end = datetime.now()
+    assert revision.major == ret.revision + 1
+    assert (end - start).seconds < 3
+
+
+@pytest.mark.integration
+def test_watch_file(run_around_test):
+    commit = Commit("Upsert test.json")
+    upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
+    ret = dogma.push(project_name, repo_name, commit, [upsert_json])
+
+    start = datetime.now()
+    entry: Optional[Entry[Any]] = dogma.watch_file(project_name, repo_name, Revision(ret.revision),
+                                                   Query.json("/test.json"), 2000)
+    end = datetime.now()
+    assert not entry  # Not modified
+    assert (end - start).seconds >= 1
+
+    with ThreadPoolExecutor(max_workers=1) as e:
+        e.submit(push_later)
+    start = datetime.now()
+    entry = dogma.watch_file(project_name, repo_name, Revision(ret.revision), Query.json("/test.json"), 4000)
+    end = datetime.now()
+    assert entry.revision.major == ret.revision + 1
+    assert entry.content == {"foo": "qux"}
+    assert (end - start).seconds < 3
+
+
+def push_later():
+    time.sleep(1)
+    commit = Commit("Upsert test.json")
+    upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "qux"})
+    ret = dogma.push(project_name, repo_name, commit, [upsert_json])
