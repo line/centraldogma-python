@@ -22,15 +22,19 @@ class CentralDogmaException(Exception):
     pass
 
 
-class UnauthorizedException(CentralDogmaException):
-    pass
-
-
 class BadRequestException(CentralDogmaException):
     pass
 
 
+class ConflictException(CentralDogmaException):
+    pass
+
+
 class NotFoundException(CentralDogmaException):
+    pass
+
+
+class UnauthorizedException(CentralDogmaException):
     pass
 
 

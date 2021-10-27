@@ -11,7 +11,17 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.data import DATE_FORMAT_ISO8601, Content, Creator, Project, Repository
+from centraldogma.data import (
+    DATE_FORMAT_ISO8601,
+    DATE_FORMAT_ISO8601_MS,
+    Change,
+    ChangeType,
+    Commit,
+    Content,
+    Creator,
+    Project,
+    Repository,
+)
 from centraldogma.dogma import Dogma
 from centraldogma.exceptions import (
     BadRequestException,
@@ -52,6 +62,10 @@ mock_content_json = {
     "content": {"foo": "bar", "bar": ["foo", "foo"]},
     "revision": 3,
     "url": "/projects/myPro/repos/myRepo/contents/fooDir/foo.txt",
+}
+mock_push_result = {
+    "revision": 2,
+    "pushedAt": "2021-10-28T15:33:35.123Z",
 }
 
 
@@ -465,3 +479,25 @@ def test_get_file_json_path(respx_mock):
     assert file.content == mock_content_json["content"]
     assert file.revision == mock_content_json["revision"]
     assert file.url == mock_content_json["url"]
+
+
+def test_push(respx_mock):
+    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents"
+    route = respx_mock.post(url).mock(
+        return_value=Response(HTTPStatus.CREATED, json=mock_push_result)
+    )
+    commit = Commit("Upsert test.json")
+    upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
+    ret = client.push("myproject", "myrepo", commit, [upsert_json])
+
+    assert route.called
+    request = respx_mock.calls.last.request
+    assert request.url == url
+    payload = (
+        '{"commitMessage": {"summary": "Upsert test.json", "detail": null, "markup": null}, '
+        '"changes": [{"path": "/test.json", "type": "UPSERT_JSON", "content": {"foo": "bar"}}]}'
+    )
+    assert request._content == bytes(str(payload), "utf-8")
+    assert ret.pushed_at == datetime.strptime(
+        mock_push_result["pushedAt"], DATE_FORMAT_ISO8601_MS
+    )

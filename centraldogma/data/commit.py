@@ -11,11 +11,15 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from .change import Change, ChangeType
-from .commit import Commit
-from .constants import DATE_FORMAT_ISO8601, DATE_FORMAT_ISO8601_MS
-from .content import Content
-from .creator import Creator
-from .project import Project
-from .push_result import PushResult
-from .repository import Repository
+from dataclasses import dataclass
+from typing import Optional
+
+from dataclasses_json import dataclass_json
+
+
+@dataclass_json
+@dataclass
+class Commit:
+    summary: str
+    detail: Optional[str] = None
+    markup: Optional[str] = None

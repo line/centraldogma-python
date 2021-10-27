@@ -17,25 +17,43 @@ from typing import Any
 
 import pytest
 
-from centraldogma.exceptions import to_exception, ProjectExistsException, InvalidResponseException, \
-    ProjectNotFoundException, QueryExecutionException, RedundantChangeException, RevisionNotFoundException, \
-    EntryNotFoundException, ChangeConflictException, RepositoryNotFoundException, AuthorizationException, \
-    ShuttingDownException, RepositoryExistsException, BadRequestException, UnauthorizedException, NotFoundException, \
-    UnknownException
+from centraldogma.exceptions import (
+    to_exception,
+    ProjectExistsException,
+    InvalidResponseException,
+    ProjectNotFoundException,
+    QueryExecutionException,
+    RedundantChangeException,
+    RevisionNotFoundException,
+    EntryNotFoundException,
+    ChangeConflictException,
+    RepositoryNotFoundException,
+    AuthorizationException,
+    ShuttingDownException,
+    RepositoryExistsException,
+    BadRequestException,
+    UnauthorizedException,
+    NotFoundException,
+    UnknownException,
+)
 
 
-@pytest.mark.parametrize("exception,expected_type",
-                         [("ProjectExistsException", ProjectExistsException),
-                          ("ProjectNotFoundException", ProjectNotFoundException),
-                          ("QueryExecutionException", QueryExecutionException),
-                          ("RedundantChangeException", RedundantChangeException),
-                          ("RevisionNotFoundException", RevisionNotFoundException),
-                          ("EntryNotFoundException", EntryNotFoundException),
-                          ("ChangeConflictException", ChangeConflictException),
-                          ("RepositoryNotFoundException", RepositoryNotFoundException),
-                          ("AuthorizationException", AuthorizationException),
-                          ("ShuttingDownException", ShuttingDownException),
-                          ("RepositoryExistsException", RepositoryExistsException)])
+@pytest.mark.parametrize(
+    "exception,expected_type",
+    [
+        ("ProjectExistsException", ProjectExistsException),
+        ("ProjectNotFoundException", ProjectNotFoundException),
+        ("QueryExecutionException", QueryExecutionException),
+        ("RedundantChangeException", RedundantChangeException),
+        ("RevisionNotFoundException", RevisionNotFoundException),
+        ("EntryNotFoundException", EntryNotFoundException),
+        ("ChangeConflictException", ChangeConflictException),
+        ("RepositoryNotFoundException", RepositoryNotFoundException),
+        ("AuthorizationException", AuthorizationException),
+        ("ShuttingDownException", ShuttingDownException),
+        ("RepositoryExistsException", RepositoryExistsException),
+    ],
+)
 def test_repository_exists_exception(exception, expected_type):
     class MockResponse:
         def json(self) -> Any:
@@ -50,10 +68,15 @@ def test_repository_exists_exception(exception, expected_type):
     assert str(exception) == "foobar"
 
 
-@pytest.mark.parametrize("status,expected_type", [(HTTPStatus.UNAUTHORIZED, UnauthorizedException),
-                                                  (HTTPStatus.BAD_REQUEST, BadRequestException),
-                                                  (HTTPStatus.NOT_FOUND, NotFoundException),
-                                                  (HTTPStatus.GATEWAY_TIMEOUT, UnknownException)])
+@pytest.mark.parametrize(
+    "status,expected_type",
+    [
+        (HTTPStatus.UNAUTHORIZED, UnauthorizedException),
+        (HTTPStatus.BAD_REQUEST, BadRequestException),
+        (HTTPStatus.NOT_FOUND, NotFoundException),
+        (HTTPStatus.GATEWAY_TIMEOUT, UnknownException),
+    ],
+)
 def test_http_status_exception(status, expected_type):
     class MockResponse:
         status_code = status

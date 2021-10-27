@@ -11,11 +11,22 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from .change import Change, ChangeType
-from .commit import Commit
-from .constants import DATE_FORMAT_ISO8601, DATE_FORMAT_ISO8601_MS
-from .content import Content
-from .creator import Creator
-from .project import Project
-from .push_result import PushResult
-from .repository import Repository
+from dataclasses import dataclass, field
+from datetime import datetime
+
+from dataclasses_json import LetterCase, config, dataclass_json
+from marshmallow import fields
+
+from centraldogma.data.constants import DATE_FORMAT_ISO8601_MS
+
+
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass
+class PushResult:
+    revision: int
+    pushed_at: datetime = field(
+        metadata=config(
+            decoder=lambda x: datetime.strptime(x, DATE_FORMAT_ISO8601_MS),
+            mm_field=fields.DateTime(format=DATE_FORMAT_ISO8601_MS),
+        ),
+    )

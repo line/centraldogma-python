@@ -11,11 +11,16 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+from dataclasses import asdict
+from enum import Enum
 from http import HTTPStatus
 from typing import List, Optional
 
 from centraldogma.base_client import BaseClient
 from centraldogma.data import Content
+from centraldogma.data.change import Change
+from centraldogma.data.commit import Commit
+from centraldogma.data.push_result import PushResult
 from centraldogma.exceptions import to_exception
 
 
@@ -68,3 +73,26 @@ class ContentService:
         if resp.status_code == HTTPStatus.OK:
             return Content.from_dict(resp.json())
         raise to_exception(resp)
+
+    def push(
+        self,
+        project_name: str,
+        repo_name: str,
+        commit: Commit,
+        changes: List[Change],
+    ) -> PushResult:
+        params = {
+            "commitMessage": asdict(commit),
+            "changes": [
+                asdict(change, dict_factory=self._change_dict) for change in changes
+            ],
+        }
+        path = f"/projects/{project_name}/repos/{repo_name}/contents"
+        resp = self.client.request("post", path, json=params)
+        return PushResult.from_dict(resp.json())
+
+    def _change_dict(self, data):
+        return {
+            field: value.value if isinstance(value, Enum) else value
+            for field, value in data
+        }

@@ -11,11 +11,25 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from .change import Change, ChangeType
-from .commit import Commit
-from .constants import DATE_FORMAT_ISO8601, DATE_FORMAT_ISO8601_MS
-from .content import Content
-from .creator import Creator
-from .project import Project
-from .push_result import PushResult
-from .repository import Repository
+from dataclasses import dataclass
+from enum import Enum
+from typing import Optional, Union
+
+from dataclasses_json import dataclass_json
+
+
+class ChangeType(Enum):
+    UPSERT_JSON = "UPSERT_JSON"
+    UPSERT_TEXT = "UPSERT_TEXT"
+    REMOVE = "REMOVE"
+    RENAME = "RENAME"
+    APPLY_JSON_PATCH = "APPLY_JSON_PATCH"
+    APPLY_TEXT_PATCH = "APPLY_TEXT_PATCH"
+
+
+@dataclass_json
+@dataclass
+class Change:
+    path: str
+    type: ChangeType
+    content: Optional[Union[map, str]] = None
