@@ -159,7 +159,9 @@ def test_unremove_project(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+    assert (
+        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+    )
     assert project == Project.from_dict(mock_project)
 
 
@@ -174,7 +176,9 @@ def test_unremove_project_failed(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+    assert (
+        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+    )
 
 
 def test_purge_project(respx_mock):
@@ -287,7 +291,9 @@ def test_unremove_repository(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+    assert (
+        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+    )
     assert repo == Repository.from_dict(mock_repository)
 
 
@@ -300,7 +306,9 @@ def test_unremove_repository_failed(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+    assert (
+        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+    )
 
 
 def test_purge_repository(respx_mock):
@@ -472,7 +480,7 @@ def test_get_file_json_path(respx_mock):
 def test_push(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents"
     route = respx_mock.post(url).mock(
-        return_value=Response(HTTPStatus.CREATED, json=mock_push_result)
+        return_value=Response(HTTPStatus.OK, json=mock_push_result)
     )
     commit = Commit("Upsert test.json")
     upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})

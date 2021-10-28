@@ -16,7 +16,6 @@ from typing import List
 
 from centraldogma.base_client import BaseClient
 from centraldogma.data import Project
-from centraldogma.exceptions import to_exception
 
 
 class ProjectService:
@@ -25,34 +24,33 @@ class ProjectService:
 
     def list(self, removed: bool) -> List[Project]:
         params = {"status": "removed"} if removed else None
-        resp = self.client.request("get", "/projects", params=params)
-        if resp.status_code == HTTPStatus.OK:
-            return [Project.from_dict(project) for project in resp.json()]
-        elif resp.status_code == HTTPStatus.NO_CONTENT:
-            return []
-        raise to_exception(resp)
+        handler = {
+            HTTPStatus.OK: lambda resp: [
+                Project.from_dict(project) for project in resp.json()
+            ],
+            HTTPStatus.NO_CONTENT: lambda resp: [],
+        }
+        return self.client.request("get", "/projects", params=params, handler=handler)
 
     def create(self, name: str) -> Project:
-        resp = self.client.request("post", "/projects", json={"name": name})
-        if resp.status_code == HTTPStatus.CREATED:
-            return Project.from_dict(resp.json())
-        raise to_exception(resp)
+        handler = {HTTPStatus.CREATED: lambda resp: Project.from_dict(resp.json())}
+        return self.client.request(
+            "post", "/projects", json={"name": name}, handler=handler
+        )
 
     def remove(self, name: str) -> None:
-        resp = self.client.request("delete", f"/projects/{name}")
-        if resp.status_code == HTTPStatus.NO_CONTENT:
-            return None
-        raise to_exception(resp)
+        handler = {HTTPStatus.NO_CONTENT: lambda resp: None}
+        return self.client.request("delete", f"/projects/{name}", handler=handler)
 
     def unremove(self, name: str) -> Project:
         body = [{"op": "replace", "path": "/status", "value": "active"}]
-        resp = self.client.request("patch", f"/projects/{name}", json=body)
-        if resp.status_code == HTTPStatus.OK:
-            return Project.from_dict(resp.json())
-        raise to_exception(resp)
+        handler = {HTTPStatus.OK: lambda resp: Project.from_dict(resp.json())}
+        return self.client.request(
+            "patch", f"/projects/{name}", json=body, handler=handler
+        )
 
     def purge(self, name: str) -> None:
-        resp = self.client.request("delete", f"/projects/{name}/removed")
-        if resp.status_code == HTTPStatus.NO_CONTENT:
-            return None
-        raise to_exception(resp)
+        handler = {HTTPStatus.NO_CONTENT: lambda resp: None}
+        return self.client.request(
+            "delete", f"/projects/{name}/removed", handler=handler
+        )

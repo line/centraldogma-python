@@ -11,9 +11,13 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from typing import Dict, Union
+from typing import Dict, Union, Callable, TypeVar, Optional
 
 from httpx import Client, Response
+
+from centraldogma.exceptions import to_exception
+
+T = TypeVar("T")
 
 
 class BaseClient:
@@ -28,16 +32,26 @@ class BaseClient:
         self.headers = self._get_headers(token)
         self.patch_headers = self._get_patch_headers(token)
 
-    def request(self, method: str, path: str, **kwargs) -> Union[Response]:
+    def request(
+        self,
+        method: str,
+        path: str,
+        handler: Optional[dict[int, Callable[[Response], T]]] = None,
+        **kwargs,
+    ) -> Union[Response, T]:
         kwargs = self._set_request_headers(method, **kwargs)
-        return self._httpx_request(method, path, **kwargs)
+        resp = self.client.request(method, path, **kwargs)
+        if handler:
+            converter = handler.get(resp.status_code)
+            if converter:
+                return converter(resp)
+            else:  # Unexpected response status
+                raise to_exception(resp)
+        return resp
 
     def _set_request_headers(self, method: str, **kwargs) -> Dict:
         kwargs["headers"] = self.patch_headers if method == "patch" else self.headers
         return kwargs
-
-    def _httpx_request(self, method: str, url: str, **kwargs) -> Response:
-        return self.client.request(method, url, **kwargs)
 
     @staticmethod
     def _get_headers(token: str) -> Dict:

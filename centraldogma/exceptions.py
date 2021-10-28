@@ -109,13 +109,17 @@ _EXCEPTION_FACTORIES: dict[str, Callable[[str], CentralDogmaException]] = {
 
 
 def to_exception(response: Response) -> CentralDogmaException:
+    if not response.text:
+        return _to_status_exception(response.status_code, "")
+
     try:
         body = response.json()
     except JSONDecodeError:
         return InvalidResponseException(response.text)
 
-    exception = body["exception"]
-    message = body["message"] if body["message"] else response.text
+    exception = body.get("exception")
+    message = body.get("message")
+    message = message if message else response.text
     if exception:
         exception_type = _EXCEPTION_FACTORIES.get(exception)
         if exception_type:
@@ -126,6 +130,17 @@ def to_exception(response: Response) -> CentralDogmaException:
     elif response.status_code == HTTPStatus.BAD_REQUEST:
         return BadRequestException(message)
     elif response.status_code == HTTPStatus.NOT_FOUND:
+        return NotFoundException(message)
+    else:
+        return UnknownException(message)
+
+
+def _to_status_exception(status: int, message: str) -> CentralDogmaException:
+    if status == HTTPStatus.UNAUTHORIZED:
+        return UnauthorizedException(message)
+    elif status == HTTPStatus.BAD_REQUEST:
+        return BadRequestException(message)
+    elif status == HTTPStatus.NOT_FOUND:
         return NotFoundException(message)
     else:
         return UnknownException(message)

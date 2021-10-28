@@ -62,6 +62,9 @@ def test_repository_exists_exception(exception, expected_type):
                 "message": "foobar",
             }
 
+        def text(self) -> str:
+            return json.dumps(self.json())
+
     # noinspection PyTypeChecker
     exception = to_exception(MockResponse())
     assert isinstance(exception, expected_type)
@@ -86,6 +89,9 @@ def test_http_status_exception(status, expected_type):
                 "exception": "com.linecorp.centraldogma.common.unknown",
                 "message": "foobar",
             }
+
+        def text(self) -> str:
+            return json.dumps(self.json())
 
     # noinspection PyTypeChecker
     exception = to_exception(MockResponse())
