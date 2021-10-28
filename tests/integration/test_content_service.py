@@ -16,7 +16,11 @@ import os
 import pytest
 
 from centraldogma.dogma import Change, ChangeType, Commit, Dogma
-from centraldogma.exceptions import BadRequestException, RedundantChangeException, ChangeConflictException
+from centraldogma.exceptions import (
+    BadRequestException,
+    RedundantChangeException,
+    ChangeConflictException,
+)
 
 dogma = Dogma()
 project_name = "TestProject"

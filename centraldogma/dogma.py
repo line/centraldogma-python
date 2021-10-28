@@ -16,6 +16,7 @@ from typing import List, Optional
 
 from centraldogma.base_client import BaseClient
 from centraldogma.content_service import ContentService
+
 # noinspection PyUnresolvedReferences
 from centraldogma.data import (
     Change,

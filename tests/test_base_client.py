@@ -39,6 +39,7 @@ client_with_configs = BaseClient("http://baseurl", "token", **configs)
 
 ok_handler = {HTTPStatus.OK: lambda resp: resp}
 
+
 def test_set_request_headers():
     for method in ["get", "post", "delete", "patch"]:
         kwargs = client_with_configs._set_request_headers(
