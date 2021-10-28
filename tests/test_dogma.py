@@ -133,11 +133,10 @@ def test_create_project_failed(respx_mock):
 def test_remove_project(respx_mock):
     url = "http://baseurl/api/v1/projects/project1"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
-    removed = client.remove_project("project1")
+    client.remove_project("project1")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert removed == None
 
 
 def test_remove_project_failed(respx_mock):
@@ -160,9 +159,7 @@ def test_unremove_project(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
-    )
+    assert request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     assert project == Project.from_dict(mock_project)
 
 
@@ -177,19 +174,16 @@ def test_unremove_project_failed(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
-    )
+    assert request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
 
 
 def test_purge_project(respx_mock):
     url = "http://baseurl/api/v1/projects/project1/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
-    purged = client.purge_project("project1")
+    client.purge_project("project1")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert purged is None
 
 
 def test_purge_project_failed(respx_mock):
@@ -267,11 +261,10 @@ def test_create_repository_failed(respx_mock):
 def test_remove_repository(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
-    removed = client.remove_repository("myproject", "myrepo")
+    client.remove_repository("myproject", "myrepo")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert removed is None
 
 
 def test_remove_repository_failed(respx_mock):
@@ -294,9 +287,7 @@ def test_unremove_repository(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
-    )
+    assert request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
     assert repo == Repository.from_dict(mock_repository)
 
 
@@ -309,19 +300,16 @@ def test_unremove_repository_failed(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
-    )
+    assert request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
 
 
 def test_purge_repository(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
-    perged = client.purge_repository("myproject", "myrepo")
+    client.purge_repository("myproject", "myrepo")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert perged is None
 
 
 def test_purge_repository_failed(respx_mock):

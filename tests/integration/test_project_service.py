@@ -24,15 +24,20 @@ from centraldogma.exceptions import (
 dogma = Dogma()
 project_name = "TestProject"
 
-removed = False
-purged = False
 
+@pytest.fixture(scope="module")
+def run_around_test():
+    projects = dogma.list_projects()
+    removed_projects = dogma.list_projects()
 
-def teardown_module(module):
-    if not removed:
-        dogma.remove_project(project_name)
-    if not purged:
-        dogma.purge_project(project_name)
+    yield
+
+    for project in dogma.list_projects():
+        if project not in projects:
+            dogma.remove_project(project.name)
+    for removed in dogma.list_projects(removed=True):
+        if removed not in removed_projects:
+            dogma.purge_project(removed.name)
 
 
 @pytest.mark.skipif(
@@ -40,7 +45,7 @@ def teardown_module(module):
     reason="Integration tests are disabled. Use `INTEGRATION_TEST=true pytest` to enable them.",
 )
 @pytest.mark.integration
-def test_project():
+def test_project(run_around_test):
     with pytest.raises(BadRequestException):
         dogma.create_project("Test project")
 
@@ -64,11 +69,8 @@ def test_project():
     assert unremoved.name == project_name
     validate_len(len_project + 1, len_removed_project)
 
-    global removed, purged
     dogma.remove_project(project_name)
-    removed = True
     dogma.purge_project(project_name)
-    purged = True
     validate_len(len_project, len_removed_project)
 
 

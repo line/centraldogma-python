@@ -23,18 +23,22 @@ import os
 dogma = Dogma()
 project_name = "TestProject"
 repo_name = "TestRepository"
-repo = None
 
 
 @pytest.fixture(scope="module")
 def run_around_test():
+    projects = dogma.list_projects()
+    removed_projects = dogma.list_projects()
     dogma.create_project(project_name)
+
     yield
-    if repo:
-        dogma.remove_repository(project_name, repo_name)
-        dogma.purge_repository(project_name, repo_name)
-    dogma.remove_project(project_name)
-    dogma.purge_project(project_name)
+
+    for project in dogma.list_projects():
+        if project not in projects:
+            dogma.remove_project(project.name)
+    for removed in dogma.list_projects(removed=True):
+        if removed not in removed_projects:
+            dogma.purge_project(removed.name)
 
 
 @pytest.mark.skipif(
@@ -48,7 +52,6 @@ def test_repository(run_around_test):
 
     len_repo = len(dogma.list_repositories(project_name))
     len_removed_repo = len(dogma.list_repositories(project_name, removed=True))
-    global repo
     repo = dogma.create_repository(project_name, repo_name)
     assert repo.name == repo_name
     validate_len(len_repo + 1, len_removed_repo)
