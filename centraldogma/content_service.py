@@ -30,7 +30,7 @@ from centraldogma.data.revision import Revision
 from centraldogma.exceptions import CentralDogmaException
 from centraldogma.query import Query, QueryType
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class ContentService:
@@ -38,12 +38,12 @@ class ContentService:
         self.client = client
 
     def get_files(
-            self,
-            project_name: str,
-            repo_name: str,
-            path_pattern: Optional[str],
-            revision: Optional[int],
-            include_content: bool = False,
+        self,
+        project_name: str,
+        repo_name: str,
+        path_pattern: Optional[str],
+        revision: Optional[int],
+        include_content: bool = False,
     ) -> List[Content]:
         params = {"revision": revision} if revision else None
         path = f"/projects/{project_name}/repos/{repo_name}/"
@@ -78,11 +78,11 @@ class ContentService:
         return Content.from_dict(resp.json())
 
     def push(
-            self,
-            project_name: str,
-            repo_name: str,
-            commit: Commit,
-            changes: List[Change],
+        self,
+        project_name: str,
+        repo_name: str,
+        commit: Commit,
+        changes: List[Change],
     ) -> PushResult:
         params = {
             "commitMessage": asdict(commit),
@@ -95,13 +95,19 @@ class ContentService:
         json: object = resp.json()
         return PushResult.from_dict(json)
 
-    def watch_repository(self, project_name: str, repo_name: str, last_known_revision: Revision, path_pattern: str,
-                         timeout_millis: int) -> Optional[Revision]:
+    def watch_repository(
+        self,
+        project_name: str,
+        repo_name: str,
+        last_known_revision: Revision,
+        path_pattern: str,
+        timeout_millis: int,
+    ) -> Optional[Revision]:
         path = f"/projects/{project_name}/repos/{repo_name}/contents"
         if path_pattern[0] != "/":
             path += "/**/"
 
-        if path_pattern in ' ':
+        if path_pattern in " ":
             path_pattern = path_pattern.replace(" ", "%20")
         path += path_pattern
 
@@ -115,8 +121,14 @@ class ContentService:
             # TODO(ikhoon): Handle excepitons after https://github.com/line/centraldogma-python/pull/11/ is merged.
             pass
 
-    def watch_file(self, project_name: str, repo_name: str, last_known_revision: Revision, query: Query[T],
-                   timeout_millis) -> Optional[Entry[T]]:
+    def watch_file(
+        self,
+        project_name: str,
+        repo_name: str,
+        last_known_revision: Revision,
+        query: Query[T],
+        timeout_millis,
+    ) -> Optional[Entry[T]]:
         path = f"/projects/{project_name}/repos/{repo_name}/contents/{query.path}"
         if query.query_type == QueryType.JSON_PATH:
             queries = [f"jsonpath={quote(expr)}" for expr in query.expressions]
@@ -143,7 +155,8 @@ class ContentService:
         elif query_type == QueryType.IDENTITY or query_type == QueryType.JSON_PATH:
             if received_entry_type != EntryType.JSON:
                 raise CentralDogmaException(
-                    f"invalid entry type. entry type: {received_entry_type} (expected: {query_type})")
+                    f"invalid entry type. entry type: {received_entry_type} (expected: {query_type})"
+                )
 
             return Entry.json(revision, entry_path, content)
         else:  # query_type == QueryType.IDENTITY
@@ -155,16 +168,16 @@ class ContentService:
                 return Entry.directory(revision, entry_path)
 
     def _watch(
-            self,
-            last_known_revision: Revision,
-            timeout_millis: int,
-            path: str) -> Response:
+        self, last_known_revision: Revision, timeout_millis: int, path: str
+    ) -> Response:
         normalized_timeout = (timeout_millis + 999) // 1000
         headers = {
             "if-none-match": f"{last_known_revision.major}",
-            "prefer": f"wait={normalized_timeout}"
+            "prefer": f"wait={normalized_timeout}",
         }
-        return self.client.request("get", path, headers=headers, timeout=normalized_timeout)
+        return self.client.request(
+            "get", path, headers=headers, timeout=normalized_timeout
+        )
 
     def _change_dict(self, data):
         return {

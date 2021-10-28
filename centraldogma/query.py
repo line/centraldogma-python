@@ -24,11 +24,10 @@ class QueryType(Enum):
     JSON_PATH = auto()
 
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class Query(Generic[T]):
-
     @staticmethod
     def identity(path: str) -> Query[str]:
         return Query(path=path, query_type=QueryType.IDENTITY, expressions=[])

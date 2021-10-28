@@ -11,9 +11,24 @@
 #  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #  License for the specific language governing permissions and limitations
 #  under the License.
+from __future__ import annotations
+
 from dataclasses import dataclass
 
 
 @dataclass
 class Revision:
-    major: int
+    def __init__(self, major):
+        self.major = major
+
+    @staticmethod
+    def init() -> Revision:
+        return _INIT
+
+    @staticmethod
+    def head() -> Revision:
+        return _HEAD
+
+
+_INIT = Revision(1)
+_HEAD = Revision(-1)

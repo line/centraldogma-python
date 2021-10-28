@@ -27,11 +27,10 @@ class EntryType(Enum):
     DIRECTORY = auto()
 
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class Entry(Generic[T]):
-
     @staticmethod
     def text(revision: Revision, path: str, content: str) -> Entry[str]:
         return Entry(revision, path, EntryType.TEXT, content)
@@ -46,7 +45,9 @@ class Entry(Generic[T]):
     def directory(revision: Revision, path: str) -> Entry[None]:
         return Entry(revision, path, EntryType.DIRECTORY, None)
 
-    def __init__(self, revision: Revision, path: str, entry_type: EntryType, content: T):
+    def __init__(
+        self, revision: Revision, path: str, entry_type: EntryType, content: T
+    ):
         self.revision = revision
         self.path = path
         self.entry_type = entry_type
@@ -59,7 +60,9 @@ class Entry(Generic[T]):
     @property
     def content(self) -> T:
         if self._content is None:
-            raise EntryNoContentException(f"{self.path} (type: {self.entry_type}, revision: {self.revision.major})")
+            raise EntryNoContentException(
+                f"{self.path} (type: {self.entry_type}, revision: {self.revision.major})"
+            )
 
         return self._content
 
@@ -70,7 +73,7 @@ class Entry(Generic[T]):
         if self.entry_type == EntryType.TEXT:
             self._content_as_text = self.content
         elif self.entry_type == EntryType.DIRECTORY:
-            self._content_as_text = ''
+            self._content_as_text = ""
         else:
             self._content_as_text = json.dumps(self.content)
 

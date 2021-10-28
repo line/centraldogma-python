@@ -25,8 +25,7 @@ from centraldogma.dogma import Change, ChangeType, Commit, Dogma
 from centraldogma.exceptions import BadRequestException, ConflictException
 from centraldogma.query import Query
 
-dogma = Dogma(base_url="http://127.0.0.1:18080")
-# dogma = Dogma()
+dogma = Dogma()
 project_name = "TestProject"
 repo_name = "TestRepository"
 
@@ -119,7 +118,9 @@ def test_watch_repository(run_around_test):
     ret = dogma.push(project_name, repo_name, commit, [upsert_json])
 
     start = datetime.now()
-    revision = dogma.watch_repository(project_name, repo_name, Revision(ret.revision), "/**", 2000)
+    revision = dogma.watch_repository(
+        project_name, repo_name, Revision(ret.revision), "/**", 2000
+    )
     end = datetime.now()
     assert not revision  # Not modified
     assert (end - start).seconds >= 1
@@ -127,7 +128,9 @@ def test_watch_repository(run_around_test):
     with ThreadPoolExecutor(max_workers=1) as e:
         e.submit(push_later)
     start = datetime.now()
-    revision = dogma.watch_repository(project_name, repo_name, Revision(ret.revision), "/**", 4000)
+    revision = dogma.watch_repository(
+        project_name, repo_name, Revision(ret.revision), "/**", 4000
+    )
     end = datetime.now()
     assert revision.major == ret.revision + 1
     assert (end - start).seconds < 3
@@ -140,8 +143,9 @@ def test_watch_file(run_around_test):
     ret = dogma.push(project_name, repo_name, commit, [upsert_json])
 
     start = datetime.now()
-    entry: Optional[Entry[Any]] = dogma.watch_file(project_name, repo_name, Revision(ret.revision),
-                                                   Query.json("/test.json"), 2000)
+    entry: Optional[Entry[Any]] = dogma.watch_file(
+        project_name, repo_name, Revision(ret.revision), Query.json("/test.json"), 2000
+    )
     end = datetime.now()
     assert not entry  # Not modified
     assert (end - start).seconds >= 1
@@ -149,7 +153,9 @@ def test_watch_file(run_around_test):
     with ThreadPoolExecutor(max_workers=1) as e:
         e.submit(push_later)
     start = datetime.now()
-    entry = dogma.watch_file(project_name, repo_name, Revision(ret.revision), Query.json("/test.json"), 4000)
+    entry = dogma.watch_file(
+        project_name, repo_name, Revision(ret.revision), Query.json("/test.json"), 4000
+    )
     end = datetime.now()
     assert entry.revision.major == ret.revision + 1
     assert entry.content == {"foo": "qux"}

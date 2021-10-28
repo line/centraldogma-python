@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 import os
-from typing import List, Optional, TypeVar, Generic
+from typing import List, Optional, TypeVar, Generic, Callable
 
 from centraldogma.base_client import BaseClient
 from centraldogma.content_service import ContentService
@@ -30,11 +30,15 @@ from centraldogma.data.revision import Revision
 from centraldogma.project_service import ProjectService
 from centraldogma.query import Query
 from centraldogma.repository_service import RepositoryService
+from centraldogma.watcher import Watcher
 
-T = TypeVar('T')
+T = TypeVar("T")
+U = TypeVar("U")
+
+_DEFAULT_WATCH_TIMEOUT_MILLIS = 1 * 60 * 1000  # 1 minute
 
 
-class Dogma(Generic[T]):
+class Dogma:
     DEFAULT_BASE_URL = "http://localhost:36462"
     DEFAULT_TOKEN = "anonymous"
 
@@ -187,27 +191,60 @@ class Dogma(Generic[T]):
         return self.content_service.push(project_name, repo_name, commit, changes)
 
     def watch_repository(
-            self,
-            project_name: str,
-            repo_name: str,
-            last_known_revision: Revision,
-            path_pattern: str,
-            timeout_millis: int) -> Optional[Revision]:
+        self,
+        project_name: str,
+        repo_name: str,
+        last_known_revision: Revision,
+        path_pattern: str,
+        timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS,
+    ) -> Optional[Revision]:
         """
         TODO(ikhoon): TBU
         """
-        return self.content_service.watch_repository(project_name, repo_name, last_known_revision,
-                                                     path_pattern, timeout_millis)
+        return self.content_service.watch_repository(
+            project_name, repo_name, last_known_revision, path_pattern, timeout_millis
+        )
 
     def watch_file(
-            self,
-            project_name: str,
-            repo_name: str,
-            last_known_revision: Revision,
-            query: Query[T],
-            timeout_millis: int) -> Optional[Entry[T]]:
+        self,
+        project_name: str,
+        repo_name: str,
+        last_known_revision: Revision,
+        query: Query[T],
+        timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS,
+    ) -> Optional[Entry[T]]:
         """
         TODO(ikhoon): TBU
         :rtype: object
         """
-        return self.content_service.watch_file(project_name, repo_name, last_known_revision, query, timeout_millis)
+        return self.content_service.watch_file(
+            project_name, repo_name, last_known_revision, query, timeout_millis
+        )
+
+    def repository_watcher(
+        self,
+        project_name: str,
+        repo_name: str,
+        path_pattern: str,
+        function: Callable[[Revision], T] = lambda x: x,
+    ) -> Watcher[T]:
+        from centraldogma.repository_watcher import RepositoryWatcher
+
+        watcher = RepositoryWatcher(
+            self, project_name, repo_name, path_pattern, function
+        )
+        watcher.start()
+        return watcher
+
+    def file_watcher(
+        self,
+        project_name: str,
+        repo_name: str,
+        query: Query[T],
+        function: Callable[[T], U] = lambda x: x,
+    ) -> Watcher[U]:
+        from centraldogma.repository_watcher import FileWatcher
+
+        watcher = FileWatcher(self, project_name, repo_name, query, function)
+        watcher.start()
+        return watcher
