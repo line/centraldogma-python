@@ -11,12 +11,12 @@
 #  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #  License for the specific language governing permissions and limitations
 #  under the License.
-
+import itertools
 import logging
 import math
 import threading
 import time
-from asyncio import Future
+from concurrent.futures import Future
 from enum import Enum, auto
 from random import randrange
 from threading import Thread, Lock
@@ -41,6 +41,7 @@ _DELAY_ON_SUCCESS_MILLIS = 1000  # 1 second
 _MIN_INTERVAL_MILLIS = _DELAY_ON_SUCCESS_MILLIS * 2  # 2 seconds
 _MAX_INTERVAL_MILLIS = 1 * 60 * 1000  # 1 minute
 _JITTER_RATE = 0.2
+_THREAD_ID = itertools.count()
 
 
 class AbstractWatcher(Watcher[T]):
@@ -69,7 +70,8 @@ class AbstractWatcher(Watcher[T]):
         with self._lock:
             if self._state == WatchState.INIT:
                 # FIXME(ikhoon): Replace Thread with Coroutine of asyncio once AsyncClient is implemented.
-                self._thread = Thread(target=self._schedule_watch, args=(0,))
+                self._thread = Thread(target=self._schedule_watch, args=(0,),
+                                      name=f"centraldogma-watcher-{next(_THREAD_ID)}", daemon=True)
                 self._thread.start()
 
     def close(self) -> None:
@@ -195,14 +197,11 @@ class FileWatcher(AbstractWatcher[T]):
         self.query = query
 
     def _do_watch(self, last_known_revision) -> Optional[Latest[T]]:
-        # TODO(ikhoon): Set default timeout for watch_file
         result = self.dogma.watch_file(
             self.project_name,
             self.repo_name,
             last_known_revision,
-            self.query,
-            1 * 60 * 1000,
-        )
+            self.query)
         if not result:
             return None
         return Latest(result.revision, self.function(result.content))
@@ -224,9 +223,7 @@ class RepositoryWatcher(AbstractWatcher[T]):
             self.project_name,
             self.repo_name,
             last_known_revision,
-            self.path_pattern,
-            1 * 60 * 1000,
-        )
+            self.path_pattern)
         if not revision:
             return None
         return Latest(revision, self.function(revision))

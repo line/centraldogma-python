@@ -15,15 +15,14 @@ import json
 import os
 from concurrent.futures import Future
 from concurrent.futures import TimeoutError
-from typing import Any
 
 import pytest
 
 from centraldogma.data import Commit, Change, ChangeType
 from centraldogma.data.revision import Revision
+from centraldogma.dogma import Dogma
 from centraldogma.query import Query
 from centraldogma.watcher import Watcher
-from centraldogma.dogma import Dogma
 
 dogma = Dogma()
 project_name = "TestProject"
@@ -32,15 +31,6 @@ repo_name = "TestRepository"
 
 @pytest.fixture(scope="module")
 def run_around_test():
-    try:
-        dogma.remove_project(project_name)
-    except:
-        print()
-    try:
-        dogma.purge_project(project_name)
-    except:
-        print()
-
     dogma.create_project(project_name)
     dogma.create_repository(project_name, repo_name)
     yield
