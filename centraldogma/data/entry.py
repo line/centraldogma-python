@@ -50,7 +50,7 @@ class Entry(Generic[T]):
     @staticmethod
     def json(revision: Revision, path: str, content: Any) -> Entry[Any]:
         """
-         Returns a newly-created {@link Entry} of a JSON file.
+         Returns a newly-created ``Entry`` of a JSON file.
 
         :param revision: the revision of the JSON file
         :param path: the path of the JSON file
@@ -63,7 +63,7 @@ class Entry(Generic[T]):
     @staticmethod
     def directory(revision: Revision, path: str) -> Entry[None]:
         """
-        Returns a newly-created {@link Entry} of a directory.
+        Returns a newly-created ``Entry`` of a directory.
 
         :param revision: the revision of the directory
         :param path: the path of the directory
