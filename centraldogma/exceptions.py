@@ -167,23 +167,13 @@ def to_exception(response: Response) -> CentralDogmaException:
         return InvalidResponseException(response.text)
 
     exception = body.get("exception")
-    message = body.get("message")
-    message = message if message else response.text
+    message = body.get("message") or response.text
     if exception:
         exception_type = _EXCEPTION_FACTORIES.get(exception)
         if exception_type:
             return exception_type(message)
 
-    if response.status_code == HTTPStatus.UNAUTHORIZED:
-        return UnauthorizedException(message)
-    elif response.status_code == HTTPStatus.BAD_REQUEST:
-        return BadRequestException(message)
-    elif response.status_code == HTTPStatus.NOT_FOUND:
-        return NotFoundException(message)
-    elif response.status_code == HTTPStatus.FORBIDDEN:
-        return ForbiddenException(message)
-    else:
-        return UnknownException(message)
+    return _to_status_exception(response.status_code, message)
 
 
 def _to_status_exception(status: int, message: str) -> CentralDogmaException:

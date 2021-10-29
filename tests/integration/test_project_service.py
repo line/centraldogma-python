@@ -28,7 +28,7 @@ project_name = "TestProject"
 @pytest.fixture(scope="module")
 def run_around_test():
     projects = dogma.list_projects()
-    removed_projects = dogma.list_projects()
+    removed_projects = dogma.list_projects(removed=True)
 
     yield
 
