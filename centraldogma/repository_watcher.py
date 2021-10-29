@@ -70,8 +70,12 @@ class AbstractWatcher(Watcher[T]):
         with self._lock:
             if self._state == WatchState.INIT:
                 # FIXME(ikhoon): Replace Thread with Coroutine of asyncio once AsyncClient is implemented.
-                self._thread = Thread(target=self._schedule_watch, args=(0,),
-                                      name=f"centraldogma-watcher-{next(_THREAD_ID)}", daemon=True)
+                self._thread = Thread(
+                    target=self._schedule_watch,
+                    args=(0,),
+                    name=f"centraldogma-watcher-{next(_THREAD_ID)}",
+                    daemon=True,
+                )
                 self._thread.start()
 
     def close(self) -> None:
@@ -198,10 +202,8 @@ class FileWatcher(AbstractWatcher[T]):
 
     def _do_watch(self, last_known_revision) -> Optional[Latest[T]]:
         result = self.dogma.watch_file(
-            self.project_name,
-            self.repo_name,
-            last_known_revision,
-            self.query)
+            self.project_name, self.repo_name, last_known_revision, self.query
+        )
         if not result:
             return None
         return Latest(result.revision, self.function(result.content))
@@ -220,10 +222,8 @@ class RepositoryWatcher(AbstractWatcher[T]):
 
     def _do_watch(self, last_known_revision) -> Optional[Latest[T]]:
         revision = self.dogma.watch_repository(
-            self.project_name,
-            self.repo_name,
-            last_known_revision,
-            self.path_pattern)
+            self.project_name, self.repo_name, last_known_revision, self.path_pattern
+        )
         if not revision:
             return None
         return Latest(revision, self.function(revision))

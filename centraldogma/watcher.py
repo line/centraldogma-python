@@ -12,7 +12,7 @@
 #  License for the specific language governing permissions and limitations
 #  under the License.
 
-from asyncio import Future
+from concurrent.futures import Future
 from dataclasses import dataclass
 from typing import TypeVar, Generic, Callable
 
@@ -24,7 +24,7 @@ T = TypeVar("T")
 @dataclass
 class Latest(Generic[T]):
     """
-    An immutable holder of the latest known value and its `Revision` retrieved by `Watcher`.
+    A holder of the latest known value and its `Revision` retrieved by `Watcher`.
     """
 
     revision: Revision
@@ -43,7 +43,16 @@ class Watcher(Generic[T]):
         pass
 
     def initial_value_future(self) -> Future[Latest[T]]:
+        """
+        Returns the `Future` which is completed when the initial value retrieval is done  successfully.
+        """
         pass
+
+    def await_initial_value(self) -> Latest[T]:
+        """
+        Waits for the initial value to be available.
+        """
+        return self.initial_value_future().result()
 
     def watch(self, listener: Callable[[Revision, T], None]) -> None:
         """

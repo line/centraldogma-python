@@ -88,13 +88,12 @@ def test_file_watcher(run_around_test):
     upsert_text = Change("/test.json", ChangeType.UPSERT_JSON, {"a": 1, "b": 2, "c": 3})
     result = dogma.push(project_name, repo_name, commit, [upsert_text])
 
-    watcher: Watcher[str] = dogma.file_watcher(
+    with dogma.file_watcher(
         project_name,
         repo_name,
         Query.json_path("/test.json", ["$.a"]),
         lambda j: json.dumps(j),
-    )
-    with watcher:
+    ) as watcher:
         future: Future[Revision] = Future()
 
         def listener(revision1: Revision, _: str) -> None:
