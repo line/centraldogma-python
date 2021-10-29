@@ -17,11 +17,6 @@ client.list_projects()
 ```
 
 ## Development
-### Install
-```
-$ pip install -r requirements-dev.txt
-```
-
 ### Tests
 #### Unit test
 ```
@@ -45,6 +40,7 @@ $ docker-compose down
 ```
 
 ### Lint
+- [PEP 8](https://www.python.org/dev/peps/pep-0008)
 ```
 $ black .
 ```
