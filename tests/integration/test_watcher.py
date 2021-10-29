@@ -22,7 +22,7 @@ from centraldogma.data import Commit, Change, ChangeType
 from centraldogma.data.revision import Revision
 from centraldogma.dogma import Dogma
 from centraldogma.query import Query
-from centraldogma.watcher import Watcher
+from centraldogma.watcher import Watcher, Latest
 
 dogma = Dogma()
 project_name = "TestProject"
@@ -107,7 +107,7 @@ def test_file_watcher(run_around_test):
         dogma.push(project_name, repo_name, commit, [upsert_text])
 
         with pytest.raises(TimeoutError):
-            future.result(timeout=0.5)
+            future.result(timeout=1)
 
         upsert_text = Change(
             "/test.json", ChangeType.UPSERT_JSON, {"a": 11, "b": 12, "c": 33}
@@ -132,4 +132,25 @@ def test_file_watcher(run_around_test):
         )
         dogma.push(project_name, repo_name, commit, [upsert_text])
         with pytest.raises(TimeoutError):
-            future.result(timeout=0.5)
+            future.result(timeout=1)
+
+
+def test_await_init_value(run_around_test):
+    with dogma.file_watcher(
+        project_name,
+        repo_name,
+        Query.json("/test.json"),
+        lambda j: json.dumps(j),
+    ) as watcher:
+
+        future: Future[Latest[str]] = watcher.initial_value_future()
+        with pytest.raises(TimeoutError):
+            future.result(timeout=1)
+        assert not watcher.latest()
+
+        commit = Commit("Upsert test.json")
+        upsert_text = Change("/test.json", ChangeType.UPSERT_JSON, {"a": 1})
+        dogma.push(project_name, repo_name, commit, [upsert_text])
+        latest: Latest[str] = future.result()
+        assert latest.value == '{"a": 1}'
+        assert watcher.latest() == latest

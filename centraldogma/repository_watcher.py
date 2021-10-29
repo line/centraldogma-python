@@ -90,6 +90,9 @@ class AbstractWatcher(Watcher[T]):
     def latest(self) -> Latest[T]:
         return self._latest
 
+    def initial_value_future(self) -> Future[Latest[T]]:
+        return self._initial_value_future
+
     def watch(self, listener: Callable[[Revision, T], None]) -> None:
         self._update_listeners.append(listener)
 
@@ -139,7 +142,7 @@ class AbstractWatcher(Watcher[T]):
 
             if not logged:
                 logging.warning(
-                    "Failed to watch a file (%s/%s%s) at Central Dogma; trying again\n%s",
+                    "Failed to watch a file (%s/%s%s) at Central Dogma; trying again.\n%s",
                     self.project_name,
                     self.repo_name,
                     self.path_pattern,
@@ -158,16 +161,16 @@ class AbstractWatcher(Watcher[T]):
 
         latest = self._latest
         for listener in self._update_listeners:
+            # noinspection PyBroadException
             try:
                 listener(latest.revision, latest.value)
             except Exception as ex:
-                logging.warning(
-                    "Exception thrown for watcher (%s/%s%s): rev=%s\n%s",
+                logging.exception(
+                    "Exception thrown for watcher (%s/%s%s): rev=%s.",
                     self.project_name,
                     self.repo_name,
                     self.path_pattern,
                     latest.revision,
-                    ex,
                 )
 
     def _is_stopped(self) -> bool:

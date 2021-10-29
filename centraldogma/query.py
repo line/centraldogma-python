@@ -13,6 +13,7 @@
 #  under the License.
 from __future__ import annotations
 
+from dataclasses import dataclass
 from enum import Enum, auto
 from typing import TypeVar, Generic, Any, List
 
@@ -27,7 +28,12 @@ class QueryType(Enum):
 T = TypeVar("T")
 
 
+@dataclass
 class Query(Generic[T]):
+    path: str
+    query_type: QueryType
+    expressions: List[str]
+
     @staticmethod
     def identity(path: str) -> Query[str]:
         return Query(path=path, query_type=QueryType.IDENTITY, expressions=[])
@@ -43,8 +49,3 @@ class Query(Generic[T]):
     @staticmethod
     def json_path(path: str, json_paths: List[str]) -> Query[Any]:
         return Query(path=path, query_type=QueryType.JSON_PATH, expressions=json_paths)
-
-    def __init__(self, path: str, query_type: QueryType, expressions: List[str]):
-        self.path = path
-        self.query_type = query_type
-        self.expressions = expressions

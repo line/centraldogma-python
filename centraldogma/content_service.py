@@ -82,6 +82,7 @@ class ContentService:
         project_name: str,
         repo_name: str,
         commit: Commit,
+        # TODO(ikhoon): Make changes accept varargs?
         changes: List[Change],
     ) -> PushResult:
         params = {

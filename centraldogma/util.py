@@ -11,29 +11,13 @@
 #  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #  License for the specific language governing permissions and limitations
 #  under the License.
-from __future__ import annotations
-
-from dataclasses import dataclass
 
 
-@dataclass
-class Revision:
-    """
-    A revision number of a ``Commit``.
-    """
+def to_string(obj, **fields) -> str:
+    items = vars(obj).items()
+    if not fields:
+        values = [f"{k}={v}" for k, v in items]
+    else:
+        values = [f"{k}={v}" for k, v in items if k in fields]
 
-    major: int
-
-    @staticmethod
-    def init() -> Revision:
-        """Revision ``1``, also known as 'INIT'."""
-        return _INIT
-
-    @staticmethod
-    def head() -> Revision:
-        """Revision ``-1``, also known as 'HEAD'."""
-        return _HEAD
-
-
-_INIT = Revision(1)
-_HEAD = Revision(-1)
+    return f"{obj.__class__.__name__}({','.join(values)})"
