@@ -51,6 +51,7 @@ class Query(Generic[T]):
     def text(path: str) -> Query[str]:
         """
         Returns a newly-created ``Query`` that retrieves the textual content as it is.
+
         :param path: the path of a file being queried on
         """
         return Query(path=path, query_type=QueryType.IDENTITY_TEXT, expressions=[])
