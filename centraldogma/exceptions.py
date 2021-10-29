@@ -19,25 +19,33 @@ from httpx import Response
 
 
 class CentralDogmaException(Exception):
-    """A exception that is raised when failed to access Central Dogma."""
+    """
+    A exception that is raised when failed to access Central Dogma.
+    """
 
     pass
 
 
 class BadRequestException(CentralDogmaException):
-    """A exception indicating a 400 Bad Client Request."""
+    """
+    A exception indicating a 400 Bad Client Request.
+    """
 
     pass
 
 
 class NotFoundException(CentralDogmaException):
-    """A exception indicating a 404 Not Found."""
+    """
+    A exception indicating a 404 Not Found.
+    """
 
     pass
 
 
 class UnauthorizedException(CentralDogmaException):
-    """A exception indicating a 401 Unauthorized."""
+    """
+    A exception indicating a 401 Unauthorized.
+    """
 
     pass
 
@@ -51,64 +59,80 @@ class ForbiddenException(CentralDogmaException):
 
 
 class UnknownException(CentralDogmaException):
-    """A exception used for reporting unknown exceptions"""
+    """
+    A exception used for reporting unknown exceptions
+    """
 
     pass
 
 
 class ProjectExistsException(CentralDogmaException):
-    """A `CentralDogmaException` that is raised when attempted to create a project with an existing project name."""
+    """
+    A ``CentralDogmaException`` that is raised when attempted to create a project with an existing project name.
+    """
 
     pass
 
 
 class ProjectNotFoundException(CentralDogmaException):
-    """A `CentralDogmaException` that is raised when attempted to access a non-existent project."""
+    """
+    A ``CentralDogmaException`` that is raised when attempted to access a non-existent project.
+    """
 
     pass
 
 
 class QueryExecutionException(CentralDogmaException):
-    """A `CentralDogmaException` that is raised when the evaluation of a `Query` has failed."""
+    """
+    A ``CentralDogmaException`` that is raised when the evaluation of a `Query` has failed.
+    """
 
     pass
 
 
 class RedundantChangeException(CentralDogmaException):
-    """A `CentralDogmaException` that is raised when attempted to push a commit without effective changes."""
+    """
+    A ``CentralDogmaException`` that is raised when attempted to push a commit without effective changes.
+    """
 
     pass
 
 
 class RevisionNotFoundException(CentralDogmaException):
-    """A `CentralDogmaException` that is raised when attempted to access a non-existent revision."""
+    """
+    A ``CentralDogmaException`` that is raised when attempted to access a non-existent revision.
+    """
 
     pass
 
 
 class EntryNotFoundException(CentralDogmaException):
-    """A `CentralDogmaException` that is raised when attempted to access a non-existent entry in a repository."""
+    """
+    A ``CentralDogmaException`` that is raised when attempted to access a non-existent entry in a repository.
+    """
 
     pass
 
 
 class ChangeConflictException(CentralDogmaException):
     """
-    A `CentralDogmaException` that is raised when attempted to push a commit which cannot be applied without a conflict.
+    A ``CentralDogmaException`` that is raised when attempted to push a commit which cannot be applied without a conflict.
     """
 
     pass
 
 
 class RepositoryNotFoundException(CentralDogmaException):
-    """A `CentralDogmaException` that is raised when attempted to access a non-existent repository."""
+    """
+    A ``CentralDogmaException`` that is raised when attempted to access a non-existent repository.
+    """
 
     pass
 
 
 class AuthorizationException(CentralDogmaException):
     """
-    A `CentralDogmaException` that is raised when a client failed to authenticate or attempted to
+    A ``CentralDogmaException`` that is raised when a client failed to authenticate or attempted to
     perform an unauthorized operation.
     """
 
@@ -117,7 +141,7 @@ class AuthorizationException(CentralDogmaException):
 
 class ShuttingDownException(CentralDogmaException):
     """
-    A `CentralDogmaException` that is raised when Central Dogma cannot handle a request because it's shutting down.
+    A ``CentralDogmaException`` that is raised when Central Dogma cannot handle a request because it's shutting down.
     """
 
     pass
@@ -125,7 +149,7 @@ class ShuttingDownException(CentralDogmaException):
 
 class RepositoryExistsException(CentralDogmaException):
     """
-    A `CentralDogmaException` that is raised when attempted to create a repository with an existing repository name.
+    A ``CentralDogmaException`` that is raised when attempted to create a repository with an existing repository name.
     """
 
     pass
@@ -133,7 +157,7 @@ class RepositoryExistsException(CentralDogmaException):
 
 class InvalidResponseException(CentralDogmaException):
     """
-    A `CentralDogmaException` that is raised when a client received an invalid response.
+    A ``CentralDogmaException`` that is raised when a client received an invalid response.
     """
 
     pass
