@@ -19,74 +19,123 @@ from httpx import Response
 
 
 class CentralDogmaException(Exception):
+    """A exception that is raised when failed to access Central Dogma."""
+
     pass
 
 
 class BadRequestException(CentralDogmaException):
-    pass
+    """A exception indicating a 400 Bad Client Request."""
 
-
-class ConflictException(CentralDogmaException):
     pass
 
 
 class NotFoundException(CentralDogmaException):
+    """A exception indicating a 404 Not Found."""
+
     pass
 
 
 class UnauthorizedException(CentralDogmaException):
+    """A exception indicating a 401 Unauthorized."""
+
+    pass
+
+
+class ForbiddenException(CentralDogmaException):
+    """
+    A exception indicating that an access to a resource requested by a client has been forbidden by the Central Dogma.
+    """
+
     pass
 
 
 class UnknownException(CentralDogmaException):
+    """A exception used for reporting unknown exceptions"""
+
     pass
 
 
 class ProjectExistsException(CentralDogmaException):
+    """A `CentralDogmaException` that is raised when attempted to create a project with an existing project name."""
+
     pass
 
 
 class ProjectNotFoundException(CentralDogmaException):
+    """A `CentralDogmaException` that is raised when attempted to access a non-existent project."""
+
     pass
 
 
 class QueryExecutionException(CentralDogmaException):
+    """A `CentralDogmaException` that is raised when the evaluation of a `Query` has failed."""
+
     pass
 
 
 class RedundantChangeException(CentralDogmaException):
+    """A `CentralDogmaException` that is raised when attempted to push a commit without effective changes."""
+
     pass
 
 
 class RevisionNotFoundException(CentralDogmaException):
+    """A `CentralDogmaException` that is raised when attempted to access a non-existent revision."""
+
     pass
 
 
 class EntryNotFoundException(CentralDogmaException):
+    """A `CentralDogmaException` that is raised when attempted to access a non-existent entry in a repository."""
+
     pass
 
 
 class ChangeConflictException(CentralDogmaException):
+    """
+    A `CentralDogmaException` that is raised when attempted to push a commit which cannot be applied without a conflict.
+    """
+
     pass
 
 
 class RepositoryNotFoundException(CentralDogmaException):
+    """A `CentralDogmaException` that is raised when attempted to access a non-existent repository."""
+
     pass
 
 
 class AuthorizationException(CentralDogmaException):
+    """
+    A `CentralDogmaException` that is raised when a client failed to authenticate or attempted to
+    perform an unauthorized operation.
+    """
+
     pass
 
 
 class ShuttingDownException(CentralDogmaException):
+    """
+    A `CentralDogmaException` that is raised when Central Dogma cannot handle a request because it's shutting down.
+    """
+
     pass
 
 
 class RepositoryExistsException(CentralDogmaException):
+    """
+    A `CentralDogmaException` that is raised when attempted to create a repository with an existing repository name.
+    """
+
     pass
 
 
 class InvalidResponseException(CentralDogmaException):
+    """
+    A `CentralDogmaException` that is raised when a client received an invalid response.
+    """
+
     pass
 
 
@@ -131,6 +180,8 @@ def to_exception(response: Response) -> CentralDogmaException:
         return BadRequestException(message)
     elif response.status_code == HTTPStatus.NOT_FOUND:
         return NotFoundException(message)
+    elif response.status_code == HTTPStatus.FORBIDDEN:
+        return ForbiddenException(message)
     else:
         return UnknownException(message)
 

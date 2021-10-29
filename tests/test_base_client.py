@@ -73,7 +73,6 @@ def test_request_with_configs(respx_mock):
             timeout=5,
             cookies=None,
             auth=None,
-            allow_redirects=False,
         )
         client.request(method, "/path", timeout=(3.05, 27))
         client_with_configs.request(method, "/path")
