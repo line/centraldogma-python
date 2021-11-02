@@ -14,23 +14,23 @@
 from dataclasses import asdict
 from enum import Enum
 from http import HTTPStatus
-from typing import List, Optional, TypeVar, Any
-
+from typing import List, Optional, TypeVar, Any, Callable
 from urllib.parse import quote
 
 from httpx import Response
 
-from centraldogma.base_client import BaseClient
-from centraldogma.data.change import Change
-from centraldogma.data.commit import Commit
-from centraldogma.data.content import Content
 from centraldogma.data.entry import Entry, EntryType
-from centraldogma.data.push_result import PushResult
 from centraldogma.data.revision import Revision
 from centraldogma.exceptions import CentralDogmaException
 from centraldogma.query import Query, QueryType
 
 T = TypeVar("T")
+
+from centraldogma.base_client import BaseClient
+from centraldogma.data import Content
+from centraldogma.data.change import Change
+from centraldogma.data.commit import Commit
+from centraldogma.data.push_result import PushResult
 
 
 class ContentService:
@@ -53,10 +53,14 @@ class ContentService:
                 path += path_pattern
             else:
                 path += "/" + path_pattern
-        resp = self.client.request("get", path, params=params)
-        if resp.status_code == HTTPStatus.NO_CONTENT:
-            return []
-        return [Content.from_dict(content) for content in resp.json()]
+
+        handler = {
+            HTTPStatus.OK: lambda resp: [
+                Content.from_dict(content) for content in resp.json()
+            ],
+            HTTPStatus.NO_CONTENT: lambda resp: [],
+        }
+        return self.client.request("get", path, params=params, handler=handler)
 
     def get_file(
         self,
@@ -74,8 +78,9 @@ class ContentService:
         if not file_path.startswith("/"):
             file_path = "/" + file_path
         path = f"/projects/{project_name}/repos/{repo_name}/contents{file_path}"
-        resp = self.client.request("get", path, params=params)
-        return Content.from_dict(resp.json())
+
+        handler = {HTTPStatus.OK: lambda resp: Content.from_dict(resp.json())}
+        return self.client.request("get", path, params=params, handler=handler)
 
     def push(
         self,
@@ -92,9 +97,8 @@ class ContentService:
             ],
         }
         path = f"/projects/{project_name}/repos/{repo_name}/contents"
-        resp = self.client.request("post", path, json=params)
-        json: object = resp.json()
-        return PushResult.from_dict(json)
+        handler = {HTTPStatus.OK: lambda resp: PushResult.from_dict(resp.json())}
+        return self.client.request("post", path, json=params, handler=handler)
 
     def watch_repository(
         self,
@@ -112,15 +116,11 @@ class ContentService:
             path_pattern = path_pattern.replace(" ", "%20")
         path += path_pattern
 
-        response = self._watch(last_known_revision, timeout_millis, path)
-        if response.status_code == HTTPStatus.OK:
-            json = response.json()
-            return Revision(json["revision"])
-        elif response.status_code == HTTPStatus.NOT_MODIFIED:
-            return None
-        else:
-            # TODO(ikhoon): Handle excepitons after https://github.com/line/centraldogma-python/pull/11/ is merged.
-            pass
+        handler = {
+            HTTPStatus.OK: lambda resp: Revision(resp.json()["revision"]),
+            HTTPStatus.NOT_MODIFIED: lambda resp: None,
+        }
+        return self._watch(last_known_revision, timeout_millis, path, handler)
 
     def watch_file(
         self,
@@ -135,16 +135,13 @@ class ContentService:
             queries = [f"jsonpath={quote(expr)}" for expr in query.expressions]
             path = f"{path}?{'&'.join(queries)}"
 
-        response = self._watch(last_known_revision, timeout_millis, path)
-        if response.status_code == HTTPStatus.OK:
+        def on_ok(response: Response) -> Entry:
             json = response.json()
             revision = Revision(json["revision"])
             return self._to_entry(revision, json["entry"], query.query_type)
-        elif response.status_code == HTTPStatus.NOT_MODIFIED:
-            return None
-        else:
-            # TODO(ikhoon): Handle excepitons after https://github.com/line/centraldogma-python/pull/11/ is merged.
-            pass
+
+        handler = {HTTPStatus.OK: on_ok, HTTPStatus.NOT_MODIFIED: lambda resp: None}
+        return self._watch(last_known_revision, timeout_millis, path, handler)
 
     @staticmethod
     def _to_entry(revision: Revision, json: Any, query_type: QueryType) -> Entry:
@@ -169,18 +166,23 @@ class ContentService:
                 return Entry.directory(revision, entry_path)
 
     def _watch(
-        self, last_known_revision: Revision, timeout_millis: int, path: str
-    ) -> Response:
+        self,
+        last_known_revision: Revision,
+        timeout_millis: int,
+        path: str,
+        handler: dict[int, Callable[[Response], T]],
+    ) -> T:
         normalized_timeout = (timeout_millis + 999) // 1000
         headers = {
             "if-none-match": f"{last_known_revision.major}",
             "prefer": f"wait={normalized_timeout}",
         }
         return self.client.request(
-            "get", path, headers=headers, timeout=normalized_timeout
+            "get", path, handler=handler, headers=headers, timeout=normalized_timeout
         )
 
-    def _change_dict(self, data):
+    @staticmethod
+    def _change_dict(data):
         return {
             field: value.value if isinstance(value, Enum) else value
             for field, value in data

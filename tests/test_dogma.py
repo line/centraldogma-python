@@ -23,12 +23,16 @@ from centraldogma.data import (
     Repository,
 )
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestException, UnknownException
+from centraldogma.exceptions import (
+    BadRequestException,
+    UnknownException,
+    ProjectExistsException,
+    RepositoryExistsException,
+)
 from datetime import datetime
 from http import HTTPStatus
 from httpx import Response
 import pytest
-
 
 client = Dogma("http://baseurl", "token")
 
@@ -109,9 +113,16 @@ def test_create_project(respx_mock):
 
 def test_create_project_failed(respx_mock):
     url = "http://baseurl/api/v1/projects"
-    route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    with pytest.raises(BadRequestException):
+    response_body = {
+        "exception": "com.linecorp.centraldogma.common.ProjectExistsException",
+        "message": "Project 'newProject' exists already.",
+    }
+    route = respx_mock.post(url).mock(
+        return_value=Response(HTTPStatus.CONFLICT, json=response_body)
+    )
+    with pytest.raises(ProjectExistsException) as cause:
         client.create_project("newProject")
+    assert response_body["message"] == str(cause.value)
 
     assert route.called
     request = respx_mock.calls.last.request
@@ -122,11 +133,10 @@ def test_create_project_failed(respx_mock):
 def test_remove_project(respx_mock):
     url = "http://baseurl/api/v1/projects/project1"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
-    removed = client.remove_project("project1")
+    client.remove_project("project1")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert removed == True
 
 
 def test_remove_project_failed(respx_mock):
@@ -174,11 +184,10 @@ def test_unremove_project_failed(respx_mock):
 def test_purge_project(respx_mock):
     url = "http://baseurl/api/v1/projects/project1/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
-    purged = client.purge_project("project1")
+    client.purge_project("project1")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert purged == True
 
 
 def test_purge_project_failed(respx_mock):
@@ -237,8 +246,14 @@ def test_create_repository(respx_mock):
 
 def test_create_repository_failed(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos"
-    route = respx_mock.post(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
-    with pytest.raises(BadRequestException):
+    response_body = {
+        "exception": "com.linecorp.centraldogma.common.RepositoryExistsException",
+        "message": "Respository 'myproject/newRepo' exists already.",
+    }
+    route = respx_mock.post(url).mock(
+        return_value=Response(HTTPStatus.CONFLICT, json=response_body)
+    )
+    with pytest.raises(RepositoryExistsException):
         client.create_repository("myproject", "newRepo")
 
     assert route.called
@@ -250,11 +265,10 @@ def test_create_repository_failed(respx_mock):
 def test_remove_repository(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
-    removed = client.remove_repository("myproject", "myrepo")
+    client.remove_repository("myproject", "myrepo")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert removed == True
 
 
 def test_remove_repository_failed(respx_mock):
@@ -300,11 +314,10 @@ def test_unremove_repository_failed(respx_mock):
 def test_purge_repository(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
-    perged = client.purge_repository("myproject", "myrepo")
+    client.purge_repository("myproject", "myrepo")
 
     assert route.called
     assert respx_mock.calls.last.request.url == url
-    assert perged == True
 
 
 def test_purge_repository_failed(respx_mock):
@@ -467,7 +480,7 @@ def test_get_file_json_path(respx_mock):
 def test_push(respx_mock):
     url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents"
     route = respx_mock.post(url).mock(
-        return_value=Response(HTTPStatus.CREATED, json=mock_push_result)
+        return_value=Response(HTTPStatus.OK, json=mock_push_result)
     )
     commit = Commit("Upsert test.json")
     upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})

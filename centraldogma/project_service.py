@@ -11,10 +11,11 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.base_client import BaseClient
-from centraldogma.data import Project
 from http import HTTPStatus
 from typing import List
+
+from centraldogma.base_client import BaseClient
+from centraldogma.data import Project
 
 
 class ProjectService:
@@ -23,24 +24,33 @@ class ProjectService:
 
     def list(self, removed: bool) -> List[Project]:
         params = {"status": "removed"} if removed else None
-        resp = self.client.request("get", "/projects", params=params)
-        if resp.status_code == HTTPStatus.NO_CONTENT:
-            return []
-        return [Project.from_dict(project) for project in resp.json()]
+        handler = {
+            HTTPStatus.OK: lambda resp: [
+                Project.from_dict(project) for project in resp.json()
+            ],
+            HTTPStatus.NO_CONTENT: lambda resp: [],
+        }
+        return self.client.request("get", "/projects", params=params, handler=handler)
 
     def create(self, name: str) -> Project:
-        resp = self.client.request("post", "/projects", json={"name": name})
-        return Project.from_dict(resp.json())
+        handler = {HTTPStatus.CREATED: lambda resp: Project.from_dict(resp.json())}
+        return self.client.request(
+            "post", "/projects", json={"name": name}, handler=handler
+        )
 
-    def remove(self, name: str) -> bool:
-        resp = self.client.request("delete", f"/projects/{name}")
-        return True if resp.status_code == HTTPStatus.NO_CONTENT else False
+    def remove(self, name: str) -> None:
+        handler = {HTTPStatus.NO_CONTENT: lambda resp: None}
+        return self.client.request("delete", f"/projects/{name}", handler=handler)
 
     def unremove(self, name: str) -> Project:
         body = [{"op": "replace", "path": "/status", "value": "active"}]
-        resp = self.client.request("patch", f"/projects/{name}", json=body)
-        return Project.from_dict(resp.json())
+        handler = {HTTPStatus.OK: lambda resp: Project.from_dict(resp.json())}
+        return self.client.request(
+            "patch", f"/projects/{name}", json=body, handler=handler
+        )
 
-    def purge(self, name: str) -> bool:
-        resp = self.client.request("delete", f"/projects/{name}/removed")
-        return True if resp.status_code == HTTPStatus.NO_CONTENT else False
+    def purge(self, name: str) -> None:
+        handler = {HTTPStatus.NO_CONTENT: lambda resp: None}
+        return self.client.request(
+            "delete", f"/projects/{name}/removed", handler=handler
+        )

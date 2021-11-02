@@ -11,11 +11,12 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+from http import HTTPStatus
+
 from centraldogma.exceptions import UnauthorizedException, NotFoundException
 from centraldogma.base_client import BaseClient
 from httpx import Limits, Response
 import pytest
-
 
 client = BaseClient("http://baseurl", "token")
 
@@ -35,6 +36,8 @@ configs = {
     "trust_env": True,
 }
 client_with_configs = BaseClient("http://baseurl", "token", **configs)
+
+ok_handler = {HTTPStatus.OK: lambda resp: resp}
 
 
 def test_set_request_headers():
@@ -70,7 +73,6 @@ def test_request_with_configs(respx_mock):
             timeout=5,
             cookies=None,
             auth=None,
-            allow_redirects=False,
         )
         client.request(method, "/path", timeout=(3.05, 27))
         client_with_configs.request(method, "/path")
@@ -92,14 +94,14 @@ def test_delete(respx_mock):
 def test_delete_exception_authorization(respx_mock):
     with pytest.raises(UnauthorizedException):
         respx_mock.delete("http://baseurl/api/v1/path").mock(return_value=Response(401))
-        client.request("delete", "/path")
+        client.request("delete", "/path", handler=ok_handler)
 
 
 def test_get(respx_mock):
     route = respx_mock.get("http://baseurl/api/v1/path").mock(
         return_value=Response(200, text="success")
     )
-    resp = client.request("get", "/path", params={"a": "b"})
+    resp = client.request("get", "/path", params={"a": "b"}, handler=ok_handler)
 
     assert route.called
     assert resp.request.headers["Authorization"] == "bearer token"
@@ -110,20 +112,20 @@ def test_get(respx_mock):
 def test_get_exception_authorization(respx_mock):
     with pytest.raises(UnauthorizedException):
         respx_mock.get("http://baseurl/api/v1/path").mock(return_value=Response(401))
-        client.request("get", "/path")
+        client.request("get", "/path", handler=ok_handler)
 
 
 def test_get_exception_not_found(respx_mock):
     with pytest.raises(NotFoundException):
         respx_mock.get("http://baseurl/api/v1/path").mock(return_value=Response(404))
-        client.request("get", "/path")
+        client.request("get", "/path", handler=ok_handler)
 
 
 def test_patch(respx_mock):
     route = respx_mock.patch("http://baseurl/api/v1/path").mock(
         return_value=Response(200, text="success")
     )
-    resp = client.request("patch", "/path", json={"a": "b"})
+    resp = client.request("patch", "/path", json={"a": "b"}, handler=ok_handler)
 
     assert route.called
     assert resp.request.headers["Authorization"] == "bearer token"
@@ -134,14 +136,14 @@ def test_patch(respx_mock):
 def test_patch_exception_authorization(respx_mock):
     with pytest.raises(UnauthorizedException):
         respx_mock.patch("http://baseurl/api/v1/path").mock(return_value=Response(401))
-        client.request("patch", "/path", json={"a": "b"})
+        client.request("patch", "/path", json={"a": "b"}, handler=ok_handler)
 
 
 def test_post(respx_mock):
     route = respx_mock.post("http://baseurl/api/v1/path").mock(
         return_value=Response(200, text="success")
     )
-    resp = client.request("post", "/path", json={"a": "b"})
+    resp = client.request("post", "/path", json={"a": "b"}, handler=ok_handler)
 
     assert route.called
     assert resp.request.headers["Authorization"] == "bearer token"
@@ -152,4 +154,4 @@ def test_post(respx_mock):
 def test_post_exception_authorization(respx_mock):
     with pytest.raises(UnauthorizedException):
         respx_mock.post("http://baseurl/api/v1/path").mock(return_value=Response(401))
-        client.request("post", "/path")
+        client.request("post", "/path", handler=ok_handler)

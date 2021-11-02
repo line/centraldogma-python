@@ -11,11 +11,13 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.data.constants import DATE_FORMAT_ISO8601_MS
 from dataclasses import dataclass, field
-from dataclasses_json import LetterCase, config, dataclass_json
 from datetime import datetime
+
+from dataclasses_json import LetterCase, config, dataclass_json
 from marshmallow import fields
+
+from centraldogma.data.constants import DATE_FORMAT_ISO8601_MS
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)

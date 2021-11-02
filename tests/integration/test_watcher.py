@@ -101,9 +101,7 @@ def test_file_watcher(run_around_test):
 
         watcher.watch(listener)
         commit = Commit("Upsert1 test.json")
-        upsert_text = Change(
-            "/test.json", ChangeType.UPSERT_JSON, {"b": 12, "c": 3}
-        )
+        upsert_text = Change("/test.json", ChangeType.UPSERT_JSON, {"b": 12, "c": 3})
         dogma.push(project_name, repo_name, commit, [upsert_text])
 
         with pytest.raises(TimeoutError):

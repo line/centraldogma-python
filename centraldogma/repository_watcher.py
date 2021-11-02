@@ -45,7 +45,6 @@ _THREAD_ID = itertools.count()
 
 
 class AbstractWatcher(Watcher[T]):
-
     def __init__(
         self,
         dogma: Dogma,

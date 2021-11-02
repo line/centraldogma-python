@@ -22,7 +22,11 @@ import pytest
 from centraldogma.data.entry import Entry
 from centraldogma.data.revision import Revision
 from centraldogma.dogma import Change, ChangeType, Commit, Dogma
-from centraldogma.exceptions import BadRequestException, ConflictException
+from centraldogma.exceptions import (
+    BadRequestException,
+    RedundantChangeException,
+    ChangeConflictException,
+)
 from centraldogma.query import Query
 
 dogma = Dogma()
@@ -58,7 +62,7 @@ def test_content(run_around_test):
     ret = dogma.push(project_name, repo_name, commit, [upsert_json])
     assert ret.revision == 2
 
-    with pytest.raises(ConflictException):
+    with pytest.raises(RedundantChangeException):
         dogma.push(project_name, repo_name, commit, [upsert_json])
 
     commit = Commit("Upsert test.txt")
@@ -74,9 +78,10 @@ def test_content(run_around_test):
 
     commit = Commit("Rename the json")
     rename_json = Change("/test2.json", ChangeType.RENAME, "/test3.json")
-    with pytest.raises(ConflictException):
+    with pytest.raises(ChangeConflictException):
         dogma.push(project_name, repo_name, commit, [rename_json])
     rename_json = Change("/test.json", ChangeType.RENAME, "")
+
     with pytest.raises(BadRequestException):
         dogma.push(project_name, repo_name, commit, [rename_json])
     rename_json = Change("/test.json", ChangeType.RENAME, "/test2.json")
@@ -90,13 +95,13 @@ def test_content(run_around_test):
 
     commit = Commit("Remove the json")
     remove_json = Change("/test.json", ChangeType.REMOVE)
-    with pytest.raises(ConflictException):
+    with pytest.raises(ChangeConflictException):
         dogma.push(project_name, repo_name, commit, [remove_json])
     remove_json = Change("/test2.json", ChangeType.REMOVE)
     ret = dogma.push(project_name, repo_name, commit, [remove_json])
     assert ret.revision == 6
 
-    with pytest.raises(ConflictException):
+    with pytest.raises(ChangeConflictException):
         dogma.push(project_name, repo_name, commit, [remove_json])
 
     files = dogma.list_files(project_name, repo_name)
