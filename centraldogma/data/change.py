@@ -12,9 +12,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from dataclasses import dataclass
-from dataclasses_json import dataclass_json
 from enum import Enum
 from typing import Optional, Union
+
+from dataclasses_json import dataclass_json
 
 
 class ChangeType(Enum):

@@ -11,21 +11,24 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+import os
+from typing import List, Optional
+
 from centraldogma.base_client import BaseClient
 from centraldogma.content_service import ContentService
+
+# noinspection PyUnresolvedReferences
 from centraldogma.data import (
     Change,
-    ChangeType,
     Commit,
     Content,
+    ChangeType,
     Project,
     PushResult,
     Repository,
 )
 from centraldogma.project_service import ProjectService
 from centraldogma.repository_service import RepositoryService
-from typing import List, Optional
-import os
 
 
 class Dogma:
@@ -59,7 +62,7 @@ class Dogma:
         """Creates a project. The creator of the project will become the owner of the project."""
         return self.project_service.create(name)
 
-    def remove_project(self, name: str) -> bool:
+    def remove_project(self, name: str) -> None:
         """Removes a project. Only the owner and an admin can remove the project."""
         return self.project_service.remove(name)
 
@@ -67,7 +70,7 @@ class Dogma:
         """Unremoves a project which is removed before. Only an admin can unremove the project."""
         return self.project_service.unremove(name)
 
-    def purge_project(self, name: str) -> bool:
+    def purge_project(self, name: str) -> None:
         """Purges a project. Only the owner and an admin can purge the project removed before."""
         return self.project_service.purge(name)
 
@@ -81,7 +84,7 @@ class Dogma:
         """Creates a repository. Only the owner and an admin can create."""
         return self.repository_service.create(project_name, name)
 
-    def remove_repository(self, project_name: str, name: str) -> bool:
+    def remove_repository(self, project_name: str, name: str) -> None:
         """Removes a repository. Only the owner and an admin can remove."""
         return self.repository_service.remove(project_name, name)
 
@@ -89,7 +92,7 @@ class Dogma:
         """Unremoves a repository. Only the owner and an admin can unremove."""
         return self.repository_service.unremove(project_name, name)
 
-    def purge_repository(self, project_name: str, name: str) -> bool:
+    def purge_repository(self, project_name: str, name: str) -> None:
         """Purges a repository. Only the owner and an admin can purge a repository removed before."""
         return self.repository_service.purge(project_name, name)
 

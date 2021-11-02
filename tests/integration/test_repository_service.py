@@ -12,7 +12,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestException, NotFoundException
+from centraldogma.exceptions import (
+    BadRequestException,
+    NotFoundException,
+    RepositoryNotFoundException,
+)
 import pytest
 import os
 
@@ -23,10 +27,18 @@ repo_name = "TestRepository"
 
 @pytest.fixture(scope="module")
 def run_around_test():
+    projects = dogma.list_projects()
+    removed_projects = dogma.list_projects(removed=True)
     dogma.create_project(project_name)
+
     yield
-    dogma.remove_project(project_name)
-    dogma.purge_project(project_name)
+
+    for project in dogma.list_projects():
+        if project not in projects:
+            dogma.remove_project(project.name)
+    for removed in dogma.list_projects(removed=True):
+        if removed not in removed_projects:
+            dogma.purge_project(removed.name)
 
 
 @pytest.mark.skipif(
@@ -40,29 +52,22 @@ def test_repository(run_around_test):
 
     len_repo = len(dogma.list_repositories(project_name))
     len_removed_repo = len(dogma.list_repositories(project_name, removed=True))
-
     repo = dogma.create_repository(project_name, repo_name)
     assert repo.name == repo_name
     validate_len(len_repo + 1, len_removed_repo)
 
-    with pytest.raises(NotFoundException):
+    with pytest.raises(RepositoryNotFoundException):
         dogma.remove_repository(project_name, "Non-existent")
 
-    removed = dogma.remove_repository(project_name, repo_name)
-    assert removed == True
+    dogma.remove_repository(project_name, repo_name)
     validate_len(len_repo, len_removed_repo + 1)
 
-    with pytest.raises(NotFoundException):
+    with pytest.raises(RepositoryNotFoundException):
         dogma.unremove_repository(project_name, "Non-existent")
 
     unremoved = dogma.unremove_repository(project_name, repo_name)
     assert unremoved.name == repo_name
     validate_len(len_repo + 1, len_removed_repo)
-
-    dogma.remove_repository(project_name, repo_name)
-    purged = dogma.purge_repository(project_name, repo_name)
-    assert purged == True
-    validate_len(len_repo, len_removed_repo)
 
 
 def validate_len(expected_len, expected_removed_len):

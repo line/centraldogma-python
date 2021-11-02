@@ -11,13 +11,33 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.dogma import Dogma
-from centraldogma.exceptions import BadRequestException, NotFoundException
-import pytest
 import os
+
+import pytest
+
+from centraldogma.dogma import Dogma
+from centraldogma.exceptions import (
+    BadRequestException,
+    ProjectNotFoundException,
+)
 
 dogma = Dogma()
 project_name = "TestProject"
+
+
+@pytest.fixture(scope="module")
+def run_around_test():
+    projects = dogma.list_projects()
+    removed_projects = dogma.list_projects(removed=True)
+
+    yield
+
+    for project in dogma.list_projects():
+        if project not in projects:
+            dogma.remove_project(project.name)
+    for removed in dogma.list_projects(removed=True):
+        if removed not in removed_projects:
+            dogma.purge_project(removed.name)
 
 
 @pytest.mark.skipif(
@@ -25,7 +45,7 @@ project_name = "TestProject"
     reason="Integration tests are disabled. Use `INTEGRATION_TEST=true pytest` to enable them.",
 )
 @pytest.mark.integration
-def test_project():
+def test_project(run_around_test):
     with pytest.raises(BadRequestException):
         dogma.create_project("Test project")
 
@@ -36,14 +56,13 @@ def test_project():
     assert new_project.name == project_name
     validate_len(len_project + 1, len_removed_project)
 
-    with pytest.raises(NotFoundException):
+    with pytest.raises(ProjectNotFoundException):
         dogma.remove_project("Non-existent")
 
-    removed = dogma.remove_project(project_name)
-    assert removed == True
+    dogma.remove_project(project_name)
     validate_len(len_project, len_removed_project + 1)
 
-    with pytest.raises(NotFoundException):
+    with pytest.raises(ProjectNotFoundException):
         dogma.unremove_project("Non-existent")
 
     unremoved = dogma.unremove_project(project_name)
@@ -51,8 +70,7 @@ def test_project():
     validate_len(len_project + 1, len_removed_project)
 
     dogma.remove_project(project_name)
-    purged = dogma.purge_project(project_name)
-    assert purged == True
+    dogma.purge_project(project_name)
     validate_len(len_project, len_removed_project)
 
 

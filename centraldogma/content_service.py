@@ -11,15 +11,16 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from centraldogma.base_client import BaseClient
-from centraldogma.data.change import Change
-from centraldogma.data.commit import Commit
-from centraldogma.data.content import Content
-from centraldogma.data.push_result import PushResult
 from dataclasses import asdict
 from enum import Enum
 from http import HTTPStatus
 from typing import List, Optional
+
+from centraldogma.base_client import BaseClient
+from centraldogma.data import Content
+from centraldogma.data.change import Change
+from centraldogma.data.commit import Commit
+from centraldogma.data.push_result import PushResult
 
 
 class ContentService:
@@ -42,10 +43,14 @@ class ContentService:
                 path += path_pattern
             else:
                 path += "/" + path_pattern
-        resp = self.client.request("get", path, params=params)
-        if resp.status_code == HTTPStatus.NO_CONTENT:
-            return []
-        return [Content.from_dict(content) for content in resp.json()]
+
+        handler = {
+            HTTPStatus.OK: lambda resp: [
+                Content.from_dict(content) for content in resp.json()
+            ],
+            HTTPStatus.NO_CONTENT: lambda resp: [],
+        }
+        return self.client.request("get", path, params=params, handler=handler)
 
     def get_file(
         self,
@@ -63,8 +68,9 @@ class ContentService:
         if not file_path.startswith("/"):
             file_path = "/" + file_path
         path = f"/projects/{project_name}/repos/{repo_name}/contents{file_path}"
-        resp = self.client.request("get", path, params=params)
-        return Content.from_dict(resp.json())
+
+        handler = {HTTPStatus.OK: lambda resp: Content.from_dict(resp.json())}
+        return self.client.request("get", path, params=params, handler=handler)
 
     def push(
         self,
@@ -80,10 +86,11 @@ class ContentService:
             ],
         }
         path = f"/projects/{project_name}/repos/{repo_name}/contents"
-        resp = self.client.request("post", path, json=params)
-        return PushResult.from_dict(resp.json())
+        handler = {HTTPStatus.OK: lambda resp: PushResult.from_dict(resp.json())}
+        return self.client.request("post", path, json=params, handler=handler)
 
-    def _change_dict(self, data):
+    @staticmethod
+    def _change_dict(data):
         return {
             field: value.value if isinstance(value, Enum) else value
             for field, value in data
