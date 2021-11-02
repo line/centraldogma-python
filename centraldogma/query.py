@@ -69,7 +69,7 @@ class Query(Generic[T]):
     def json_path(path: str, json_paths: List[str]) -> Query[Any]:
         """
         Returns a newly-created ``Query`` that applies a series of
-        `JSON path expressions <https://github.com/json-path/JsonPath/blob/master/README.md>_ to the content.
+        `JSON path expressions <https://github.com/json-path/JsonPath/blob/master/README.md>`_ to the content.
 
         :param path: the path of a file being queried on
         :param json_paths: the JSON path expressions to apply

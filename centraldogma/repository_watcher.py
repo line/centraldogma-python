@@ -45,12 +45,6 @@ _THREAD_ID = itertools.count()
 
 
 class AbstractWatcher(Watcher[T]):
-    _latest: Optional[Latest[T]] = None
-    _state: WatchState = WatchState.INIT
-    _initial_value_future = Future()
-    _update_listeners: List[Callable[[Revision, T], None]] = []
-    _thread: Optional[threading.Thread] = None
-    _lock: Lock = threading.Lock()
 
     def __init__(
         self,
@@ -66,17 +60,29 @@ class AbstractWatcher(Watcher[T]):
         self.path_pattern = path_pattern
         self.function = function
 
+        # states
+        self._latest: Optional[Latest[T]] = None
+        self._state: WatchState = WatchState.INIT
+        self._initial_value_future: Future[Latest[T]] = Future()
+        self._update_listeners: List[Callable[[Revision, T], None]] = []
+        self._thread: Optional[threading.Thread] = None
+        self._lock: Lock = threading.Lock()
+
     def start(self):
         with self._lock:
-            if self._state == WatchState.INIT:
-                # FIXME(ikhoon): Replace Thread with Coroutine of asyncio once AsyncClient is implemented.
-                self._thread = Thread(
-                    target=self._schedule_watch,
-                    args=(0,),
-                    name=f"centraldogma-watcher-{next(_THREAD_ID)}",
-                    daemon=True,
-                )
-                self._thread.start()
+            if self._state != WatchState.INIT:
+                return
+            else:
+                self._state = WatchState.STARTED
+
+        # FIXME(ikhoon): Replace Thread with Coroutine of asyncio once AsyncClient is implemented.
+        self._thread = Thread(
+            target=self._schedule_watch,
+            args=(0,),
+            name=f"centraldogma-watcher-{next(_THREAD_ID)}",
+            daemon=True,
+        )
+        self._thread.start()
 
     def close(self) -> None:
         self._state = WatchState.STOPPED

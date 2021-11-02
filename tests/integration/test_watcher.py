@@ -102,7 +102,7 @@ def test_file_watcher(run_around_test):
         watcher.watch(listener)
         commit = Commit("Upsert1 test.json")
         upsert_text = Change(
-            "/test.json", ChangeType.UPSERT_JSON, {"a": 1, "b": 12, "c": 3}
+            "/test.json", ChangeType.UPSERT_JSON, {"b": 12, "c": 3}
         )
         dogma.push(project_name, repo_name, commit, [upsert_text])
 
@@ -139,7 +139,7 @@ def test_await_init_value(run_around_test):
     with dogma.file_watcher(
         project_name,
         repo_name,
-        Query.json("/test.json"),
+        Query.json("/foo.json"),
         lambda j: json.dumps(j),
     ) as watcher:
 
@@ -148,8 +148,8 @@ def test_await_init_value(run_around_test):
             future.result(timeout=1)
         assert not watcher.latest()
 
-        commit = Commit("Upsert test.json")
-        upsert_text = Change("/test.json", ChangeType.UPSERT_JSON, {"a": 1})
+        commit = Commit("Upsert foo.json")
+        upsert_text = Change("/foo.json", ChangeType.UPSERT_JSON, {"a": 1})
         dogma.push(project_name, repo_name, commit, [upsert_text])
         latest: Latest[str] = future.result()
         assert latest.value == '{"a": 1}'

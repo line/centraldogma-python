@@ -92,7 +92,7 @@ class Entry(Generic[T]):
 
         :exception EntryNoContentException if the content is ``None``
         """
-        if self._content is None:
+        if not self._content:
             raise EntryNoContentException(
                 f"{self.path} (type: {self.entry_type}, revision: {self.revision.major})"
             )
@@ -105,7 +105,7 @@ class Entry(Generic[T]):
 
         :exception EntryNoContentException if the content is ``None``
         """
-        if self._content_as_text is not None:
+        if self._content_as_text:
             return self._content_as_text
 
         content = self.content

@@ -128,7 +128,7 @@ class ContentService:
         repo_name: str,
         last_known_revision: Revision,
         query: Query[T],
-        timeout_millis,
+        timeout_millis: int,
     ) -> Optional[Entry[T]]:
         path = f"/projects/{project_name}/repos/{repo_name}/contents/{query.path}"
         if query.query_type == QueryType.JSON_PATH:
