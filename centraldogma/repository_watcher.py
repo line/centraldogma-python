@@ -24,6 +24,11 @@ from typing import TypeVar, Callable, Optional, List
 
 from centraldogma.data.revision import Revision
 from centraldogma.dogma import Dogma
+from centraldogma.exceptions import (
+    EntryNotFoundException,
+    RepositoryNotFoundException,
+    ShuttingDownException,
+)
 from centraldogma.query import Query
 from centraldogma.watcher import Watcher, Latest
 
@@ -129,7 +134,7 @@ class AbstractWatcher(Watcher[T]):
                 old_latest = self._latest
                 self._latest = new_latest
                 logging.debug(
-                    f"watcher noticed updated file %s/%s%s: rev=%s",
+                    "watcher noticed updated file %s/%s%s: rev=%s",
                     self.project_name,
                     self.repo_name,
                     self.path_pattern,
@@ -142,10 +147,22 @@ class AbstractWatcher(Watcher[T]):
                 # Watch again for the next change.
                 self._schedule_watch(0)
         except Exception as ex:
-            logged = False
-            # TODO(ikhoon): Leave proper log messages
-
-            if not logged:
+            if isinstance(ex, EntryNotFoundException):
+                logging.info(
+                    "%s/%s%s does not exist yet; trying again",
+                    self.project_name,
+                    self.repo_name,
+                    self.path_pattern,
+                )
+            elif isinstance(ex, RepositoryNotFoundException):
+                logging.info(
+                    "%s/%s does not exist yet; trying again",
+                    self.project_name,
+                    self.repo_name,
+                )
+            elif isinstance(ex, ShuttingDownException):
+                logging.info("Central Dogma is shutting down; trying again")
+            else:
                 logging.warning(
                     "Failed to watch a file (%s/%s%s) at Central Dogma; trying again.\n%s",
                     self.project_name,
