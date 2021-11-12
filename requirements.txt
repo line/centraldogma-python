@@ -7,3 +7,5 @@ black
 pytest
 setuptools
 respx
+pytest-cov
+codecov

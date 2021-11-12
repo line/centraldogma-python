@@ -1,0 +1,49 @@
+
+name: Testing Central Dogma Python
+
+on:
+  push:
+    branches:
+       - main
+  pull_request:
+    branches:
+       - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: black --check
+        uses: rickstaa/action-black@v1
+        id: action_black
+        with:
+          black_args: ". --check"
+
+      - name: Start centraldogma
+        run: docker-compose -f "docker-compose.yml" up -d --build
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Test with pytest
+        run: |
+          INTEGRATION_TEST=true pytest --cov=centraldogma ./tests
+
+      - name: upload to codecov
+        run: codecov
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f "docker-compose.yml" down
