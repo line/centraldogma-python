@@ -19,10 +19,10 @@ from typing import TypeVar, Generic, Any, List
 
 
 class QueryType(Enum):
-    IDENTITY = auto()
-    IDENTITY_TEXT = auto()
-    IDENTITY_JSON = auto()
-    JSON_PATH = auto()
+    IDENTITY = "IDENTITY"
+    IDENTITY_TEXT = "IDENTITY_TEXT"
+    IDENTITY_JSON = "IDENTITY_JSON"
+    JSON_PATH = "JSON_PATH"
 
 
 T = TypeVar("T")

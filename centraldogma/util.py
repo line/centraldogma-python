@@ -13,11 +13,7 @@
 #  under the License.
 
 
-def to_string(obj, **fields) -> str:
+def to_string(obj) -> str:
     items = vars(obj).items()
-    if not fields:
-        values = [f"{k}={v}" for k, v in items]
-    else:
-        values = [f"{k}={v}" for k, v in items if k in fields]
-
+    values = [f"{k}={v}" for k, v in items]
     return f"{obj.__class__.__name__}({','.join(values)})"

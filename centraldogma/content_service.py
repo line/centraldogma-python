@@ -150,7 +150,7 @@ class ContentService:
         content = json["content"]
         if query_type == QueryType.IDENTITY_TEXT:
             return Entry.text(revision, entry_path, content)
-        elif query_type == QueryType.IDENTITY or query_type == QueryType.JSON_PATH:
+        elif query_type == QueryType.IDENTITY_JSON or query_type == QueryType.JSON_PATH:
             if received_entry_type != EntryType.JSON:
                 raise CentralDogmaException(
                     f"invalid entry type. entry type: {received_entry_type} (expected: {query_type})"

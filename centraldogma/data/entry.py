@@ -23,9 +23,9 @@ from centraldogma.exceptions import EntryNoContentException
 
 
 class EntryType(Enum):
-    JSON = auto()
-    TEXT = auto()
-    DIRECTORY = auto()
+    JSON = "JSON"
+    TEXT = "TEXT"
+    DIRECTORY = "DIRECTORY"
 
 
 T = TypeVar("T")

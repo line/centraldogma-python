@@ -37,9 +37,9 @@ T = TypeVar("T")
 
 
 class WatchState(Enum):
-    INIT = auto()
-    STARTED = auto()
-    STOPPED = auto()
+    INIT = "INIT"
+    STARTED = "STARTED"
+    STOPPED = "STOPPED"
 
 
 _DELAY_ON_SUCCESS_MILLIS = 1000  # 1 second
@@ -173,7 +173,7 @@ class AbstractWatcher(Watcher[T]):
             self._schedule_watch(num_attempts_so_far + 1)
             return
 
-    def _do_watch(self, last_known_revision) -> Optional[Latest[T]]:
+    def _do_watch(self, last_known_revision: Revision) -> Optional[Latest[T]]:
         pass
 
     def notify_listeners(self):
@@ -225,7 +225,7 @@ class FileWatcher(AbstractWatcher[T]):
         super().__init__(dogma, project_name, repo_name, query.path, function)
         self.query = query
 
-    def _do_watch(self, last_known_revision) -> Optional[Latest[T]]:
+    def _do_watch(self, last_known_revision: Revision) -> Optional[Latest[T]]:
         result = self.dogma.watch_file(
             self.project_name, self.repo_name, last_known_revision, self.query
         )
