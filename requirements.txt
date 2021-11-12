@@ -1,9 +1,3 @@
 dataclasses-json
 httpx[http2]
 marshmallow
-
-# Dev dependencies
-black
-pytest
-setuptools
-respx
