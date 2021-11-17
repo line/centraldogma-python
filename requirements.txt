@@ -4,8 +4,8 @@ marshmallow
 
 # Dev dependencies
 black
-pytest
-setuptools
-respx
-pytest-cov
 codecov
+pytest
+pytest-cov
+respx
+setuptools
