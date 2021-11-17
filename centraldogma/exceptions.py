@@ -13,7 +13,7 @@
 # under the License.
 from http import HTTPStatus
 from json import JSONDecodeError
-from typing import Callable
+from typing import Callable, Dict
 
 from httpx import Response
 
@@ -163,7 +163,7 @@ class InvalidResponseException(CentralDogmaException):
     pass
 
 
-_EXCEPTION_FACTORIES: dict[str, Callable[[str], CentralDogmaException]] = {
+_EXCEPTION_FACTORIES: Dict[str, Callable[[str], CentralDogmaException]] = {
     "com.linecorp.centraldogma.common." + exception.__name__: exception
     for exception in [
         ProjectExistsException,

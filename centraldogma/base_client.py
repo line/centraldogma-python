@@ -36,7 +36,7 @@ class BaseClient:
         self,
         method: str,
         path: str,
-        handler: Optional[dict[int, Callable[[Response], T]]] = None,
+        handler: Optional[Dict[int, Callable[[Response], T]]] = None,
         **kwargs,
     ) -> Union[Response, T]:
         kwargs = self._set_request_headers(method, **kwargs)
