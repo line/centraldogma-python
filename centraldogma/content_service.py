@@ -112,7 +112,7 @@ class ContentService:
         if path_pattern[0] != "/":
             path += "/**/"
 
-        if path_pattern in " ":
+        if " " in path_pattern:
             path_pattern = path_pattern.replace(" ", "%20")
         path += path_pattern
 
@@ -157,12 +157,12 @@ class ContentService:
                 )
 
             return Entry.json(revision, entry_path, content)
-        else:  # query_type == QueryType.IDENTITY
+        elif query_type == QueryType.IDENTITY:
             if received_entry_type == EntryType.JSON:
                 return Entry.json(revision, entry_path, content)
             elif received_entry_type == EntryType.TEXT:
                 return Entry.text(revision, entry_path, content)
-            else:  # received_entry_type == EntryType.DIRECTORY
+            elif received_entry_type == EntryType.DIRECTORY:
                 return Entry.directory(revision, entry_path)
 
     def _watch(

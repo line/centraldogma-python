@@ -13,8 +13,8 @@
 #  under the License.
 from __future__ import annotations
 
-from dataclasses import dataclass
-from enum import Enum, auto
+from dataclasses import dataclass, field
+from enum import Enum
 from typing import TypeVar, Generic, Any, List
 
 
@@ -36,7 +36,7 @@ class Query(Generic[T]):
 
     path: str
     query_type: QueryType
-    expressions: List[str]
+    expressions: List[str] = field(default_factory=list)
 
     @staticmethod
     def identity(path: str) -> Query[str]:
@@ -45,7 +45,7 @@ class Query(Generic[T]):
 
         :param path: the path of a file being queried on
         """
-        return Query(path=path, query_type=QueryType.IDENTITY, expressions=[])
+        return Query(path=path, query_type=QueryType.IDENTITY)
 
     @staticmethod
     def text(path: str) -> Query[str]:
@@ -54,7 +54,7 @@ class Query(Generic[T]):
 
         :param path: the path of a file being queried on
         """
-        return Query(path=path, query_type=QueryType.IDENTITY_TEXT, expressions=[])
+        return Query(path=path, query_type=QueryType.IDENTITY_TEXT)
 
     @staticmethod
     def json(path: str) -> Query[Any]:
@@ -63,7 +63,7 @@ class Query(Generic[T]):
 
         :param path: the path of a file being queried on
         """
-        return Query(path=path, query_type=QueryType.IDENTITY_JSON, expressions=[])
+        return Query(path=path, query_type=QueryType.IDENTITY_JSON)
 
     @staticmethod
     def json_path(path: str, json_paths: List[str]) -> Query[Any]:
