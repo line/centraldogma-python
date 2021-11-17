@@ -4,6 +4,8 @@ marshmallow
 
 # Dev dependencies
 black
+codecov
 pytest
-setuptools
+pytest-cov
 respx
+setuptools
