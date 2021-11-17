@@ -24,7 +24,7 @@ jobs:
         with:
           black_args: ". --check"
 
-      - name: Start centraldogma
+      - name: Start Central Dogma
         run: docker-compose -f "docker-compose.yml" up -d --build
 
       - name: Set up Python ${{ matrix.python-version }}
