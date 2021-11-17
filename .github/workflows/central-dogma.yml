@@ -41,7 +41,7 @@ jobs:
         run: |
           INTEGRATION_TEST=true pytest --cov=centraldogma ./tests
 
-      - name: upload to codecov
+      - name: Upload to codecov
         run: codecov
 
       - name: Stop containers
