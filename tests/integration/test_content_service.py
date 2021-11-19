@@ -26,6 +26,7 @@ from centraldogma.exceptions import (
     BadRequestException,
     RedundantChangeException,
     ChangeConflictException,
+    CentralDogmaException,
 )
 from centraldogma.query import Query
 
@@ -170,6 +171,27 @@ class TestContentService:
         assert entry.revision.major == ret.revision + 1
         assert entry.content == {"foo": "qux"}
         assert (end - start).seconds < 3
+
+    def test_invalid_entry_type(self, run_around_test):
+        commit = Commit("Upsert test.txt")
+        upsert_text = Change("/test.txt", ChangeType.UPSERT_TEXT, "foo")
+        ret = dogma.push(project_name, repo_name, commit, [upsert_text])
+
+        upsert_text = Change("/test.txt", ChangeType.UPSERT_TEXT, "bar")
+        dogma.push(project_name, repo_name, commit, [upsert_text])
+
+        with pytest.raises(CentralDogmaException) as ex:
+            dogma.watch_file(
+                project_name,
+                repo_name,
+                Revision(ret.revision),
+                Query.json("/test.txt"),  # A wrong JSON query for a text
+                2000,
+            )
+        assert (
+            "invalid entry type. entry type: EntryType.TEXT (expected: QueryType.IDENTITY_JSON)"
+            in str(ex.value)
+        )
 
     @staticmethod
     def push_later():
