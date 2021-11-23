@@ -29,6 +29,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: KengoTODA/actions-setup-docker-compose@main
+        with:
+          version: '1.29.2'
+
       - name: Start Central Dogma
         run: docker-compose -f "docker-compose.yml" up -d --build
 
