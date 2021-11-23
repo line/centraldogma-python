@@ -24,12 +24,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-18.04, ubuntu-latest]
+        os: [windows-latest, ubuntu-18.04, ubuntu-latest]
         python-version: [3.7, 3.8, 3.9]
 
     steps:
       - uses: actions/checkout@v2
-      - uses: docker-practice/actions-setup-docker@master
       - name: Start Central Dogma
         run: docker-compose -f "docker-compose.yml" up -d --build
 
