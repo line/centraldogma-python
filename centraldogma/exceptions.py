@@ -20,7 +20,7 @@ from httpx import Response
 
 class CentralDogmaException(Exception):
     """
-    A exception that is raised when failed to access Central Dogma.
+    An exception that is raised when failed to access Central Dogma.
     """
 
     pass
@@ -28,7 +28,7 @@ class CentralDogmaException(Exception):
 
 class BadRequestException(CentralDogmaException):
     """
-    A exception indicating a 400 Bad Client Request.
+    An exception indicating a 400 Bad Client Request.
     """
 
     pass
@@ -36,7 +36,7 @@ class BadRequestException(CentralDogmaException):
 
 class NotFoundException(CentralDogmaException):
     """
-    A exception indicating a 404 Not Found.
+    An exception indicating a 404 Not Found.
     """
 
     pass
@@ -44,7 +44,7 @@ class NotFoundException(CentralDogmaException):
 
 class UnauthorizedException(CentralDogmaException):
     """
-    A exception indicating a 401 Unauthorized.
+    An exception indicating a 401 Unauthorized.
     """
 
     pass
@@ -52,7 +52,7 @@ class UnauthorizedException(CentralDogmaException):
 
 class ForbiddenException(CentralDogmaException):
     """
-    A exception indicating that an access to a resource requested by a client has been forbidden by the Central Dogma.
+    An exception indicating that an access to a resource requested by a client has been forbidden by the Central Dogma.
     """
 
     pass
@@ -60,7 +60,7 @@ class ForbiddenException(CentralDogmaException):
 
 class UnknownException(CentralDogmaException):
     """
-    A exception used for reporting unknown exceptions
+    An exception used for reporting unknown exceptions
     """
 
     pass

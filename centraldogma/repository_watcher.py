@@ -17,13 +17,13 @@ import math
 import threading
 import time
 from concurrent.futures import Future
-from enum import Enum, auto
+from enum import Enum
 from random import randrange
 from threading import Thread, Lock
 from typing import TypeVar, Callable, Optional, List
 
+from centraldogma.content_service import ContentService
 from centraldogma.data.revision import Revision
-from centraldogma.dogma import Dogma
 from centraldogma.exceptions import (
     EntryNotFoundException,
     RepositoryNotFoundException,
@@ -52,13 +52,13 @@ _THREAD_ID = itertools.count()
 class AbstractWatcher(Watcher[T]):
     def __init__(
         self,
-        dogma: Dogma,
+        content_service: ContentService,
         project_name: str,
         repo_name: str,
         path_pattern: str,
         function: Callable[[S], T],
     ):
-        self.dogma = dogma
+        self.content_service = content_service
         self.project_name = project_name
         self.repo_name = repo_name
         self.path_pattern = path_pattern
@@ -216,18 +216,24 @@ class AbstractWatcher(Watcher[T]):
 class FileWatcher(AbstractWatcher[T]):
     def __init__(
         self,
-        dogma: Dogma,
+        content_service: ContentService,
         project_name: str,
         repo_name: str,
         query: Query[T],
+        timeout_millis: int,
         function: Callable[[S], T],
     ):
-        super().__init__(dogma, project_name, repo_name, query.path, function)
+        super().__init__(content_service, project_name, repo_name, query.path, function)
         self.query = query
+        self.timeout_millis = timeout_millis
 
     def _do_watch(self, last_known_revision: Revision) -> Optional[Latest[T]]:
-        result = self.dogma.watch_file(
-            self.project_name, self.repo_name, last_known_revision, self.query
+        result = self.content_service.watch_file(
+            self.project_name,
+            self.repo_name,
+            last_known_revision,
+            self.query,
+            self.timeout_millis,
         )
         if not result:
             return None
@@ -237,17 +243,25 @@ class FileWatcher(AbstractWatcher[T]):
 class RepositoryWatcher(AbstractWatcher[T]):
     def __init__(
         self,
-        dogma: Dogma,
+        content_service: ContentService,
         project_name: str,
         repo_name: str,
         path_pattern: str,
+        timeout_millis: int,
         function: Callable[[Revision], T],
     ):
-        super().__init__(dogma, project_name, repo_name, path_pattern, function)
+        super().__init__(
+            content_service, project_name, repo_name, path_pattern, function
+        )
+        self.timeout_millis = timeout_millis
 
     def _do_watch(self, last_known_revision) -> Optional[Latest[T]]:
-        revision = self.dogma.watch_repository(
-            self.project_name, self.repo_name, last_known_revision, self.path_pattern
+        revision = self.content_service.watch_repository(
+            self.project_name,
+            self.repo_name,
+            last_known_revision,
+            self.path_pattern,
+            self.timeout_millis,
         )
         if not revision:
             return None

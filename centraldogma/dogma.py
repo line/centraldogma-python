@@ -32,6 +32,7 @@ from centraldogma.data.revision import Revision
 from centraldogma.project_service import ProjectService
 from centraldogma.query import Query
 from centraldogma.repository_service import RepositoryService
+from centraldogma.repository_watcher import RepositoryWatcher, FileWatcher
 from centraldogma.watcher import Watcher
 
 T = TypeVar("T")
@@ -268,10 +269,13 @@ class Dogma:
         .. _a known issue:
             https://github.com/line/centraldogma/issues/40
         """
-        from centraldogma.repository_watcher import RepositoryWatcher
-
         watcher = RepositoryWatcher(
-            self, project_name, repo_name, path_pattern, function
+            self.content_service,
+            project_name,
+            repo_name,
+            path_pattern,
+            _DEFAULT_WATCH_TIMEOUT_MILLIS,
+            function,
         )
         watcher.start()
         return watcher
@@ -298,8 +302,13 @@ class Dogma:
         :param query: the query to watch a file or a content in the repository.
         :param function: the function to convert the given content into another.
         """
-        from centraldogma.repository_watcher import FileWatcher
-
-        watcher = FileWatcher(self, project_name, repo_name, query, function)
+        watcher = FileWatcher(
+            self.content_service,
+            project_name,
+            repo_name,
+            query,
+            _DEFAULT_WATCH_TIMEOUT_MILLIS,
+            function,
+        )
         watcher.start()
         return watcher

@@ -130,3 +130,6 @@ dmypy.json
 
 # IntelliJ
 .idea/
+
+# macOS folder metadata
+.DS_Store
