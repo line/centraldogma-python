@@ -43,7 +43,7 @@ ok_handler = {HTTPStatus.OK: lambda resp: resp}
 def test_set_request_headers():
     for method in ["get", "post", "delete", "patch"]:
         kwargs = client_with_configs._set_request_headers(
-            method, params={"a": "b"}, allow_redirects=True
+            method, params={"a": "b"}, follow_redirects=True
         )
         content_type = (
             "application/json-patch+json" if method == "patch" else "application/json"
@@ -53,7 +53,7 @@ def test_set_request_headers():
             "Content-Type": content_type,
         }
         assert kwargs["params"] == {"a": "b"}
-        assert kwargs["allow_redirects"]
+        assert kwargs["follow_redirects"]
         assert "limits" not in kwargs
         assert "event_hooks" not in kwargs
         assert "transport" not in kwargs
