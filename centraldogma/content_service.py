@@ -19,18 +19,17 @@ from urllib.parse import quote
 
 from httpx import Response
 
+from centraldogma.base_client import BaseClient
+from centraldogma.data import Content
+from centraldogma.data.change import Change
+from centraldogma.data.commit import Commit
 from centraldogma.data.entry import Entry, EntryType
+from centraldogma.data.push_result import PushResult
 from centraldogma.data.revision import Revision
 from centraldogma.exceptions import CentralDogmaException
 from centraldogma.query import Query, QueryType
 
 T = TypeVar("T")
-
-from centraldogma.base_client import BaseClient
-from centraldogma.data import Content
-from centraldogma.data.change import Change
-from centraldogma.data.commit import Commit
-from centraldogma.data.push_result import PushResult
 
 
 class ContentService:
