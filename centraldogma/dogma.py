@@ -288,16 +288,16 @@ class Dogma:
         function: Callable[[T], U] = lambda x: x,
     ) -> Watcher[U]:
         """
-         Returns a ``Watcher`` which notifies its listeners after applying the specified ``function`` when the result
-         of the given ``Query`` becomes available or changes. e.g::
+        Returns a ``Watcher`` which notifies its listeners after applying the specified ``function`` when the result
+        of the given ``Query`` becomes available or changes. e.g::
 
-            with dogma.file_watcher("foo_project", "bar_repo", Query.json("/baz.json"),
-                                    lambda content: MyType.from_dict(content)) as watcher:
+           with dogma.file_watcher("foo_project", "bar_repo", Query.json("/baz.json"),
+                                   lambda content: MyType.from_dict(content)) as watcher:
 
-                def listener(revision: Revision, value: MyType) -> None:
-                    ...
+               def listener(revision: Revision, value: MyType) -> None:
+                   ...
 
-                watcher.watch(listener)
+               watcher.watch(listener)
 
         :param query: the query to watch a file or a content in the repository.
         :param function: the function to convert the given content into another.

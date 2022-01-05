@@ -14,7 +14,7 @@
 from dataclasses import asdict
 from enum import Enum
 from http import HTTPStatus
-from typing import List, Optional, TypeVar, Any, Callable
+from typing import List, Optional, TypeVar, Any, Callable, Dict
 from urllib.parse import quote
 
 from httpx import Response
@@ -170,7 +170,7 @@ class ContentService:
         last_known_revision: Revision,
         timeout_millis: int,
         path: str,
-        handler: dict[int, Callable[[Response], T]],
+        handler: Dict[int, Callable[[Response], T]],
     ) -> T:
         normalized_timeout = (timeout_millis + 999) // 1000
         headers = {

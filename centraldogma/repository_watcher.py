@@ -56,12 +56,14 @@ class AbstractWatcher(Watcher[T]):
         project_name: str,
         repo_name: str,
         path_pattern: str,
+        timeout_millis: int,
         function: Callable[[S], T],
     ):
         self.content_service = content_service
         self.project_name = project_name
         self.repo_name = repo_name
         self.path_pattern = path_pattern
+        self.timeout_millis = timeout_millis
         self.function = function
 
         # states
@@ -223,9 +225,8 @@ class FileWatcher(AbstractWatcher[T]):
         timeout_millis: int,
         function: Callable[[S], T],
     ):
-        super().__init__(content_service, project_name, repo_name, query.path, function)
+        super().__init__(content_service, project_name, repo_name, query.path, timeout_millis, function)
         self.query = query
-        self.timeout_millis = timeout_millis
 
     def _do_watch(self, last_known_revision: Revision) -> Optional[Latest[T]]:
         result = self.content_service.watch_file(
@@ -251,9 +252,8 @@ class RepositoryWatcher(AbstractWatcher[T]):
         function: Callable[[Revision], T],
     ):
         super().__init__(
-            content_service, project_name, repo_name, path_pattern, function
+            content_service, project_name, repo_name, path_pattern, timeout_millis, function
         )
-        self.timeout_millis = timeout_millis
 
     def _do_watch(self, last_known_revision) -> Optional[Latest[T]]:
         revision = self.content_service.watch_repository(
