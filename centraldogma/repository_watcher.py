@@ -69,7 +69,8 @@ class AbstractWatcher(Watcher[T]):
         # states
         self._latest: Optional[Latest[T]] = None
         self._state: WatchState = WatchState.INIT
-        self._initial_value_future: Future[Latest[T]] = Future()
+        # The actual type of `_initial_value_future` is `Future[Latest[T]]` that is unavailable under Python 3.9.
+        self._initial_value_future: Future = Future()
         self._update_listeners: List[Callable[[Revision, T], None]] = []
         self._thread: Optional[threading.Thread] = None
         self._lock: Lock = threading.Lock()
@@ -102,7 +103,7 @@ class AbstractWatcher(Watcher[T]):
     def latest(self) -> Latest[T]:
         return self._latest
 
-    def initial_value_future(self) -> Future[Latest[T]]:
+    def initial_value_future(self) -> Future:
         return self._initial_value_future
 
     def watch(self, listener: Callable[[Revision, T], None]) -> None:

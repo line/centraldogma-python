@@ -42,9 +42,11 @@ class Watcher(Generic[T]):
         """
         pass
 
-    def initial_value_future(self) -> Future[Latest[T]]:
+    # TODO(ikhoon): Use Generic `Future[Latest[T]]` when the Python 3.9 becomes the baseline.
+    # https://github.com/python/typing/issues/446#issuecomment-623251451
+    def initial_value_future(self) -> Future:
         """
-        Returns the `Future` which is completed when the initial value retrieval is done  successfully.
+        Returns the `Future` which completes a `Latest[T]` when the initial value retrieval is done successfully.
         """
         pass
 

@@ -133,3 +133,6 @@ dmypy.json
 
 # macOS folder metadata
 .DS_Store
+
+# asdf
+.tool-versions
