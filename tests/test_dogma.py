@@ -497,3 +497,9 @@ def test_push(respx_mock):
     assert ret.pushed_at == datetime.strptime(
         mock_push_result["pushedAt"], DATE_FORMAT_ISO8601_MS
     )
+
+def test_push_format():
+    mock_push_result = {
+        "revision": 2,
+        "pushedAt": "2021-10-28T15:33:35.123Z",
+    }
