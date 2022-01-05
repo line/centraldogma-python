@@ -225,7 +225,14 @@ class FileWatcher(AbstractWatcher[T]):
         timeout_millis: int,
         function: Callable[[S], T],
     ):
-        super().__init__(content_service, project_name, repo_name, query.path, timeout_millis, function)
+        super().__init__(
+            content_service,
+            project_name,
+            repo_name,
+            query.path,
+            timeout_millis,
+            function,
+        )
         self.query = query
 
     def _do_watch(self, last_known_revision: Revision) -> Optional[Latest[T]]:
@@ -252,7 +259,12 @@ class RepositoryWatcher(AbstractWatcher[T]):
         function: Callable[[Revision], T],
     ):
         super().__init__(
-            content_service, project_name, repo_name, path_pattern, timeout_millis, function
+            content_service,
+            project_name,
+            repo_name,
+            path_pattern,
+            timeout_millis,
+            function,
         )
 
     def _do_watch(self, last_known_revision) -> Optional[Latest[T]]:
