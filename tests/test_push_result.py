@@ -43,4 +43,3 @@ def test_decode_push_result_with_iso8601():
     push_result: PushResult = PushResult.from_dict(push_result_with_date)
     assert push_result.revision == 3
     assert push_result.pushed_at == parser.parse(push_result_with_date["pushedAt"])
-

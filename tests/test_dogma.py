@@ -498,6 +498,7 @@ def test_push(respx_mock):
         mock_push_result["pushedAt"], DATE_FORMAT_ISO8601_MS
     )
 
+
 def test_push_format():
     mock_push_result = {
         "revision": 2,

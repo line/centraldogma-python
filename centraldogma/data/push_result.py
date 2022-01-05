@@ -18,6 +18,7 @@ from dataclasses_json import LetterCase, config, dataclass_json
 from marshmallow import fields
 from dateutil import parser
 
+
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 class PushResult:
@@ -25,6 +26,6 @@ class PushResult:
     pushed_at: datetime = field(
         metadata=config(
             decoder=lambda x: parser.parse(x),
-            mm_field=fields.DateTime(format='iso'),
+            mm_field=fields.DateTime(format="iso"),
         ),
     )
