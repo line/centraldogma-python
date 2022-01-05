@@ -8,20 +8,25 @@ on:
   pull_request:
 
 jobs:
-  build:
+  linter:
+    name: black --check
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.9]
-
     steps:
       - uses: actions/checkout@v2
-      - name: black --check
-        uses: rickstaa/action-black@v1
+      - uses: rickstaa/action-black@v1
         id: action_black
         with:
           black_args: ". --check"
 
+  integration-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-latest]
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v2
       - name: Start Central Dogma
         run: docker-compose -f "docker-compose.yml" up -d --build
 
@@ -45,3 +50,29 @@ jobs:
       - name: Stop containers
         if: always()
         run: docker-compose -f "docker-compose.yml" down
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Test with pytest
+        run: |
+          pytest --cov=centraldogma ./tests
+
+      - name: Upload to codecov
+        run: codecov

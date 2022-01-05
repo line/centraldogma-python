@@ -1,6 +1,8 @@
 # Central Dogma client in Python
 Python client library for Central Dogma
 
+🚧 WIP - Initial development is in progress 🚧
+
 ## Install
 ```
 $ pip install -r requirements.txt
