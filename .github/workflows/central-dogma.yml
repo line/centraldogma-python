@@ -17,6 +17,7 @@ jobs:
       - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/"
+          pre-build-command: "pip install sphinx_rtd_theme"
 
   linter:
     name: black --check
