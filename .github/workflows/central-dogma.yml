@@ -10,6 +10,14 @@ on:
        - main
 
 jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ammaraskar/sphinx-action@master
+        with:
+          docs-folder: "docs/"
+
   linter:
     name: black --check
     runs-on: ubuntu-latest

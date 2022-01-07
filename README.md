@@ -49,3 +49,9 @@ $ black .
 
 ### Documentation
 - [PEP 257](https://www.python.org/dev/peps/pep-0257)
+
+#### To build sphinx at local
+```
+$ pip install sphinx sphinx_rtd_theme
+$ cd docs && make html
+```

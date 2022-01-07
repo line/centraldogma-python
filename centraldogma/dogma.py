@@ -111,13 +111,13 @@ class Dogma:
     ) -> List[Content]:
         """Lists files. The user should have read permission at least.
 
-        :param path_pattern: A path pattern is a variant of glob as follows.
-            "/**" - find all files recursively
-            "*.json" - find all JSON files recursively
-            "/foo/*.json" - find all JSON files under the directory /foo
-            "/*/foo.txt" - find all files named foo.txt at the second depth level
-            "*.json,/bar/*.txt" - use comma to match any patterns
-            This will bring all of the files in the repository, if unspecified.
+        :param path_pattern: A path pattern is a variant of glob as follows. |br|
+            "/\*\*" - find all files recursively |br|
+            "\*.json" - find all JSON files recursively |br|
+            "/foo/\*.json" - find all JSON files under the directory /foo |br|
+            "/\*/foo.txt" - find all files named foo.txt at the second depth level |br|
+            "\*.json,/bar/\*.txt" - use comma to match any patterns |br|
+            This will bring all of the files in the repository, if unspecified. |br|
         :param revision: The revision of the list to get. If not specified, gets the list of
             the latest revision.
         """
@@ -135,12 +135,12 @@ class Dogma:
         """Gets files. The user should have read permission at least. The difference from
             the API List files is that this includes the content of the files.
 
-        :param path_pattern: A path pattern is a variant of glob as follows.
-            "/**" - find all files recursively
-            "*.json" - find all JSON files recursively
-            "/foo/*.json" - find all JSON files under the directory /foo
-            "/*/foo.txt" - find all files named foo.txt at the second depth level
-            "*.json,/bar/*.txt" - use comma to match any patterns
+        :param path_pattern: A path pattern is a variant of glob as follows. |br|
+            "/\*\*" - find all files recursively |br|
+            "\*.json" - find all JSON files recursively |br|
+            "/foo/\*.json" - find all JSON files under the directory /foo |br|
+            "/\*/foo.txt" - find all files named foo.txt at the second depth level |br|
+            "\*.json,/bar/\*.txt" - use comma to match any patterns
             This will bring all of the files in the repository, if unspecified.
         :param revision: The revision of the list to get. If not specified, gets the list of
             the latest revision.
