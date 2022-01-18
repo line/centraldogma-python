@@ -111,9 +111,7 @@ class ContentService:
         if path_pattern[0] != "/":
             path += "/**/"
 
-        if " " in path_pattern:
-            path_pattern = path_pattern.replace(" ", "%20")
-        path += path_pattern
+        path += quote(path_pattern)
 
         handler = {
             HTTPStatus.OK: lambda resp: Revision(resp.json()["revision"]),
@@ -142,6 +140,22 @@ class ContentService:
         handler = {HTTPStatus.OK: on_ok, HTTPStatus.NOT_MODIFIED: lambda resp: None}
         return self._watch(last_known_revision, timeout_millis, path, handler)
 
+    def _watch(
+        self,
+        last_known_revision: Revision,
+        timeout_millis: int,
+        path: str,
+        handler: Dict[int, Callable[[Response], T]],
+    ) -> T:
+        normalized_timeout = (timeout_millis + 999) // 1000
+        headers = {
+            "if-none-match": f"{last_known_revision.major}",
+            "prefer": f"wait={normalized_timeout}",
+        }
+        return self.client.request(
+            "get", path, handler=handler, headers=headers, timeout=normalized_timeout
+        )
+
     @staticmethod
     def _to_entry(revision: Revision, json: Any, query_type: QueryType) -> Entry:
         entry_path = json["path"]
@@ -163,22 +177,6 @@ class ContentService:
                 return Entry.text(revision, entry_path, content)
             elif received_entry_type == EntryType.DIRECTORY:
                 return Entry.directory(revision, entry_path)
-
-    def _watch(
-        self,
-        last_known_revision: Revision,
-        timeout_millis: int,
-        path: str,
-        handler: Dict[int, Callable[[Response], T]],
-    ) -> T:
-        normalized_timeout = (timeout_millis + 999) // 1000
-        headers = {
-            "if-none-match": f"{last_known_revision.major}",
-            "prefer": f"wait={normalized_timeout}",
-        }
-        return self.client.request(
-            "get", path, handler=handler, headers=headers, timeout=normalized_timeout
-        )
 
     @staticmethod
     def _change_dict(data):

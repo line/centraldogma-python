@@ -132,6 +132,62 @@ class TestWatcher:
             with pytest.raises(TimeoutError):
                 future.result(timeout=1)
 
+    def test_file_watcher_multiple_json_path(self):
+        commit = Commit("Upsert test.json")
+        upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"b": 2})
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+
+        with dogma.file_watcher(
+            project_name,
+            repo_name,
+            # Applies a series of JSON patches that will be translated to '$.a.c'
+            Query.json_path("/test.json", ["$.a", "$.c"]),
+            lambda j: json.dumps(j),
+        ) as watcher:
+            future: Future[Revision] = Future()
+
+            def listener(revision1: Revision, _: str) -> None:
+                future.set_result(revision1)
+
+            watcher.watch(listener)
+            # Entity not found.
+            with pytest.raises(TimeoutError):
+                future.result(timeout=2)
+
+            future: Future[Revision] = Future()
+            json_patch = Change(
+                "/test.json",
+                ChangeType.APPLY_JSON_PATCH,
+                [{"op": "replace", "path": "/b", "value": 12}],
+            )
+            dogma.push(project_name, repo_name, commit, [json_patch])
+
+            # $.a.c has not changed.
+            with pytest.raises(TimeoutError):
+                future.result(timeout=2)
+
+            future: Future[Revision] = Future()
+            json_patch = Change(
+                "/test.json",
+                ChangeType.APPLY_JSON_PATCH,
+                [{"op": "add", "path": "/a", "value": {"a": 1}}],
+            )
+            dogma.push(project_name, repo_name, commit, [json_patch])
+
+            # $.a.c has not changed.
+            with pytest.raises(TimeoutError):
+                future.result(timeout=2)
+
+            future: Future[Revision] = Future()
+            json_patch = Change(
+                "/test.json",
+                ChangeType.APPLY_JSON_PATCH,
+                [{"op": "add", "path": "/a", "value": {"c": 3}}],
+            )
+            result = dogma.push(project_name, repo_name, commit, [json_patch])
+            watched_revision = future.result()
+            assert result.revision == watched_revision.major
+
     def test_await_init_value(self, run_around_test):
         with dogma.file_watcher(
             project_name,
