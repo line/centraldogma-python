@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 import os
-from typing import List, Optional
+from typing import List, Optional, TypeVar, Callable
 
 from centraldogma.base_client import BaseClient
 from centraldogma.content_service import ContentService
@@ -27,8 +27,18 @@ from centraldogma.data import (
     PushResult,
     Repository,
 )
+from centraldogma.data.entry import Entry
+from centraldogma.data.revision import Revision
 from centraldogma.project_service import ProjectService
+from centraldogma.query import Query
 from centraldogma.repository_service import RepositoryService
+from centraldogma.repository_watcher import RepositoryWatcher, FileWatcher
+from centraldogma.watcher import Watcher
+
+T = TypeVar("T")
+U = TypeVar("U")
+
+_DEFAULT_WATCH_TIMEOUT_MILLIS = 1 * 60 * 1000  # 1 minute
 
 
 class Dogma:
@@ -96,6 +106,7 @@ class Dogma:
         """Purges a repository. Only the owner and an admin can purge a repository removed before."""
         return self.repository_service.purge(project_name, name)
 
+    # TODO(ikhoon): Use `Revision` class instead of int
     def normalize_repository_revision(
         self, project_name: str, name: str, revision: int
     ) -> int:
@@ -182,3 +193,122 @@ class Dogma:
             the content is supposed to be the new name.
         """
         return self.content_service.push(project_name, repo_name, commit, changes)
+
+    def watch_repository(
+        self,
+        project_name: str,
+        repo_name: str,
+        last_known_revision: Revision,
+        path_pattern: str,
+        timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS,
+    ) -> Optional[Revision]:
+        """
+        Waits for the files matched by the specified ``path_pattern`` to be changed since the specified
+        ``last_known_revision``. If no changes were made within the specified ``timeout_millis``,
+        ``None`` will be returned.
+        It is recommended to specify the largest ``timeout_millis`` allowed by the server. If unsure, use
+        the default watch timeout.
+
+        :return: the latest known ``Revision`` which contains the changes for the matched files.
+                 ``None`` if the files were not changed for ``timeout_millis`` milliseconds
+                 since the invocation of this method.
+        """
+        return self.content_service.watch_repository(
+            project_name, repo_name, last_known_revision, path_pattern, timeout_millis
+        )
+
+    def watch_file(
+        self,
+        project_name: str,
+        repo_name: str,
+        last_known_revision: Revision,
+        query: Query[T],
+        timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS,
+    ) -> Optional[Entry[T]]:
+        """
+        Waits for the file matched by the specified ``Query`` to be changed since the specified
+        ``last_known_revision``. If no changes were made within the specified ``timeout_millis``,
+        ``None`` will be returned.
+        It is recommended to specify the largest ``timeout_millis`` allowed by the server. If unsure, use
+        the default watch timeout.
+
+        :return: the ``Entry`` which contains the latest known ``Query`` result.
+                 ``None`` if the file was not changed for ``timeout_millis`` milliseconds
+                 since the invocation of this method.
+        """
+        return self.content_service.watch_file(
+            project_name, repo_name, last_known_revision, query, timeout_millis
+        )
+
+    def repository_watcher(
+        self,
+        project_name: str,
+        repo_name: str,
+        path_pattern: str,
+        function: Callable[[Revision], T] = lambda x: x,
+    ) -> Watcher[T]:
+        """
+        Returns a ``Watcher`` which notifies its listeners when the specified repository has a new commit
+        that contains the changes for the files matched by the given ``path_pattern``. e.g::
+            def get_files(revision: Revision) -> List[Content]:
+                return dogma.get_files("foo_project", "bar_repo", revision, "/*.json")
+
+            with dogma.repository_watcher("foo_project", "bar_repo", "/*.json", get_files) as watcher:
+
+                def listener(revision: Revision, contents: List[Content]) -> None:
+                    ...
+
+                watcher.watch(listener)
+
+        Note that you may get ``RevisionNotFoundException`` during the ``get_files()`` call and
+        may have to retry in the above example due to `a known issue`_.
+
+        :param path_pattern: the path pattern to match files in the repository.
+        :param function: the function to convert the given `Revision` into another.
+
+        .. _a known issue:
+            https://github.com/line/centraldogma/issues/40
+        """
+        watcher = RepositoryWatcher(
+            self.content_service,
+            project_name,
+            repo_name,
+            path_pattern,
+            _DEFAULT_WATCH_TIMEOUT_MILLIS,
+            function,
+        )
+        watcher.start()
+        return watcher
+
+    def file_watcher(
+        self,
+        project_name: str,
+        repo_name: str,
+        query: Query[T],
+        function: Callable[[T], U] = lambda x: x,
+    ) -> Watcher[U]:
+        """
+        Returns a ``Watcher`` which notifies its listeners after applying the specified ``function`` when the result
+        of the given ``Query`` becomes available or changes. e.g::
+
+           with dogma.file_watcher("foo_project", "bar_repo", Query.json("/baz.json"),
+                                   lambda content: MyType.from_dict(content)) as watcher:
+
+               def listener(revision: Revision, value: MyType) -> None:
+                   ...
+
+               watcher.watch(listener)
+
+        :param query: the query to watch a file or a content in the repository.
+        :param function: the function to convert the given content into another.
+        """
+        watcher = FileWatcher(
+            self.content_service,
+            project_name,
+            repo_name,
+            query,
+            _DEFAULT_WATCH_TIMEOUT_MILLIS,
+            function,
+        )
+        watcher.start()
+        return watcher

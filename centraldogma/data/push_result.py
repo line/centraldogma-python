@@ -16,8 +16,7 @@ from datetime import datetime
 
 from dataclasses_json import LetterCase, config, dataclass_json
 from marshmallow import fields
-
-from centraldogma.data.constants import DATE_FORMAT_ISO8601_MS
+from dateutil import parser
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -26,7 +25,7 @@ class PushResult:
     revision: int
     pushed_at: datetime = field(
         metadata=config(
-            decoder=lambda x: datetime.strptime(x, DATE_FORMAT_ISO8601_MS),
-            mm_field=fields.DateTime(format=DATE_FORMAT_ISO8601_MS),
+            decoder=lambda x: parser.parse(x),
+            mm_field=fields.DateTime(format="iso"),
         ),
     )

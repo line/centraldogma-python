@@ -16,6 +16,7 @@ from datetime import datetime
 from typing import Optional
 
 from dataclasses_json import LetterCase, config, dataclass_json
+from dateutil import parser
 from marshmallow import fields
 
 from centraldogma.data.constants import DATE_FORMAT_ISO8601
@@ -30,8 +31,8 @@ class Project:
     created_at: Optional[datetime] = field(
         default=None,
         metadata=config(
-            decoder=lambda x: datetime.strptime(x, DATE_FORMAT_ISO8601) if x else None,
-            mm_field=fields.DateTime(format=DATE_FORMAT_ISO8601),
+            decoder=lambda x: parser.parse(x) if x else None,
+            mm_field=fields.DateTime(format="iso"),
         ),
     )
     url: Optional[str] = None

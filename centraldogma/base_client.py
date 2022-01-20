@@ -50,7 +50,8 @@ class BaseClient:
         return resp
 
     def _set_request_headers(self, method: str, **kwargs) -> Dict:
-        kwargs["headers"] = self.patch_headers if method == "patch" else self.headers
+        default_headers = self.patch_headers if method == "patch" else self.headers
+        kwargs["headers"] = {**default_headers, **(kwargs.get("headers") or {})}
         return kwargs
 
     @staticmethod

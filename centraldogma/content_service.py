@@ -14,13 +14,22 @@
 from dataclasses import asdict
 from enum import Enum
 from http import HTTPStatus
-from typing import List, Optional
+from typing import List, Optional, TypeVar, Any, Callable, Dict
+from urllib.parse import quote
+
+from httpx import Response
 
 from centraldogma.base_client import BaseClient
 from centraldogma.data import Content
 from centraldogma.data.change import Change
 from centraldogma.data.commit import Commit
+from centraldogma.data.entry import Entry, EntryType
 from centraldogma.data.push_result import PushResult
+from centraldogma.data.revision import Revision
+from centraldogma.exceptions import CentralDogmaException
+from centraldogma.query import Query, QueryType
+
+T = TypeVar("T")
 
 
 class ContentService:
@@ -77,6 +86,7 @@ class ContentService:
         project_name: str,
         repo_name: str,
         commit: Commit,
+        # TODO(ikhoon): Make changes accept varargs?
         changes: List[Change],
     ) -> PushResult:
         params = {
@@ -88,6 +98,85 @@ class ContentService:
         path = f"/projects/{project_name}/repos/{repo_name}/contents"
         handler = {HTTPStatus.OK: lambda resp: PushResult.from_dict(resp.json())}
         return self.client.request("post", path, json=params, handler=handler)
+
+    def watch_repository(
+        self,
+        project_name: str,
+        repo_name: str,
+        last_known_revision: Revision,
+        path_pattern: str,
+        timeout_millis: int,
+    ) -> Optional[Revision]:
+        path = f"/projects/{project_name}/repos/{repo_name}/contents"
+        if path_pattern[0] != "/":
+            path += "/**/"
+
+        path += quote(path_pattern)
+
+        handler = {
+            HTTPStatus.OK: lambda resp: Revision(resp.json()["revision"]),
+            HTTPStatus.NOT_MODIFIED: lambda resp: None,
+        }
+        return self._watch(last_known_revision, timeout_millis, path, handler)
+
+    def watch_file(
+        self,
+        project_name: str,
+        repo_name: str,
+        last_known_revision: Revision,
+        query: Query[T],
+        timeout_millis: int,
+    ) -> Optional[Entry[T]]:
+        path = f"/projects/{project_name}/repos/{repo_name}/contents/{query.path}"
+        if query.query_type == QueryType.JSON_PATH:
+            queries = [f"jsonpath={quote(expr)}" for expr in query.expressions]
+            path = f"{path}?{'&'.join(queries)}"
+
+        def on_ok(response: Response) -> Entry:
+            json = response.json()
+            revision = Revision(json["revision"])
+            return self._to_entry(revision, json["entry"], query.query_type)
+
+        handler = {HTTPStatus.OK: on_ok, HTTPStatus.NOT_MODIFIED: lambda resp: None}
+        return self._watch(last_known_revision, timeout_millis, path, handler)
+
+    def _watch(
+        self,
+        last_known_revision: Revision,
+        timeout_millis: int,
+        path: str,
+        handler: Dict[int, Callable[[Response], T]],
+    ) -> T:
+        normalized_timeout = (timeout_millis + 999) // 1000
+        headers = {
+            "if-none-match": f"{last_known_revision.major}",
+            "prefer": f"wait={normalized_timeout}",
+        }
+        return self.client.request(
+            "get", path, handler=handler, headers=headers, timeout=normalized_timeout
+        )
+
+    @staticmethod
+    def _to_entry(revision: Revision, json: Any, query_type: QueryType) -> Entry:
+        entry_path = json["path"]
+        received_entry_type = EntryType[json["type"]]
+        content = json["content"]
+        if query_type == QueryType.IDENTITY_TEXT:
+            return Entry.text(revision, entry_path, content)
+        elif query_type == QueryType.IDENTITY_JSON or query_type == QueryType.JSON_PATH:
+            if received_entry_type != EntryType.JSON:
+                raise CentralDogmaException(
+                    f"invalid entry type. entry type: {received_entry_type} (expected: {query_type})"
+                )
+
+            return Entry.json(revision, entry_path, content)
+        elif query_type == QueryType.IDENTITY:
+            if received_entry_type == EntryType.JSON:
+                return Entry.json(revision, entry_path, content)
+            elif received_entry_type == EntryType.TEXT:
+                return Entry.text(revision, entry_path, content)
+            elif received_entry_type == EntryType.DIRECTORY:
+                return Entry.directory(revision, entry_path)
 
     @staticmethod
     def _change_dict(data):

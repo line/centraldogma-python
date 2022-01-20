@@ -13,7 +13,7 @@
 # under the License.
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional, Union
+from typing import Optional, Any
 
 from dataclasses_json import dataclass_json
 
@@ -32,4 +32,4 @@ class ChangeType(Enum):
 class Change:
     path: str
     type: ChangeType
-    content: Optional[Union[map, str]] = None
+    content: Optional[Any] = None
