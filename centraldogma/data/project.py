@@ -11,15 +11,15 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from dataclasses import dataclass, field
+from dataclasses import field
 from datetime import datetime
 from typing import Optional
 
 from dataclasses_json import LetterCase, config, dataclass_json
 from dateutil import parser
 from marshmallow import fields
+from pydantic.dataclasses import dataclass
 
-from centraldogma.data.constants import DATE_FORMAT_ISO8601
 from centraldogma.data.creator import Creator
 
 
