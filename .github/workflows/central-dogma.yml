@@ -8,6 +8,15 @@ on:
   pull_request:
 
 jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ammaraskar/sphinx-action@master
+        with:
+          docs-folder: "docs/"
+          pre-build-command: "python -m pip install --upgrade pip && pip install sphinx_rtd_theme dataclasses-json httpx[http2]"
+
   linter:
     name: black --check
     runs-on: ubuntu-latest
