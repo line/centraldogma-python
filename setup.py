@@ -29,15 +29,8 @@ setup(
     author="Seunggon Kim",
     author_email="crosien@gmail.com",
     license="Apache License 2.0",
-    packages=[
-        "centraldogma",
-        "centraldogma.data"
-    ],
-    install_requires=[
-        "httpx",
-        "marshmallow",
-        "dataclasses-json"
-    ],
+    packages=["centraldogma", "centraldogma.data"],
+    install_requires=["httpx", "marshmallow", "dataclasses-json"],
     python_requires=">=3.7",
     keywords="centraldogma",
     classifiers=[
