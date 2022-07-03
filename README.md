@@ -1,4 +1,8 @@
 # Central Dogma client in Python
+<a href="https://pypi.org/project/centraldogma-python/">
+    <img src="https://badge.fury.io/py/centraldogma-python.svg" alt="Package version">
+</a>
+
 Python client library for Central Dogma
 
 🚧 WIP - Initial development is in progress 🚧

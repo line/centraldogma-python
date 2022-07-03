@@ -20,7 +20,7 @@ def get_long_description():
 
 
 setup(
-    name="centraldogma",
+    name="centraldogma-python",
     version="0.1.0",
     description="Central Dogma client in Python",
     long_description=get_long_description(),
