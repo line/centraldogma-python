@@ -9,7 +9,7 @@ Python client library for Central Dogma
 
 ## Install
 ```
-$ pip install centraldogma
+$ pip install centraldogma-python
 ```
 
 ## Getting started

@@ -21,7 +21,7 @@ def get_long_description():
 
 setup(
     name="centraldogma-python",
-    version="0.1.0",
+    version="0.1.1",
     description="Central Dogma client in Python",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
@@ -30,7 +30,13 @@ setup(
     author_email="crosien@gmail.com",
     license="Apache License 2.0",
     packages=["centraldogma", "centraldogma.data"],
-    install_requires=["httpx", "marshmallow", "dataclasses-json"],
+    install_requires=[
+        "httpx",
+        "marshmallow",
+        "dataclasses-json",
+        "pydantic",
+        "python-dateutil",
+    ],
     python_requires=">=3.7",
     keywords="centraldogma",
     classifiers=[
