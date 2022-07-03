@@ -1,6 +1,6 @@
 version: "3.9"
 services:
   centraldogma:
-    image: line/centraldogma:0.54.0
+    image: line/centraldogma:latest
     ports:
       - "36462:36462"
