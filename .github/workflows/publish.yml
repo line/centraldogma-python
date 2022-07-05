@@ -22,8 +22,8 @@ jobs:
 
     - name: Build and publish
       env:
-        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        TWINE_USERNAME: '__token__' # https://github.com/pypa/twine/blob/main/tests/test_integration.py#L46-L66
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN_CENTRALDOGMA }}
       run: |
         python setup.py sdist bdist_wheel
         twine upload dist/*
