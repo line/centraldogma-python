@@ -1,6 +1,7 @@
 dataclasses-json
 httpx[http2]
 marshmallow
+pydantic
 python-dateutil
 
 # Dev dependencies
