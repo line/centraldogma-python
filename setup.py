@@ -22,12 +22,12 @@ def get_long_description():
 setup(
     name="centraldogma-python",
     version="0.1.1",
-    description="Central Dogma client in Python",
+    description="Python client library for Central Dogma",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
     url="https://github.com/line/centraldogma-python",
-    author="Seunggon Kim",
-    author_email="crosien@gmail.com",
+    author="dl_centraldogma",
+    author_email="dl_centraldogma@linecorp.com",
     license="Apache License 2.0",
     packages=["centraldogma", "centraldogma.data"],
     install_requires=[

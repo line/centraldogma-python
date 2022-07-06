@@ -5,8 +5,6 @@
 
 Python client library for Central Dogma
 
-🚧 WIP - Initial development is in progress 🚧
-
 ## Install
 ```
 $ pip install centraldogma-python
