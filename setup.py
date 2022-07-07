@@ -26,7 +26,7 @@ setup(
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
     url="https://github.com/line/centraldogma-python",
-    author="dl_centraldogma",
+    author="Central Dogma Team",
     author_email="dl_centraldogma@linecorp.com",
     license="Apache License 2.0",
     packages=["centraldogma", "centraldogma.data"],
