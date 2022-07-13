@@ -3,7 +3,7 @@
     <img src="https://badge.fury.io/py/centraldogma-python.svg" alt="Package version">
 </a>
 
-Python client library for Central Dogma
+Python client library for [Central Dogma](https://line.github.io/centraldogma/)
 
 ## Install
 ```
