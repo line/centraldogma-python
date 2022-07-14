@@ -1,22 +1,25 @@
 # Central Dogma client in Python
-Python client library for Central Dogma
+<a href="https://pypi.org/project/centraldogma-python/">
+    <img src="https://badge.fury.io/py/centraldogma-python.svg" alt="Package version">
+</a>
 
-🚧 WIP - Initial development is in progress 🚧
+Python client library for [Central Dogma](https://line.github.io/centraldogma/)
 
 ## Install
 ```
-$ pip install -r requirements.txt
-$ pip install --user .
+$ pip install centraldogma-python
 ```
 
-## Usage
-### Getting started
-Please see [`examples` folder](https://github.com/line/centraldogma-python/tree/main/examples) for more detail.
-```python
-client = ApiClient(base_url, token, timeout=30)
-client.list_projects()
-...
+## Getting started
+```pycon
+>>> from centraldogma.dogma import Dogma
+>>> dogma = Dogma("https://dogma.yourdomain.com", "token")
+>>> dogma.list_projects()
+[]
 ```
+Please see [`examples` folder](https://github.com/line/centraldogma-python/tree/main/examples) for more detail.
+
+---
 
 ## Development
 ### Tests
