@@ -24,6 +24,8 @@ from centraldogma.data import Content
 from centraldogma.data.change import Change
 from centraldogma.data.commit import Commit
 from centraldogma.data.entry import Entry, EntryType
+from centraldogma.data.merge_source import MergeSource
+from centraldogma.data.merged_entry import MergedEntry
 from centraldogma.data.push_result import PushResult
 from centraldogma.data.revision import Revision
 from centraldogma.exceptions import CentralDogmaException
@@ -155,6 +157,27 @@ class ContentService:
         return self.client.request(
             "get", path, handler=handler, headers=headers, timeout=normalized_timeout
         )
+
+    def merge_files(
+        self,
+        project_name: str,
+        repo_name: str,
+        merge_sources: List[MergeSource],
+        json_paths: List[str],
+        revision: Optional[int],
+    ) -> MergedEntry[T]:
+        path = f"/projects/{project_name}/repos/{repo_name}/merge"
+        queries = []
+        if revision:
+            queries.append(f"revision={revision}")
+        for merge_source in merge_sources:
+            query = f"optional_path={merge_source.path}" if merge_source.optional else f"path={merge_source.path}"
+            queries.append(query)
+        for json_path in json_paths:
+            queries.append(f"jsonpath={json_path}")
+        path = f"{path}?{'&'.join(queries)}"
+        handler = {HTTPStatus.OK: lambda resp: MergedEntry.from_dict(resp.json())}
+        return self.client.request("get", path, handler=handler)
 
     @staticmethod
     def _to_entry(revision: Revision, json: Any, query_type: QueryType) -> Entry:

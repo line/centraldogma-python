@@ -16,7 +16,6 @@ from typing import List, Optional, TypeVar, Callable
 
 from centraldogma.base_client import BaseClient
 from centraldogma.content_service import ContentService
-
 # noinspection PyUnresolvedReferences
 from centraldogma.data import (
     Change,
@@ -28,6 +27,8 @@ from centraldogma.data import (
     Repository,
 )
 from centraldogma.data.entry import Entry
+from centraldogma.data.merge_source import MergeSource
+from centraldogma.data.merged_entry import MergedEntry
 from centraldogma.data.revision import Revision
 from centraldogma.project_service import ProjectService
 from centraldogma.query import Query
@@ -312,3 +313,15 @@ class Dogma:
         )
         watcher.start()
         return watcher
+
+    def merge_files(
+        self,
+        project_name: str,
+        repo_name: str,
+        merge_sources: List[MergeSource],
+        json_paths=None,
+        revision: Optional[int] = None,
+    ) -> MergedEntry[T]:
+        if json_paths is None:
+            json_paths = []
+        return self.content_service.merge_files(project_name, repo_name, merge_sources, json_paths, revision)

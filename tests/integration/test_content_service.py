@@ -19,7 +19,8 @@ from typing import Optional, Any
 
 import pytest
 
-from centraldogma.data.entry import Entry
+from centraldogma.data.entry import Entry, EntryType
+from centraldogma.data.merge_source import MergeSource
 from centraldogma.data.revision import Revision
 from centraldogma.dogma import Change, ChangeType, Commit, Dogma
 from centraldogma.exceptions import (
@@ -27,6 +28,7 @@ from centraldogma.exceptions import (
     RedundantChangeException,
     ChangeConflictException,
     CentralDogmaException,
+    EntryNotFoundException,
 )
 from centraldogma.query import Query
 
@@ -192,6 +194,29 @@ class TestContentService:
             "invalid entry type. entry type: EntryType.TEXT (expected: QueryType.IDENTITY_JSON)"
             in str(ex.value)
         )
+
+    def test_merge_files(self, run_around_test):
+        commit = Commit("Upsert test.json")
+        upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
+        ret = dogma.push(project_name, repo_name, commit, [upsert_json])
+        assert ret.revision == 2
+        upsert_json = Change("/test2.json", ChangeType.UPSERT_JSON, {"foo2": "bar2"})
+        ret = dogma.push(project_name, repo_name, commit, [upsert_json])
+        assert ret.revision == 3
+
+        merge_sources = [
+            MergeSource("/nonexist.json", False),
+        ]
+        with pytest.raises(EntryNotFoundException):
+            dogma.merge_files(project_name, repo_name, merge_sources)
+
+        merge_sources = [
+            MergeSource("/test.json", True),
+            MergeSource("/test2.json", True),
+        ]
+        ret = dogma.merge_files(project_name, repo_name, merge_sources)
+        assert ret.entry_type == EntryType.JSON
+        assert ret.content == {"foo": "bar", "foo2": "bar2"}
 
     @staticmethod
     def push_later():
