@@ -72,7 +72,7 @@ mock_merge_result = {
     "revision": 4,
     "type": "JSON",
     "content": {"foo": "bar"},
-    "paths": ["/test.json", "/test2.json", "/test3.json"]
+    "paths": ["/test.json", "/test2.json", "/test3.json"],
 }
 
 

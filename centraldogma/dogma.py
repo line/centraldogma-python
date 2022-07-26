@@ -16,6 +16,7 @@ from typing import List, Optional, TypeVar, Callable
 
 from centraldogma.base_client import BaseClient
 from centraldogma.content_service import ContentService
+
 # noinspection PyUnresolvedReferences
 from centraldogma.data import (
     Change,
@@ -332,4 +333,6 @@ class Dogma:
         """
         if json_paths is None:
             json_paths = []
-        return self.content_service.merge_files(project_name, repo_name, merge_sources, json_paths, revision)
+        return self.content_service.merge_files(
+            project_name, repo_name, merge_sources, json_paths, revision
+        )

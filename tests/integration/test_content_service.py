@@ -28,7 +28,8 @@ from centraldogma.exceptions import (
     RedundantChangeException,
     ChangeConflictException,
     CentralDogmaException,
-    EntryNotFoundException, QueryExecutionException,
+    EntryNotFoundException,
+    QueryExecutionException,
 )
 from centraldogma.query import Query
 
@@ -203,7 +204,11 @@ class TestContentService:
         upsert_json = Change("/test2.json", ChangeType.UPSERT_JSON, {"foo2": "bar2"})
         ret = dogma.push(project_name, repo_name, commit, [upsert_json])
         assert ret.revision == 3
-        upsert_json = Change("/test3.json", ChangeType.UPSERT_JSON, {"inner": {"inner2": {"foo3": "bar3"}}})
+        upsert_json = Change(
+            "/test3.json",
+            ChangeType.UPSERT_JSON,
+            {"inner": {"inner2": {"foo3": "bar3"}}},
+        )
         ret = dogma.push(project_name, repo_name, commit, [upsert_json])
         assert ret.revision == 4
 
@@ -220,7 +225,11 @@ class TestContentService:
         ]
         ret = dogma.merge_files(project_name, repo_name, merge_sources)
         assert ret.entry_type == EntryType.JSON
-        assert ret.content == {"foo": "bar", "foo2": "bar2", "inner": {"inner2": {"foo3": "bar3"}}}
+        assert ret.content == {
+            "foo": "bar",
+            "foo2": "bar2",
+            "inner": {"inner2": {"foo3": "bar3"}},
+        }
 
         with pytest.raises(QueryExecutionException):
             dogma.merge_files(project_name, repo_name, merge_sources, ["$.inner2"])
@@ -229,7 +238,9 @@ class TestContentService:
         assert ret.entry_type == EntryType.JSON
         assert ret.content == {"inner2": {"foo3": "bar3"}}
 
-        ret = dogma.merge_files(project_name, repo_name, merge_sources, ["$.inner", "$.inner2"])
+        ret = dogma.merge_files(
+            project_name, repo_name, merge_sources, ["$.inner", "$.inner2"]
+        )
         assert ret.entry_type == EntryType.JSON
         assert ret.content == {"foo3": "bar3"}
 

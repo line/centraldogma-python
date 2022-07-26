@@ -22,7 +22,6 @@ T = TypeVar("T")
 
 
 class MergedEntry(Generic[T]):
-
     @staticmethod
     def from_dict(json: Any):
         paths: List[str] = json["paths"]
@@ -33,7 +32,9 @@ class MergedEntry(Generic[T]):
         content = json["content"]
         return MergedEntry(revision, paths, entry_type, content)
 
-    def __init__(self, revision: Revision, paths: List[str], entry_type: EntryType, content: T):
+    def __init__(
+        self, revision: Revision, paths: List[str], entry_type: EntryType, content: T
+    ):
         self.revision = revision
         self.paths = paths
         self.entry_type = entry_type

@@ -171,7 +171,11 @@ class ContentService:
         if revision:
             queries.append(f"revision={revision}")
         for merge_source in merge_sources:
-            query = f"optional_path={merge_source.path}" if merge_source.optional else f"path={merge_source.path}"
+            query = (
+                f"optional_path={merge_source.path}"
+                if merge_source.optional
+                else f"path={merge_source.path}"
+            )
             queries.append(query)
         for json_path in json_paths:
             queries.append(f"jsonpath={json_path}")
