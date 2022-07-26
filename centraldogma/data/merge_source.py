@@ -17,4 +17,4 @@ from pydantic.dataclasses import dataclass
 @dataclass
 class MergeSource:
     path: str
-    optional: bool
+    optional: bool = True
