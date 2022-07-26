@@ -31,12 +31,9 @@ class MergedEntry(Generic[T]):
         revision = Revision(json["revision"])
         entry_type = EntryType[json["type"]]
         content = json["content"]
-        # TODO: validate that entry_type matches content
         return MergedEntry(revision, paths, entry_type, content)
 
-    def __init__(
-        self, revision: Revision, paths: List[str], entry_type: EntryType, content: T
-    ):
+    def __init__(self, revision: Revision, paths: List[str], entry_type: EntryType, content: T):
         self.revision = revision
         self.paths = paths
         self.entry_type = entry_type

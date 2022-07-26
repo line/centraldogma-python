@@ -319,9 +319,17 @@ class Dogma:
         project_name: str,
         repo_name: str,
         merge_sources: List[MergeSource],
-        json_paths=None,
+        json_paths: List[str] = None,
         revision: Optional[int] = None,
     ) -> MergedEntry[T]:
+        """
+        Returns the merged result of files represented by ``MergeSource``. Each ``MergeSource``
+        can be optional, indicating that no error should be thrown even if the path doesn't exist.
+        If ``json_paths`` is specified, each ``json_path`` is applied recursively on the merged
+        result. If any of the ``json_path``s is invalid, a ``QueryExecutionException`` is thrown.
+
+        :return: the ``MergedEntry`` which contains the merged content for the given query.
+        """
         if json_paths is None:
             json_paths = []
         return self.content_service.merge_files(project_name, repo_name, merge_sources, json_paths, revision)
