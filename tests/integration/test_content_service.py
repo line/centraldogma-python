@@ -199,18 +199,15 @@ class TestContentService:
     def test_merge_files(self, run_around_test):
         commit = Commit("Upsert test.json")
         upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
-        ret = dogma.push(project_name, repo_name, commit, [upsert_json])
-        assert ret.revision == 2
+        dogma.push(project_name, repo_name, commit, [upsert_json])
         upsert_json = Change("/test2.json", ChangeType.UPSERT_JSON, {"foo2": "bar2"})
-        ret = dogma.push(project_name, repo_name, commit, [upsert_json])
-        assert ret.revision == 3
+        dogma.push(project_name, repo_name, commit, [upsert_json])
         upsert_json = Change(
             "/test3.json",
             ChangeType.UPSERT_JSON,
             {"inner": {"inner2": {"foo3": "bar3"}}},
         )
-        ret = dogma.push(project_name, repo_name, commit, [upsert_json])
-        assert ret.revision == 4
+        dogma.push(project_name, repo_name, commit, [upsert_json])
 
         merge_sources = [
             MergeSource("/nonexisting.json", False),
