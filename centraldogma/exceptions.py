@@ -51,7 +51,7 @@ class ForbiddenException(CentralDogmaException):
 
 
 class UnknownException(CentralDogmaException):
-    """An exception used for reporting unknown exceptions"""
+    """An exception used for reporting unknown exceptions."""
 
     pass
 
