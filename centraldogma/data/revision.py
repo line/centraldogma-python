@@ -18,9 +18,7 @@ from pydantic.dataclasses import dataclass
 
 @dataclass
 class Revision:
-    """
-    A revision number of a ``Commit``.
-    """
+    """A revision number of a ``Commit``."""
 
     major: int
 
