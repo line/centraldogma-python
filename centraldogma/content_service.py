@@ -142,30 +142,16 @@ class ContentService:
         handler = {HTTPStatus.OK: on_ok, HTTPStatus.NOT_MODIFIED: lambda resp: None}
         return self._watch(last_known_revision, timeout_millis, path, handler)
 
-    def _watch(
-        self,
-        last_known_revision: Revision,
-        timeout_millis: int,
-        path: str,
-        handler: Dict[int, Callable[[Response], T]],
-    ) -> T:
-        normalized_timeout = (timeout_millis + 999) // 1000
-        headers = {
-            "if-none-match": f"{last_known_revision.major}",
-            "prefer": f"wait={normalized_timeout}",
-        }
-        return self.client.request(
-            "get", path, handler=handler, headers=headers, timeout=normalized_timeout
-        )
-
     def merge_files(
         self,
         project_name: str,
         repo_name: str,
         merge_sources: List[MergeSource],
-        json_paths: List[str],
+        json_paths: Optional[List[str]],
         revision: Optional[int],
-    ) -> MergedEntry[T]:
+    ) -> MergedEntry:
+        if not merge_sources:
+            raise ValueError("at least one MergeSource is required")
         path = f"/projects/{project_name}/repos/{repo_name}/merge"
         queries = []
         if revision:
@@ -182,6 +168,22 @@ class ContentService:
         path = f"{path}?{'&'.join(queries)}"
         handler = {HTTPStatus.OK: lambda resp: MergedEntry.from_dict(resp.json())}
         return self.client.request("get", path, handler=handler)
+
+    def _watch(
+        self,
+        last_known_revision: Revision,
+        timeout_millis: int,
+        path: str,
+        handler: Dict[int, Callable[[Response], T]],
+    ) -> T:
+        normalized_timeout = (timeout_millis + 999) // 1000
+        headers = {
+            "if-none-match": f"{last_known_revision.major}",
+            "prefer": f"wait={normalized_timeout}",
+        }
+        return self.client.request(
+            "get", path, handler=handler, headers=headers, timeout=normalized_timeout
+        )
 
     @staticmethod
     def _to_entry(revision: Revision, json: Any, query_type: QueryType) -> Entry:

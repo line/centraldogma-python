@@ -11,6 +11,12 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+from datetime import datetime
+from http import HTTPStatus
+
+import pytest
+from httpx import Response
+
 from centraldogma.data import (
     DATE_FORMAT_ISO8601,
     DATE_FORMAT_ISO8601_MS,
@@ -30,10 +36,6 @@ from centraldogma.exceptions import (
     ProjectExistsException,
     RepositoryExistsException,
 )
-from datetime import datetime
-from http import HTTPStatus
-from httpx import Response
-import pytest
 
 client = Dogma("http://baseurl", "token")
 
@@ -511,6 +513,11 @@ def test_merge(respx_mock):
     route = respx_mock.get(url).mock(
         return_value=Response(HTTPStatus.OK, json=mock_merge_result)
     )
+
+    # merge_sources cannot be empty
+    with pytest.raises(ValueError):
+        client.merge_files("myproject", "myrepo", [])
+
     merge_sources = [
         MergeSource("test.json"),
         MergeSource("test2.json"),

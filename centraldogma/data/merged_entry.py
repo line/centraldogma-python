@@ -11,29 +11,27 @@
 #  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #  License for the specific language governing permissions and limitations
 #  under the License.
-from typing import Generic, TypeVar, List, Any
+from typing import List, Union
+
+from dataclasses_json.core import Json
 
 from centraldogma import util
 from centraldogma.data.entry import EntryType
 from centraldogma.data.revision import Revision
-from centraldogma.exceptions import CentralDogmaException, EntryNoContentException
-
-T = TypeVar("T")
+from centraldogma.exceptions import EntryNoContentException
 
 
-class MergedEntry(Generic[T]):
+class MergedEntry:
     @staticmethod
-    def from_dict(json: Any):
+    def from_dict(json: Json):
         paths: List[str] = json["paths"]
-        if len(paths) == 0:
-            raise CentralDogmaException(f"paths is unexpectedly empty for json: {json}")
         revision = Revision(json["revision"])
         entry_type = EntryType[json["type"]]
         content = json["content"]
         return MergedEntry(revision, paths, entry_type, content)
 
     def __init__(
-        self, revision: Revision, paths: List[str], entry_type: EntryType, content: T
+        self, revision: Revision, paths: List[str], entry_type: EntryType, content: Json
     ):
         self.revision = revision
         self.paths = paths
@@ -41,11 +39,10 @@ class MergedEntry(Generic[T]):
         self._content = content
 
     @property
-    def content(self) -> T:
-        """
-        Returns the content.
+    def content(self) -> Union[str, dict]:
+        """Returns the content.
 
-        :exception EntryNoContentException if the content is ``None``
+        :raises EntryNoContentException: it occurs if the content is ``None``
         """
         if not self._content:
             raise EntryNoContentException(
