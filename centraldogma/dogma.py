@@ -323,8 +323,7 @@ class Dogma:
         json_paths: Optional[List[str]] = None,
         revision: Optional[int] = None,
     ) -> MergedEntry:
-        """
-        Returns the merged result of files represented by ``MergeSource``. Each ``MergeSource``
+        """Returns the merged result of files represented by ``MergeSource``. Each ``MergeSource``
         can be optional, indicating that no error should be thrown even if the path doesn't exist.
         If ``json_paths`` is specified, each ``json_path`` is applied recursively on the merged
         result. If any of the ``json_path``s is invalid, a ``QueryExecutionException`` is thrown.
