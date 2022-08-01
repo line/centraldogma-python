@@ -328,6 +328,7 @@ class Dogma:
         If ``json_paths`` is specified, each ``json_path`` is applied recursively on the merged
         result. If any of the ``json_path``s is invalid, a ``QueryExecutionException`` is thrown.
 
+        :raises ValueError: If the provided ``merge_sources`` is empty.
         :return: the ``MergedEntry`` which contains the merged content for the given query.
         """
         return self.content_service.merge_files(
