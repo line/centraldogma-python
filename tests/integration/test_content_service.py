@@ -19,7 +19,8 @@ from typing import Optional, Any
 
 import pytest
 
-from centraldogma.data.entry import Entry
+from centraldogma.data.entry import Entry, EntryType
+from centraldogma.data.merge_source import MergeSource
 from centraldogma.data.revision import Revision
 from centraldogma.dogma import Change, ChangeType, Commit, Dogma
 from centraldogma.exceptions import (
@@ -27,6 +28,8 @@ from centraldogma.exceptions import (
     RedundantChangeException,
     ChangeConflictException,
     CentralDogmaException,
+    EntryNotFoundException,
+    QueryExecutionException,
 )
 from centraldogma.query import Query
 
@@ -192,6 +195,51 @@ class TestContentService:
             "invalid entry type. entry type: EntryType.TEXT (expected: QueryType.IDENTITY_JSON)"
             in str(ex.value)
         )
+
+    def test_merge_files(self, run_around_test):
+        commit = Commit("Upsert test.json")
+        upsert_json = Change("/test.json", ChangeType.UPSERT_JSON, {"foo": "bar"})
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+        upsert_json = Change("/test2.json", ChangeType.UPSERT_JSON, {"foo2": "bar2"})
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+        upsert_json = Change(
+            "/test3.json",
+            ChangeType.UPSERT_JSON,
+            {"inner": {"inner2": {"foo3": "bar3"}}},
+        )
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+
+        merge_sources = [
+            MergeSource("/nonexisting.json", False),
+        ]
+        with pytest.raises(EntryNotFoundException):
+            dogma.merge_files(project_name, repo_name, merge_sources)
+
+        merge_sources = [
+            MergeSource("/test.json", True),
+            MergeSource("/test2.json", True),
+            MergeSource("/test3.json", True),
+        ]
+        ret = dogma.merge_files(project_name, repo_name, merge_sources)
+        assert ret.entry_type == EntryType.JSON
+        assert ret.content == {
+            "foo": "bar",
+            "foo2": "bar2",
+            "inner": {"inner2": {"foo3": "bar3"}},
+        }
+
+        with pytest.raises(QueryExecutionException):
+            dogma.merge_files(project_name, repo_name, merge_sources, ["$.inner2"])
+
+        ret = dogma.merge_files(project_name, repo_name, merge_sources, ["$.inner"])
+        assert ret.entry_type == EntryType.JSON
+        assert ret.content == {"inner2": {"foo3": "bar3"}}
+
+        ret = dogma.merge_files(
+            project_name, repo_name, merge_sources, ["$.inner", "$.inner2"]
+        )
+        assert ret.entry_type == EntryType.JSON
+        assert ret.content == {"foo3": "bar3"}
 
     @staticmethod
     def push_later():

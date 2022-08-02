@@ -11,6 +11,12 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+from datetime import datetime
+from http import HTTPStatus
+
+import pytest
+from httpx import Response
+
 from centraldogma.data import (
     DATE_FORMAT_ISO8601,
     DATE_FORMAT_ISO8601_MS,
@@ -22,6 +28,7 @@ from centraldogma.data import (
     Project,
     Repository,
 )
+from centraldogma.data.merge_source import MergeSource
 from centraldogma.dogma import Dogma
 from centraldogma.exceptions import (
     BadRequestException,
@@ -29,10 +36,6 @@ from centraldogma.exceptions import (
     ProjectExistsException,
     RepositoryExistsException,
 )
-from datetime import datetime
-from http import HTTPStatus
-from httpx import Response
-import pytest
 
 client = Dogma("http://baseurl", "token")
 
@@ -66,6 +69,12 @@ mock_content_json = {
 mock_push_result = {
     "revision": 2,
     "pushedAt": "2021-10-28T15:33:35.123Z",
+}
+mock_merge_result = {
+    "revision": 4,
+    "type": "JSON",
+    "content": {"foo": "bar"},
+    "paths": ["/test.json", "/test2.json", "/test3.json"],
 }
 
 
@@ -497,3 +506,26 @@ def test_push(respx_mock):
     assert ret.pushed_at == datetime.strptime(
         mock_push_result["pushedAt"], DATE_FORMAT_ISO8601_MS
     )
+
+
+def test_merge(respx_mock):
+    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/merge?optional_path=test.json&optional_path=test2.json&path=test3.json"
+    route = respx_mock.get(url).mock(
+        return_value=Response(HTTPStatus.OK, json=mock_merge_result)
+    )
+
+    # merge_sources cannot be empty
+    with pytest.raises(ValueError):
+        client.merge_files("myproject", "myrepo", [])
+
+    merge_sources = [
+        MergeSource("test.json"),
+        MergeSource("test2.json"),
+        MergeSource("test3.json", False),
+    ]
+    ret = client.merge_files("myproject", "myrepo", merge_sources)
+
+    assert route.called
+    request = respx_mock.calls.last.request
+    assert request.url == url
+    assert ret.content == {"foo": "bar"}

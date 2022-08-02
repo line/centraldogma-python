@@ -28,6 +28,8 @@ from centraldogma.data import (
     Repository,
 )
 from centraldogma.data.entry import Entry
+from centraldogma.data.merge_source import MergeSource
+from centraldogma.data.merged_entry import MergedEntry
 from centraldogma.data.revision import Revision
 from centraldogma.project_service import ProjectService
 from centraldogma.query import Query
@@ -312,3 +314,23 @@ class Dogma:
         )
         watcher.start()
         return watcher
+
+    def merge_files(
+        self,
+        project_name: str,
+        repo_name: str,
+        merge_sources: List[MergeSource],
+        json_paths: Optional[List[str]] = None,
+        revision: Optional[int] = None,
+    ) -> MergedEntry:
+        """Returns the merged result of files represented by ``MergeSource``. Each ``MergeSource``
+        can be optional, indicating that no error should be thrown even if the path doesn't exist.
+        If ``json_paths`` is specified, each ``json_path`` is applied recursively on the merged
+        result. If any of the ``json_path``s is invalid, a ``QueryExecutionException`` is thrown.
+
+        :raises ValueError: If the provided ``merge_sources`` is empty.
+        :return: the ``MergedEntry`` which contains the merged content for the given query.
+        """
+        return self.content_service.merge_files(
+            project_name, repo_name, merge_sources, json_paths or [], revision
+        )
