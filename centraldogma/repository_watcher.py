@@ -146,9 +146,8 @@ class AbstractWatcher(Watcher[T]):
                 self.notify_listeners()
                 if not old_latest:
                     self._initial_value_future.set_result(new_latest)
-
-                # Watch again for the next change.
-                self._schedule_watch(0)
+            # Watch again for the next change.
+            self._schedule_watch(0)
         except Exception as ex:
             if isinstance(ex, EntryNotFoundException):
                 logging.info(
