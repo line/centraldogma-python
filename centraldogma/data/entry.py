@@ -32,14 +32,11 @@ T = TypeVar("T")
 
 
 class Entry(Generic[T]):
-    """
-    A file or a directory in a repository.
-    """
+    """A file or a directory in a repository."""
 
     @staticmethod
     def text(revision: Revision, path: str, content: str) -> Entry[str]:
-        """
-        Returns a newly-created ``Entry`` of a text file.
+        """Returns a newly-created ``Entry`` of a text file.
 
         :param revision: the revision of the text file
         :param path: the path of the text file
@@ -49,8 +46,7 @@ class Entry(Generic[T]):
 
     @staticmethod
     def json(revision: Revision, path: str, content: Any) -> Entry[Any]:
-        """
-         Returns a newly-created ``Entry`` of a JSON file.
+        """Returns a newly-created ``Entry`` of a JSON file.
 
         :param revision: the revision of the JSON file
         :param path: the path of the JSON file
@@ -62,8 +58,7 @@ class Entry(Generic[T]):
 
     @staticmethod
     def directory(revision: Revision, path: str) -> Entry[None]:
-        """
-        Returns a newly-created ``Entry`` of a directory.
+        """Returns a newly-created ``Entry`` of a directory.
 
         :param revision: the revision of the directory
         :param path: the path of the directory
@@ -80,17 +75,14 @@ class Entry(Generic[T]):
         self._content_as_text = None
 
     def has_content(self) -> bool:
-        """
-        Returns if this ``Entry`` has content, which is always ``True`` if it's not a directory.
-        """
+        """Returns if this ``Entry`` has content, which is always ``True`` if it's not a directory."""
         return self.content is not None
 
     @property
     def content(self) -> T:
-        """
-        Returns the content.
+        """Returns the content.
 
-        :exception EntryNoContentException if the content is ``None``
+        :raises EntryNoContentException: it occurs if the content is ``None``
         """
         if not self._content:
             raise EntryNoContentException(
@@ -100,10 +92,9 @@ class Entry(Generic[T]):
         return self._content
 
     def content_as_text(self) -> str:
-        """
-        Returns the textual representation of the specified content.
+        """Returns the textual representation of the specified content.
 
-        :exception EntryNoContentException if the content is ``None``
+        :raises EntryNoContentException: it occurs if the content is ``None``
         """
         if self._content_as_text:
             return self._content_as_text

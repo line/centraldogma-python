@@ -23,48 +23,37 @@ T = TypeVar("T")
 
 @dataclass
 class Latest(Generic[T]):
-    """
-    A holder of the latest known value and its `Revision` retrieved by `Watcher`.
-    """
+    """A holder of the latest known value and its `Revision` retrieved by `Watcher`."""
 
     revision: Revision
     value: T
 
 
 class Watcher(Generic[T]):
-    """
-    Watches the changes of a repository or a file.
-    """
+    """Watches the changes of a repository or a file."""
 
     def latest(self) -> Latest[T]:
-        """
-        Returns the latest `Revision` and value of `watch_file()` result.
-        """
+        """Returns the latest ``Revision`` and value of ``watch_file()`` result."""
         pass
 
     # TODO(ikhoon): Use Generic `Future[Latest[T]]` when the Python 3.9 becomes the baseline.
     # https://github.com/python/typing/issues/446#issuecomment-623251451
     def initial_value_future(self) -> Future:
-        """
-        Returns the `Future` which completes a `Latest[T]` when the initial value retrieval is done successfully.
+        """Returns the ``Future`` which completes a ``Latest[T]`` when the initial value retrieval is done
+        successfully.
         """
         pass
 
     def await_initial_value(self) -> Latest[T]:
-        """
-        Waits for the initial value to be available.
-        """
+        """Waits for the initial value to be available."""
         return self.initial_value_future().result()
 
     def watch(self, listener: Callable[[Revision, T], None]) -> None:
-        """
-        Registers a listener that will be invoked when the value of the watched entry becomes
+        """Registers a listener that will be invoked when the value of the watched entry becomes
         available or changes.
         """
         pass
 
     def close(self) -> None:
-        """
-        Stops watching the file specified in the `Query` or the path pattern in the repository.
-        """
+        """Stops watching the file specified in the ``Query`` or the path pattern in the repository."""
         pass

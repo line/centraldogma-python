@@ -50,10 +50,10 @@ class Dogma:
     def __init__(self, base_url: str = None, token: str = None, **configs):
         """A Central Dogma API client using requests.
 
-        : param base_url: a base URL indicating Central Dogma server such as domain.
-        : param token: a token for authorization.
-        : param configs: (optional) configurations for an HTTP client.
-            For example, cert and timeout can be applied by using it.
+        :param base_url: a base URL indicating Central Dogma server such as domain.
+        :param token: a token for authorization.
+        :param configs: configurations for an HTTP client. For example, cert and timeout can be applied by using it.
+        :type configs: dict, optional
         """
         if base_url is None:
             env_host = os.getenv("CENTRAL_DOGMA_HOST")
@@ -146,7 +146,7 @@ class Dogma:
         revision: Optional[int] = None,
     ) -> List[Content]:
         """Gets files. The user should have read permission at least. The difference from
-            the API List files is that this includes the content of the files.
+        the API List files is that this includes the content of the files.
 
         :param path_pattern: A path pattern is a variant of glob as follows. |br|
             "/\*\*" - find all files recursively |br|
@@ -187,7 +187,7 @@ class Dogma:
         commit: Commit,
         changes: List[Change],
     ) -> PushResult:
-        """Creates, replaces, renames or deletes files. The user should have write permission.
+        """Creates, replaces, renames or deletes files. The user should have a permission to write.
 
         :param commit: A commit message for changes.
         :param changes: Detailed changes including path, type and content.
@@ -204,16 +204,15 @@ class Dogma:
         path_pattern: str,
         timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS,
     ) -> Optional[Revision]:
-        """
-        Waits for the files matched by the specified ``path_pattern`` to be changed since the specified
+        """Waits for the files matched by the specified ``path_pattern`` to be changed since the specified
         ``last_known_revision``. If no changes were made within the specified ``timeout_millis``,
         ``None`` will be returned.
         It is recommended to specify the largest ``timeout_millis`` allowed by the server. If unsure, use
         the default watch timeout.
 
         :return: the latest known ``Revision`` which contains the changes for the matched files.
-                 ``None`` if the files were not changed for ``timeout_millis`` milliseconds
-                 since the invocation of this method.
+            ``None`` if the files were not changed for ``timeout_millis`` milliseconds
+            since the invocation of this method.
         """
         return self.content_service.watch_repository(
             project_name, repo_name, last_known_revision, path_pattern, timeout_millis
@@ -227,16 +226,15 @@ class Dogma:
         query: Query[T],
         timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS,
     ) -> Optional[Entry[T]]:
-        """
-        Waits for the file matched by the specified ``Query`` to be changed since the specified
+        """Waits for the file matched by the specified ``Query`` to be changed since the specified
         ``last_known_revision``. If no changes were made within the specified ``timeout_millis``,
         ``None`` will be returned.
         It is recommended to specify the largest ``timeout_millis`` allowed by the server. If unsure, use
         the default watch timeout.
 
         :return: the ``Entry`` which contains the latest known ``Query`` result.
-                 ``None`` if the file was not changed for ``timeout_millis`` milliseconds
-                 since the invocation of this method.
+            ``None`` if the file was not changed for ``timeout_millis`` milliseconds
+            since the invocation of this method.
         """
         return self.content_service.watch_file(
             project_name, repo_name, last_known_revision, query, timeout_millis
@@ -249,8 +247,7 @@ class Dogma:
         path_pattern: str,
         function: Callable[[Revision], T] = lambda x: x,
     ) -> Watcher[T]:
-        """
-        Returns a ``Watcher`` which notifies its listeners when the specified repository has a new commit
+        """Returns a ``Watcher`` which notifies its listeners when the specified repository has a new commit
         that contains the changes for the files matched by the given ``path_pattern``. e.g::
             def get_files(revision: Revision) -> List[Content]:
                 return dogma.get_files("foo_project", "bar_repo", revision, "/*.json")
@@ -289,8 +286,7 @@ class Dogma:
         query: Query[T],
         function: Callable[[T], U] = lambda x: x,
     ) -> Watcher[U]:
-        """
-        Returns a ``Watcher`` which notifies its listeners after applying the specified ``function`` when the result
+        """Returns a ``Watcher`` which notifies its listeners after applying the specified ``function`` when the result
         of the given ``Query`` becomes available or changes. e.g::
 
            with dogma.file_watcher("foo_project", "bar_repo", Query.json("/baz.json"),

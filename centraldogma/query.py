@@ -30,9 +30,7 @@ T = TypeVar("T")
 
 @dataclass
 class Query(Generic[T]):
-    """
-    A query on a file.
-    """
+    """A query on a file."""
 
     path: str
     query_type: QueryType
@@ -40,8 +38,7 @@ class Query(Generic[T]):
 
     @staticmethod
     def identity(path: str) -> Query[str]:
-        """
-        Returns a newly-created ``Query`` that retrieves the content as it is.
+        """Returns a newly-created ``Query`` that retrieves the content as it is.
 
         :param path: the path of a file being queried on
         """
@@ -49,8 +46,7 @@ class Query(Generic[T]):
 
     @staticmethod
     def text(path: str) -> Query[str]:
-        """
-        Returns a newly-created ``Query`` that retrieves the textual content as it is.
+        """Returns a newly-created ``Query`` that retrieves the textual content as it is.
 
         :param path: the path of a file being queried on
         """
@@ -58,8 +54,7 @@ class Query(Generic[T]):
 
     @staticmethod
     def json(path: str) -> Query[Any]:
-        """
-        Returns a newly-created ``Query`` that retrieves the JSON content as it is.
+        """Returns a newly-created ``Query`` that retrieves the JSON content as it is.
 
         :param path: the path of a file being queried on
         """
@@ -67,8 +62,7 @@ class Query(Generic[T]):
 
     @staticmethod
     def json_path(path: str, json_paths: List[str]) -> Query[Any]:
-        """
-        Returns a newly-created ``Query`` that applies a series of
+        """Returns a newly-created ``Query`` that applies a series of
         `JSON path expressions <https://github.com/json-path/JsonPath/blob/master/README.md>`_ to the content.
 
         :param path: the path of a file being queried on
