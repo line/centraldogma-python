@@ -40,5 +40,5 @@ def create_watcher():
         repo_name="repo",
         path_pattern="/test",
         timeout_millis=1 * 60 * 1000,
-        function=lambda x: x
+        function=lambda x: x,
     )
