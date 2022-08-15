@@ -14,7 +14,7 @@ jobs:
       - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/"
-          pre-build-command: "python -m pip install --upgrade pip && pip install sphinx_rtd_theme dataclasses-json httpx[http2]"
+          pre-build-command: "python -m pip install --upgrade pip && pip install -r requirements.txt"
 
   linter:
     name: black --check
