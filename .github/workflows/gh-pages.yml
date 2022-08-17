@@ -1,0 +1,27 @@
+name: Deploy Sphinx documentation to Github pages
+
+on:
+  push:
+    branches:
+       - main
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ammaraskar/sphinx-action@master
+        with:
+          docs-folder: "docs/"
+          pre-build-command: "python -m pip install --upgrade pip && pip install -r requirements.txt && pip install sphinx_rtd_theme"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: html-docs
+          path: docs/_build/html/
+
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
