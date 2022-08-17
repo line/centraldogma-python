@@ -21,7 +21,7 @@ def get_long_description():
 
 setup(
     name="centraldogma-python",
-    version="0.1.1",
+    version="0.2.0",
     description="Python client library for Central Dogma",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
