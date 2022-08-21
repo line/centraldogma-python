@@ -12,47 +12,85 @@
 #  License for the specific language governing permissions and limitations
 #  under the License.
 
-from unittest.mock import Mock
-
 from centraldogma.data.revision import Revision
-from centraldogma.repository_watcher import RepositoryWatcher
+from centraldogma.query import Query
+from centraldogma.repository_watcher import RepositoryWatcher, FileWatcher
 from centraldogma.watcher import Latest
 
-
-def test__watch():
-    watcher = create_watcher()
-    revision = Revision.init()
-    latest = Latest(revision, watcher.function(revision))
-    watcher._do_watch = Mock(return_value=latest)
-
-    response = watcher._watch(0)
-    assert response == 0
-    assert watcher.latest() == latest
+import pytest
 
 
-def test__watch_with_none_revision():
-    watcher = create_watcher()
-    watcher._do_watch = Mock(return_value=None)
-
-    response = watcher._watch(0)
-    assert response == 0
-    assert watcher.latest() is None
-
-
-def test__watch_with_exception():
-    watcher = create_watcher()
-    watcher._do_watch = Mock(side_effect=Exception("test exception"))
-    response = watcher._watch(0)
-    assert response == 1
-    assert watcher.latest() is None
-
-
-def create_watcher():
+@pytest.fixture()
+def repo_watcher(mocker):
     return RepositoryWatcher(
-        content_service=Mock(),
+        content_service=mocker.MagicMock(),
         project_name="project",
         repo_name="repo",
         path_pattern="/test",
         timeout_millis=1 * 60 * 1000,
         function=lambda x: x,
     )
+
+
+@pytest.fixture()
+def file_watcher(mocker):
+    return FileWatcher(
+        content_service=mocker.MagicMock(),
+        project_name="project",
+        repo_name="repo",
+        query=Query.text("test.txt"),
+        timeout_millis=5000,
+        function=lambda x: x
+    )
+
+
+def test_repository_watch(repo_watcher, mocker):
+    revision = Revision.init()
+    latest = Latest(revision, repo_watcher.function(revision))
+    mocker.patch.object(repo_watcher, "_do_watch", return_value=latest)
+
+    response = repo_watcher._watch(0)
+    assert response == 0
+    assert repo_watcher.latest() is latest
+
+
+def test_repository_watch_with_none_revision(repo_watcher, mocker):
+    mocker.patch.object(repo_watcher, "_do_watch", return_value=None)
+
+    response = repo_watcher._watch(0)
+    assert response == 1
+    assert repo_watcher.latest() is None
+
+
+def test_repository_watch_with_exception(repo_watcher, mocker):
+    mocker.patch.object(repo_watcher, "_do_watch", side_effect=Exception("test exception"))
+
+    response = repo_watcher._watch(0)
+    assert response == 1
+    assert repo_watcher.latest() is None
+
+
+def test_file_watch(file_watcher, mocker):
+    revision = Revision.init()
+    latest = Latest(revision, file_watcher.function(revision))
+    mocker.patch.object(file_watcher, "_do_watch", return_value=latest)
+
+    response = file_watcher._watch(0)
+    assert response == 0
+    assert file_watcher.latest() is latest
+
+
+def test_file_watch_with_none_revision(file_watcher, mocker):
+    mocker.patch.object(file_watcher, "_do_watch", return_value=None)
+
+    response = file_watcher._watch(0)
+    assert response == 1
+    assert file_watcher.latest() is None
+
+
+def test_file_watch_with_exception(file_watcher, mocker):
+    mocker.patch.object(file_watcher, "_do_watch", side_effect=Exception("test exception"))
+
+    response = file_watcher._watch(0)
+    assert response == 1
+    assert file_watcher.latest() is None
