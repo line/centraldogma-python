@@ -40,7 +40,7 @@ def file_watcher(mocker):
         repo_name="repo",
         query=Query.text("test.txt"),
         timeout_millis=5000,
-        function=lambda x: x
+        function=lambda x: x,
     )
 
 
@@ -63,7 +63,9 @@ def test_repository_watch_with_none_revision(repo_watcher, mocker):
 
 
 def test_repository_watch_with_exception(repo_watcher, mocker):
-    mocker.patch.object(repo_watcher, "_do_watch", side_effect=Exception("test exception"))
+    mocker.patch.object(
+        repo_watcher, "_do_watch", side_effect=Exception("test exception")
+    )
 
     response = repo_watcher._watch(0)
     assert response == 1
@@ -89,7 +91,9 @@ def test_file_watch_with_none_revision(file_watcher, mocker):
 
 
 def test_file_watch_with_exception(file_watcher, mocker):
-    mocker.patch.object(file_watcher, "_do_watch", side_effect=Exception("test exception"))
+    mocker.patch.object(
+        file_watcher, "_do_watch", side_effect=Exception("test exception")
+    )
 
     response = file_watcher._watch(0)
     assert response == 1
