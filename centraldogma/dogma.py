@@ -248,7 +248,7 @@ class Dogma:
         repo_name: str,
         path_pattern: str,
         function: Callable[[Revision], T] = lambda x: x,
-        timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS
+        timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS,
     ) -> Watcher[T]:
         """
         Returns a ``Watcher`` which notifies its listeners when the specified repository has a new commit

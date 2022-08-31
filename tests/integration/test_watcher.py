@@ -218,7 +218,8 @@ class TestWatcher:
 
         # pass short timeout millis for testing purpose.
         watcher: Watcher[Revision] = dogma.repository_watcher(
-            project_name, repo_name, "/**", timeout_millis=timeout_millis)
+            project_name, repo_name, "/**", timeout_millis=timeout_millis
+        )
 
         # wait until watcher get NOT_MODIFIED at least once.
         time.sleep(5 * timeout_second)
