@@ -222,14 +222,13 @@ class TestWatcher:
         )
 
         # wait until watcher get NOT_MODIFIED at least once.
-        time.sleep(5 * timeout_second)
+        time.sleep(4 * timeout_second)
 
         commit = Commit("Upsert modify.txt")
         upsert_text = Change("/path/modify.txt", ChangeType.UPSERT_TEXT, "modified")
         result = dogma.push(project_name, repo_name, commit, [upsert_text])
 
         # wait until watcher watch latest.
-        while watcher.latest() is None:
-            time.sleep(timeout_second)
+        time.sleep(4 * timeout_second)
 
         assert result.revision == watcher.latest().revision.major
