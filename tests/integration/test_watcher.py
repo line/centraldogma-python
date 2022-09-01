@@ -220,7 +220,7 @@ class TestWatcher:
             project_name, repo_name, "/**", timeout_millis=timeout_millis
         )
 
-        # wait until watcher get NOT_MODIFIED at least once.
+        # wait until watcher get `NOT_MODIFIED` at least once.
         time.sleep(4 * timeout_second)
 
         commit = Commit("Upsert modify.txt")
