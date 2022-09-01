@@ -58,7 +58,7 @@ def test_repository_watch_with_none_revision(repo_watcher, mocker):
     mocker.patch.object(repo_watcher, "_do_watch", return_value=None)
 
     response = repo_watcher._watch(0)
-    assert response == 1
+    assert response == 0
     assert repo_watcher.latest() is None
 
 
@@ -86,7 +86,7 @@ def test_file_watch_with_none_revision(file_watcher, mocker):
     mocker.patch.object(file_watcher, "_do_watch", return_value=None)
 
     response = file_watcher._watch(0)
-    assert response == 1
+    assert response == 0
     assert file_watcher.latest() is None
 
 

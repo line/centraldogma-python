@@ -148,8 +148,8 @@ class AbstractWatcher(Watcher[T]):
                 self.notify_listeners()
                 if not old_latest:
                     self._initial_value_future.set_result(new_latest)
-                # Watch again for the next change.
-                return 0
+            # Watch again for the next change.
+            return 0
         except Exception as ex:
             if isinstance(ex, EntryNotFoundException):
                 logging.info(
@@ -174,7 +174,7 @@ class AbstractWatcher(Watcher[T]):
                     self.path_pattern,
                     ex,
                 )
-        return num_attempts_so_far + 1
+            return num_attempts_so_far + 1
 
     def _do_watch(self, last_known_revision: Revision) -> Optional[Latest[T]]:
         pass
