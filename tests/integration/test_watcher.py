@@ -210,8 +210,7 @@ class TestWatcher:
             assert watcher.latest() == latest
 
     def test_not_modified_repository_watcher(self, run_around_test):
-        """It verifies that a watcher keep watching well even after `NOT_MODIFIED`.
-        """
+        """It verifies that a watcher keep watching well even after `NOT_MODIFIED`."""
         timeout_millis = 1000
         timeout_second = timeout_millis / 1000
 
