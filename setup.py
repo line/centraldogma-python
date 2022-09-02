@@ -19,9 +19,20 @@ def get_long_description():
         return f.read()
 
 
+def get_install_requires():
+    install_requires = []
+    with open("requirements.txt", "r") as f:
+        for line in f:
+            dependency = line.rstrip()
+            if not dependency:
+                break
+            install_requires.append(dependency)
+    return install_requires
+
+
 setup(
     name="centraldogma-python",
-    version="0.2.0",
+    version="0.3.0",
     description="Python client library for Central Dogma",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
@@ -30,13 +41,7 @@ setup(
     author_email="dl_centraldogma@linecorp.com",
     license="Apache License 2.0",
     packages=["centraldogma", "centraldogma.data"],
-    install_requires=[
-        "httpx",
-        "marshmallow",
-        "dataclasses-json",
-        "pydantic",
-        "python-dateutil",
-    ],
+    install_requires=get_install_requires(),
     python_requires=">=3.7",
     keywords="centraldogma",
     classifiers=[
