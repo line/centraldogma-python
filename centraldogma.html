@@ -352,7 +352,7 @@ the content is supposed to be the new name.</p></li>
 
 <dl class="method">
 <dt id="centraldogma.dogma.Dogma.repository_watcher">
-<code class="sig-name descname">repository_watcher</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, path_pattern: str, function: Callable[[centraldogma.data.revision.Revision], T] = &lt;function Dogma.&lt;lambda&gt;&gt;</em><span class="sig-paren">)</span> &#x2192; centraldogma.watcher.Watcher[~T][T]<a class="headerlink" href="#centraldogma.dogma.Dogma.repository_watcher" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">repository_watcher</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, path_pattern: str, function: Callable[[centraldogma.data.revision.Revision], T] = &lt;function Dogma.&lt;lambda&gt;&gt;, timeout_millis: int = 60000</em><span class="sig-paren">)</span> &#x2192; centraldogma.watcher.Watcher[~T][T]<a class="headerlink" href="#centraldogma.dogma.Dogma.repository_watcher" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> which notifies its listeners when the specified repository has a new commit
 that contains the changes for the files matched by the given <code class="docutils literal notranslate"><span class="pre">path_pattern</span></code>. e.g:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_files</span><span class="p">(</span><span class="n">revision</span><span class="p">:</span> <span class="n">Revision</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Content</span><span class="p">]:</span>
@@ -373,6 +373,7 @@ may have to retry in the above example due to <a class="reference external" href
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path_pattern</strong> – the path pattern to match files in the repository.</p></li>
 <li><p><strong>function</strong> – the function to convert the given <cite>Revision</cite> into another.</p></li>
+<li><p><strong>timeout_millis</strong> – the timeout millis for the watching request.</p></li>
 </ul>
 </dd>
 </dl>
