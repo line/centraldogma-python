@@ -113,22 +113,24 @@ class AbstractWatcher(Watcher[T]):
             listener(self._latest.revision, self._latest.value)
 
     def _schedule_watch(self, num_attempts_so_far: int) -> None:
-        if self._is_stopped():
-            return
+        num_attempts = num_attempts_so_far
+        while num_attempts >= 0:
+            if self._is_stopped():
+                break
 
-        if num_attempts_so_far == 0:
-            delay = _DELAY_ON_SUCCESS_MILLIS if self._latest is None else 0
-        else:
-            delay = self._next_delay_millis(num_attempts_so_far)
+            if num_attempts == 0:
+                delay = _DELAY_ON_SUCCESS_MILLIS if self._latest is None else 0
+            else:
+                delay = self._next_delay_millis(num_attempts)
 
-        # FIXME(ikhoon): Replace asyncio.sleep() after AsyncClient is implemented.
-        time.sleep(delay / 1000)
-        self._watch(num_attempts_so_far)
+            # FIXME(ikhoon): Replace asyncio.sleep() after AsyncClient is implemented.
+            time.sleep(delay / 1000)
+            num_attempts = self._watch(num_attempts)
         return None
 
-    def _watch(self, num_attempts_so_far: int) -> None:
+    def _watch(self, num_attempts_so_far: int) -> int:
         if self._is_stopped():
-            return
+            return -1
 
         last_known_revision = self._latest.revision if self._latest else Revision.init()
         try:
@@ -146,9 +148,8 @@ class AbstractWatcher(Watcher[T]):
                 self.notify_listeners()
                 if not old_latest:
                     self._initial_value_future.set_result(new_latest)
-
-                # Watch again for the next change.
-                self._schedule_watch(0)
+            # Watch again for the next change.
+            return 0
         except Exception as ex:
             if isinstance(ex, EntryNotFoundException):
                 logging.info(
@@ -173,8 +174,7 @@ class AbstractWatcher(Watcher[T]):
                     self.path_pattern,
                     ex,
                 )
-            self._schedule_watch(num_attempts_so_far + 1)
-            return
+            return num_attempts_so_far + 1
 
     def _do_watch(self, last_known_revision: Revision) -> Optional[Latest[T]]:
         pass

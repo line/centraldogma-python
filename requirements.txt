@@ -9,5 +9,6 @@ black
 codecov
 pytest
 pytest-cov
+pytest-mock
 respx
 setuptools

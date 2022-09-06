@@ -13,6 +13,7 @@
 #  under the License.
 import json
 import os
+import time
 from concurrent.futures import Future
 from concurrent.futures import TimeoutError
 
@@ -207,3 +208,25 @@ class TestWatcher:
             latest: Latest[str] = future.result()
             assert latest.value == '{"a": 1}'
             assert watcher.latest() == latest
+
+    def test_not_modified_repository_watcher(self, run_around_test):
+        """It verifies that a watcher keep watching well even after `NOT_MODIFIED`."""
+        timeout_millis = 1000
+        timeout_second = timeout_millis / 1000
+
+        # pass short timeout millis for testing purpose.
+        watcher: Watcher[Revision] = dogma.repository_watcher(
+            project_name, repo_name, "/**", timeout_millis=timeout_millis
+        )
+
+        # wait until watcher get `NOT_MODIFIED` at least once.
+        time.sleep(4 * timeout_second)
+
+        commit = Commit("Upsert modify.txt")
+        upsert_text = Change("/path/modify.txt", ChangeType.UPSERT_TEXT, "modified")
+        result = dogma.push(project_name, repo_name, commit, [upsert_text])
+
+        # wait until watcher watch latest.
+        time.sleep(4 * timeout_second)
+
+        assert result.revision == watcher.latest().revision.major

@@ -246,6 +246,7 @@ class Dogma:
         repo_name: str,
         path_pattern: str,
         function: Callable[[Revision], T] = lambda x: x,
+        timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS,
     ) -> Watcher[T]:
         """Returns a ``Watcher`` which notifies its listeners when the specified repository has a new commit
         that contains the changes for the files matched by the given ``path_pattern``. e.g::
@@ -264,6 +265,7 @@ class Dogma:
 
         :param path_pattern: the path pattern to match files in the repository.
         :param function: the function to convert the given `Revision` into another.
+        :param timeout_millis: the timeout millis for the watching request.
 
         .. _a known issue:
             https://github.com/line/centraldogma/issues/40
@@ -273,7 +275,7 @@ class Dogma:
             project_name,
             repo_name,
             path_pattern,
-            _DEFAULT_WATCH_TIMEOUT_MILLIS,
+            timeout_millis,
             function,
         )
         watcher.start()
