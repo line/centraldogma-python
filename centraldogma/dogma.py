@@ -227,9 +227,8 @@ class Dogma:
     ) -> Optional[Entry[T]]:
         """Waits for the file matched by the specified ``Query`` to be changed since the specified
         ``last_known_revision``. If no changes were made within the specified ``timeout_millis``,
-        ``None`` will be returned.
-        It is recommended to specify the largest ``timeout_millis`` allowed by the server. If unsure, use
-        the default watch timeout.
+        ``None`` will be returned. It is recommended to specify the largest ``timeout_millis`` allowed by the server.
+        If unsure, use the default watch timeout.
 
         :return: the ``Entry`` which contains the latest known ``Query`` result.
             ``None`` if the file was not changed for ``timeout_millis`` milliseconds
@@ -253,7 +252,6 @@ class Dogma:
                 return dogma.get_files("foo_project", "bar_repo", revision, "/*.json")
 
             with dogma.repository_watcher("foo_project", "bar_repo", "/*.json", get_files) as watcher:
-
                 def listener(revision: Revision, contents: List[Content]) -> None:
                     ...
 
@@ -292,7 +290,6 @@ class Dogma:
 
            with dogma.file_watcher("foo_project", "bar_repo", Query.json("/baz.json"),
                                    lambda content: MyType.from_dict(content)) as watcher:
-
                def listener(revision: Revision, value: MyType) -> None:
                    ...
 

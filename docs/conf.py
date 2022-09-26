@@ -19,8 +19,8 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 
 project = "centraldogma-python"
-copyright = "2022, hexoul, ikhoon, minwoox"
-author = "hexoul, ikhoon, minwoox"
+copyright = "2017-2022, LINE Corporation"
+author = "Central Dogma Team"
 
 
 # -- General configuration ---------------------------------------------------
