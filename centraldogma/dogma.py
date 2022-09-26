@@ -127,10 +127,10 @@ class Dogma:
         :param path_pattern: A path pattern is a variant of glob as follows. |br|
             "/\*\*" - find all files recursively |br|
             "\*.json" - find all JSON files recursively |br|
-            "/foo/\*.json" - find all JSON files under the directory /foo |br|
+            "/foo/\*.json" - find all JSON files under the directory ``/foo`` |br|
             "/\*/foo.txt" - find all files named foo.txt at the second depth level |br|
             "\*.json,/bar/\*.txt" - use comma to match any patterns |br|
-            This will bring all of the files in the repository, if unspecified. |br|
+            This will bring all of the files in the repository, if unspecified.
         :param revision: The revision of the list to get. If not specified, gets the list of
             the latest revision.
         """
@@ -153,7 +153,7 @@ class Dogma:
             "\*.json" - find all JSON files recursively |br|
             "/foo/\*.json" - find all JSON files under the directory /foo |br|
             "/\*/foo.txt" - find all files named foo.txt at the second depth level |br|
-            "\*.json,/bar/\*.txt" - use comma to match any patterns
+            "\*.json,/bar/\*.txt" - use comma to match any patterns |br|
             This will bring all of the files in the repository, if unspecified.
         :param revision: The revision of the list to get. If not specified, gets the list of
             the latest revision.
@@ -206,9 +206,8 @@ class Dogma:
     ) -> Optional[Revision]:
         """Waits for the files matched by the specified ``path_pattern`` to be changed since the specified
         ``last_known_revision``. If no changes were made within the specified ``timeout_millis``,
-        ``None`` will be returned.
-        It is recommended to specify the largest ``timeout_millis`` allowed by the server. If unsure, use
-        the default watch timeout.
+        ``None`` will be returned. It is recommended to specify the largest ``timeout_millis`` allowed by the server.
+        If unsure, use the default watch timeout.
 
         :return: the latest known ``Revision`` which contains the changes for the matched files.
             ``None`` if the files were not changed for ``timeout_millis`` milliseconds
@@ -324,7 +323,7 @@ class Dogma:
         """Returns the merged result of files represented by ``MergeSource``. Each ``MergeSource``
         can be optional, indicating that no error should be thrown even if the path doesn't exist.
         If ``json_paths`` is specified, each ``json_path`` is applied recursively on the merged
-        result. If any of the ``json_path``s is invalid, a ``QueryExecutionException`` is thrown.
+        result. If any of the ``json_path`` s is invalid, a ``QueryExecutionException`` is thrown.
 
         :raises ValueError: If the provided ``merge_sources`` is empty.
         :return: the ``MergedEntry`` which contains the merged content for the given query.
