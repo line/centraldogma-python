@@ -151,7 +151,7 @@ class Dogma:
         :param path_pattern: A path pattern is a variant of glob as follows. |br|
             "/\*\*" - find all files recursively |br|
             "\*.json" - find all JSON files recursively |br|
-            "/foo/\*.json" - find all JSON files under the directory /foo |br|
+            "/foo/\*.json" - find all JSON files under the directory ``/foo`` |br|
             "/\*/foo.txt" - find all files named foo.txt at the second depth level |br|
             "\*.json,/bar/\*.txt" - use comma to match any patterns |br|
             This will bring all of the files in the repository, if unspecified.
