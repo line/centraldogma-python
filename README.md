@@ -3,7 +3,7 @@
     <img src="https://badge.fury.io/py/centraldogma-python.svg" alt="Package version">
 </a>
 
-Python client library for [Central Dogma](https://line.github.io/centraldogma/)
+Python client library for [Central Dogma](https://line.github.io/centraldogma/).
 
 ## Install
 ```
@@ -30,25 +30,25 @@ $ pytest
 
 #### Integration test
 1. Run local Central Dogma server with docker-compose
-```
-$ docker-compose up -d
-```
+    ```
+    $ docker-compose up -d
+    ```
 
 2. Run integration tests
-```
-$ INTEGRATION_TEST=true pytest
-```
+    ```
+    $ INTEGRATION_TEST=true pytest
+    ```
 
 3. Stop the server
-```
-$ docker-compose down
-```
+    ```
+    $ docker-compose down
+    ```
 
 ### Lint
 - [PEP 8](https://www.python.org/dev/peps/pep-0008)
-```
-$ black .
-```
+    ```
+    $ black .
+    ```
 
 ### Documentation
 - [PEP 257](https://www.python.org/dev/peps/pep-0257)

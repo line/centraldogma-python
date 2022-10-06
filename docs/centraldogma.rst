@@ -1,45 +1,10 @@
 centraldogma package
 ====================
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   centraldogma.data
-
-Submodules
-----------
-
-centraldogma.base\_client module
---------------------------------
-
-.. automodule:: centraldogma.base_client
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-centraldogma.content\_service module
-------------------------------------
-
-.. automodule:: centraldogma.content_service
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 centraldogma.dogma module
 -------------------------
 
 .. automodule:: centraldogma.dogma
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-centraldogma.exceptions module
-------------------------------
-
-.. automodule:: centraldogma.exceptions
    :members:
    :undoc-members:
    :show-inheritance:
@@ -60,13 +25,45 @@ centraldogma.repository\_service module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+centraldogma.content\_service module
+------------------------------------
 
-.. automodule:: centraldogma
+.. automodule:: centraldogma.content_service
    :members:
    :undoc-members:
    :show-inheritance:
+
+centraldogma.watcher module
+--------------------------------
+
+.. automodule:: centraldogma.watcher
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+centraldogma.query module
+--------------------------------
+
+.. automodule:: centraldogma.query
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+centraldogma.exceptions module
+------------------------------
+
+.. automodule:: centraldogma.exceptions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   centraldogma.data
 
 .. |br| raw:: html
 
