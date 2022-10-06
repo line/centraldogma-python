@@ -38,18 +38,17 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">centraldogma</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="centraldogma.html">centraldogma package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.dogma">centraldogma.dogma module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.project_service">centraldogma.project_service module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.repository_service">centraldogma.repository_service module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.content_service">centraldogma.content_service module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.watcher">centraldogma.watcher module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.query">centraldogma.query module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.exceptions">centraldogma.exceptions module</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="centraldogma.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">centraldogma.data package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.base_client">centraldogma.base_client module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.content_service">centraldogma.content_service module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.dogma">centraldogma.dogma module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.exceptions">centraldogma.exceptions module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.project_service">centraldogma.project_service module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma.repository_service">centraldogma.repository_service module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#module-centraldogma">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -222,9 +221,6 @@
 </dd></dl>
 
 </div>
-<div class="section" id="module-centraldogma.data.constants">
-<span id="centraldogma-data-constants-module"></span><h2>centraldogma.data.constants module<a class="headerlink" href="#module-centraldogma.data.constants" title="Permalink to this headline"></a></h2>
-</div>
 <div class="section" id="module-centraldogma.data.content">
 <span id="centraldogma-data-content-module"></span><h2>centraldogma.data.content module<a class="headerlink" href="#module-centraldogma.data.content" title="Permalink to this headline"></a></h2>
 <dl class="class">
@@ -323,6 +319,154 @@
 <dl class="method">
 <dt id="centraldogma.data.creator.Creator.to_json">
 <code class="sig-name descname">to_json</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">skipkeys: bool = False</em>, <em class="sig-param">ensure_ascii: bool = True</em>, <em class="sig-param">check_circular: bool = True</em>, <em class="sig-param">allow_nan: bool = True</em>, <em class="sig-param">indent: Union[int</em>, <em class="sig-param">str</em>, <em class="sig-param">None] = None</em>, <em class="sig-param">separators: Tuple[str</em>, <em class="sig-param">str] = None</em>, <em class="sig-param">default: Callable = None</em>, <em class="sig-param">sort_keys: bool = False</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#centraldogma.data.creator.Creator.to_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-centraldogma.data.entry">
+<span id="centraldogma-data-entry-module"></span><h2>centraldogma.data.entry module<a class="headerlink" href="#module-centraldogma.data.entry" title="Permalink to this headline"></a></h2>
+<dl class="class">
+<dt id="centraldogma.data.entry.Entry">
+<em class="property">class </em><code class="sig-prename descclassname">centraldogma.data.entry.</code><code class="sig-name descname">Entry</code><span class="sig-paren">(</span><em class="sig-param">revision: centraldogma.data.revision.Revision</em>, <em class="sig-param">path: str</em>, <em class="sig-param">entry_type: centraldogma.data.entry.EntryType</em>, <em class="sig-param">content: T</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.data.entry.Entry" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+<p>A file or a directory in a repository.</p>
+<dl class="method">
+<dt id="centraldogma.data.entry.Entry.content">
+<em class="property">property </em><code class="sig-name descname">content</code><a class="headerlink" href="#centraldogma.data.entry.Entry.content" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.EntryNoContentException" title="centraldogma.exceptions.EntryNoContentException"><strong>EntryNoContentException</strong></a> – it occurs if the content is <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="centraldogma.data.entry.Entry.content_as_text">
+<code class="sig-name descname">content_as_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#centraldogma.data.entry.Entry.content_as_text" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the textual representation of the specified content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.EntryNoContentException" title="centraldogma.exceptions.EntryNoContentException"><strong>EntryNoContentException</strong></a> – it occurs if the content is <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="centraldogma.data.entry.Entry.directory">
+<em class="property">static </em><code class="sig-name descname">directory</code><span class="sig-paren">(</span><em class="sig-param">revision: centraldogma.data.revision.Revision</em>, <em class="sig-param">path: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.entry.Entry[NoneType][None]<a class="headerlink" href="#centraldogma.data.entry.Entry.directory" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Entry</span></code> of a directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>revision</strong> – the revision of the directory</p></li>
+<li><p><strong>path</strong> – the path of the directory</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="centraldogma.data.entry.Entry.has_content">
+<code class="sig-name descname">has_content</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#centraldogma.data.entry.Entry.has_content" title="Permalink to this definition"></a></dt>
+<dd><p>Returns if this <code class="docutils literal notranslate"><span class="pre">Entry</span></code> has content, which is always <code class="docutils literal notranslate"><span class="pre">True</span></code> if it’s not a directory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="centraldogma.data.entry.Entry.json">
+<em class="property">static </em><code class="sig-name descname">json</code><span class="sig-paren">(</span><em class="sig-param">revision: centraldogma.data.revision.Revision</em>, <em class="sig-param">path: str</em>, <em class="sig-param">content: Any</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.entry.Entry[typing.Any][Any]<a class="headerlink" href="#centraldogma.data.entry.Entry.json" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Entry</span></code> of a JSON file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>revision</strong> – the revision of the JSON file</p></li>
+<li><p><strong>path</strong> – the path of the JSON file</p></li>
+<li><p><strong>content</strong> – the content of the JSON file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="centraldogma.data.entry.Entry.text">
+<em class="property">static </em><code class="sig-name descname">text</code><span class="sig-paren">(</span><em class="sig-param">revision: centraldogma.data.revision.Revision</em>, <em class="sig-param">path: str</em>, <em class="sig-param">content: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.entry.Entry[str][str]<a class="headerlink" href="#centraldogma.data.entry.Entry.text" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Entry</span></code> of a text file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>revision</strong> – the revision of the text file</p></li>
+<li><p><strong>path</strong> – the path of the text file</p></li>
+<li><p><strong>content</strong> – the content of the text file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="centraldogma.data.entry.EntryType">
+<em class="property">class </em><code class="sig-prename descclassname">centraldogma.data.entry.</code><code class="sig-name descname">EntryType</code><a class="headerlink" href="#centraldogma.data.entry.EntryType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="centraldogma.data.entry.EntryType.DIRECTORY">
+<code class="sig-name descname">DIRECTORY</code><em class="property"> = 'DIRECTORY'</em><a class="headerlink" href="#centraldogma.data.entry.EntryType.DIRECTORY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="centraldogma.data.entry.EntryType.JSON">
+<code class="sig-name descname">JSON</code><em class="property"> = 'JSON'</em><a class="headerlink" href="#centraldogma.data.entry.EntryType.JSON" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="centraldogma.data.entry.EntryType.TEXT">
+<code class="sig-name descname">TEXT</code><em class="property"> = 'TEXT'</em><a class="headerlink" href="#centraldogma.data.entry.EntryType.TEXT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="centraldogma-data-merge-source-module">
+<h2>centraldogma.data.merge_source module<a class="headerlink" href="#centraldogma-data-merge-source-module" title="Permalink to this headline"></a></h2>
+<span class="target" id="module-centraldogma.data.merge_source"></span><dl class="class">
+<dt id="centraldogma.data.merge_source.MergeSource">
+<em class="property">class </em><code class="sig-prename descclassname">centraldogma.data.merge_source.</code><code class="sig-name descname">MergeSource</code><span class="sig-paren">(</span><em class="sig-param">path: str</em>, <em class="sig-param">optional: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.data.merge_source.MergeSource" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="centraldogma.data.merge_source.MergeSource.optional">
+<code class="sig-name descname">optional</code><em class="property">: bool</em><em class="property"> = True</em><a class="headerlink" href="#centraldogma.data.merge_source.MergeSource.optional" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="centraldogma.data.merge_source.MergeSource.path">
+<code class="sig-name descname">path</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#centraldogma.data.merge_source.MergeSource.path" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="centraldogma-data-merged-entry-module">
+<h2>centraldogma.data.merged_entry module<a class="headerlink" href="#centraldogma-data-merged-entry-module" title="Permalink to this headline"></a></h2>
+<span class="target" id="module-centraldogma.data.merged_entry"></span><dl class="class">
+<dt id="centraldogma.data.merged_entry.MergedEntry">
+<em class="property">class </em><code class="sig-prename descclassname">centraldogma.data.merged_entry.</code><code class="sig-name descname">MergedEntry</code><span class="sig-paren">(</span><em class="sig-param">revision: centraldogma.data.revision.Revision, paths: List[str], entry_type: centraldogma.data.entry.EntryType, content: Union[dict, list, str, int, float, bool, None]</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.data.merged_entry.MergedEntry" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="centraldogma.data.merged_entry.MergedEntry.content">
+<em class="property">property </em><code class="sig-name descname">content</code><a class="headerlink" href="#centraldogma.data.merged_entry.MergedEntry.content" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.EntryNoContentException" title="centraldogma.exceptions.EntryNoContentException"><strong>EntryNoContentException</strong></a> – it occurs if the content is <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="centraldogma.data.merged_entry.MergedEntry.from_dict">
+<em class="property">static </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">json: Union[dict, list, str, int, float, bool, None]</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.data.merged_entry.MergedEntry.from_dict" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -500,8 +644,32 @@
 </dd></dl>
 
 </div>
-<div class="section" id="module-centraldogma.data">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-centraldogma.data" title="Permalink to this headline"></a></h2>
+<div class="section" id="module-centraldogma.data.revision">
+<span id="centraldogma-data-revision-module"></span><h2>centraldogma.data.revision module<a class="headerlink" href="#module-centraldogma.data.revision" title="Permalink to this headline"></a></h2>
+<dl class="class">
+<dt id="centraldogma.data.revision.Revision">
+<em class="property">class </em><code class="sig-prename descclassname">centraldogma.data.revision.</code><code class="sig-name descname">Revision</code><a class="headerlink" href="#centraldogma.data.revision.Revision" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A revision number of a <code class="docutils literal notranslate"><span class="pre">Commit</span></code>.</p>
+<dl class="method">
+<dt id="centraldogma.data.revision.Revision.head">
+<em class="property">static </em><code class="sig-name descname">head</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; centraldogma.data.revision.Revision<a class="headerlink" href="#centraldogma.data.revision.Revision.head" title="Permalink to this definition"></a></dt>
+<dd><p>Revision <code class="docutils literal notranslate"><span class="pre">-1</span></code>, also known as ‘HEAD’.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="centraldogma.data.revision.Revision.init">
+<em class="property">static </em><code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; centraldogma.data.revision.Revision<a class="headerlink" href="#centraldogma.data.revision.Revision.init" title="Permalink to this definition"></a></dt>
+<dd><p>Revision <code class="docutils literal notranslate"><span class="pre">1</span></code>, also known as ‘INIT’.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="centraldogma.data.revision.Revision.major">
+<code class="sig-name descname">major</code><em class="property">: int</em><em class="property"> = None</em><a class="headerlink" href="#centraldogma.data.revision.Revision.major" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -515,7 +683,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, hexoul, ikhoon, minwoox.</p>
+    <p>&#169; Copyright 2017-2022, LINE Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

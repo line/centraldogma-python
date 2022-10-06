@@ -20,14 +20,6 @@ centraldogma.data.commit module
    :undoc-members:
    :show-inheritance:
 
-centraldogma.data.constants module
-----------------------------------
-
-.. automodule:: centraldogma.data.constants
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 centraldogma.data.content module
 --------------------------------
 
@@ -40,6 +32,30 @@ centraldogma.data.creator module
 --------------------------------
 
 .. automodule:: centraldogma.data.creator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+centraldogma.data.entry module
+----------------------------------
+
+.. automodule:: centraldogma.data.entry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+centraldogma.data.merge\_source module
+----------------------------------
+
+.. automodule:: centraldogma.data.merge_source
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+centraldogma.data.merged\_entry module
+----------------------------------
+
+.. automodule:: centraldogma.data.merged_entry
    :members:
    :undoc-members:
    :show-inheritance:
@@ -68,10 +84,10 @@ centraldogma.data.repository module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+centraldogma.data.revision module
+-----------------------------------
 
-.. automodule:: centraldogma.data
+.. automodule:: centraldogma.data.revision
    :members:
    :undoc-members:
    :show-inheritance:
