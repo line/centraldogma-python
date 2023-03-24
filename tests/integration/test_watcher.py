@@ -79,7 +79,6 @@ class TestWatcher:
             assert result.revision == watched_revision.major
 
     def test_file_watcher(self, run_around_test):
-
         commit = Commit("Upsert1 test.json")
         upsert_text = Change(
             "/test.json", ChangeType.UPSERT_JSON, {"a": 1, "b": 2, "c": 3}
@@ -196,7 +195,6 @@ class TestWatcher:
             Query.json("/foo.json"),
             lambda j: json.dumps(j),
         ) as watcher:
-
             future: Future[Latest[str]] = watcher.initial_value_future()
             with pytest.raises(TimeoutError):
                 future.result(timeout=1)
