@@ -15,7 +15,7 @@ from http import HTTPStatus
 
 from centraldogma.exceptions import UnauthorizedException, NotFoundException
 from centraldogma.base_client import BaseClient
-from httpx import Limits, Response
+from httpx import Response
 import pytest
 
 client = BaseClient("http://baseurl", "token")
@@ -28,7 +28,9 @@ configs = {
     "proxies": None,
     "mounts": None,
     "timeout": 5,
-    "limits": Limits(max_connections=100, max_keepalive_connections=20),
+    "retries": 10,
+    "max_connections": 50,
+    "max_keepalive_connections": 10,
     "max_redirects": 1,
     "event_hooks": None,
     "transport": None,

@@ -13,7 +13,7 @@
 # under the License.
 from typing import Dict, Union, Callable, TypeVar, Optional
 
-from httpx import Client, Response
+from httpx import Client, HTTPTransport, Limits, Response
 
 from centraldogma.exceptions import to_exception
 
@@ -23,15 +23,37 @@ T = TypeVar("T")
 class BaseClient:
     PATH_PREFIX = "/api/v1"
 
-    def __init__(self, base_url: str, token: str, http2: bool = True, **configs):
+    def __init__(
+        self,
+        base_url: str,
+        token: str,
+        http2: bool = True,
+        retries: int = 0,
+        max_connections: int = 100,
+        max_keepalive_connections: int = 20,
+        **configs,
+    ):
         base_url = base_url[:-1] if base_url[-1] == "/" else base_url
+
+        for key in ["transport", "limits"]:
+            if key in configs:
+                del configs[key]
+
         self.client = Client(
-            base_url=f"{base_url}{self.PATH_PREFIX}", http2=http2, **configs
+            base_url=f"{base_url}{self.PATH_PREFIX}",
+            http2=http2,
+            transport=HTTPTransport(retries=retries),
+            limits=Limits(
+                max_connections=max_connections,
+                max_keepalive_connections=max_keepalive_connections,
+            ),
+            **configs,
         )
         self.token = token
         self.headers = self._get_headers(token)
         self.patch_headers = self._get_patch_headers(token)
 
+    # TODO(@hexoul): Support automatic retry with `tenacity` even if an exception occurs.
     def request(
         self,
         method: str,
