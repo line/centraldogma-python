@@ -28,9 +28,9 @@ class BaseClient:
         base_url: str,
         token: str,
         http2: bool = True,
-        retries: int = 0,
-        max_connections: int = 100,
-        max_keepalive_connections: int = 20,
+        retries: int = 1,
+        max_connections: int = 10,
+        max_keepalive_connections: int = 2,
         **configs,
     ):
         base_url = base_url[:-1] if base_url[-1] == "/" else base_url
