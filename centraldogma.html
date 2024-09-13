@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>centraldogma package &mdash; centraldogma-python  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>centraldogma package &mdash; centraldogma-python  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -39,17 +44,59 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">centraldogma</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">centraldogma package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.dogma">centraldogma.dogma module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.project_service">centraldogma.project_service module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.repository_service">centraldogma.repository_service module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.content_service">centraldogma.content_service module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.watcher">centraldogma.watcher module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.query">centraldogma.query module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.exceptions">centraldogma.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.dogma">centraldogma.dogma module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.dogma.Dogma"><code class="docutils literal notranslate"><span class="pre">Dogma</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.project_service">centraldogma.project_service module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.project_service.ProjectService"><code class="docutils literal notranslate"><span class="pre">ProjectService</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.repository_service">centraldogma.repository_service module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.repository_service.RepositoryService"><code class="docutils literal notranslate"><span class="pre">RepositoryService</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.content_service">centraldogma.content_service module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.content_service.ContentService"><code class="docutils literal notranslate"><span class="pre">ContentService</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.watcher">centraldogma.watcher module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.watcher.Latest"><code class="docutils literal notranslate"><span class="pre">Latest</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.watcher.Watcher"><code class="docutils literal notranslate"><span class="pre">Watcher</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.query">centraldogma.query module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.query.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.query.QueryType"><code class="docutils literal notranslate"><span class="pre">QueryType</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-centraldogma.exceptions">centraldogma.exceptions module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.AuthorizationException"><code class="docutils literal notranslate"><span class="pre">AuthorizationException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.BadRequestException"><code class="docutils literal notranslate"><span class="pre">BadRequestException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException"><code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.ChangeConflictException"><code class="docutils literal notranslate"><span class="pre">ChangeConflictException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.EntryNoContentException"><code class="docutils literal notranslate"><span class="pre">EntryNoContentException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.EntryNotFoundException"><code class="docutils literal notranslate"><span class="pre">EntryNotFoundException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.ForbiddenException"><code class="docutils literal notranslate"><span class="pre">ForbiddenException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.InvalidResponseException"><code class="docutils literal notranslate"><span class="pre">InvalidResponseException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.NotFoundException"><code class="docutils literal notranslate"><span class="pre">NotFoundException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.ProjectExistsException"><code class="docutils literal notranslate"><span class="pre">ProjectExistsException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.ProjectNotFoundException"><code class="docutils literal notranslate"><span class="pre">ProjectNotFoundException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.QueryExecutionException"><code class="docutils literal notranslate"><span class="pre">QueryExecutionException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.RedundantChangeException"><code class="docutils literal notranslate"><span class="pre">RedundantChangeException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.RepositoryExistsException"><code class="docutils literal notranslate"><span class="pre">RepositoryExistsException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.RepositoryNotFoundException"><code class="docutils literal notranslate"><span class="pre">RepositoryNotFoundException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.RevisionNotFoundException"><code class="docutils literal notranslate"><span class="pre">RevisionNotFoundException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.ShuttingDownException"><code class="docutils literal notranslate"><span class="pre">ShuttingDownException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.UnauthorizedException"><code class="docutils literal notranslate"><span class="pre">UnauthorizedException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.UnknownException"><code class="docutils literal notranslate"><span class="pre">UnknownException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centraldogma.exceptions.to_exception"><code class="docutils literal notranslate"><span class="pre">to_exception()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html">centraldogma.data package</a></li>
 </ul>
@@ -85,39 +132,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="centraldogma-package">
-<h1>centraldogma package<a class="headerlink" href="#centraldogma-package" title="Permalink to this headline"></a></h1>
-<div class="section" id="module-centraldogma.dogma">
-<span id="centraldogma-dogma-module"></span><h2>centraldogma.dogma module<a class="headerlink" href="#module-centraldogma.dogma" title="Permalink to this headline"></a></h2>
-<dl class="class">
-<dt id="centraldogma.dogma.Dogma">
-<em class="property">class </em><code class="sig-prename descclassname">centraldogma.dogma.</code><code class="sig-name descname">Dogma</code><span class="sig-paren">(</span><em class="sig-param">base_url: str = None</em>, <em class="sig-param">token: str = None</em>, <em class="sig-param">**configs</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.dogma.Dogma" title="Permalink to this definition"></a></dt>
+  <section id="centraldogma-package">
+<h1>centraldogma package<a class="headerlink" href="#centraldogma-package" title="Permalink to this heading"></a></h1>
+<section id="module-centraldogma.dogma">
+<span id="centraldogma-dogma-module"></span><h2>centraldogma.dogma module<a class="headerlink" href="#module-centraldogma.dogma" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.dogma.</span></span><span class="sig-name descname"><span class="pre">Dogma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.dogma.Dogma" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="attribute">
-<dt id="centraldogma.dogma.Dogma.DEFAULT_BASE_URL">
-<code class="sig-name descname">DEFAULT_BASE_URL</code><em class="property"> = 'http://localhost:36462'</em><a class="headerlink" href="#centraldogma.dogma.Dogma.DEFAULT_BASE_URL" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.DEFAULT_BASE_URL">
+<span class="sig-name descname"><span class="pre">DEFAULT_BASE_URL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'http://localhost:36462'</span></em><a class="headerlink" href="#centraldogma.dogma.Dogma.DEFAULT_BASE_URL" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="centraldogma.dogma.Dogma.DEFAULT_TOKEN">
-<code class="sig-name descname">DEFAULT_TOKEN</code><em class="property"> = 'anonymous'</em><a class="headerlink" href="#centraldogma.dogma.Dogma.DEFAULT_TOKEN" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.DEFAULT_TOKEN">
+<span class="sig-name descname"><span class="pre">DEFAULT_TOKEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'anonymous'</span></em><a class="headerlink" href="#centraldogma.dogma.Dogma.DEFAULT_TOKEN" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.create_project">
-<code class="sig-name descname">create_project</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.project.Project<a class="headerlink" href="#centraldogma.dogma.Dogma.create_project" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.create_project">
+<span class="sig-name descname"><span class="pre">create_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project" title="centraldogma.data.project.Project"><span class="pre">Project</span></a></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.create_project" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a project. The creator of the project will become the owner of the project.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.create_repository">
-<code class="sig-name descname">create_repository</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.repository.Repository<a class="headerlink" href="#centraldogma.dogma.Dogma.create_repository" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.create_repository">
+<span class="sig-name descname"><span class="pre">create_repository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository" title="centraldogma.data.repository.Repository"><span class="pre">Repository</span></a></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.create_repository" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a repository. Only the owner and an admin can create.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.file_watcher">
-<code class="sig-name descname">file_watcher</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, query: centraldogma.query.Query[~T][T], function: Callable[[T], U] = &lt;function Dogma.&lt;lambda&gt;&gt;</em><span class="sig-paren">)</span> &#x2192; centraldogma.watcher.Watcher[~U][U]<a class="headerlink" href="#centraldogma.dogma.Dogma.file_watcher" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.file_watcher">
+<span class="sig-name descname"><span class="pre">file_watcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">project_name:</span> <span class="pre">str,</span> <span class="pre">repo_name:</span> <span class="pre">str,</span> <span class="pre">query:</span> <span class="pre">~centraldogma.query.Query[~centraldogma.dogma.T],</span> <span class="pre">function:</span> <span class="pre">~typing.Callable[[~centraldogma.dogma.T],</span> <span class="pre">~centraldogma.dogma.U]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">Dogma.&lt;lambda&gt;&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.watcher.Watcher" title="centraldogma.watcher.Watcher"><span class="pre">Watcher</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.file_watcher" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> which notifies its listeners after applying the specified <code class="docutils literal notranslate"><span class="pre">function</span></code> when the result
 of the given <code class="docutils literal notranslate"><span class="pre">Query</span></code> becomes available or changes. e.g:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">dogma</span><span class="o">.</span><span class="n">file_watcher</span><span class="p">(</span><span class="s2">&quot;foo_project&quot;</span><span class="p">,</span> <span class="s2">&quot;bar_repo&quot;</span><span class="p">,</span> <span class="n">Query</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="s2">&quot;/baz.json&quot;</span><span class="p">),</span>
@@ -129,7 +176,7 @@ of the given <code class="docutils literal notranslate"><span class="pre">Query<
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>query</strong> – the query to watch a file or a content in the repository.</p></li>
 <li><p><strong>function</strong> – the function to convert the given content into another.</p></li>
@@ -138,12 +185,12 @@ of the given <code class="docutils literal notranslate"><span class="pre">Query<
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.get_file">
-<code class="sig-name descname">get_file</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">repo_name: str</em>, <em class="sig-param">file_path: str</em>, <em class="sig-param">revision: Optional[int] = None</em>, <em class="sig-param">json_path: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.content.Content<a class="headerlink" href="#centraldogma.dogma.Dogma.get_file" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.get_file">
+<span class="sig-name descname"><span class="pre">get_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content" title="centraldogma.data.content.Content"><span class="pre">Content</span></a></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.get_file" title="Permalink to this definition"></a></dt>
 <dd><p>Gets a file. The user should have read permission at least.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>revision</strong> – The revision of the file to get. If not specified, gets the file of
 the latest revision.</p></li>
@@ -153,13 +200,13 @@ the latest revision.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.get_files">
-<code class="sig-name descname">get_files</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">repo_name: str</em>, <em class="sig-param">path_pattern: Optional[str] = None</em>, <em class="sig-param">revision: Optional[int] = None</em><span class="sig-paren">)</span> &#x2192; List[centraldogma.data.content.Content]<a class="headerlink" href="#centraldogma.dogma.Dogma.get_files" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.get_files">
+<span class="sig-name descname"><span class="pre">get_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content" title="centraldogma.data.content.Content"><span class="pre">Content</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.get_files" title="Permalink to this definition"></a></dt>
 <dd><p>Gets files. The user should have read permission at least. The difference from
 the API List files is that this includes the content of the files.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path_pattern</strong> – A path pattern is a variant of glob as follows. <br>
 “/**” - find all files recursively <br>
@@ -175,12 +222,12 @@ the latest revision.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.list_files">
-<code class="sig-name descname">list_files</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">repo_name: str</em>, <em class="sig-param">path_pattern: Optional[str] = None</em>, <em class="sig-param">revision: Optional[int] = None</em><span class="sig-paren">)</span> &#x2192; List[centraldogma.data.content.Content]<a class="headerlink" href="#centraldogma.dogma.Dogma.list_files" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.list_files">
+<span class="sig-name descname"><span class="pre">list_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content" title="centraldogma.data.content.Content"><span class="pre">Content</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.list_files" title="Permalink to this definition"></a></dt>
 <dd><p>Lists files. The user should have read permission at least.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path_pattern</strong> – A path pattern is a variant of glob as follows. <br>
 “/**” - find all files recursively <br>
@@ -196,59 +243,59 @@ the latest revision.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.list_projects">
-<code class="sig-name descname">list_projects</code><span class="sig-paren">(</span><em class="sig-param">removed: bool = False</em><span class="sig-paren">)</span> &#x2192; List[centraldogma.data.project.Project]<a class="headerlink" href="#centraldogma.dogma.Dogma.list_projects" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.list_projects">
+<span class="sig-name descname"><span class="pre">list_projects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">removed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project" title="centraldogma.data.project.Project"><span class="pre">Project</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.list_projects" title="Permalink to this definition"></a></dt>
 <dd><p>Lists all projects, in the order that they were created on the Central Dogma server.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.list_repositories">
-<code class="sig-name descname">list_repositories</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">removed: bool = False</em><span class="sig-paren">)</span> &#x2192; List[centraldogma.data.repository.Repository]<a class="headerlink" href="#centraldogma.dogma.Dogma.list_repositories" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.list_repositories">
+<span class="sig-name descname"><span class="pre">list_repositories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">removed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository" title="centraldogma.data.repository.Repository"><span class="pre">Repository</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.list_repositories" title="Permalink to this definition"></a></dt>
 <dd><p>Lists all repositories, in the order that they were created on the Central Dogma server.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.merge_files">
-<code class="sig-name descname">merge_files</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, merge_sources: List[centraldogma.data.merge_source.MergeSource], json_paths: Optional[List[str]] = None, revision: Optional[int] = None</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.merged_entry.MergedEntry<a class="headerlink" href="#centraldogma.dogma.Dogma.merge_files" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.merge_files">
+<span class="sig-name descname"><span class="pre">merge_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_sources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merge_source.MergeSource" title="centraldogma.data.merge_source.MergeSource"><span class="pre">MergeSource</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merged_entry.MergedEntry" title="centraldogma.data.merged_entry.MergedEntry"><span class="pre">MergedEntry</span></a></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.merge_files" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the merged result of files represented by <code class="docutils literal notranslate"><span class="pre">MergeSource</span></code>. Each <code class="docutils literal notranslate"><span class="pre">MergeSource</span></code>
 can be optional, indicating that no error should be thrown even if the path doesn’t exist.
 If <code class="docutils literal notranslate"><span class="pre">json_paths</span></code> is specified, each <code class="docutils literal notranslate"><span class="pre">json_path</span></code> is applied recursively on the merged
 result. If any of the <code class="docutils literal notranslate"><span class="pre">json_path</span></code> s is invalid, a <code class="docutils literal notranslate"><span class="pre">QueryExecutionException</span></code> is thrown.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ValueError</strong> – If the provided <code class="docutils literal notranslate"><span class="pre">merge_sources</span></code> is empty.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the <code class="docutils literal notranslate"><span class="pre">MergedEntry</span></code> which contains the merged content for the given query.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.normalize_repository_revision">
-<code class="sig-name descname">normalize_repository_revision</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em>, <em class="sig-param">revision: int</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#centraldogma.dogma.Dogma.normalize_repository_revision" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.normalize_repository_revision">
+<span class="sig-name descname"><span class="pre">normalize_repository_revision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.normalize_repository_revision" title="Permalink to this definition"></a></dt>
 <dd><p>Normalizes the revision into an absolute revision.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.purge_project">
-<code class="sig-name descname">purge_project</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.dogma.Dogma.purge_project" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.purge_project">
+<span class="sig-name descname"><span class="pre">purge_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.purge_project" title="Permalink to this definition"></a></dt>
 <dd><p>Purges a project. Only the owner and an admin can purge the project removed before.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.purge_repository">
-<code class="sig-name descname">purge_repository</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.dogma.Dogma.purge_repository" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.purge_repository">
+<span class="sig-name descname"><span class="pre">purge_repository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.purge_repository" title="Permalink to this definition"></a></dt>
 <dd><p>Purges a repository. Only the owner and an admin can purge a repository removed before.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.push">
-<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, commit: centraldogma.data.commit.Commit, changes: List[centraldogma.data.change.Change]</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.push_result.PushResult<a class="headerlink" href="#centraldogma.dogma.Dogma.push" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.push">
+<span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit" title="centraldogma.data.commit.Commit"><span class="pre">Commit</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">changes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change" title="centraldogma.data.change.Change"><span class="pre">Change</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult" title="centraldogma.data.push_result.PushResult"><span class="pre">PushResult</span></a></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.push" title="Permalink to this definition"></a></dt>
 <dd><p>Creates, replaces, renames or deletes files. The user should have a permission to write.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>commit</strong> – A commit message for changes.</p></li>
 <li><p><strong>changes</strong> – Detailed changes including path, type and content.
@@ -259,21 +306,21 @@ the content is supposed to be the new name.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.remove_project">
-<code class="sig-name descname">remove_project</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.dogma.Dogma.remove_project" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.remove_project">
+<span class="sig-name descname"><span class="pre">remove_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.remove_project" title="Permalink to this definition"></a></dt>
 <dd><p>Removes a project. Only the owner and an admin can remove the project.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.remove_repository">
-<code class="sig-name descname">remove_repository</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.dogma.Dogma.remove_repository" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.remove_repository">
+<span class="sig-name descname"><span class="pre">remove_repository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.remove_repository" title="Permalink to this definition"></a></dt>
 <dd><p>Removes a repository. Only the owner and an admin can remove.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.repository_watcher">
-<code class="sig-name descname">repository_watcher</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, path_pattern: str, function: Callable[[centraldogma.data.revision.Revision], T] = &lt;function Dogma.&lt;lambda&gt;&gt;, timeout_millis: int = 60000</em><span class="sig-paren">)</span> &#x2192; centraldogma.watcher.Watcher[~T][T]<a class="headerlink" href="#centraldogma.dogma.Dogma.repository_watcher" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.repository_watcher">
+<span class="sig-name descname"><span class="pre">repository_watcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">project_name:</span> <span class="pre">str,</span> <span class="pre">repo_name:</span> <span class="pre">str,</span> <span class="pre">path_pattern:</span> <span class="pre">str,</span> <span class="pre">function:</span> <span class="pre">~typing.Callable[[~centraldogma.data.revision.Revision],</span> <span class="pre">~centraldogma.dogma.T]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">Dogma.&lt;lambda&gt;&gt;,</span> <span class="pre">timeout_millis:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">60000</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.watcher.Watcher" title="centraldogma.watcher.Watcher"><span class="pre">Watcher</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.repository_watcher" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> which notifies its listeners when the specified repository has a new commit
 that contains the changes for the files matched by the given <code class="docutils literal notranslate"><span class="pre">path_pattern</span></code>. e.g:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_files</span><span class="p">(</span><span class="n">revision</span><span class="p">:</span> <span class="n">Revision</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Content</span><span class="p">]:</span>
@@ -289,7 +336,7 @@ that contains the changes for the files matched by the given <code class="docuti
 <p>Note that you may get <code class="docutils literal notranslate"><span class="pre">RevisionNotFoundException</span></code> during the <code class="docutils literal notranslate"><span class="pre">get_files()</span></code> call and
 may have to retry in the above example due to <a class="reference external" href="https://github.com/line/centraldogma/issues/40">a known issue</a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path_pattern</strong> – the path pattern to match files in the repository.</p></li>
 <li><p><strong>function</strong> – the function to convert the given <cite>Revision</cite> into another.</p></li>
@@ -299,27 +346,27 @@ may have to retry in the above example due to <a class="reference external" href
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.unremove_project">
-<code class="sig-name descname">unremove_project</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.project.Project<a class="headerlink" href="#centraldogma.dogma.Dogma.unremove_project" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.unremove_project">
+<span class="sig-name descname"><span class="pre">unremove_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project" title="centraldogma.data.project.Project"><span class="pre">Project</span></a></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.unremove_project" title="Permalink to this definition"></a></dt>
 <dd><p>Unremoves a project which is removed before. Only an admin can unremove the project.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.unremove_repository">
-<code class="sig-name descname">unremove_repository</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.repository.Repository<a class="headerlink" href="#centraldogma.dogma.Dogma.unremove_repository" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.unremove_repository">
+<span class="sig-name descname"><span class="pre">unremove_repository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository" title="centraldogma.data.repository.Repository"><span class="pre">Repository</span></a></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.unremove_repository" title="Permalink to this definition"></a></dt>
 <dd><p>Unremoves a repository. Only the owner and an admin can unremove.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.watch_file">
-<code class="sig-name descname">watch_file</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, last_known_revision: centraldogma.data.revision.Revision, query: centraldogma.query.Query[~T][T], timeout_millis: int = 60000</em><span class="sig-paren">)</span> &#x2192; Optional[centraldogma.data.entry.Entry[~T][T]]<a class="headerlink" href="#centraldogma.dogma.Dogma.watch_file" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.watch_file">
+<span class="sig-name descname"><span class="pre">watch_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_known_revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_millis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.Entry" title="centraldogma.data.entry.Entry"><span class="pre">Entry</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.watch_file" title="Permalink to this definition"></a></dt>
 <dd><p>Waits for the file matched by the specified <code class="docutils literal notranslate"><span class="pre">Query</span></code> to be changed since the specified
 <code class="docutils literal notranslate"><span class="pre">last_known_revision</span></code>. If no changes were made within the specified <code class="docutils literal notranslate"><span class="pre">timeout_millis</span></code>,
 <code class="docutils literal notranslate"><span class="pre">None</span></code> will be returned. It is recommended to specify the largest <code class="docutils literal notranslate"><span class="pre">timeout_millis</span></code> allowed by the server.
 If unsure, use the default watch timeout.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">Entry</span></code> which contains the latest known <code class="docutils literal notranslate"><span class="pre">Query</span></code> result.
 <code class="docutils literal notranslate"><span class="pre">None</span></code> if the file was not changed for <code class="docutils literal notranslate"><span class="pre">timeout_millis</span></code> milliseconds
 since the invocation of this method.</p>
@@ -327,15 +374,15 @@ since the invocation of this method.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.dogma.Dogma.watch_repository">
-<code class="sig-name descname">watch_repository</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">repo_name: str</em>, <em class="sig-param">last_known_revision: centraldogma.data.revision.Revision</em>, <em class="sig-param">path_pattern: str</em>, <em class="sig-param">timeout_millis: int = 60000</em><span class="sig-paren">)</span> &#x2192; Optional[centraldogma.data.revision.Revision]<a class="headerlink" href="#centraldogma.dogma.Dogma.watch_repository" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.dogma.Dogma.watch_repository">
+<span class="sig-name descname"><span class="pre">watch_repository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_known_revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_millis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.watch_repository" title="Permalink to this definition"></a></dt>
 <dd><p>Waits for the files matched by the specified <code class="docutils literal notranslate"><span class="pre">path_pattern</span></code> to be changed since the specified
 <code class="docutils literal notranslate"><span class="pre">last_known_revision</span></code>. If no changes were made within the specified <code class="docutils literal notranslate"><span class="pre">timeout_millis</span></code>,
 <code class="docutils literal notranslate"><span class="pre">None</span></code> will be returned. It is recommended to specify the largest <code class="docutils literal notranslate"><span class="pre">timeout_millis</span></code> allowed by the server.
 If unsure, use the default watch timeout.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the latest known <code class="docutils literal notranslate"><span class="pre">Revision</span></code> which contains the changes for the matched files.
 <code class="docutils literal notranslate"><span class="pre">None</span></code> if the files were not changed for <code class="docutils literal notranslate"><span class="pre">timeout_millis</span></code> milliseconds
 since the invocation of this method.</p>
@@ -345,219 +392,219 @@ since the invocation of this method.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-centraldogma.project_service">
-<span id="centraldogma-project-service-module"></span><h2>centraldogma.project_service module<a class="headerlink" href="#module-centraldogma.project_service" title="Permalink to this headline"></a></h2>
-<dl class="class">
-<dt id="centraldogma.project_service.ProjectService">
-<em class="property">class </em><code class="sig-prename descclassname">centraldogma.project_service.</code><code class="sig-name descname">ProjectService</code><span class="sig-paren">(</span><em class="sig-param">client: centraldogma.base_client.BaseClient</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.project_service.ProjectService" title="Permalink to this definition"></a></dt>
+</section>
+<section id="module-centraldogma.project_service">
+<span id="centraldogma-project-service-module"></span><h2>centraldogma.project_service module<a class="headerlink" href="#module-centraldogma.project_service" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="centraldogma.project_service.ProjectService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.project_service.</span></span><span class="sig-name descname"><span class="pre">ProjectService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseClient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.project_service.ProjectService" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="method">
-<dt id="centraldogma.project_service.ProjectService.create">
-<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.project.Project<a class="headerlink" href="#centraldogma.project_service.ProjectService.create" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.project_service.ProjectService.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project" title="centraldogma.data.project.Project"><span class="pre">Project</span></a></span></span><a class="headerlink" href="#centraldogma.project_service.ProjectService.create" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.project_service.ProjectService.list">
-<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">removed: bool</em><span class="sig-paren">)</span> &#x2192; List[centraldogma.data.project.Project]<a class="headerlink" href="#centraldogma.project_service.ProjectService.list" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.project_service.ProjectService.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">removed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project" title="centraldogma.data.project.Project"><span class="pre">Project</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.project_service.ProjectService.list" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.project_service.ProjectService.purge">
-<code class="sig-name descname">purge</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.project_service.ProjectService.purge" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.project_service.ProjectService.purge">
+<span class="sig-name descname"><span class="pre">purge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.project_service.ProjectService.purge" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.project_service.ProjectService.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.project_service.ProjectService.remove" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.project_service.ProjectService.remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.project_service.ProjectService.remove" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.project_service.ProjectService.unremove">
-<code class="sig-name descname">unremove</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.project.Project<a class="headerlink" href="#centraldogma.project_service.ProjectService.unremove" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.project_service.ProjectService.unremove">
+<span class="sig-name descname"><span class="pre">unremove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project" title="centraldogma.data.project.Project"><span class="pre">Project</span></a></span></span><a class="headerlink" href="#centraldogma.project_service.ProjectService.unremove" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-centraldogma.repository_service">
-<span id="centraldogma-repository-service-module"></span><h2>centraldogma.repository_service module<a class="headerlink" href="#module-centraldogma.repository_service" title="Permalink to this headline"></a></h2>
-<dl class="class">
-<dt id="centraldogma.repository_service.RepositoryService">
-<em class="property">class </em><code class="sig-prename descclassname">centraldogma.repository_service.</code><code class="sig-name descname">RepositoryService</code><span class="sig-paren">(</span><em class="sig-param">client: centraldogma.base_client.BaseClient</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService" title="Permalink to this definition"></a></dt>
+</section>
+<section id="module-centraldogma.repository_service">
+<span id="centraldogma-repository-service-module"></span><h2>centraldogma.repository_service module<a class="headerlink" href="#module-centraldogma.repository_service" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="centraldogma.repository_service.RepositoryService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.repository_service.</span></span><span class="sig-name descname"><span class="pre">RepositoryService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseClient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="method">
-<dt id="centraldogma.repository_service.RepositoryService.create">
-<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.repository.Repository<a class="headerlink" href="#centraldogma.repository_service.RepositoryService.create" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.repository_service.RepositoryService.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository" title="centraldogma.data.repository.Repository"><span class="pre">Repository</span></a></span></span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService.create" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.repository_service.RepositoryService.list">
-<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">removed: bool</em><span class="sig-paren">)</span> &#x2192; List[centraldogma.data.repository.Repository]<a class="headerlink" href="#centraldogma.repository_service.RepositoryService.list" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.repository_service.RepositoryService.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">removed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository" title="centraldogma.data.repository.Repository"><span class="pre">Repository</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService.list" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.repository_service.RepositoryService.normalize_revision">
-<code class="sig-name descname">normalize_revision</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em>, <em class="sig-param">revision: int</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#centraldogma.repository_service.RepositoryService.normalize_revision" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.repository_service.RepositoryService.normalize_revision">
+<span class="sig-name descname"><span class="pre">normalize_revision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService.normalize_revision" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.repository_service.RepositoryService.purge">
-<code class="sig-name descname">purge</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.repository_service.RepositoryService.purge" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.repository_service.RepositoryService.purge">
+<span class="sig-name descname"><span class="pre">purge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService.purge" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.repository_service.RepositoryService.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.repository_service.RepositoryService.remove" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.repository_service.RepositoryService.remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService.remove" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.repository_service.RepositoryService.unremove">
-<code class="sig-name descname">unremove</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.repository.Repository<a class="headerlink" href="#centraldogma.repository_service.RepositoryService.unremove" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.repository_service.RepositoryService.unremove">
+<span class="sig-name descname"><span class="pre">unremove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository" title="centraldogma.data.repository.Repository"><span class="pre">Repository</span></a></span></span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService.unremove" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-centraldogma.content_service">
-<span id="centraldogma-content-service-module"></span><h2>centraldogma.content_service module<a class="headerlink" href="#module-centraldogma.content_service" title="Permalink to this headline"></a></h2>
-<dl class="class">
-<dt id="centraldogma.content_service.ContentService">
-<em class="property">class </em><code class="sig-prename descclassname">centraldogma.content_service.</code><code class="sig-name descname">ContentService</code><span class="sig-paren">(</span><em class="sig-param">client: centraldogma.base_client.BaseClient</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.content_service.ContentService" title="Permalink to this definition"></a></dt>
+</section>
+<section id="module-centraldogma.content_service">
+<span id="centraldogma-content-service-module"></span><h2>centraldogma.content_service module<a class="headerlink" href="#module-centraldogma.content_service" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="centraldogma.content_service.ContentService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.content_service.</span></span><span class="sig-name descname"><span class="pre">ContentService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseClient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.content_service.ContentService" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="method">
-<dt id="centraldogma.content_service.ContentService.get_file">
-<code class="sig-name descname">get_file</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, file_path: str, revision: Optional[int], json_path: Optional[str]</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.content.Content<a class="headerlink" href="#centraldogma.content_service.ContentService.get_file" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.content_service.ContentService.get_file">
+<span class="sig-name descname"><span class="pre">get_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content" title="centraldogma.data.content.Content"><span class="pre">Content</span></a></span></span><a class="headerlink" href="#centraldogma.content_service.ContentService.get_file" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.content_service.ContentService.get_files">
-<code class="sig-name descname">get_files</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, path_pattern: Optional[str], revision: Optional[int], include_content: bool = False</em><span class="sig-paren">)</span> &#x2192; List[centraldogma.data.content.Content]<a class="headerlink" href="#centraldogma.content_service.ContentService.get_files" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.content_service.ContentService.get_files">
+<span class="sig-name descname"><span class="pre">get_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content" title="centraldogma.data.content.Content"><span class="pre">Content</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.content_service.ContentService.get_files" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.content_service.ContentService.merge_files">
-<code class="sig-name descname">merge_files</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, merge_sources: List[centraldogma.data.merge_source.MergeSource], json_paths: Optional[List[str]], revision: Optional[int]</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.merged_entry.MergedEntry<a class="headerlink" href="#centraldogma.content_service.ContentService.merge_files" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.content_service.ContentService.merge_files">
+<span class="sig-name descname"><span class="pre">merge_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_sources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merge_source.MergeSource" title="centraldogma.data.merge_source.MergeSource"><span class="pre">MergeSource</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merged_entry.MergedEntry" title="centraldogma.data.merged_entry.MergedEntry"><span class="pre">MergedEntry</span></a></span></span><a class="headerlink" href="#centraldogma.content_service.ContentService.merge_files" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.content_service.ContentService.push">
-<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, commit: centraldogma.data.commit.Commit, changes: List[centraldogma.data.change.Change]</em><span class="sig-paren">)</span> &#x2192; centraldogma.data.push_result.PushResult<a class="headerlink" href="#centraldogma.content_service.ContentService.push" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.content_service.ContentService.push">
+<span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit" title="centraldogma.data.commit.Commit"><span class="pre">Commit</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">changes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change" title="centraldogma.data.change.Change"><span class="pre">Change</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult" title="centraldogma.data.push_result.PushResult"><span class="pre">PushResult</span></a></span></span><a class="headerlink" href="#centraldogma.content_service.ContentService.push" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.content_service.ContentService.watch_file">
-<code class="sig-name descname">watch_file</code><span class="sig-paren">(</span><em class="sig-param">project_name: str, repo_name: str, last_known_revision: centraldogma.data.revision.Revision, query: centraldogma.query.Query[~T][T], timeout_millis: int</em><span class="sig-paren">)</span> &#x2192; Optional[centraldogma.data.entry.Entry[~T][T]]<a class="headerlink" href="#centraldogma.content_service.ContentService.watch_file" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.content_service.ContentService.watch_file">
+<span class="sig-name descname"><span class="pre">watch_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_known_revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_millis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.Entry" title="centraldogma.data.entry.Entry"><span class="pre">Entry</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.content_service.ContentService.watch_file" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.content_service.ContentService.watch_repository">
-<code class="sig-name descname">watch_repository</code><span class="sig-paren">(</span><em class="sig-param">project_name: str</em>, <em class="sig-param">repo_name: str</em>, <em class="sig-param">last_known_revision: centraldogma.data.revision.Revision</em>, <em class="sig-param">path_pattern: str</em>, <em class="sig-param">timeout_millis: int</em><span class="sig-paren">)</span> &#x2192; Optional[centraldogma.data.revision.Revision]<a class="headerlink" href="#centraldogma.content_service.ContentService.watch_repository" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.content_service.ContentService.watch_repository">
+<span class="sig-name descname"><span class="pre">watch_repository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_known_revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_millis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.content_service.ContentService.watch_repository" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-centraldogma.watcher">
-<span id="centraldogma-watcher-module"></span><h2>centraldogma.watcher module<a class="headerlink" href="#module-centraldogma.watcher" title="Permalink to this headline"></a></h2>
-<dl class="class">
-<dt id="centraldogma.watcher.Latest">
-<em class="property">class </em><code class="sig-prename descclassname">centraldogma.watcher.</code><code class="sig-name descname">Latest</code><span class="sig-paren">(</span><em class="sig-param">revision: centraldogma.data.revision.Revision</em>, <em class="sig-param">value: T</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.watcher.Latest" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+</section>
+<section id="module-centraldogma.watcher">
+<span id="centraldogma-watcher-module"></span><h2>centraldogma.watcher module<a class="headerlink" href="#module-centraldogma.watcher" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="centraldogma.watcher.Latest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.watcher.</span></span><span class="sig-name descname"><span class="pre">Latest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.watcher.Latest" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
 <p>A holder of the latest known value and its <cite>Revision</cite> retrieved by <cite>Watcher</cite>.</p>
-<dl class="attribute">
-<dt id="centraldogma.watcher.Latest.revision">
-<code class="sig-name descname">revision</code><em class="property">: Revision</em><em class="property"> = None</em><a class="headerlink" href="#centraldogma.watcher.Latest.revision" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.watcher.Latest.revision">
+<span class="sig-name descname"><span class="pre">revision</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a></em><a class="headerlink" href="#centraldogma.watcher.Latest.revision" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="centraldogma.watcher.Latest.value">
-<code class="sig-name descname">value</code><em class="property">: T</em><em class="property"> = None</em><a class="headerlink" href="#centraldogma.watcher.Latest.value" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.watcher.Latest.value">
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">T</span></em><a class="headerlink" href="#centraldogma.watcher.Latest.value" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
-<dt id="centraldogma.watcher.Watcher">
-<em class="property">class </em><code class="sig-prename descclassname">centraldogma.watcher.</code><code class="sig-name descname">Watcher</code><a class="headerlink" href="#centraldogma.watcher.Watcher" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="centraldogma.watcher.Watcher">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.watcher.</span></span><span class="sig-name descname"><span class="pre">Watcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.watcher.Watcher" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
 <p>Watches the changes of a repository or a file.</p>
-<dl class="method">
-<dt id="centraldogma.watcher.Watcher.await_initial_value">
-<code class="sig-name descname">await_initial_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; centraldogma.watcher.Latest[~T][T]<a class="headerlink" href="#centraldogma.watcher.Watcher.await_initial_value" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.watcher.Watcher.await_initial_value">
+<span class="sig-name descname"><span class="pre">await_initial_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.watcher.Latest" title="centraldogma.watcher.Latest"><span class="pre">Latest</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.watcher.Watcher.await_initial_value" title="Permalink to this definition"></a></dt>
 <dd><p>Waits for the initial value to be available.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.watcher.Watcher.close">
-<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.watcher.Watcher.close" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.watcher.Watcher.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.watcher.Watcher.close" title="Permalink to this definition"></a></dt>
 <dd><p>Stops watching the file specified in the <code class="docutils literal notranslate"><span class="pre">Query</span></code> or the path pattern in the repository.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.watcher.Watcher.initial_value_future">
-<code class="sig-name descname">initial_value_future</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; concurrent.futures._base.Future<a class="headerlink" href="#centraldogma.watcher.Watcher.initial_value_future" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.watcher.Watcher.initial_value_future">
+<span class="sig-name descname"><span class="pre">initial_value_future</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Future</span></span></span><a class="headerlink" href="#centraldogma.watcher.Watcher.initial_value_future" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the <code class="docutils literal notranslate"><span class="pre">Future</span></code> which completes a <code class="docutils literal notranslate"><span class="pre">Latest[T]</span></code> when the initial value retrieval is done
 successfully.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.watcher.Watcher.latest">
-<code class="sig-name descname">latest</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; centraldogma.watcher.Latest[~T][T]<a class="headerlink" href="#centraldogma.watcher.Watcher.latest" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.watcher.Watcher.latest">
+<span class="sig-name descname"><span class="pre">latest</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.watcher.Latest" title="centraldogma.watcher.Latest"><span class="pre">Latest</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.watcher.Watcher.latest" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the latest <code class="docutils literal notranslate"><span class="pre">Revision</span></code> and value of <code class="docutils literal notranslate"><span class="pre">watch_file()</span></code> result.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.watcher.Watcher.watch">
-<code class="sig-name descname">watch</code><span class="sig-paren">(</span><em class="sig-param">listener: Callable[[centraldogma.data.revision.Revision, T], None]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#centraldogma.watcher.Watcher.watch" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.watcher.Watcher.watch">
+<span class="sig-name descname"><span class="pre">watch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listener</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#centraldogma.watcher.Watcher.watch" title="Permalink to this definition"></a></dt>
 <dd><p>Registers a listener that will be invoked when the value of the watched entry becomes
 available or changes.</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-centraldogma.query">
-<span id="centraldogma-query-module"></span><h2>centraldogma.query module<a class="headerlink" href="#module-centraldogma.query" title="Permalink to this headline"></a></h2>
-<dl class="class">
-<dt id="centraldogma.query.Query">
-<em class="property">class </em><code class="sig-prename descclassname">centraldogma.query.</code><code class="sig-name descname">Query</code><span class="sig-paren">(</span><em class="sig-param">path: str</em>, <em class="sig-param">query_type: centraldogma.query.QueryType</em>, <em class="sig-param">expressions: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.query.Query" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+</section>
+<section id="module-centraldogma.query">
+<span id="centraldogma-query-module"></span><h2>centraldogma.query module<a class="headerlink" href="#module-centraldogma.query" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="centraldogma.query.Query">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.query.</span></span><span class="sig-name descname"><span class="pre">Query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_type:</span> <span class="pre">~centraldogma.query.QueryType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expressions:</span> <span class="pre">~typing.List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.query.Query" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
 <p>A query on a file.</p>
-<dl class="attribute">
-<dt id="centraldogma.query.Query.expressions">
-<code class="sig-name descname">expressions</code><em class="property">: List[str]</em><em class="property"> = None</em><a class="headerlink" href="#centraldogma.query.Query.expressions" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.query.Query.expressions">
+<span class="sig-name descname"><span class="pre">expressions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#centraldogma.query.Query.expressions" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.query.Query.identity">
-<em class="property">static </em><code class="sig-name descname">identity</code><span class="sig-paren">(</span><em class="sig-param">path: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.query.Query[str][str]<a class="headerlink" href="#centraldogma.query.Query.identity" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.query.Query.identity">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.identity" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Query</span></code> that retrieves the content as it is.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> – the path of a file being queried on</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.query.Query.json">
-<em class="property">static </em><code class="sig-name descname">json</code><span class="sig-paren">(</span><em class="sig-param">path: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.query.Query[typing.Any][Any]<a class="headerlink" href="#centraldogma.query.Query.json" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.query.Query.json">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.json" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Query</span></code> that retrieves the JSON content as it is.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> – the path of a file being queried on</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.query.Query.json_path">
-<em class="property">static </em><code class="sig-name descname">json_path</code><span class="sig-paren">(</span><em class="sig-param">path: str, json_paths: List[str]</em><span class="sig-paren">)</span> &#x2192; centraldogma.query.Query[typing.Any][Any]<a class="headerlink" href="#centraldogma.query.Query.json_path" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.query.Query.json_path">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.json_path" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Query</span></code> that applies a series of
 <a class="reference external" href="https://github.com/json-path/JsonPath/blob/master/README.md">JSON path expressions</a> to the content.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> – the path of a file being queried on</p></li>
 <li><p><strong>json_paths</strong> – the JSON path expressions to apply</p></li>
@@ -566,22 +613,22 @@ available or changes.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="centraldogma.query.Query.path">
-<code class="sig-name descname">path</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#centraldogma.query.Query.path" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.query.Query.path">
+<span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#centraldogma.query.Query.path" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="centraldogma.query.Query.query_type">
-<code class="sig-name descname">query_type</code><em class="property">: QueryType</em><em class="property"> = None</em><a class="headerlink" href="#centraldogma.query.Query.query_type" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.query.Query.query_type">
+<span class="sig-name descname"><span class="pre">query_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#centraldogma.query.QueryType" title="centraldogma.query.QueryType"><span class="pre">QueryType</span></a></em><a class="headerlink" href="#centraldogma.query.Query.query_type" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="centraldogma.query.Query.text">
-<em class="property">static </em><code class="sig-name descname">text</code><span class="sig-paren">(</span><em class="sig-param">path: str</em><span class="sig-paren">)</span> &#x2192; centraldogma.query.Query[str][str]<a class="headerlink" href="#centraldogma.query.Query.text" title="Permalink to this definition"></a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="centraldogma.query.Query.text">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.text" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Query</span></code> that retrieves the textual content as it is.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> – the path of a file being queried on</p>
 </dd>
 </dl>
@@ -589,203 +636,348 @@ available or changes.</p>
 
 </dd></dl>
 
-<dl class="class">
-<dt id="centraldogma.query.QueryType">
-<em class="property">class </em><code class="sig-prename descclassname">centraldogma.query.</code><code class="sig-name descname">QueryType</code><a class="headerlink" href="#centraldogma.query.QueryType" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="centraldogma.query.QueryType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.query.</span></span><span class="sig-name descname"><span class="pre">QueryType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.query.QueryType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <p>An enumeration.</p>
-<dl class="attribute">
-<dt id="centraldogma.query.QueryType.IDENTITY">
-<code class="sig-name descname">IDENTITY</code><em class="property"> = 'IDENTITY'</em><a class="headerlink" href="#centraldogma.query.QueryType.IDENTITY" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.query.QueryType.IDENTITY">
+<span class="sig-name descname"><span class="pre">IDENTITY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IDENTITY'</span></em><a class="headerlink" href="#centraldogma.query.QueryType.IDENTITY" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="centraldogma.query.QueryType.IDENTITY_JSON">
-<code class="sig-name descname">IDENTITY_JSON</code><em class="property"> = 'IDENTITY_JSON'</em><a class="headerlink" href="#centraldogma.query.QueryType.IDENTITY_JSON" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.query.QueryType.IDENTITY_JSON">
+<span class="sig-name descname"><span class="pre">IDENTITY_JSON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IDENTITY_JSON'</span></em><a class="headerlink" href="#centraldogma.query.QueryType.IDENTITY_JSON" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="centraldogma.query.QueryType.IDENTITY_TEXT">
-<code class="sig-name descname">IDENTITY_TEXT</code><em class="property"> = 'IDENTITY_TEXT'</em><a class="headerlink" href="#centraldogma.query.QueryType.IDENTITY_TEXT" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.query.QueryType.IDENTITY_TEXT">
+<span class="sig-name descname"><span class="pre">IDENTITY_TEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IDENTITY_TEXT'</span></em><a class="headerlink" href="#centraldogma.query.QueryType.IDENTITY_TEXT" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="centraldogma.query.QueryType.JSON_PATH">
-<code class="sig-name descname">JSON_PATH</code><em class="property"> = 'JSON_PATH'</em><a class="headerlink" href="#centraldogma.query.QueryType.JSON_PATH" title="Permalink to this definition"></a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="centraldogma.query.QueryType.JSON_PATH">
+<span class="sig-name descname"><span class="pre">JSON_PATH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'JSON_PATH'</span></em><a class="headerlink" href="#centraldogma.query.QueryType.JSON_PATH" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-centraldogma.exceptions">
-<span id="centraldogma-exceptions-module"></span><h2>centraldogma.exceptions module<a class="headerlink" href="#module-centraldogma.exceptions" title="Permalink to this headline"></a></h2>
-<dl class="exception">
-<dt id="centraldogma.exceptions.AuthorizationException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">AuthorizationException</code><a class="headerlink" href="#centraldogma.exceptions.AuthorizationException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+</section>
+<section id="module-centraldogma.exceptions">
+<span id="centraldogma-exceptions-module"></span><h2>centraldogma.exceptions module<a class="headerlink" href="#module-centraldogma.exceptions" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.AuthorizationException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">AuthorizationException</span></span><a class="headerlink" href="#centraldogma.exceptions.AuthorizationException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when a client failed to authenticate or attempted to
 perform an unauthorized operation.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.BadRequestException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">BadRequestException</code><a class="headerlink" href="#centraldogma.exceptions.BadRequestException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.BadRequestException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">BadRequestException</span></span><a class="headerlink" href="#centraldogma.exceptions.BadRequestException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception indicating a 400 Bad Client Request.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.CentralDogmaException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">CentralDogmaException</code><a class="headerlink" href="#centraldogma.exceptions.CentralDogmaException" title="Permalink to this definition"></a></dt>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.CentralDogmaException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">CentralDogmaException</span></span><a class="headerlink" href="#centraldogma.exceptions.CentralDogmaException" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>An exception that is raised when failed to access Central Dogma.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.ChangeConflictException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">ChangeConflictException</code><a class="headerlink" href="#centraldogma.exceptions.ChangeConflictException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.ChangeConflictException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ChangeConflictException</span></span><a class="headerlink" href="#centraldogma.exceptions.ChangeConflictException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to push a commit which cannot be applied
 without a conflict.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.EntryNoContentException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">EntryNoContentException</code><a class="headerlink" href="#centraldogma.exceptions.EntryNoContentException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.EntryNoContentException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">EntryNoContentException</span></span><a class="headerlink" href="#centraldogma.exceptions.EntryNoContentException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to retrieve the content from a directory entry.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.EntryNotFoundException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">EntryNotFoundException</code><a class="headerlink" href="#centraldogma.exceptions.EntryNotFoundException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.EntryNotFoundException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">EntryNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.EntryNotFoundException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to access a non-existent entry in a repository.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.ForbiddenException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">ForbiddenException</code><a class="headerlink" href="#centraldogma.exceptions.ForbiddenException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.ForbiddenException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ForbiddenException</span></span><a class="headerlink" href="#centraldogma.exceptions.ForbiddenException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception indicating that an access to a resource requested by a client has been forbidden
 by the Central Dogma.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.InvalidResponseException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">InvalidResponseException</code><a class="headerlink" href="#centraldogma.exceptions.InvalidResponseException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.InvalidResponseException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidResponseException</span></span><a class="headerlink" href="#centraldogma.exceptions.InvalidResponseException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when a client received an invalid response.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.NotFoundException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">NotFoundException</code><a class="headerlink" href="#centraldogma.exceptions.NotFoundException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.NotFoundException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">NotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.NotFoundException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception indicating a 404 Not Found.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.ProjectExistsException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">ProjectExistsException</code><a class="headerlink" href="#centraldogma.exceptions.ProjectExistsException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.ProjectExistsException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ProjectExistsException</span></span><a class="headerlink" href="#centraldogma.exceptions.ProjectExistsException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to create a project with an existing project name.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.ProjectNotFoundException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">ProjectNotFoundException</code><a class="headerlink" href="#centraldogma.exceptions.ProjectNotFoundException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.ProjectNotFoundException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ProjectNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.ProjectNotFoundException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to access a non-existent project.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.QueryExecutionException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">QueryExecutionException</code><a class="headerlink" href="#centraldogma.exceptions.QueryExecutionException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.QueryExecutionException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">QueryExecutionException</span></span><a class="headerlink" href="#centraldogma.exceptions.QueryExecutionException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when the evaluation of a <cite>Query</cite> has failed.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.RedundantChangeException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">RedundantChangeException</code><a class="headerlink" href="#centraldogma.exceptions.RedundantChangeException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.RedundantChangeException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RedundantChangeException</span></span><a class="headerlink" href="#centraldogma.exceptions.RedundantChangeException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to push a commit without effective changes.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.RepositoryExistsException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">RepositoryExistsException</code><a class="headerlink" href="#centraldogma.exceptions.RepositoryExistsException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.RepositoryExistsException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RepositoryExistsException</span></span><a class="headerlink" href="#centraldogma.exceptions.RepositoryExistsException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to create a repository
 with an existing repository name.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.RepositoryNotFoundException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">RepositoryNotFoundException</code><a class="headerlink" href="#centraldogma.exceptions.RepositoryNotFoundException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.RepositoryNotFoundException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RepositoryNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.RepositoryNotFoundException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to access a non-existent repository.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.RevisionNotFoundException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">RevisionNotFoundException</code><a class="headerlink" href="#centraldogma.exceptions.RevisionNotFoundException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.RevisionNotFoundException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RevisionNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.RevisionNotFoundException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to access a non-existent revision.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.ShuttingDownException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">ShuttingDownException</code><a class="headerlink" href="#centraldogma.exceptions.ShuttingDownException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.ShuttingDownException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ShuttingDownException</span></span><a class="headerlink" href="#centraldogma.exceptions.ShuttingDownException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when Central Dogma cannot handle a request
 because it’s shutting down.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.UnauthorizedException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">UnauthorizedException</code><a class="headerlink" href="#centraldogma.exceptions.UnauthorizedException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.UnauthorizedException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnauthorizedException</span></span><a class="headerlink" href="#centraldogma.exceptions.UnauthorizedException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception indicating a 401 Unauthorized.</p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="centraldogma.exceptions.UnknownException">
-<em class="property">exception </em><code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">UnknownException</code><a class="headerlink" href="#centraldogma.exceptions.UnknownException" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">centraldogma.exceptions.CentralDogmaException</span></code></a></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="centraldogma.exceptions.UnknownException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnknownException</span></span><a class="headerlink" href="#centraldogma.exceptions.UnknownException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception used for reporting unknown exceptions.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="centraldogma.exceptions.to_exception">
-<code class="sig-prename descclassname">centraldogma.exceptions.</code><code class="sig-name descname">to_exception</code><span class="sig-paren">(</span><em class="sig-param">response: httpx.Response</em><span class="sig-paren">)</span> &#x2192; centraldogma.exceptions.CentralDogmaException<a class="headerlink" href="#centraldogma.exceptions.to_exception" title="Permalink to this definition"></a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="centraldogma.exceptions.to_exception">
+<span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">to_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Response</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><span class="pre">CentralDogmaException</span></a></span></span><a class="headerlink" href="#centraldogma.exceptions.to_exception" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-</div>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+</section>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="centraldogma.data.html">centraldogma.data package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.change">centraldogma.data.change module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.commit">centraldogma.data.commit module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.content">centraldogma.data.content module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.creator">centraldogma.data.creator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.entry">centraldogma.data.entry module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#centraldogma-data-merge-source-module">centraldogma.data.merge_source module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#centraldogma-data-merged-entry-module">centraldogma.data.merged_entry module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.project">centraldogma.data.project module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.push_result">centraldogma.data.push_result module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.repository">centraldogma.data.repository module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.revision">centraldogma.data.revision module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.change">centraldogma.data.change module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change"><code class="docutils literal notranslate"><span class="pre">Change</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change.content"><code class="docutils literal notranslate"><span class="pre">Change.content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change.from_dict"><code class="docutils literal notranslate"><span class="pre">Change.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change.from_json"><code class="docutils literal notranslate"><span class="pre">Change.from_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change.path"><code class="docutils literal notranslate"><span class="pre">Change.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change.schema"><code class="docutils literal notranslate"><span class="pre">Change.schema()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change.to_dict"><code class="docutils literal notranslate"><span class="pre">Change.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change.to_json"><code class="docutils literal notranslate"><span class="pre">Change.to_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.Change.type"><code class="docutils literal notranslate"><span class="pre">Change.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.ChangeType"><code class="docutils literal notranslate"><span class="pre">ChangeType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.ChangeType.APPLY_JSON_PATCH"><code class="docutils literal notranslate"><span class="pre">ChangeType.APPLY_JSON_PATCH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.ChangeType.APPLY_TEXT_PATCH"><code class="docutils literal notranslate"><span class="pre">ChangeType.APPLY_TEXT_PATCH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.ChangeType.REMOVE"><code class="docutils literal notranslate"><span class="pre">ChangeType.REMOVE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.ChangeType.RENAME"><code class="docutils literal notranslate"><span class="pre">ChangeType.RENAME</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.ChangeType.UPSERT_JSON"><code class="docutils literal notranslate"><span class="pre">ChangeType.UPSERT_JSON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.change.ChangeType.UPSERT_TEXT"><code class="docutils literal notranslate"><span class="pre">ChangeType.UPSERT_TEXT</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.commit">centraldogma.data.commit module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit"><code class="docutils literal notranslate"><span class="pre">Commit</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit.detail"><code class="docutils literal notranslate"><span class="pre">Commit.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit.from_dict"><code class="docutils literal notranslate"><span class="pre">Commit.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit.from_json"><code class="docutils literal notranslate"><span class="pre">Commit.from_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit.markup"><code class="docutils literal notranslate"><span class="pre">Commit.markup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit.schema"><code class="docutils literal notranslate"><span class="pre">Commit.schema()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit.summary"><code class="docutils literal notranslate"><span class="pre">Commit.summary</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit.to_dict"><code class="docutils literal notranslate"><span class="pre">Commit.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.commit.Commit.to_json"><code class="docutils literal notranslate"><span class="pre">Commit.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.content">centraldogma.data.content module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content"><code class="docutils literal notranslate"><span class="pre">Content</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.content"><code class="docutils literal notranslate"><span class="pre">Content.content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.from_dict"><code class="docutils literal notranslate"><span class="pre">Content.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.from_json"><code class="docutils literal notranslate"><span class="pre">Content.from_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.path"><code class="docutils literal notranslate"><span class="pre">Content.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.revision"><code class="docutils literal notranslate"><span class="pre">Content.revision</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.schema"><code class="docutils literal notranslate"><span class="pre">Content.schema()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.to_dict"><code class="docutils literal notranslate"><span class="pre">Content.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.to_json"><code class="docutils literal notranslate"><span class="pre">Content.to_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.type"><code class="docutils literal notranslate"><span class="pre">Content.type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.content.Content.url"><code class="docutils literal notranslate"><span class="pre">Content.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.creator">centraldogma.data.creator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.creator.Creator"><code class="docutils literal notranslate"><span class="pre">Creator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.creator.Creator.email"><code class="docutils literal notranslate"><span class="pre">Creator.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.creator.Creator.from_dict"><code class="docutils literal notranslate"><span class="pre">Creator.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.creator.Creator.from_json"><code class="docutils literal notranslate"><span class="pre">Creator.from_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.creator.Creator.name"><code class="docutils literal notranslate"><span class="pre">Creator.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.creator.Creator.schema"><code class="docutils literal notranslate"><span class="pre">Creator.schema()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.creator.Creator.to_dict"><code class="docutils literal notranslate"><span class="pre">Creator.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.creator.Creator.to_json"><code class="docutils literal notranslate"><span class="pre">Creator.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.entry">centraldogma.data.entry module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.Entry"><code class="docutils literal notranslate"><span class="pre">Entry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.Entry.content"><code class="docutils literal notranslate"><span class="pre">Entry.content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.Entry.content_as_text"><code class="docutils literal notranslate"><span class="pre">Entry.content_as_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.Entry.directory"><code class="docutils literal notranslate"><span class="pre">Entry.directory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.Entry.has_content"><code class="docutils literal notranslate"><span class="pre">Entry.has_content()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.Entry.json"><code class="docutils literal notranslate"><span class="pre">Entry.json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.Entry.text"><code class="docutils literal notranslate"><span class="pre">Entry.text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.EntryType"><code class="docutils literal notranslate"><span class="pre">EntryType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.EntryType.DIRECTORY"><code class="docutils literal notranslate"><span class="pre">EntryType.DIRECTORY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.EntryType.JSON"><code class="docutils literal notranslate"><span class="pre">EntryType.JSON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.entry.EntryType.TEXT"><code class="docutils literal notranslate"><span class="pre">EntryType.TEXT</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#centraldogma-data-merge-source-module">centraldogma.data.merge_source module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merge_source.MergeSource"><code class="docutils literal notranslate"><span class="pre">MergeSource</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merge_source.MergeSource.optional"><code class="docutils literal notranslate"><span class="pre">MergeSource.optional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merge_source.MergeSource.path"><code class="docutils literal notranslate"><span class="pre">MergeSource.path</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#centraldogma-data-merged-entry-module">centraldogma.data.merged_entry module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merged_entry.MergedEntry"><code class="docutils literal notranslate"><span class="pre">MergedEntry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merged_entry.MergedEntry.content"><code class="docutils literal notranslate"><span class="pre">MergedEntry.content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.merged_entry.MergedEntry.from_dict"><code class="docutils literal notranslate"><span class="pre">MergedEntry.from_dict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.project">centraldogma.data.project module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project"><code class="docutils literal notranslate"><span class="pre">Project</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.created_at"><code class="docutils literal notranslate"><span class="pre">Project.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.creator"><code class="docutils literal notranslate"><span class="pre">Project.creator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.dataclass_json_config"><code class="docutils literal notranslate"><span class="pre">Project.dataclass_json_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.from_dict"><code class="docutils literal notranslate"><span class="pre">Project.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.from_json"><code class="docutils literal notranslate"><span class="pre">Project.from_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.name"><code class="docutils literal notranslate"><span class="pre">Project.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.schema"><code class="docutils literal notranslate"><span class="pre">Project.schema()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.to_dict"><code class="docutils literal notranslate"><span class="pre">Project.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.to_json"><code class="docutils literal notranslate"><span class="pre">Project.to_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.project.Project.url"><code class="docutils literal notranslate"><span class="pre">Project.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.push_result">centraldogma.data.push_result module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult"><code class="docutils literal notranslate"><span class="pre">PushResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult.dataclass_json_config"><code class="docutils literal notranslate"><span class="pre">PushResult.dataclass_json_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult.from_dict"><code class="docutils literal notranslate"><span class="pre">PushResult.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult.from_json"><code class="docutils literal notranslate"><span class="pre">PushResult.from_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult.pushed_at"><code class="docutils literal notranslate"><span class="pre">PushResult.pushed_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult.revision"><code class="docutils literal notranslate"><span class="pre">PushResult.revision</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult.schema"><code class="docutils literal notranslate"><span class="pre">PushResult.schema()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult.to_dict"><code class="docutils literal notranslate"><span class="pre">PushResult.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.push_result.PushResult.to_json"><code class="docutils literal notranslate"><span class="pre">PushResult.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.repository">centraldogma.data.repository module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository"><code class="docutils literal notranslate"><span class="pre">Repository</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.created_at"><code class="docutils literal notranslate"><span class="pre">Repository.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.creator"><code class="docutils literal notranslate"><span class="pre">Repository.creator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.dataclass_json_config"><code class="docutils literal notranslate"><span class="pre">Repository.dataclass_json_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.from_dict"><code class="docutils literal notranslate"><span class="pre">Repository.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.from_json"><code class="docutils literal notranslate"><span class="pre">Repository.from_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.head_revision"><code class="docutils literal notranslate"><span class="pre">Repository.head_revision</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.name"><code class="docutils literal notranslate"><span class="pre">Repository.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.schema"><code class="docutils literal notranslate"><span class="pre">Repository.schema()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.to_dict"><code class="docutils literal notranslate"><span class="pre">Repository.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.to_json"><code class="docutils literal notranslate"><span class="pre">Repository.to_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.repository.Repository.url"><code class="docutils literal notranslate"><span class="pre">Repository.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.data.html#module-centraldogma.data.revision">centraldogma.data.revision module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision"><code class="docutils literal notranslate"><span class="pre">Revision</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision.head"><code class="docutils literal notranslate"><span class="pre">Revision.head()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision.init"><code class="docutils literal notranslate"><span class="pre">Revision.init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision.major"><code class="docutils literal notranslate"><span class="pre">Revision.major</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

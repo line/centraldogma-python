@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>centraldogma &mdash; centraldogma-python  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>centraldogma &mdash; centraldogma-python  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -39,7 +44,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">centraldogma</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="centraldogma.html">centraldogma package</a></li>
@@ -71,18 +76,133 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="centraldogma">
-<h1>centraldogma<a class="headerlink" href="#centraldogma" title="Permalink to this headline"></a></h1>
+  <section id="centraldogma">
+<h1>centraldogma<a class="headerlink" href="#centraldogma" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="centraldogma.html">centraldogma package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.dogma">centraldogma.dogma module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.project_service">centraldogma.project_service module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.repository_service">centraldogma.repository_service module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.content_service">centraldogma.content_service module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.watcher">centraldogma.watcher module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.query">centraldogma.query module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.exceptions">centraldogma.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.dogma">centraldogma.dogma module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma"><code class="docutils literal notranslate"><span class="pre">Dogma</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.DEFAULT_BASE_URL"><code class="docutils literal notranslate"><span class="pre">Dogma.DEFAULT_BASE_URL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.DEFAULT_TOKEN"><code class="docutils literal notranslate"><span class="pre">Dogma.DEFAULT_TOKEN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.create_project"><code class="docutils literal notranslate"><span class="pre">Dogma.create_project()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.create_repository"><code class="docutils literal notranslate"><span class="pre">Dogma.create_repository()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.file_watcher"><code class="docutils literal notranslate"><span class="pre">Dogma.file_watcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.get_file"><code class="docutils literal notranslate"><span class="pre">Dogma.get_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.get_files"><code class="docutils literal notranslate"><span class="pre">Dogma.get_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.list_files"><code class="docutils literal notranslate"><span class="pre">Dogma.list_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.list_projects"><code class="docutils literal notranslate"><span class="pre">Dogma.list_projects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.list_repositories"><code class="docutils literal notranslate"><span class="pre">Dogma.list_repositories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.merge_files"><code class="docutils literal notranslate"><span class="pre">Dogma.merge_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.normalize_repository_revision"><code class="docutils literal notranslate"><span class="pre">Dogma.normalize_repository_revision()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.purge_project"><code class="docutils literal notranslate"><span class="pre">Dogma.purge_project()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.purge_repository"><code class="docutils literal notranslate"><span class="pre">Dogma.purge_repository()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.push"><code class="docutils literal notranslate"><span class="pre">Dogma.push()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.remove_project"><code class="docutils literal notranslate"><span class="pre">Dogma.remove_project()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.remove_repository"><code class="docutils literal notranslate"><span class="pre">Dogma.remove_repository()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.repository_watcher"><code class="docutils literal notranslate"><span class="pre">Dogma.repository_watcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.unremove_project"><code class="docutils literal notranslate"><span class="pre">Dogma.unremove_project()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.unremove_repository"><code class="docutils literal notranslate"><span class="pre">Dogma.unremove_repository()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.watch_file"><code class="docutils literal notranslate"><span class="pre">Dogma.watch_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.dogma.Dogma.watch_repository"><code class="docutils literal notranslate"><span class="pre">Dogma.watch_repository()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.project_service">centraldogma.project_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.project_service.ProjectService"><code class="docutils literal notranslate"><span class="pre">ProjectService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.project_service.ProjectService.create"><code class="docutils literal notranslate"><span class="pre">ProjectService.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.project_service.ProjectService.list"><code class="docutils literal notranslate"><span class="pre">ProjectService.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.project_service.ProjectService.purge"><code class="docutils literal notranslate"><span class="pre">ProjectService.purge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.project_service.ProjectService.remove"><code class="docutils literal notranslate"><span class="pre">ProjectService.remove()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.project_service.ProjectService.unremove"><code class="docutils literal notranslate"><span class="pre">ProjectService.unremove()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.repository_service">centraldogma.repository_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.repository_service.RepositoryService"><code class="docutils literal notranslate"><span class="pre">RepositoryService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.repository_service.RepositoryService.create"><code class="docutils literal notranslate"><span class="pre">RepositoryService.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.repository_service.RepositoryService.list"><code class="docutils literal notranslate"><span class="pre">RepositoryService.list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.repository_service.RepositoryService.normalize_revision"><code class="docutils literal notranslate"><span class="pre">RepositoryService.normalize_revision()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.repository_service.RepositoryService.purge"><code class="docutils literal notranslate"><span class="pre">RepositoryService.purge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.repository_service.RepositoryService.remove"><code class="docutils literal notranslate"><span class="pre">RepositoryService.remove()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.repository_service.RepositoryService.unremove"><code class="docutils literal notranslate"><span class="pre">RepositoryService.unremove()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.content_service">centraldogma.content_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.content_service.ContentService"><code class="docutils literal notranslate"><span class="pre">ContentService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.content_service.ContentService.get_file"><code class="docutils literal notranslate"><span class="pre">ContentService.get_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.content_service.ContentService.get_files"><code class="docutils literal notranslate"><span class="pre">ContentService.get_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.content_service.ContentService.merge_files"><code class="docutils literal notranslate"><span class="pre">ContentService.merge_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.content_service.ContentService.push"><code class="docutils literal notranslate"><span class="pre">ContentService.push()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.content_service.ContentService.watch_file"><code class="docutils literal notranslate"><span class="pre">ContentService.watch_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.content_service.ContentService.watch_repository"><code class="docutils literal notranslate"><span class="pre">ContentService.watch_repository()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.watcher">centraldogma.watcher module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.watcher.Latest"><code class="docutils literal notranslate"><span class="pre">Latest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.watcher.Latest.revision"><code class="docutils literal notranslate"><span class="pre">Latest.revision</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.watcher.Latest.value"><code class="docutils literal notranslate"><span class="pre">Latest.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.watcher.Watcher"><code class="docutils literal notranslate"><span class="pre">Watcher</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.watcher.Watcher.await_initial_value"><code class="docutils literal notranslate"><span class="pre">Watcher.await_initial_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.watcher.Watcher.close"><code class="docutils literal notranslate"><span class="pre">Watcher.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.watcher.Watcher.initial_value_future"><code class="docutils literal notranslate"><span class="pre">Watcher.initial_value_future()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.watcher.Watcher.latest"><code class="docutils literal notranslate"><span class="pre">Watcher.latest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.watcher.Watcher.watch"><code class="docutils literal notranslate"><span class="pre">Watcher.watch()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.query">centraldogma.query module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.query.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.Query.expressions"><code class="docutils literal notranslate"><span class="pre">Query.expressions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.Query.identity"><code class="docutils literal notranslate"><span class="pre">Query.identity()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.Query.json"><code class="docutils literal notranslate"><span class="pre">Query.json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.Query.json_path"><code class="docutils literal notranslate"><span class="pre">Query.json_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.Query.path"><code class="docutils literal notranslate"><span class="pre">Query.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.Query.query_type"><code class="docutils literal notranslate"><span class="pre">Query.query_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.Query.text"><code class="docutils literal notranslate"><span class="pre">Query.text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.query.QueryType"><code class="docutils literal notranslate"><span class="pre">QueryType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.QueryType.IDENTITY"><code class="docutils literal notranslate"><span class="pre">QueryType.IDENTITY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.QueryType.IDENTITY_JSON"><code class="docutils literal notranslate"><span class="pre">QueryType.IDENTITY_JSON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.QueryType.IDENTITY_TEXT"><code class="docutils literal notranslate"><span class="pre">QueryType.IDENTITY_TEXT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="centraldogma.html#centraldogma.query.QueryType.JSON_PATH"><code class="docutils literal notranslate"><span class="pre">QueryType.JSON_PATH</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centraldogma.html#module-centraldogma.exceptions">centraldogma.exceptions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.AuthorizationException"><code class="docutils literal notranslate"><span class="pre">AuthorizationException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.BadRequestException"><code class="docutils literal notranslate"><span class="pre">BadRequestException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.CentralDogmaException"><code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.ChangeConflictException"><code class="docutils literal notranslate"><span class="pre">ChangeConflictException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.EntryNoContentException"><code class="docutils literal notranslate"><span class="pre">EntryNoContentException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.EntryNotFoundException"><code class="docutils literal notranslate"><span class="pre">EntryNotFoundException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.ForbiddenException"><code class="docutils literal notranslate"><span class="pre">ForbiddenException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.InvalidResponseException"><code class="docutils literal notranslate"><span class="pre">InvalidResponseException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.NotFoundException"><code class="docutils literal notranslate"><span class="pre">NotFoundException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.ProjectExistsException"><code class="docutils literal notranslate"><span class="pre">ProjectExistsException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.ProjectNotFoundException"><code class="docutils literal notranslate"><span class="pre">ProjectNotFoundException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.QueryExecutionException"><code class="docutils literal notranslate"><span class="pre">QueryExecutionException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.RedundantChangeException"><code class="docutils literal notranslate"><span class="pre">RedundantChangeException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.RepositoryExistsException"><code class="docutils literal notranslate"><span class="pre">RepositoryExistsException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.RepositoryNotFoundException"><code class="docutils literal notranslate"><span class="pre">RepositoryNotFoundException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.RevisionNotFoundException"><code class="docutils literal notranslate"><span class="pre">RevisionNotFoundException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.ShuttingDownException"><code class="docutils literal notranslate"><span class="pre">ShuttingDownException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.UnauthorizedException"><code class="docutils literal notranslate"><span class="pre">UnauthorizedException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.UnknownException"><code class="docutils literal notranslate"><span class="pre">UnknownException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="centraldogma.html#centraldogma.exceptions.to_exception"><code class="docutils literal notranslate"><span class="pre">to_exception()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="centraldogma.html#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="centraldogma.data.html">centraldogma.data package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="centraldogma.data.html#submodules">Submodules</a></li>
@@ -105,7 +225,7 @@
 </li>
 </ul>
 </div>
-</div>
+</section>
 
 
            </div>
