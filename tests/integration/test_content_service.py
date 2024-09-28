@@ -33,7 +33,7 @@ from centraldogma.exceptions import (
 )
 from centraldogma.query import Query
 
-dogma = Dogma()
+dogma = Dogma(retries=3)
 project_name = "TestProject"
 repo_name = "TestRepository"
 

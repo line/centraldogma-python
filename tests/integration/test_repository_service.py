@@ -20,7 +20,7 @@ from centraldogma.exceptions import (
 import pytest
 import os
 
-dogma = Dogma()
+dogma = Dogma(retries=3)
 project_name = "TestProject"
 repo_name = "TestRepository"
 

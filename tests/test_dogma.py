@@ -37,7 +37,8 @@ from centraldogma.exceptions import (
     RepositoryExistsException,
 )
 
-client = Dogma("http://baseurl", "token")
+base_url = "http://baseurl"
+client = Dogma(base_url, "token")
 
 mock_project = {
     "name": "project1",
@@ -79,7 +80,7 @@ mock_merge_result = {
 
 
 def test_list_projects(respx_mock):
-    url = "http://baseurl/api/v1/projects"
+    url = f"{base_url}/api/v1/projects"
     route = respx_mock.get(url).mock(
         return_value=Response(200, json=[mock_project, mock_project])
     )
@@ -97,7 +98,7 @@ def test_list_projects(respx_mock):
 
 
 def test_list_projects_removed(respx_mock):
-    url = "http://baseurl/api/v1/projects"
+    url = f"{base_url}/api/v1/projects"
     route = respx_mock.get(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     projects = client.list_projects(removed=True)
 
@@ -107,7 +108,7 @@ def test_list_projects_removed(respx_mock):
 
 
 def test_create_project(respx_mock):
-    url = "http://baseurl/api/v1/projects"
+    url = f"{base_url}/api/v1/projects"
     route = respx_mock.post(url).mock(
         return_value=Response(HTTPStatus.CREATED, json=mock_project)
     )
@@ -121,7 +122,7 @@ def test_create_project(respx_mock):
 
 
 def test_create_project_failed(respx_mock):
-    url = "http://baseurl/api/v1/projects"
+    url = f"{base_url}/api/v1/projects"
     response_body = {
         "exception": "com.linecorp.centraldogma.common.ProjectExistsException",
         "message": "Project 'newProject' exists already.",
@@ -140,7 +141,7 @@ def test_create_project_failed(respx_mock):
 
 
 def test_remove_project(respx_mock):
-    url = "http://baseurl/api/v1/projects/project1"
+    url = f"{base_url}/api/v1/projects/project1"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     client.remove_project("project1")
 
@@ -149,7 +150,7 @@ def test_remove_project(respx_mock):
 
 
 def test_remove_project_failed(respx_mock):
-    url = "http://baseurl/api/v1/projects/project1"
+    url = f"{base_url}/api/v1/projects/project1"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
     with pytest.raises(BadRequestException):
         client.remove_project("project1")
@@ -159,7 +160,7 @@ def test_remove_project_failed(respx_mock):
 
 
 def test_unremove_project(respx_mock):
-    url = "http://baseurl/api/v1/projects/project1"
+    url = f"{base_url}/api/v1/projects/project1"
     route = respx_mock.patch(url).mock(
         return_value=Response(HTTPStatus.OK, json=mock_project)
     )
@@ -175,7 +176,7 @@ def test_unremove_project(respx_mock):
 
 
 def test_unremove_project_failed(respx_mock):
-    url = "http://baseurl/api/v1/projects/project1"
+    url = f"{base_url}/api/v1/projects/project1"
     route = respx_mock.patch(url).mock(
         return_value=Response(HTTPStatus.SERVICE_UNAVAILABLE)
     )
@@ -191,7 +192,7 @@ def test_unremove_project_failed(respx_mock):
 
 
 def test_purge_project(respx_mock):
-    url = "http://baseurl/api/v1/projects/project1/removed"
+    url = f"{base_url}/api/v1/projects/project1/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     client.purge_project("project1")
 
@@ -200,7 +201,7 @@ def test_purge_project(respx_mock):
 
 
 def test_purge_project_failed(respx_mock):
-    url = "http://baseurl/api/v1/projects/project1/removed"
+    url = f"{base_url}/api/v1/projects/project1/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.FORBIDDEN))
     with pytest.raises(UnknownException):
         client.purge_project("project1")
@@ -210,7 +211,7 @@ def test_purge_project_failed(respx_mock):
 
 
 def test_list_repositories(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos"
+    url = f"{base_url}/api/v1/projects/myproject/repos"
     route = respx_mock.get(url).mock(
         return_value=Response(HTTPStatus.OK, json=[mock_repository, mock_repository])
     )
@@ -230,7 +231,7 @@ def test_list_repositories(respx_mock):
 
 
 def test_list_repositories_removed(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos"
+    url = f"{base_url}/api/v1/projects/myproject/repos"
     route = respx_mock.get(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     repos = client.list_repositories("myproject", removed=True)
 
@@ -240,7 +241,7 @@ def test_list_repositories_removed(respx_mock):
 
 
 def test_create_repository(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos"
+    url = f"{base_url}/api/v1/projects/myproject/repos"
     route = respx_mock.post(url).mock(
         return_value=Response(HTTPStatus.CREATED, json=mock_repository)
     )
@@ -254,7 +255,7 @@ def test_create_repository(respx_mock):
 
 
 def test_create_repository_failed(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos"
+    url = f"{base_url}/api/v1/projects/myproject/repos"
     response_body = {
         "exception": "com.linecorp.centraldogma.common.RepositoryExistsException",
         "message": "Respository 'myproject/newRepo' exists already.",
@@ -272,7 +273,7 @@ def test_create_repository_failed(respx_mock):
 
 
 def test_remove_repository(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     client.remove_repository("myproject", "myrepo")
 
@@ -281,7 +282,7 @@ def test_remove_repository(respx_mock):
 
 
 def test_remove_repository_failed(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.FORBIDDEN))
     with pytest.raises(UnknownException):
         client.remove_repository("myproject", "myrepo")
@@ -291,7 +292,7 @@ def test_remove_repository_failed(respx_mock):
 
 
 def test_unremove_repository(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.patch(url).mock(
         return_value=Response(HTTPStatus.OK, json=mock_repository)
     )
@@ -307,7 +308,7 @@ def test_unremove_repository(respx_mock):
 
 
 def test_unremove_repository_failed(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo"
     route = respx_mock.patch(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
     with pytest.raises(BadRequestException):
         client.unremove_repository("myproject", "myrepo")
@@ -321,7 +322,7 @@ def test_unremove_repository_failed(respx_mock):
 
 
 def test_purge_repository(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/removed"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     client.purge_repository("myproject", "myrepo")
 
@@ -330,7 +331,7 @@ def test_purge_repository(respx_mock):
 
 
 def test_purge_repository_failed(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/removed"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/removed"
     route = respx_mock.delete(url).mock(return_value=Response(HTTPStatus.FORBIDDEN))
     with pytest.raises(UnknownException):
         client.purge_repository("myproject", "myrepo")
@@ -340,7 +341,7 @@ def test_purge_repository_failed(respx_mock):
 
 
 def test_normalize_repository_revision(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/revision/3"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/revision/3"
     route = respx_mock.get(url).mock(
         return_value=Response(HTTPStatus.OK, json={"revision": 3})
     )
@@ -352,7 +353,7 @@ def test_normalize_repository_revision(respx_mock):
 
 
 def test_normalize_repository_revision_failed(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/revision/3"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/revision/3"
     route = respx_mock.get(url).mock(return_value=Response(HTTPStatus.BAD_REQUEST))
     with pytest.raises(BadRequestException):
         client.normalize_repository_revision("myproject", "myrepo", 3)
@@ -362,7 +363,7 @@ def test_normalize_repository_revision_failed(respx_mock):
 
 
 def test_list_files(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/list"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/list"
     route = respx_mock.get(url).mock(
         return_value=Response(
             HTTPStatus.OK, json=[mock_content_text, mock_content_text]
@@ -380,7 +381,7 @@ def test_list_files(respx_mock):
 
 
 def test_list_files_pattern(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/list/foo/*.json"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/list/foo/*.json"
     route = respx_mock.get(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     files = client.list_files("myproject", "myrepo", "/foo/*.json")
 
@@ -390,7 +391,7 @@ def test_list_files_pattern(respx_mock):
 
 
 def test_list_files_revision(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/list/*.json"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/list/*.json"
     route = respx_mock.get(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     files = client.list_files("myproject", "myrepo", "*.json", 3)
 
@@ -400,7 +401,7 @@ def test_list_files_revision(respx_mock):
 
 
 def test_get_files(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/contents"
     route = respx_mock.get(url).mock(
         return_value=Response(
             HTTPStatus.OK, json=[mock_content_text, mock_content_text]
@@ -416,7 +417,7 @@ def test_get_files(respx_mock):
 
 
 def test_get_files_pattern(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents/foo/*.json"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/contents/foo/*.json"
     route = respx_mock.get(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     files = client.get_files("myproject", "myrepo", "/foo/*.json")
 
@@ -426,7 +427,7 @@ def test_get_files_pattern(respx_mock):
 
 
 def test_get_files_revision(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents/*.json"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/contents/*.json"
     route = respx_mock.get(url).mock(return_value=Response(HTTPStatus.NO_CONTENT))
     files = client.get_files("myproject", "myrepo", "*.json", 3)
 
@@ -436,7 +437,7 @@ def test_get_files_revision(respx_mock):
 
 
 def test_get_file_text(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents/foo.text"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/contents/foo.text"
     route = respx_mock.get(url).mock(
         return_value=Response(HTTPStatus.OK, json=mock_content_text)
     )
@@ -453,7 +454,7 @@ def test_get_file_text(respx_mock):
 
 
 def test_get_file_json(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents/foo.json"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/contents/foo.json"
     route = respx_mock.get(url).mock(
         return_value=Response(HTTPStatus.OK, json=mock_content_json)
     )
@@ -470,7 +471,7 @@ def test_get_file_json(respx_mock):
 
 
 def test_get_file_json_path(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents/foo.json"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/contents/foo.json"
     route = respx_mock.get(url).mock(
         return_value=Response(HTTPStatus.OK, json=mock_content_json)
     )
@@ -487,7 +488,7 @@ def test_get_file_json_path(respx_mock):
 
 
 def test_push(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/contents"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/contents"
     route = respx_mock.post(url).mock(
         return_value=Response(HTTPStatus.OK, json=mock_push_result)
     )
@@ -509,7 +510,7 @@ def test_push(respx_mock):
 
 
 def test_merge(respx_mock):
-    url = "http://baseurl/api/v1/projects/myproject/repos/myrepo/merge?optional_path=test.json&optional_path=test2.json&path=test3.json"
+    url = f"{base_url}/api/v1/projects/myproject/repos/myrepo/merge?optional_path=test.json&optional_path=test2.json&path=test3.json"
     route = respx_mock.get(url).mock(
         return_value=Response(HTTPStatus.OK, json=mock_merge_result)
     )
