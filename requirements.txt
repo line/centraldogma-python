@@ -3,6 +3,7 @@ httpx[http2]
 marshmallow
 pydantic
 python-dateutil
+tenacity
 
 # Dev dependencies
 black
