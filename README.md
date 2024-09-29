@@ -1,7 +1,9 @@
 # Central Dogma client in Python
-<a href="https://pypi.org/project/centraldogma-python/">
-    <img src="https://badge.fury.io/py/centraldogma-python.svg" alt="Package version">
-</a>
+
+[![PyPI version](https://badge.fury.io/py/centraldogma-python.svg)](https://badge.fury.io/py/centraldogma-python)
+[![PyPI Supported Python Versions](https://img.shields.io/pypi/pyversions/centraldogma-python.svg)](https://pypi.python.org/pypi/centraldogma-python/)
+[![check](https://github.com/line/centraldogma-python/actions/workflows/test.yml/badge.svg)](https://github.com/line/centraldogma-python/actions/workflows/test.yml)
+[![Downloads](https://static.pepy.tech/badge/centraldogma-python/month)](https://pepy.tech/project/centraldogma-python)
 
 Python client library for [Central Dogma](https://line.github.io/centraldogma/).
 
