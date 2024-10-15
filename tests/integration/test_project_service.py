@@ -21,7 +21,7 @@ from centraldogma.exceptions import (
     ProjectNotFoundException,
 )
 
-dogma = Dogma()
+dogma = Dogma(retries=3)
 project_name = "TestProject"
 
 

@@ -14,6 +14,7 @@
 from typing import Dict, Union, Callable, TypeVar, Optional
 
 from httpx import Client, HTTPTransport, Limits, Response
+from tenacity import stop_after_attempt, wait_exponential, Retrying
 
 from centraldogma.exceptions import to_exception
 
@@ -21,8 +22,6 @@ T = TypeVar("T")
 
 
 class BaseClient:
-    PATH_PREFIX = "/api/v1"
-
     def __init__(
         self,
         base_url: str,
@@ -33,14 +32,21 @@ class BaseClient:
         max_keepalive_connections: int = 2,
         **configs,
     ):
+        assert retries >= 0, "retries must be greater than or equal to zero"
+        assert max_connections > 0, "max_connections must be greater than zero"
+        assert (
+            max_keepalive_connections > 0
+        ), "max_keepalive_connections must be greater than zero"
+
         base_url = base_url[:-1] if base_url[-1] == "/" else base_url
 
         for key in ["transport", "limits"]:
             if key in configs:
                 del configs[key]
 
+        self.retries = retries
         self.client = Client(
-            base_url=f"{base_url}{self.PATH_PREFIX}",
+            base_url=f"{base_url}/api/v1",
             http2=http2,
             transport=HTTPTransport(retries=retries),
             limits=Limits(
@@ -53,7 +59,6 @@ class BaseClient:
         self.headers = self._get_headers(token)
         self.patch_headers = self._get_patch_headers(token)
 
-    # TODO(@hexoul): Support automatic retry with `tenacity` even if an exception occurs.
     def request(
         self,
         method: str,
@@ -62,6 +67,25 @@ class BaseClient:
         **kwargs,
     ) -> Union[Response, T]:
         kwargs = self._set_request_headers(method, **kwargs)
+        retryer = Retrying(
+            stop=stop_after_attempt(self.retries + 1),
+            wait=wait_exponential(max=60),
+            reraise=True,
+        )
+        return retryer(self._request, method, path, handler, **kwargs)
+
+    def _set_request_headers(self, method: str, **kwargs) -> Dict:
+        default_headers = self.patch_headers if method == "patch" else self.headers
+        kwargs["headers"] = {**default_headers, **(kwargs.get("headers") or {})}
+        return kwargs
+
+    def _request(
+        self,
+        method: str,
+        path: str,
+        handler: Optional[Dict[int, Callable[[Response], T]]] = None,
+        **kwargs,
+    ):
         resp = self.client.request(method, path, **kwargs)
         if handler:
             converter = handler.get(resp.status_code)
@@ -70,11 +94,6 @@ class BaseClient:
             else:  # Unexpected response status
                 raise to_exception(resp)
         return resp
-
-    def _set_request_headers(self, method: str, **kwargs) -> Dict:
-        default_headers = self.patch_headers if method == "patch" else self.headers
-        kwargs["headers"] = {**default_headers, **(kwargs.get("headers") or {})}
-        return kwargs
 
     @staticmethod
     def _get_headers(token: str) -> Dict:
