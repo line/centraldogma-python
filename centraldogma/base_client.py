@@ -32,6 +32,12 @@ class BaseClient:
         max_keepalive_connections: int = 2,
         **configs,
     ):
+        assert retries >= 0, "retries must be greater than or equal to zero"
+        assert max_connections > 0, "max_connections must be greater than zero"
+        assert (
+            max_keepalive_connections > 0
+        ), "max_keepalive_connections must be greater than zero"
+
         base_url = base_url[:-1] if base_url[-1] == "/" else base_url
 
         for key in ["transport", "limits"]:
@@ -61,7 +67,7 @@ class BaseClient:
         **kwargs,
     ) -> Union[Response, T]:
         kwargs = self._set_request_headers(method, **kwargs)
-        retryer = Retrying(stop=stop_after_attempt(self.retries), reraise=True)
+        retryer = Retrying(stop=stop_after_attempt(self.retries + 1), reraise=True)
         return retryer(self._request, method, path, handler, **kwargs)
 
     def _set_request_headers(self, method: str, **kwargs) -> Dict:

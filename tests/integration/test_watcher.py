@@ -25,7 +25,7 @@ from centraldogma.dogma import Dogma
 from centraldogma.query import Query
 from centraldogma.watcher import Watcher, Latest
 
-dogma = Dogma()
+dogma = Dogma(retries=3)
 project_name = "TestProject"
 repo_name = "TestRepository"
 

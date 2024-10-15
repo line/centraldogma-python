@@ -130,7 +130,7 @@ def test_get_with_retry_by_response(respx_mock):
         side_effect=[Response(503), Response(404), Response(200)],
     )
 
-    retry_client = BaseClient(base_url, "token", retries=3)
+    retry_client = BaseClient(base_url, "token", retries=2)
     retry_client.request("get", "/path", handler=ok_handler)
 
     assert route.called
@@ -142,7 +142,7 @@ def test_get_with_retry_by_client(respx_mock):
         side_effect=[ConnectError, ConnectError, NetworkError, Response(200)],
     )
 
-    retry_client = BaseClient(base_url, "token", retries=5)
+    retry_client = BaseClient(base_url, "token", retries=10)
     retry_client.request("get", "/path", handler=ok_handler)
 
     assert route.called
