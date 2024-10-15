@@ -19,7 +19,7 @@ from httpx import ConnectError, NetworkError, Response
 import pytest
 
 base_url = "http://baseurl"
-client = BaseClient(base_url, "token")
+client = BaseClient(base_url, "token", retries=0)
 
 configs = {
     "auth": None,

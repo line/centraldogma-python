@@ -38,7 +38,7 @@ from centraldogma.exceptions import (
 )
 
 base_url = "http://baseurl"
-client = Dogma(base_url, "token")
+client = Dogma(base_url, "token", retries=0)
 
 mock_project = {
     "name": "project1",

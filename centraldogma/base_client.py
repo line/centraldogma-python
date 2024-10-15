@@ -14,7 +14,7 @@
 from typing import Dict, Union, Callable, TypeVar, Optional
 
 from httpx import Client, HTTPTransport, Limits, Response
-from tenacity import stop_after_attempt, Retrying
+from tenacity import stop_after_attempt, wait_exponential, Retrying
 
 from centraldogma.exceptions import to_exception
 
@@ -67,7 +67,11 @@ class BaseClient:
         **kwargs,
     ) -> Union[Response, T]:
         kwargs = self._set_request_headers(method, **kwargs)
-        retryer = Retrying(stop=stop_after_attempt(self.retries + 1), reraise=True)
+        retryer = Retrying(
+            stop=stop_after_attempt(self.retries + 1),
+            wait=wait_exponential(max=60),
+            reraise=True,
+        )
         return retryer(self._request, method, path, handler, **kwargs)
 
     def _set_request_headers(self, method: str, **kwargs) -> Dict:
