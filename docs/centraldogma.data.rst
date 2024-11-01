@@ -45,7 +45,7 @@ centraldogma.data.entry module
    :show-inheritance:
 
 centraldogma.data.merge\_source module
-----------------------------------
+---------------------------------------
 
 .. automodule:: centraldogma.data.merge_source
    :members:
@@ -53,7 +53,7 @@ centraldogma.data.merge\_source module
    :show-inheritance:
 
 centraldogma.data.merged\_entry module
-----------------------------------
+---------------------------------------
 
 .. automodule:: centraldogma.data.merged_entry
    :members:
