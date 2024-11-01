@@ -125,11 +125,11 @@ class Dogma:
         """Lists files. The user should have read permission at least.
 
         :param path_pattern: A path pattern is a variant of glob as follows. |br|
-            "/\*\*" - find all files recursively |br|
-            "\*.json" - find all JSON files recursively |br|
-            "/foo/\*.json" - find all JSON files under the directory ``/foo`` |br|
-            "/\*/foo.txt" - find all files named foo.txt at the second depth level |br|
-            "\*.json,/bar/\*.txt" - use comma to match any patterns |br|
+            "/\\*\\*" - find all files recursively |br|
+            "\\*.json" - find all JSON files recursively |br|
+            "/foo/\\*.json" - find all JSON files under the directory ``/foo`` |br|
+            "/\\*/foo.txt" - find all files named foo.txt at the second depth level |br|
+            "\\*.json,/bar/\\*.txt" - use comma to match any patterns |br|
             This will bring all of the files in the repository, if unspecified.
         :param revision: The revision of the list to get. If not specified, gets the list of
             the latest revision.
@@ -149,11 +149,11 @@ class Dogma:
         the API List files is that this includes the content of the files.
 
         :param path_pattern: A path pattern is a variant of glob as follows. |br|
-            "/\*\*" - find all files recursively |br|
-            "\*.json" - find all JSON files recursively |br|
-            "/foo/\*.json" - find all JSON files under the directory ``/foo`` |br|
-            "/\*/foo.txt" - find all files named foo.txt at the second depth level |br|
-            "\*.json,/bar/\*.txt" - use comma to match any patterns |br|
+            "/\\*\\*" - find all files recursively |br|
+            "\\*.json" - find all JSON files recursively |br|
+            "/foo/\\*.json" - find all JSON files under the directory ``/foo`` |br|
+            "/\\*/foo.txt" - find all files named foo.txt at the second depth level |br|
+            "\\*.json,/bar/\\*.txt" - use comma to match any patterns |br|
             This will bring all of the files in the repository, if unspecified.
         :param revision: The revision of the list to get. If not specified, gets the list of
             the latest revision.
@@ -248,6 +248,7 @@ class Dogma:
     ) -> Watcher[T]:
         """Returns a ``Watcher`` which notifies its listeners when the specified repository has a new commit
         that contains the changes for the files matched by the given ``path_pattern``. e.g::
+
             def get_files(revision: Revision) -> List[Content]:
                 return dogma.get_files("foo_project", "bar_repo", revision, "/*.json")
 
