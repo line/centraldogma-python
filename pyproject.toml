@@ -39,7 +39,7 @@ classifiers = [
 requires-python = ">=3.9"
 dependencies = [
     "dataclasses-json",
-    "httpsx[http2]",
+    "httpx[http2]",
     "marshmallow",
     "pydantic",
     "python-dateutil",
