@@ -22,7 +22,7 @@ description = "Python client library for Central Dogma"
 readme = "README.md"
 urls = {Homepage = "https://github.com/line/centraldogma-python"}
 authors= [{name = "Central Dogma Team", email = "dl_centraldogma@linecorp.com"}]
-license = { text = "Apache-2.0" }
+license = { text = "Apache License 2.0" }
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
