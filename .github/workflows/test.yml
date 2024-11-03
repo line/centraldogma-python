@@ -18,6 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -e .
+          pip install -e '.[dev]'
           pip install sphinx
           pip install sphinx_rtd_theme
       - name : Build docs
@@ -55,7 +56,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f pyproject.toml ]; then pip install -e .; fi
+          pip install -e .
+          pip install -e '.[dev]'
 
       - name: Test with pytest
         run: |
@@ -88,6 +90,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -e .
+          pip install -e '.[dev]'
 
       - name: Test with pytest
         run: |

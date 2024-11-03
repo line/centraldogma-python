@@ -45,7 +45,10 @@ dependencies = [
     "pydantic == 2.9.2",
     "python-dateutil == 2.9.0.post0",
     "tenacity == 9.0.0",
+]
 
+[project.optional-dependencies]
+dev = [
     "black",
     "codecov",
     "pytest",
