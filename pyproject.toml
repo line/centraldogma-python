@@ -1,0 +1,78 @@
+# Copyright 2024 LINE Corporation
+#
+# LINE Corporation licenses this file to you under the Apache License,
+# version 2.0 (the "License"); you may not use this file except in compliance
+# with the License. You may obtain a copy of the License at:
+#
+#   https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+[build-system]
+requires = ["setuptools >= 61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "centraldogma-python"
+dynamic = ["version"]
+description = "Python client library for Central Dogma"
+readme = "README.md"
+authors= [{name = "Central Dogma Team", email = "dl_centraldogma@linecorp.com"}]
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "dataclasses-json == 0.6.7",
+    "httpx[http2] == 0.27.2",
+    "marshmallow == 3.23.0",
+    "pydantic == 2.9.2",
+    "python-dateutil == 2.9.0.post0",
+    "tenacity == 9.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/line/centraldogma-python"
+Documentation = "https://line.github.io/centraldogma-python"
+Repository = "https://github.com/line/centraldogma-python.git"
+Issues = "https://github.com/line/centraldogma-python/issues"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "codecov",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "respx"
+]
+docs = [
+    "sphinx_rtd_theme"
+]
+
+[tool.setuptools]
+packages = ["centraldogma", "centraldogma.data"]
+
+[tool.setuptools.dynamic]
+version = {attr = "centraldogma.__version__"}
+
+[tool.distutils.bdist_wheel]
+universal = true
+
+[tool.pep8]
+ignore = "E501"
