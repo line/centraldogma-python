@@ -61,6 +61,9 @@ dev = [
     "pytest-mock",
     "respx"
 ]
+docs = [
+    "sphinx_rtd_theme"
+]
 
 [tool.setuptools]
 packages = ["centraldogma", "centraldogma.data"]

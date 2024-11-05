@@ -11,15 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.9
       - name: Install dependencies
         run: |
-          pip install -e .
-          pip install -e '.[dev]'
-          pip install sphinx
+          pip install -e '.[docs]'
           pip install sphinx_rtd_theme
       - name : Build docs
         run: sphinx-build docs ./docs/_build/html/
