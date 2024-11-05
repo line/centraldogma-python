@@ -20,9 +20,11 @@ name = "centraldogma-python"
 dynamic = ["version"]
 description = "Python client library for Central Dogma"
 readme = "README.md"
-urls = {Homepage = "https://github.com/line/centraldogma-python"}
+[project.urls]
+Homepage = "https://github.com/line/centraldogma-python"
+Documentation = "https://line.github.io/centraldogma-python"
 authors= [{name = "Central Dogma Team", email = "dl_centraldogma@linecorp.com"}]
-license = { text = "Apache License 2.0" }
+license = {file = "LICENSE"}
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
