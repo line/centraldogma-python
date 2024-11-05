@@ -20,9 +20,6 @@ name = "centraldogma-python"
 dynamic = ["version"]
 description = "Python client library for Central Dogma"
 readme = "README.md"
-[project.urls]
-Homepage = "https://github.com/line/centraldogma-python"
-Documentation = "https://line.github.io/centraldogma-python"
 authors= [{name = "Central Dogma Team", email = "dl_centraldogma@linecorp.com"}]
 license = {file = "LICENSE"}
 classifiers = [
@@ -48,6 +45,12 @@ dependencies = [
     "python-dateutil == 2.9.0.post0",
     "tenacity == 9.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/line/centraldogma-python"
+Documentation = "https://line.github.io/centraldogma-python"
+Repository = "https://github.com/line/centraldogma-python.git"
+Issues = "https://github.com/line/centraldogma-python/issues"
 
 [project.optional-dependencies]
 dev = [
