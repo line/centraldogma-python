@@ -3,7 +3,11 @@ name: Deploy Sphinx documentation to Github pages
 on:
   push:
     branches:
-       - main
+      - main
+
+env:
+  UV_SYSTEM_PYTHON: 1
+  UV_PYTHON_PREFERENCE: system
 
 jobs:
   docs:
@@ -14,10 +18,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.9
-      
+          python-version: 3.13
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.1"
+
       - name: Install dependencies
-        run: pip install -e '.[docs]'
+        run: uv pip install -e '.[docs]'
 
       - name: Build docs
         run: sphinx-build docs ./docs/_build/html/
