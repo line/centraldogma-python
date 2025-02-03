@@ -241,6 +241,44 @@ class TestContentService:
         assert ret.entry_type == EntryType.JSON
         assert ret.content == {"foo3": "bar3"}
 
+    def test_when_cd_has_a_file_and_get_files_is_called_it_should_be_failed(
+        self, run_around_test
+    ):
+        # GIVEN
+        commit = Commit("Upsert dummy1-test.json")
+        upsert_json = Change(
+            "/test/dummy1-test.json", ChangeType.UPSERT_JSON, {"foo": "bar"}
+        )
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+
+        # WHEN + THEN
+        with pytest.raises(AttributeError):
+            dogma.get_files(project_name, repo_name, "/test/dummy1-test.json")
+
+    def test_when_cd_has_two_files_and_get_files_is_called_it_should_be_success(
+        self, run_around_test
+    ):
+        # GIVEN
+        expected_file_count = 2
+
+        commit = Commit("Upsert dummy1-test.json")
+        upsert_json = Change(
+            "/dummy1-test.json", ChangeType.UPSERT_JSON, {"foo": "bar"}
+        )
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+
+        commit = Commit("Upsert dummy2-test.json")
+        upsert_json = Change(
+            "/dummy2-test.json", ChangeType.UPSERT_JSON, {"foo": "bar"}
+        )
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+
+        # WHEN
+        result = dogma.get_files(project_name, repo_name, "/dummy*-test.json")
+
+        # THEN
+        assert len(result) == expected_file_count
+
     @staticmethod
     def push_later():
         time.sleep(1)
