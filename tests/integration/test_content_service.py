@@ -241,25 +241,17 @@ class TestContentService:
         assert ret.entry_type == EntryType.JSON
         assert ret.content == {"foo3": "bar3"}
 
-    def test_when_cd_has_a_file_and_get_files_is_called_it_should_be_failed(
-        self, run_around_test
-    ):
-        # GIVEN
+    def test_get_files_for_single_file(self, run_around_test):
         commit = Commit("Upsert dummy1-test.json")
         upsert_json = Change(
             "/test/dummy1-test.json", ChangeType.UPSERT_JSON, {"foo": "bar"}
         )
         dogma.push(project_name, repo_name, commit, [upsert_json])
 
-        # WHEN + THEN
-        with pytest.raises(AttributeError):
-            dogma.get_files(project_name, repo_name, "/test/dummy1-test.json")
+        ret = dogma.get_files(project_name, repo_name, "/test/dummy1-test.json")
+        assert len(ret) == 1
 
-    def test_when_cd_has_two_files_and_get_files_is_called_it_should_be_success(
-        self, run_around_test
-    ):
-        # GIVEN
-        expected_file_count = 2
+    def test_get_files_for_multiple_file(self, run_around_test):
 
         commit = Commit("Upsert dummy1-test.json")
         upsert_json = Change(
@@ -273,11 +265,8 @@ class TestContentService:
         )
         dogma.push(project_name, repo_name, commit, [upsert_json])
 
-        # WHEN
-        result = dogma.get_files(project_name, repo_name, "/dummy*-test.json")
-
-        # THEN
-        assert len(result) == expected_file_count
+        ret = dogma.get_files(project_name, repo_name, "/dummy*-test.json")
+        assert len(ret) == 2
 
     @staticmethod
     def push_later():
