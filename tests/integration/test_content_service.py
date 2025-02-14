@@ -252,7 +252,6 @@ class TestContentService:
         assert len(ret) == 1
 
     def test_get_files_for_multiple_file(self, run_around_test):
-
         commit = Commit("Upsert dummy1-test.json")
         upsert_json = Change(
             "/dummy1-test.json", ChangeType.UPSERT_JSON, {"foo": "bar"}
