@@ -241,6 +241,32 @@ class TestContentService:
         assert ret.entry_type == EntryType.JSON
         assert ret.content == {"foo3": "bar3"}
 
+    def test_get_files_for_single_file(self, run_around_test):
+        commit = Commit("Upsert dummy1-test.json")
+        upsert_json = Change(
+            "/test/dummy1-test.json", ChangeType.UPSERT_JSON, {"foo": "bar"}
+        )
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+
+        ret = dogma.get_files(project_name, repo_name, "/test/dummy1-test.json")
+        assert len(ret) == 1
+
+    def test_get_files_for_multiple_file(self, run_around_test):
+        commit = Commit("Upsert dummy1-test.json")
+        upsert_json = Change(
+            "/dummy1-test.json", ChangeType.UPSERT_JSON, {"foo": "bar"}
+        )
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+
+        commit = Commit("Upsert dummy2-test.json")
+        upsert_json = Change(
+            "/dummy2-test.json", ChangeType.UPSERT_JSON, {"foo": "bar"}
+        )
+        dogma.push(project_name, repo_name, commit, [upsert_json])
+
+        ret = dogma.get_files(project_name, repo_name, "/dummy*-test.json")
+        assert len(ret) == 2
+
     @staticmethod
     def push_later():
         time.sleep(1)

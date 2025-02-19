@@ -56,9 +56,13 @@ class ContentService:
                 path += "/" + path_pattern
 
         handler = {
-            HTTPStatus.OK: lambda resp: [
-                Content.from_dict(content) for content in resp.json()
-            ],
+            HTTPStatus.OK: lambda resp: (
+                lambda data: (
+                    [Content.from_dict(content) for content in data]
+                    if isinstance(data, list)
+                    else [Content.from_dict(data)]
+                )
+            )(resp.json()),
             HTTPStatus.NO_CONTENT: lambda resp: [],
         }
         return self.client.request("get", path, params=params, handler=handler)
