@@ -22,7 +22,6 @@ from centraldogma.data import (
     Change,
     Commit,
     Content,
-    ChangeType,
     Project,
     PushResult,
     Repository,
