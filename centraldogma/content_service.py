@@ -181,13 +181,13 @@ class ContentService:
         handler: Dict[int, Callable[[Response], T]],
     ) -> T:
         normalized_timeout = (timeout_millis + 999) // 1000
-        # Add 10 seconds as a buffer time to the client timeout
-        # See: https://github.com/line/centraldogma-python/pull/65#issuecomment-3409908130
-        normalized_timeout += 10
         headers = {
             "if-none-match": f"{last_known_revision.major}",
             "prefer": f"wait={normalized_timeout}",
         }
+        # Add 10 seconds as a buffer time to the client timeout
+        # See: https://github.com/line/centraldogma-python/pull/65#issuecomment-3409908130
+        normalized_timeout += 10
         return self.client.request(
             "get", path, handler=handler, headers=headers, timeout=normalized_timeout
         )
