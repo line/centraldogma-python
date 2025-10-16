@@ -285,6 +285,7 @@ class Dogma:
         repo_name: str,
         query: Query[T],
         function: Callable[[T], U] = lambda x: x,
+        timeout_millis: int = _DEFAULT_WATCH_TIMEOUT_MILLIS,
     ) -> Watcher[U]:
         """Returns a ``Watcher`` which notifies its listeners after applying the specified ``function`` when the result
         of the given ``Query`` becomes available or changes. e.g::
@@ -298,13 +299,14 @@ class Dogma:
 
         :param query: the query to watch a file or a content in the repository.
         :param function: the function to convert the given content into another.
+        :param timeout_millis: the timeout millis for the watching request.
         """
         watcher = FileWatcher(
             self.content_service,
             project_name,
             repo_name,
             query,
-            _DEFAULT_WATCH_TIMEOUT_MILLIS,
+            timeout_millis,
             function,
         )
         watcher.start()
