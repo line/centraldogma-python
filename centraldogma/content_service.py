@@ -181,7 +181,7 @@ class ContentService:
         handler: Dict[int, Callable[[Response], T]],
     ) -> T:
         normalized_timeout = (timeout_millis + 999) // 1000
-        # Increase 10 seconds as a buffer time to the client timeout
+        # Add 10 seconds as a buffer time to the client timeout
         # See: https://github.com/line/centraldogma-python/pull/65#issuecomment-3409908130
         normalized_timeout += 10
         headers = {
