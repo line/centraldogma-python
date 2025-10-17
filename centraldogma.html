@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>centraldogma package &mdash; centraldogma-python  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
@@ -136,7 +136,7 @@
 <span id="centraldogma-dogma-module"></span><h2>centraldogma.dogma module<a class="headerlink" href="#module-centraldogma.dogma" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="centraldogma.dogma.Dogma">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.dogma.</span></span><span class="sig-name descname"><span class="pre">Dogma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.dogma.Dogma" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.dogma.</span></span><span class="sig-name descname"><span class="pre">Dogma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">configs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.dogma.Dogma" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="centraldogma.dogma.Dogma.DEFAULT_BASE_URL">
@@ -162,12 +162,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="centraldogma.dogma.Dogma.file_watcher">
-<span class="sig-name descname"><span class="pre">file_watcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">project_name:</span> <span class="pre">str,</span> <span class="pre">repo_name:</span> <span class="pre">str,</span> <span class="pre">query:</span> <span class="pre">~centraldogma.query.Query[~centraldogma.dogma.T],</span> <span class="pre">function:</span> <span class="pre">~typing.Callable[[~centraldogma.dogma.T],</span> <span class="pre">~centraldogma.dogma.U]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">Dogma.&lt;lambda&gt;&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.watcher.Watcher" title="centraldogma.watcher.Watcher"><span class="pre">Watcher</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.file_watcher" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">file_watcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">project_name:</span> <span class="pre">str,</span> <span class="pre">repo_name:</span> <span class="pre">str,</span> <span class="pre">query:</span> <span class="pre">~centraldogma.query.Query[~centraldogma.dogma.T],</span> <span class="pre">function:</span> <span class="pre">~typing.Callable[[~centraldogma.dogma.T],</span> <span class="pre">~centraldogma.dogma.U]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">Dogma.&lt;lambda&gt;&gt;,</span> <span class="pre">timeout_millis:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">60000</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.watcher.Watcher" title="centraldogma.watcher.Watcher"><span class="pre">Watcher</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.file_watcher" title="Link to this definition"></a></dt>
 <dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> which notifies its listeners after applying the specified <code class="docutils literal notranslate"><span class="pre">function</span></code> when the result
 of the given <code class="docutils literal notranslate"><span class="pre">Query</span></code> becomes available or changes. e.g:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">dogma</span><span class="o">.</span><span class="n">file_watcher</span><span class="p">(</span><span class="s2">&quot;foo_project&quot;</span><span class="p">,</span> <span class="s2">&quot;bar_repo&quot;</span><span class="p">,</span> <span class="n">Query</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="s2">&quot;/baz.json&quot;</span><span class="p">),</span>
                         <span class="k">lambda</span> <span class="n">content</span><span class="p">:</span> <span class="n">MyType</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">content</span><span class="p">))</span> <span class="k">as</span> <span class="n">watcher</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">listener</span><span class="p">(</span><span class="n">revision</span><span class="p">:</span> <span class="n">Revision</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">MyType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">listener</span><span class="p">(</span><span class="n">revision</span><span class="p">:</span> <span class="n">Revision</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">MyType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="o">...</span>
 
     <span class="n">watcher</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">listener</span><span class="p">)</span>
@@ -178,6 +178,7 @@ of the given <code class="docutils literal notranslate"><span class="pre">Query<
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>query</strong> – the query to watch a file or a content in the repository.</p></li>
 <li><p><strong>function</strong> – the function to convert the given content into another.</p></li>
+<li><p><strong>timeout_millis</strong> – the timeout millis for the watching request.</p></li>
 </ul>
 </dd>
 </dl>
@@ -321,11 +322,11 @@ the content is supposed to be the new name.</p></li>
 <span class="sig-name descname"><span class="pre">repository_watcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">project_name:</span> <span class="pre">str,</span> <span class="pre">repo_name:</span> <span class="pre">str,</span> <span class="pre">path_pattern:</span> <span class="pre">str,</span> <span class="pre">function:</span> <span class="pre">~typing.Callable[[~centraldogma.data.revision.Revision],</span> <span class="pre">~centraldogma.dogma.T]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">Dogma.&lt;lambda&gt;&gt;,</span> <span class="pre">timeout_millis:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">60000</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.watcher.Watcher" title="centraldogma.watcher.Watcher"><span class="pre">Watcher</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.dogma.Dogma.repository_watcher" title="Link to this definition"></a></dt>
 <dd><p>Returns a <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> which notifies its listeners when the specified repository has a new commit
 that contains the changes for the files matched by the given <code class="docutils literal notranslate"><span class="pre">path_pattern</span></code>. e.g:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_files</span><span class="p">(</span><span class="n">revision</span><span class="p">:</span> <span class="n">Revision</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Content</span><span class="p">]:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_files</span><span class="p">(</span><span class="n">revision</span><span class="p">:</span> <span class="n">Revision</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Content</span><span class="p">]:</span>
     <span class="k">return</span> <span class="n">dogma</span><span class="o">.</span><span class="n">get_files</span><span class="p">(</span><span class="s2">&quot;foo_project&quot;</span><span class="p">,</span> <span class="s2">&quot;bar_repo&quot;</span><span class="p">,</span> <span class="n">revision</span><span class="p">,</span> <span class="s2">&quot;/*.json&quot;</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">dogma</span><span class="o">.</span><span class="n">repository_watcher</span><span class="p">(</span><span class="s2">&quot;foo_project&quot;</span><span class="p">,</span> <span class="s2">&quot;bar_repo&quot;</span><span class="p">,</span> <span class="s2">&quot;/*.json&quot;</span><span class="p">,</span> <span class="n">get_files</span><span class="p">)</span> <span class="k">as</span> <span class="n">watcher</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">listener</span><span class="p">(</span><span class="n">revision</span><span class="p">:</span> <span class="n">Revision</span><span class="p">,</span> <span class="n">contents</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Content</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">listener</span><span class="p">(</span><span class="n">revision</span><span class="p">:</span> <span class="n">Revision</span><span class="p">,</span> <span class="n">contents</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Content</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="o">...</span>
 
     <span class="n">watcher</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">listener</span><span class="p">)</span>
@@ -395,7 +396,7 @@ since the invocation of this method.</p>
 <span id="centraldogma-project-service-module"></span><h2>centraldogma.project_service module<a class="headerlink" href="#module-centraldogma.project_service" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="centraldogma.project_service.ProjectService">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.project_service.</span></span><span class="sig-name descname"><span class="pre">ProjectService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseClient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.project_service.ProjectService" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.project_service.</span></span><span class="sig-name descname"><span class="pre">ProjectService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseClient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.project_service.ProjectService" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="centraldogma.project_service.ProjectService.create">
@@ -429,7 +430,7 @@ since the invocation of this method.</p>
 <span id="centraldogma-repository-service-module"></span><h2>centraldogma.repository_service module<a class="headerlink" href="#module-centraldogma.repository_service" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="centraldogma.repository_service.RepositoryService">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.repository_service.</span></span><span class="sig-name descname"><span class="pre">RepositoryService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseClient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.repository_service.</span></span><span class="sig-name descname"><span class="pre">RepositoryService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseClient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.repository_service.RepositoryService" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="centraldogma.repository_service.RepositoryService.create">
@@ -468,7 +469,7 @@ since the invocation of this method.</p>
 <span id="centraldogma-content-service-module"></span><h2>centraldogma.content_service module<a class="headerlink" href="#module-centraldogma.content_service" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="centraldogma.content_service.ContentService">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.content_service.</span></span><span class="sig-name descname"><span class="pre">ContentService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseClient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.content_service.ContentService" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.content_service.</span></span><span class="sig-name descname"><span class="pre">ContentService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseClient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.content_service.ContentService" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="centraldogma.content_service.ContentService.get_file">
@@ -507,7 +508,7 @@ since the invocation of this method.</p>
 <span id="centraldogma-watcher-module"></span><h2>centraldogma.watcher module<a class="headerlink" href="#module-centraldogma.watcher" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="centraldogma.watcher.Latest">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.watcher.</span></span><span class="sig-name descname"><span class="pre">Latest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.watcher.Latest" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.watcher.</span></span><span class="sig-name descname"><span class="pre">Latest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="centraldogma.data.html#centraldogma.data.revision.Revision" title="centraldogma.data.revision.Revision"><span class="pre">Revision</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.watcher.Latest" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
 <p>A holder of the latest known value and its <cite>Revision</cite> retrieved by <cite>Watcher</cite>.</p>
 <dl class="py attribute">
@@ -524,7 +525,7 @@ since the invocation of this method.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="centraldogma.watcher.Watcher">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.watcher.</span></span><span class="sig-name descname"><span class="pre">Watcher</span></span><a class="headerlink" href="#centraldogma.watcher.Watcher" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.watcher.</span></span><span class="sig-name descname"><span class="pre">Watcher</span></span><a class="headerlink" href="#centraldogma.watcher.Watcher" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
 <p>Watches the changes of a repository or a file.</p>
 <dl class="py method">
@@ -566,7 +567,7 @@ available or changes.</p>
 <span id="centraldogma-query-module"></span><h2>centraldogma.query module<a class="headerlink" href="#module-centraldogma.query" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="centraldogma.query.Query">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.query.</span></span><span class="sig-name descname"><span class="pre">Query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_type:</span> <span class="pre">~centraldogma.query.QueryType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expressions:</span> <span class="pre">~typing.List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.query.Query" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.query.</span></span><span class="sig-name descname"><span class="pre">Query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_type:</span> <span class="pre">~centraldogma.query.QueryType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expressions:</span> <span class="pre">~typing.List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.query.Query" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
 <p>A query on a file.</p>
 <dl class="py attribute">
@@ -576,7 +577,7 @@ available or changes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="centraldogma.query.Query.identity">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.identity" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.identity" title="Link to this definition"></a></dt>
 <dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Query</span></code> that retrieves the content as it is.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -587,7 +588,7 @@ available or changes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="centraldogma.query.Query.json">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.json" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.json" title="Link to this definition"></a></dt>
 <dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Query</span></code> that retrieves the JSON content as it is.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -598,7 +599,7 @@ available or changes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="centraldogma.query.Query.json_path">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.json_path" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.json_path" title="Link to this definition"></a></dt>
 <dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Query</span></code> that applies a series of
 <a class="reference external" href="https://github.com/json-path/JsonPath/blob/master/README.md">JSON path expressions</a> to the content.</p>
 <dl class="field-list simple">
@@ -623,7 +624,7 @@ available or changes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="centraldogma.query.Query.text">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.text" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#centraldogma.query.Query" title="centraldogma.query.Query"><span class="pre">Query</span></a><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#centraldogma.query.Query.text" title="Link to this definition"></a></dt>
 <dd><p>Returns a newly-created <code class="docutils literal notranslate"><span class="pre">Query</span></code> that retrieves the textual content as it is.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -636,7 +637,7 @@ available or changes.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="centraldogma.query.QueryType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.query.</span></span><span class="sig-name descname"><span class="pre">QueryType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.query.QueryType" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.query.</span></span><span class="sig-name descname"><span class="pre">QueryType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#centraldogma.query.QueryType" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="centraldogma.query.QueryType.IDENTITY">
@@ -665,7 +666,7 @@ available or changes.</p>
 <span id="centraldogma-exceptions-module"></span><h2>centraldogma.exceptions module<a class="headerlink" href="#module-centraldogma.exceptions" title="Link to this heading"></a></h2>
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.AuthorizationException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">AuthorizationException</span></span><a class="headerlink" href="#centraldogma.exceptions.AuthorizationException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">AuthorizationException</span></span><a class="headerlink" href="#centraldogma.exceptions.AuthorizationException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when a client failed to authenticate or attempted to
 perform an unauthorized operation.</p>
@@ -673,21 +674,21 @@ perform an unauthorized operation.</p>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.BadRequestException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">BadRequestException</span></span><a class="headerlink" href="#centraldogma.exceptions.BadRequestException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">BadRequestException</span></span><a class="headerlink" href="#centraldogma.exceptions.BadRequestException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception indicating a 400 Bad Client Request.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.CentralDogmaException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">CentralDogmaException</span></span><a class="headerlink" href="#centraldogma.exceptions.CentralDogmaException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">CentralDogmaException</span></span><a class="headerlink" href="#centraldogma.exceptions.CentralDogmaException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>An exception that is raised when failed to access Central Dogma.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.ChangeConflictException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ChangeConflictException</span></span><a class="headerlink" href="#centraldogma.exceptions.ChangeConflictException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ChangeConflictException</span></span><a class="headerlink" href="#centraldogma.exceptions.ChangeConflictException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to push a commit which cannot be applied
 without a conflict.</p>
@@ -695,21 +696,21 @@ without a conflict.</p>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.EntryNoContentException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">EntryNoContentException</span></span><a class="headerlink" href="#centraldogma.exceptions.EntryNoContentException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">EntryNoContentException</span></span><a class="headerlink" href="#centraldogma.exceptions.EntryNoContentException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to retrieve the content from a directory entry.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.EntryNotFoundException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">EntryNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.EntryNotFoundException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">EntryNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.EntryNotFoundException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to access a non-existent entry in a repository.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.ForbiddenException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ForbiddenException</span></span><a class="headerlink" href="#centraldogma.exceptions.ForbiddenException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ForbiddenException</span></span><a class="headerlink" href="#centraldogma.exceptions.ForbiddenException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception indicating that an access to a resource requested by a client has been forbidden
 by the Central Dogma.</p>
@@ -717,49 +718,49 @@ by the Central Dogma.</p>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.InvalidResponseException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidResponseException</span></span><a class="headerlink" href="#centraldogma.exceptions.InvalidResponseException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidResponseException</span></span><a class="headerlink" href="#centraldogma.exceptions.InvalidResponseException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when a client received an invalid response.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.NotFoundException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">NotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.NotFoundException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">NotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.NotFoundException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception indicating a 404 Not Found.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.ProjectExistsException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ProjectExistsException</span></span><a class="headerlink" href="#centraldogma.exceptions.ProjectExistsException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ProjectExistsException</span></span><a class="headerlink" href="#centraldogma.exceptions.ProjectExistsException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to create a project with an existing project name.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.ProjectNotFoundException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ProjectNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.ProjectNotFoundException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ProjectNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.ProjectNotFoundException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to access a non-existent project.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.QueryExecutionException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">QueryExecutionException</span></span><a class="headerlink" href="#centraldogma.exceptions.QueryExecutionException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">QueryExecutionException</span></span><a class="headerlink" href="#centraldogma.exceptions.QueryExecutionException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when the evaluation of a <cite>Query</cite> has failed.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.RedundantChangeException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RedundantChangeException</span></span><a class="headerlink" href="#centraldogma.exceptions.RedundantChangeException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RedundantChangeException</span></span><a class="headerlink" href="#centraldogma.exceptions.RedundantChangeException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to push a commit without effective changes.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.RepositoryExistsException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RepositoryExistsException</span></span><a class="headerlink" href="#centraldogma.exceptions.RepositoryExistsException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RepositoryExistsException</span></span><a class="headerlink" href="#centraldogma.exceptions.RepositoryExistsException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to create a repository
 with an existing repository name.</p>
@@ -767,21 +768,21 @@ with an existing repository name.</p>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.RepositoryNotFoundException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RepositoryNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.RepositoryNotFoundException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RepositoryNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.RepositoryNotFoundException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to access a non-existent repository.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.RevisionNotFoundException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RevisionNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.RevisionNotFoundException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">RevisionNotFoundException</span></span><a class="headerlink" href="#centraldogma.exceptions.RevisionNotFoundException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when attempted to access a non-existent revision.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.ShuttingDownException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ShuttingDownException</span></span><a class="headerlink" href="#centraldogma.exceptions.ShuttingDownException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">ShuttingDownException</span></span><a class="headerlink" href="#centraldogma.exceptions.ShuttingDownException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>A <code class="docutils literal notranslate"><span class="pre">CentralDogmaException</span></code> that is raised when Central Dogma cannot handle a request
 because it’s shutting down.</p>
@@ -789,14 +790,14 @@ because it’s shutting down.</p>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.UnauthorizedException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnauthorizedException</span></span><a class="headerlink" href="#centraldogma.exceptions.UnauthorizedException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnauthorizedException</span></span><a class="headerlink" href="#centraldogma.exceptions.UnauthorizedException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception indicating a 401 Unauthorized.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="centraldogma.exceptions.UnknownException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnknownException</span></span><a class="headerlink" href="#centraldogma.exceptions.UnknownException" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">centraldogma.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnknownException</span></span><a class="headerlink" href="#centraldogma.exceptions.UnknownException" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#centraldogma.exceptions.CentralDogmaException" title="centraldogma.exceptions.CentralDogmaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">CentralDogmaException</span></code></a></p>
 <p>An exception used for reporting unknown exceptions.</p>
 </dd></dl>
@@ -987,7 +988,7 @@ because it’s shutting down.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2017-2024, LINE Corporation.</p>
+    <p>&#169; Copyright 2017-2025, LINE Corporation.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
