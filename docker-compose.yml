@@ -3,3 +3,9 @@ services:
     image: line/centraldogma:latest
     ports:
       - "36462:36462"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:36462/monitor/l7check"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
