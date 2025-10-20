@@ -1,5 +1,5 @@
 services:
   centraldogma:
-    image: line/centraldogma:latest
+    image: ghcr.io/line/centraldogma:latest
     ports:
       - "36462:36462"

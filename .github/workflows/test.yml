@@ -15,16 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Install uv
         uses: astral-sh/setup-uv@v3
         with:
           version: "0.5.1"
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.13
+
       - name: Install dependencies
         run: uv pip install -e '.[docs]'
+
       - name: Build docs
         run: sphinx-build docs ./docs/_build/html/
 
@@ -33,6 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: rickstaa/action-black@v1
         id: action_black
         with:
@@ -48,8 +53,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Start Central Dogma
-        run: docker compose -f "docker-compose.yml" up -d --build
+        run: docker compose -f "docker-compose.yml" up
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
