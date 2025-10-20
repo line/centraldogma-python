@@ -55,7 +55,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Start Central Dogma
-        run: docker compose -f "docker-compose.yml" up -d --wait
+        run: docker compose -f "docker-compose.yml" up -d
+
+      - name: Print Central Dogma logs
+        run: |
+          sleep 10
+          docker compose exec centraldogma cat '/opt/centraldogma/log/centraldogma.log'
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
