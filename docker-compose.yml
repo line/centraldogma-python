@@ -3,3 +3,8 @@ services:
     image: ghcr.io/line/centraldogma:latest
     ports:
       - "36462:36462"
+    healthcheck:
+      test: [ "CMD", "curl", "-k", "--fail", "http://localhost:36462/monitor/l7check" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
