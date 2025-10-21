@@ -1,15 +1,20 @@
-name: Publish to PyPi
+name: Publish to PyPI
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - centraldogma-python-*
+
+env:
+  LC_ALL: "en_US.UTF-8"
 
 jobs:
-  publish:
+  publish-to-pypi:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -22,7 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install build twine
 
-    - name: Build and publish
+    - name: Build and publish to PyPI
       env:
         TWINE_USERNAME: "__token__" # https://github.com/pypa/twine/blob/3.x/tests/test_integration.py#L53-L64
         TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN_CENTRALDOGMA }}
