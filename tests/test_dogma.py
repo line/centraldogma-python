@@ -13,6 +13,7 @@
 # under the License.
 from datetime import datetime
 from http import HTTPStatus
+import json
 
 import pytest
 from httpx import Response
@@ -117,7 +118,7 @@ def test_create_project(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert request._content == b'{"name": "newProject"}'
+    assert json.loads(request.content) == {"name": "newProject"}
     assert project == Project.from_dict(mock_project)
 
 
@@ -137,7 +138,7 @@ def test_create_project_failed(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert request._content == b'{"name": "newProject"}'
+    assert json.loads(request.content) == {"name": "newProject"}
 
 
 def test_remove_project(respx_mock):
@@ -170,7 +171,7 @@ def test_unremove_project(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+        json.loads(request.content) == [{"op": "replace", "path": "/status", "value": "active"}]
     )
     assert project == Project.from_dict(mock_project)
 
@@ -187,7 +188,7 @@ def test_unremove_project_failed(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+        json.loads(request.content) == [{"op": "replace", "path": "/status", "value": "active"}]
     )
 
 
@@ -250,7 +251,7 @@ def test_create_repository(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert request._content == b'{"name": "newRepo"}'
+    assert json.loads(request.content) == {"name": "newRepo"}
     assert repo == Repository.from_dict(mock_repository)
 
 
@@ -269,7 +270,7 @@ def test_create_repository_failed(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert request._content == b'{"name": "newRepo"}'
+    assert json.loads(request.content) == {"name": "newRepo"}
 
 
 def test_remove_repository(respx_mock):
@@ -302,7 +303,7 @@ def test_unremove_repository(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+        json.loads(request.content) == [{"op": "replace", "path": "/status", "value": "active"}]
     )
     assert repo == Repository.from_dict(mock_repository)
 
@@ -317,7 +318,7 @@ def test_unremove_repository_failed(respx_mock):
     request = respx_mock.calls.last.request
     assert request.url == url
     assert (
-        request._content == b'[{"op": "replace", "path": "/status", "value": "active"}]'
+        json.loads(request.content) == [{"op": "replace", "path": "/status", "value": "active"}]
     )
 
 
@@ -503,7 +504,7 @@ def test_push(respx_mock):
         '{"commitMessage": {"summary": "Upsert test.json", "detail": null, "markup": null}, '
         '"changes": [{"path": "/test.json", "type": "UPSERT_JSON", "content": {"foo": "bar"}}]}'
     )
-    assert request._content == bytes(str(payload), "utf-8")
+    assert json.loads(request.content) == json.loads(bytes(str(payload), "utf-8"))
     assert ret.pushed_at == datetime.strptime(
         mock_push_result["pushedAt"], DATE_FORMAT_ISO8601_MS
     )
