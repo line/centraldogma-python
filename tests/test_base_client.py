@@ -162,6 +162,7 @@ def test_patch(respx_mock):
     got = json.loads(resp.request.content)
     assert got == given
 
+
 def test_patch_exception_authorization(respx_mock):
     with pytest.raises(UnauthorizedException):
         respx_mock.patch(f"{base_url}/api/v1/path").mock(return_value=Response(401))

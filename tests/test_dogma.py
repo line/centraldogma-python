@@ -170,9 +170,9 @@ def test_unremove_project(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert (
-        json.loads(request.content) == [{"op": "replace", "path": "/status", "value": "active"}]
-    )
+    assert json.loads(request.content) == [
+        {"op": "replace", "path": "/status", "value": "active"}
+    ]
     assert project == Project.from_dict(mock_project)
 
 
@@ -187,9 +187,9 @@ def test_unremove_project_failed(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert (
-        json.loads(request.content) == [{"op": "replace", "path": "/status", "value": "active"}]
-    )
+    assert json.loads(request.content) == [
+        {"op": "replace", "path": "/status", "value": "active"}
+    ]
 
 
 def test_purge_project(respx_mock):
@@ -302,9 +302,9 @@ def test_unremove_repository(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert (
-        json.loads(request.content) == [{"op": "replace", "path": "/status", "value": "active"}]
-    )
+    assert json.loads(request.content) == [
+        {"op": "replace", "path": "/status", "value": "active"}
+    ]
     assert repo == Repository.from_dict(mock_repository)
 
 
@@ -317,9 +317,9 @@ def test_unremove_repository_failed(respx_mock):
     assert route.called
     request = respx_mock.calls.last.request
     assert request.url == url
-    assert (
-        json.loads(request.content) == [{"op": "replace", "path": "/status", "value": "active"}]
-    )
+    assert json.loads(request.content) == [
+        {"op": "replace", "path": "/status", "value": "active"}
+    ]
 
 
 def test_purge_repository(respx_mock):
