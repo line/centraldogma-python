@@ -12,6 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 from http import HTTPStatus
+import json
 
 from centraldogma.exceptions import UnauthorizedException, NotFoundException
 from centraldogma.base_client import BaseClient
@@ -26,7 +27,7 @@ configs = {
     "cookies": None,
     "verify": None,
     "cert": None,
-    "proxies": None,
+    "proxy": None,
     "mounts": None,
     "timeout": 5,
     "retries": 10,
@@ -35,7 +36,6 @@ configs = {
     "max_redirects": 1,
     "event_hooks": None,
     "transport": None,
-    "app": None,
     "trust_env": True,
 }
 client_with_configs = BaseClient(base_url, "token", **configs)
@@ -153,12 +153,14 @@ def test_patch(respx_mock):
     route = respx_mock.patch(f"{base_url}/api/v1/path").mock(
         return_value=Response(200, text="success")
     )
-    resp = client.request("patch", "/path", json={"a": "b"}, handler=ok_handler)
+    given = {"a": "b"}
+    resp = client.request("patch", "/path", json=given, handler=ok_handler)
 
     assert route.called
     assert resp.request.headers["Authorization"] == "bearer token"
     assert resp.request.headers["Content-Type"] == "application/json-patch+json"
-    assert resp.request._content == b'{"a": "b"}'
+    got = json.loads(resp.request.content)
+    assert got == given
 
 
 def test_patch_exception_authorization(respx_mock):
@@ -171,12 +173,14 @@ def test_post(respx_mock):
     route = respx_mock.post(f"{base_url}/api/v1/path").mock(
         return_value=Response(200, text="success")
     )
-    resp = client.request("post", "/path", json={"a": "b"}, handler=ok_handler)
+    given = {"a": "b"}
+    resp = client.request("post", "/path", json=given, handler=ok_handler)
 
     assert route.called
     assert resp.request.headers["Authorization"] == "bearer token"
     assert resp.request.headers["Content-Type"] == "application/json"
-    assert resp.request._content == b'{"a": "b"}'
+    got = json.loads(resp.request.content)
+    assert got == given
 
 
 def test_post_exception_authorization(respx_mock):
