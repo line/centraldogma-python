@@ -35,7 +35,6 @@ configs = {
     "max_redirects": 1,
     "event_hooks": None,
     "transport": None,
-    "app": None,
     "trust_env": True,
 }
 client_with_configs = BaseClient(base_url, "token", **configs)
