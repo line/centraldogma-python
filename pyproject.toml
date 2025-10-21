@@ -38,12 +38,12 @@ classifiers = [
 ]
 requires-python = ">=3.9"
 dependencies = [
-    "dataclasses-json == 0.6.7",
-    "httpx[http2] == 0.27.2",
-    "marshmallow == 3.23.0",
-    "pydantic == 2.9.2",
-    "python-dateutil == 2.9.0.post0",
-    "tenacity == 9.0.0",
+    "dataclasses-json >= 0.6.7,<0.7.0",
+    "httpx[http2] >= 0.27.2,<1.0.0",
+    "marshmallow >= 3.23.0,<4.0.0",
+    "pydantic >= 2.9.2,<3.0.0",
+    "python-dateutil >= 2.9.0.post0,<3.0.0",
+    "tenacity >= 9.0.0,<10.0.0",
 ]
 
 [project.urls]
