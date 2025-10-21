@@ -26,7 +26,7 @@ configs = {
     "cookies": None,
     "verify": None,
     "cert": None,
-    "proxies": None,
+    "proxy": None,
     "mounts": None,
     "timeout": 5,
     "retries": 10,
