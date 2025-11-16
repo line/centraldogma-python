@@ -19,7 +19,7 @@ from urllib.parse import quote
 
 from httpx import Response
 
-from centraldogma.base_client import BaseClient
+from centraldogma._sync.base_client import BaseClient
 from centraldogma.data import Content
 from centraldogma.data.change import Change
 from centraldogma.data.commit import Commit

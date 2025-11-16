@@ -1,4 +1,4 @@
-# Copyright 2021 LINE Corporation
+# Copyright 2025 LINE Corporation
 #
 # LINE Corporation licenses this file to you under the Apache License,
 # version 2.0 (the "License"); you may not use this file except in compliance
@@ -11,9 +11,10 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from typing import Dict, Union, Callable, TypeVar, Optional
 
-from httpx import Client, HTTPTransport, Limits, Response
+from typing import Any, Dict, Union, Callable, TypeVar, Optional
+
+from httpx import Client, Limits, Response
 from tenacity import stop_after_attempt, wait_exponential, Retrying
 
 from centraldogma.exceptions import to_exception
@@ -48,7 +49,6 @@ class BaseClient:
         self.client = Client(
             base_url=f"{base_url}/api/v1",
             http2=http2,
-            transport=HTTPTransport(retries=retries),
             limits=Limits(
                 max_connections=max_connections,
                 max_keepalive_connections=max_keepalive_connections,
@@ -58,6 +58,9 @@ class BaseClient:
         self.token = token
         self.headers = self._get_headers(token)
         self.patch_headers = self._get_patch_headers(token)
+
+    def __exit__(self, *_: Any) -> None:
+        self.client.close()
 
     def request(
         self,
@@ -91,7 +94,7 @@ class BaseClient:
             converter = handler.get(resp.status_code)
             if converter:
                 return converter(resp)
-            else:  # Unexpected response status
+            else: # Unexpected response status
                 raise to_exception(resp)
         return resp
 

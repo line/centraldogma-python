@@ -8,11 +8,13 @@
 Python client library for [Central Dogma](https://line.github.io/centraldogma/).
 
 ## Install
+
 ```
 $ pip install centraldogma-python
 ```
 
 ## Getting started
+
 Only URL indicating CentralDogma server and access token are required.
 ```pycon
 >>> from centraldogma.dogma import Dogma
@@ -29,42 +31,6 @@ It supports client configurations.
 
 Please see [`examples` folder](https://github.com/line/centraldogma-python/tree/main/examples) for more detail.
 
----
+## Contributing
 
-## Development
-### Tests
-#### Unit test
-```
-$ pytest
-```
-
-#### Integration test
-1. Run local Central Dogma server with docker-compose
-    ```
-    $ docker-compose up -d
-    ```
-
-2. Run integration tests
-    ```
-    $ INTEGRATION_TEST=true pytest
-    ```
-
-3. Stop the server
-    ```
-    $ docker-compose down
-    ```
-
-### Lint
-- [PEP 8](https://www.python.org/dev/peps/pep-0008)
-    ```
-    $ black .
-    ```
-
-### Documentation
-- [PEP 257](https://www.python.org/dev/peps/pep-0257)
-
-#### To build sphinx at local
-```
-$ pip install sphinx sphinx_rtd_theme
-$ cd docs && make html
-```
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
