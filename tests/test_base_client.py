@@ -11,11 +11,12 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+
 from http import HTTPStatus
 import json
 
+from centraldogma._sync.base_client import BaseClient
 from centraldogma.exceptions import UnauthorizedException, NotFoundException
-from centraldogma.base_client import BaseClient
 from httpx import ConnectError, NetworkError, Response
 import pytest
 

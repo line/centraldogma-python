@@ -11,6 +11,7 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+
 [build-system]
 requires = ["setuptools >= 61"]
 build-backend = "setuptools.build_meta"
@@ -59,10 +60,11 @@ dev = [
     "pytest",
     "pytest-cov",
     "pytest-mock",
-    "respx"
+    "respx",
+    "unasync>=0.6.0"
 ]
 docs = [
-    "sphinx_rtd_theme"
+    "sphinx_rtd_theme>=3.0"
 ]
 
 [tool.setuptools]

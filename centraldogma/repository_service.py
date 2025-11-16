@@ -14,7 +14,7 @@
 from http import HTTPStatus
 from typing import List
 
-from centraldogma.base_client import BaseClient
+from centraldogma._sync.base_client import BaseClient
 from centraldogma.data import Repository
 
 
