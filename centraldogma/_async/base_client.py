@@ -94,7 +94,7 @@ class BaseClient:
             converter = handler.get(resp.status_code)
             if converter:
                 return converter(resp)
-            else: # Unexpected response status
+            else:  # Unexpected response status
                 raise to_exception(resp)
         return resp
 
