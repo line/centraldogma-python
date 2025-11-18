@@ -14,7 +14,7 @@
 import os
 from typing import List, Optional, TypeVar, Callable
 
-from centraldogma.base_client import BaseClient
+from centraldogma._sync.base_client import BaseClient
 from centraldogma.content_service import ContentService
 
 # noinspection PyUnresolvedReferences

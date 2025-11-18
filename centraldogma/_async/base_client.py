@@ -1,4 +1,4 @@
-# Copyright 2021 LINE Corporation
+# Copyright 2025 LINE Corporation
 #
 # LINE Corporation licenses this file to you under the Apache License,
 # version 2.0 (the "License"); you may not use this file except in compliance
@@ -11,10 +11,11 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-from typing import Dict, Union, Callable, TypeVar, Optional
 
-from httpx import Client, HTTPTransport, Limits, Response
-from tenacity import stop_after_attempt, wait_exponential, Retrying
+from typing import Any, Dict, Union, Callable, TypeVar, Optional
+
+from httpx import AsyncClient, Limits, Response
+from tenacity import stop_after_attempt, wait_exponential, AsyncRetrying
 
 from centraldogma.exceptions import to_exception
 
@@ -45,10 +46,9 @@ class BaseClient:
                 del configs[key]
 
         self.retries = retries
-        self.client = Client(
+        self.client = AsyncClient(
             base_url=f"{base_url}/api/v1",
             http2=http2,
-            transport=HTTPTransport(retries=retries),
             limits=Limits(
                 max_connections=max_connections,
                 max_keepalive_connections=max_keepalive_connections,
@@ -59,7 +59,10 @@ class BaseClient:
         self.headers = self._get_headers(token)
         self.patch_headers = self._get_patch_headers(token)
 
-    def request(
+    async def __aexit__(self, *_: Any) -> None:
+        await self.client.aclose()
+
+    async def request(
         self,
         method: str,
         path: str,
@@ -67,7 +70,7 @@ class BaseClient:
         **kwargs,
     ) -> Union[Response, T]:
         kwargs = self._set_request_headers(method, **kwargs)
-        retryer = Retrying(
+        retryer = AsyncRetrying(
             stop=stop_after_attempt(self.retries + 1),
             wait=wait_exponential(max=60),
             reraise=True,
@@ -79,14 +82,14 @@ class BaseClient:
         kwargs["headers"] = {**default_headers, **(kwargs.get("headers") or {})}
         return kwargs
 
-    def _request(
+    async def _request(
         self,
         method: str,
         path: str,
         handler: Optional[Dict[int, Callable[[Response], T]]] = None,
         **kwargs,
     ):
-        resp = self.client.request(method, path, **kwargs)
+        resp = await self.client.request(method, path, **kwargs)
         if handler:
             converter = handler.get(resp.status_code)
             if converter:

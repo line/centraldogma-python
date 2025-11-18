@@ -26,8 +26,8 @@ jobs:
             echo "Error: 'release_version' should be in SemVer format."
             exit 1
           fi
-          if [[ ! "${{ inputs.next_version }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Error: 'next_version' should be in SemVer format."
+          if [[ ! "${{ inputs.next_version }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ && "${{ inputs.next_version }}" != "skip" ]]; then
+            echo "Error: 'next_version' should be in SemVer format or 'skip'."
             exit 1
           fi
 
@@ -62,4 +62,4 @@ jobs:
           RELEASE_VERSION: ${{ inputs.release_version }}
           NEXT_VERSION: ${{ inputs.next_version }}
         run: |
-          python .github/scripts/release.py
+          python utils/run-release.py
