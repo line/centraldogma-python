@@ -59,6 +59,9 @@ class BaseClient:
         self.headers = self._get_headers(token)
         self.patch_headers = self._get_patch_headers(token)
 
+    def __enter__(self):
+        return self
+
     def __exit__(self, *_: Any) -> None:
         self.client.close()
 

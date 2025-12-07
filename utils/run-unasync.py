@@ -79,6 +79,7 @@ def main(check: bool = False):
                 "AsyncClient": "Client",
                 "AsyncDogma": "Dogma",
                 "AsyncRetrying": "Retrying",
+                "__aenter__": "__enter__",
                 "__aexit__": "__exit__",
                 "aclose": "close",
             },
