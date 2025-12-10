@@ -58,6 +58,7 @@ dev = [
     "black",
     "codecov",
     "pytest",
+    "pytest-asyncio>=1.2.0",
     "pytest-cov",
     "pytest-mock",
     "respx",

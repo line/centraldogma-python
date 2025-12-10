@@ -59,6 +59,9 @@ class BaseClient:
         self.headers = self._get_headers(token)
         self.patch_headers = self._get_patch_headers(token)
 
+    async def __aenter__(self):
+        return self
+
     async def __aexit__(self, *_: Any) -> None:
         await self.client.aclose()
 
@@ -75,7 +78,7 @@ class BaseClient:
             wait=wait_exponential(max=60),
             reraise=True,
         )
-        return retryer(self._request, method, path, handler, **kwargs)
+        return await retryer(self._request, method, path, handler, **kwargs)
 
     def _set_request_headers(self, method: str, **kwargs) -> Dict:
         default_headers = self.patch_headers if method == "patch" else self.headers
